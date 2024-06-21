@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 17:44+0200\n"
+"POT-Creation-Date: 2024-06-21 11:25+0200\n"
 "PO-Revision-Date: 2020-05-16 18:44+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -165,6 +165,9 @@ msgstr ""
 #
 msgid "%H:%M"
 msgstr "%H:%M"
+
+msgid "%R"
+msgstr ""
 
 #
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
@@ -366,6 +369,10 @@ msgid_plural "%s updated packages available"
 msgstr[0] " uppfærslur tiltækar."
 msgstr[1] " uppfærslur tiltækar."
 
+#, python-format
+msgid "%s%s(Default: %s)"
+msgstr ""
+
 msgid "'Minimum send interval' needs to be enabled to use this option."
 msgstr ""
 
@@ -402,6 +409,9 @@ msgstr "(sýna viðbótar DVD hljóð valmynd)"
 #, fuzzy
 msgid "(unknown)"
 msgstr "óþekktur"
+
+msgid "* = Restart Required"
+msgstr ""
 
 #
 msgid "* Only available if more than one interface is active."
@@ -567,9 +577,6 @@ msgstr "<óþekkt>"
 
 msgid "=NO STREAM\n"
 msgstr ""
-
-msgid "??"
-msgstr "??"
 
 msgid "A"
 msgstr "A"
@@ -1308,6 +1315,10 @@ msgstr "Uppsetning búin."
 msgid "Autoinstalling please wait for packages being updated"
 msgstr ""
 
+#, fuzzy
+msgid "Automatic Language"
+msgstr "Sjálfvirk leit"
+
 msgid "Automatic Scan"
 msgstr ""
 
@@ -1490,6 +1501,10 @@ msgstr "Suð deyfing"
 
 msgid "Blue"
 msgstr ""
+
+#, fuzzy
+msgid "Blue button function"
+msgstr "Veldu stað fyrir afrit"
 
 msgid "Bolivia (Plurinational State of)"
 msgstr ""
@@ -1686,6 +1701,12 @@ msgstr ""
 
 msgid "Cancel"
 msgstr "Hætta við"
+
+msgid "Cancel any changed settings and exit"
+msgstr ""
+
+msgid "Cancel any changed settings and exit all menus"
+msgstr ""
 
 msgid "Cancel any changes to the currently active skin"
 msgstr ""
@@ -2027,6 +2048,10 @@ msgstr "Afruglara tengi"
 msgid "Common Interface assignment"
 msgstr "Stillingar afruglara tengis"
 
+#, fuzzy
+msgid "Common Setup Actions"
+msgstr "Veldu stað fyrir afrit"
+
 msgid "Communication"
 msgstr "Samskipti"
 
@@ -2205,7 +2230,7 @@ msgstr ""
 msgid "Configure the duration in minutes for the screensaver."
 msgstr ""
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
+msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press blue to start/restart the sleeptimer or use yellow for stop active sleeptimer."
 msgstr ""
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
@@ -2408,10 +2433,6 @@ msgid "Configure your internal LAN"
 msgstr "Stilla innbyggt netkort"
 
 msgid "Configure your network again"
-msgstr "Stilla netkortið þitt aftur"
-
-#, fuzzy
-msgid "Configure your network settings and press OK to scan"
 msgstr "Stilla netkortið þitt aftur"
 
 msgid "Configure your wireless LAN again"
@@ -2785,6 +2806,11 @@ msgstr "Gerð Tímastillngar"
 msgid "Default+Picon"
 msgstr "Upphafs stillingar"
 
+#
+#, fuzzy, python-format
+msgid "Default: '%s'."
+msgstr "Venjulegt"
+
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr ""
 
@@ -2873,6 +2899,12 @@ msgstr "eyða skrá"
 #, fuzzy
 msgid "Delete all the text"
 msgstr "eyða atriði úr spilunarlista"
+
+msgid "Delete character to left of cursor or select AM times"
+msgstr ""
+
+msgid "Delete character under cursor or select PM times"
+msgstr ""
 
 #
 msgid "Delete entry"
@@ -3127,6 +3159,9 @@ msgstr ""
 msgid "Display setup"
 msgstr "Uppsetning skjás"
 
+msgid "Display the virtual keyboard for data entry"
+msgstr ""
+
 #, fuzzy
 msgid "Djibouti"
 msgstr "Um"
@@ -3309,6 +3344,11 @@ msgstr ""
 
 msgid "Don't save and stop timeshift"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Don't show default"
+msgstr "stíll lista venjulegur"
 
 #
 msgid "Don't stop current event but disable coming events"
@@ -3851,6 +3891,9 @@ msgstr ""
 
 msgid "Exceeds dual layer medium!"
 msgstr "Þarf meira en tveggja laga disk!"
+
+msgid "Exclude first CA device"
+msgstr ""
 
 msgid "Execution finished!!"
 msgstr "Keyrslu lokið!!"
@@ -4944,6 +4987,9 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
+msgid "In Setup screens choose whether to show the default value of the selected item in the description field."
+msgstr ""
+
 #
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Til að taka upp á tíma stillingu þá var sjónvarpið stillt á upptökurás!\n"
@@ -5224,7 +5270,7 @@ msgstr "Ítalska"
 msgid "Italy"
 msgstr "Ítalska"
 
-msgid "Items per page "
+msgid "Items per page"
 msgstr ""
 
 msgid "Items per page for list screen"
@@ -5257,6 +5303,12 @@ msgstr ""
 #, fuzzy
 msgid "Jump to end of list"
 msgstr "fara í enda listans"
+
+msgid "Jump to first item in list or the start of text"
+msgstr ""
+
+msgid "Jump to last item in list or the end of text"
+msgstr ""
 
 #
 #, fuzzy
@@ -5778,6 +5830,10 @@ msgstr ""
 msgid "Menu"
 msgstr "Valmynd"
 
+#, fuzzy
+msgid "Menu button function"
+msgstr "Veldu stað fyrir afrit"
+
 #, python-format
 msgid "Menusort (%s)"
 msgstr ""
@@ -5910,6 +5966,16 @@ msgid "Move Picture in Picture"
 msgstr "Færa Mynd í Mynd"
 
 #
+#, fuzzy
+msgid "Move down a line"
+msgstr "fara niður í síðasta atriði"
+
+#
+#, fuzzy
+msgid "Move down a screen"
+msgstr "fara niður í síðasta atriði"
+
+#
 msgid "Move east"
 msgstr "Færa austur"
 
@@ -5941,6 +6007,16 @@ msgstr ""
 msgid "Move the text cursor to the last character"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Move to first line / screen"
+msgstr "fara niður í næsta atriði"
+
+#
+#, fuzzy
+msgid "Move to last line / screen"
+msgstr "fara niður í næsta atriði"
+
 msgid "Move to position X"
 msgstr ""
 
@@ -5963,6 +6039,12 @@ msgstr "fara til baka á fyrri kafla"
 #, fuzzy
 msgid "Move to the previous skin"
 msgstr "fara upp í næsta atriði"
+
+msgid "Move up a line"
+msgstr ""
+
+msgid "Move up a screen"
+msgstr ""
 
 #
 msgid "Move west"
@@ -6238,6 +6320,11 @@ msgstr " uppfærslur tiltækar."
 
 msgid "No age block"
 msgstr ""
+
+#
+#, fuzzy
+msgid "No config items available"
+msgstr " uppfærslur tiltækar."
 
 #
 msgid ""
@@ -6711,9 +6798,6 @@ msgstr ""
 msgid "PULSe 4K(mini)"
 msgstr ""
 
-msgid "PVR"
-msgstr ""
-
 #
 msgid "Package list update"
 msgstr "Listi uppfærðra pakka"
@@ -6960,6 +7044,9 @@ msgstr ""
 "Ýttu þá á OK til að halda áfram."
 
 msgid "Please connect your receiver to the internet"
+msgstr ""
+
+msgid "Please contact the manufacturer for clarification."
 msgstr ""
 
 #
@@ -7692,9 +7779,6 @@ msgstr ""
 msgid "Recall to previous service"
 msgstr ""
 
-msgid "Receiver or driver does not support FCC"
-msgstr ""
-
 #
 #, fuzzy
 msgid "Reception settings"
@@ -8018,6 +8102,11 @@ msgstr "Endurræsa gluggakerfi núna?"
 
 #
 #, fuzzy
+msgid "Restart Sleeptimer"
+msgstr "Tímastilling"
+
+#
+#, fuzzy
 msgid "Restart both"
 msgstr "Prufa aftur"
 
@@ -8301,6 +8390,9 @@ msgid "Save"
 msgstr "Vista"
 
 msgid "Save / Enter text and exit"
+msgstr ""
+
+msgid "Save all changed settings and exit"
 msgstr ""
 
 #
@@ -8803,6 +8895,12 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "velja slóð að mynd"
 
+msgid "Select the next item in list or move cursor right"
+msgstr ""
+
+msgid "Select the previous item in list or move cursor left"
+msgstr ""
+
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr ""
 
@@ -8911,13 +9009,13 @@ msgstr ""
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr ""
 
-msgid "Select your provider, and press OK to start the scan"
-msgstr ""
-
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
 
 msgid "Select your time zone area or region."
+msgstr ""
+
+msgid "Select, toggle, process or edit the current entry"
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -9099,6 +9197,9 @@ msgid "Set action when movie playback is finished."
 msgstr "Aðgerð þegar mynd byrjar"
 
 msgid "Set all hotkey to default?"
+msgstr ""
+
+msgid "Set all the settings back as they were"
 msgstr ""
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
@@ -9315,6 +9416,16 @@ msgstr ""
 msgid "Show crypto info in infobar"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Show default after description"
+msgstr "sýna auka upplýsingar"
+
+#
+#, fuzzy
+msgid "Show default on new line"
+msgstr "sýna upplýsingalínu"
+
 msgid "Show detailed event info"
 msgstr ""
 
@@ -9467,11 +9578,20 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "Show setup default values"
+msgstr "sýna atriði nánar"
+
+#
+#, fuzzy
 msgid "Show simple second infobar"
 msgstr "Sýna upplýsingar um sendi"
 
 msgid "Show single service EPG"
 msgstr ""
+
+#, fuzzy
+msgid "Show softcam information"
+msgstr "Upplýsingar hugbúnaðar umsýslu"
 
 msgid "Show softcam setup in extensions menu"
 msgstr ""
@@ -9628,6 +9748,10 @@ msgstr ""
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
+
+#, fuzzy
+msgid "Skin Selection"
+msgstr "Veldu stað fyrir afrit"
 
 #, fuzzy
 msgid "Skin Selection Actions"
@@ -9959,6 +10083,24 @@ msgstr "%d Volt á viftu í biðstöðu "
 msgid "Standby in "
 msgstr ""
 
+msgid "Start CableScan"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Start Cablescan"
+msgstr "Byrja prófun"
+
+#
+#, fuzzy
+msgid "Start Fastscan"
+msgstr "Hratt"
+
+#
+#, fuzzy
+msgid "Start Sleeptimer"
+msgstr "Byrjunartími"
+
 #
 msgid "Start directory"
 msgstr "Byrjunar mappa"
@@ -10045,6 +10187,11 @@ msgstr "Stopp"
 #, fuzzy
 msgid "Stop PiP"
 msgstr "hætta með PiP"
+
+#
+#, fuzzy
+msgid "Stop Sleeptimer"
+msgstr "Tímastilling"
 
 msgid "Stop all current recordings"
 msgstr ""
@@ -11065,6 +11212,10 @@ msgid "Timer overview"
 msgstr "Innsláttur tímastilltra atriða"
 
 #, fuzzy
+msgid "Timer recording failed. No space left on device!\n"
+msgstr "Staður fyrir tímastilltar upptökur"
+
+#, fuzzy
 msgid "Timer recording location"
 msgstr "Staður fyrir tímastilltar upptökur"
 
@@ -11142,6 +11293,10 @@ msgstr ""
 #
 msgid "Today"
 msgstr "Í dag"
+
+#, fuzzy
+msgid "Toggle Configuration Mode or AutoDisqc"
+msgstr "Stillinga hamur"
 
 msgid "Toggle HDMI In"
 msgstr ""
@@ -11839,6 +11994,11 @@ msgstr "Mynd útgangur"
 
 #
 #, fuzzy
+msgid "Video settings"
+msgstr "Stilla hljóð/mynd"
+
+#
+#, fuzzy
 msgid "Video setup"
 msgstr "Mynd uppsetning"
 
@@ -12454,6 +12614,10 @@ msgstr ""
 msgid "Yellow DVB subtitles"
 msgstr ""
 
+#, fuzzy
+msgid "Yellow button function"
+msgstr "Veldu stað fyrir afrit"
+
 msgid "Yemen"
 msgstr ""
 
@@ -12774,9 +12938,6 @@ msgstr "viðmót til að tengja rásir/sendendur/caid við afruglara í tengi fy
 msgid "about to start"
 msgstr "er að byrja"
 
-msgid "activate network adapter configuration"
-msgstr "virkja stillingar netkorts"
-
 msgid "active"
 msgstr ""
 
@@ -13089,10 +13250,6 @@ msgstr ""
 #
 msgid "exit DVD player or return to file browser"
 msgstr "hætta í DVD spilara og fara til baka í skráarvafra"
-
-#
-msgid "exit network adapter configuration"
-msgstr "fara úr netkorts stillingum"
 
 #
 msgid "exit networkadapter setup menu"

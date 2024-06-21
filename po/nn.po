@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 17:44+0200\n"
+"POT-Creation-Date: 2024-06-21 11:25+0200\n"
 "PO-Revision-Date: 2013-10-23 19:15+0100\n"
 "Last-Translator: andy1 <dmmm8000pvr@gmail.com>\n"
 "Language-Team: none\n"
@@ -163,6 +163,9 @@ msgid "%A %e %B %Y"
 msgstr ""
 
 msgid "%H:%M"
+msgstr ""
+
+msgid "%R"
 msgstr ""
 
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
@@ -356,6 +359,10 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s oppdatert programvare er tilgjengelig"
 msgstr[1] "%s oppdaterte programvarepakker er tilgjengelig"
 
+#, python-format
+msgid "%s%s(Default: %s)"
+msgstr ""
+
 msgid "'Minimum send interval' needs to be enabled to use this option."
 msgstr ""
 
@@ -392,6 +399,9 @@ msgstr "(vis alternativ DVD lydmeny)"
 #, fuzzy
 msgid "(unknown)"
 msgstr "ukjent"
+
+msgid "* = Restart Required"
+msgstr ""
 
 msgid "* Only available if more than one interface is active."
 msgstr "* Bare tilgjengelig hvis en eller flere grensesnitt er aktive."
@@ -552,10 +562,6 @@ msgid "<unknown>"
 msgstr "<ukjent>"
 
 msgid "=NO STREAM\n"
-msgstr ""
-
-#
-msgid "??"
 msgstr ""
 
 #
@@ -1283,6 +1289,10 @@ msgstr "Installasjonen er ferdig"
 msgid "Autoinstalling please wait for packages being updated"
 msgstr ""
 
+#, fuzzy
+msgid "Automatic Language"
+msgstr "Automatisk søk"
+
 msgid "Automatic Scan"
 msgstr ""
 
@@ -1478,6 +1488,10 @@ msgstr "Blokkere støy reduksjon"
 
 msgid "Blue"
 msgstr ""
+
+#, fuzzy
+msgid "Blue button function"
+msgstr "Velg sikkerhetskopi"
 
 msgid "Bolivia (Plurinational State of)"
 msgstr ""
@@ -1685,6 +1699,12 @@ msgstr ""
 #
 msgid "Cancel"
 msgstr "Avbryt"
+
+msgid "Cancel any changed settings and exit"
+msgstr ""
+
+msgid "Cancel any changed settings and exit all menus"
+msgstr ""
 
 msgid "Cancel any changes to the currently active skin"
 msgstr ""
@@ -2056,6 +2076,10 @@ msgstr "Common Interface"
 msgid "Common Interface assignment"
 msgstr "Common Interface"
 
+#, fuzzy
+msgid "Common Setup Actions"
+msgstr "Velg sikkerhetskopi"
+
 #
 msgid "Communication"
 msgstr "Kommunikasjon"
@@ -2238,7 +2262,7 @@ msgstr ""
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "Still inn skjermsparerens varighet i minutter."
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
+msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press blue to start/restart the sleeptimer or use yellow for stop active sleeptimer."
 msgstr ""
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
@@ -2434,10 +2458,6 @@ msgstr "Still inn ditt lokale LAN nettverk"
 #
 msgid "Configure your network again"
 msgstr "Still inn nettverket på nytt"
-
-#, fuzzy
-msgid "Configure your network settings and press OK to scan"
-msgstr "Still inn nettverksinnstillingene, og trykk OK for å starte søket"
 
 msgid "Configure your wireless LAN again"
 msgstr "Still inn det trådløse nettverket igjen"
@@ -2816,6 +2836,11 @@ msgstr "Tidtaker type"
 msgid "Default+Picon"
 msgstr "Standardinnstilling"
 
+#
+#, fuzzy, python-format
+msgid "Default: '%s'."
+msgstr "Standard"
+
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr ""
 
@@ -2905,6 +2930,12 @@ msgstr "Slette fil"
 #, fuzzy
 msgid "Delete all the text"
 msgstr "Slette oppføring i spilliste"
+
+msgid "Delete character to left of cursor or select AM times"
+msgstr ""
+
+msgid "Delete character under cursor or select PM times"
+msgstr ""
 
 #
 msgid "Delete entry"
@@ -3141,6 +3172,9 @@ msgstr ""
 msgid "Display setup"
 msgstr "Frontpanel"
 
+msgid "Display the virtual keyboard for data entry"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Djibouti"
@@ -3321,6 +3355,11 @@ msgstr ""
 
 msgid "Don't save and stop timeshift"
 msgstr ""
+
+#
+#, fuzzy
+msgid "Don't show default"
+msgstr "standard liste"
 
 msgid "Don't stop current event but disable coming events"
 msgstr "Ikke stopp nåværende program men slå av neste program"
@@ -3868,6 +3907,9 @@ msgstr "Overalt"
 #
 msgid "Exceeds dual layer medium!"
 msgstr "Overgår to lags medium!"
+
+msgid "Exclude first CA device"
+msgstr ""
 
 #
 msgid "Execution finished!!"
@@ -4933,6 +4975,9 @@ msgstr ""
 msgid "Import remote receiver URL"
 msgstr ""
 
+msgid "In Setup screens choose whether to show the default value of the selected item in the description field."
+msgstr ""
+
 #
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Et tidtakeropptak startet og TV kanalen skiftet over til opptaket!\n"
@@ -5202,7 +5247,8 @@ msgstr "Italiensk"
 msgid "Italy"
 msgstr "Italiensk"
 
-msgid "Items per page "
+#, fuzzy
+msgid "Items per page"
 msgstr "Kanaler pr. side"
 
 msgid "Items per page for list screen"
@@ -5233,6 +5279,12 @@ msgstr "Gå til begynnelse av listen"
 #
 msgid "Jump to end of list"
 msgstr "Gå til slutten av listen"
+
+msgid "Jump to first item in list or the start of text"
+msgstr ""
+
+msgid "Jump to last item in list or the end of text"
+msgstr ""
 
 #
 msgid "Jump to next marked position"
@@ -5731,6 +5783,10 @@ msgstr "Minne oversikt"
 msgid "Menu"
 msgstr "Meny"
 
+#, fuzzy
+msgid "Menu button function"
+msgstr "Velg sikkerhetskopi"
+
 #, python-format
 msgid "Menusort (%s)"
 msgstr ""
@@ -5855,6 +5911,15 @@ msgstr "Flytt PiP (bilde i bilde) til hovedvindu"
 msgid "Move Picture in Picture"
 msgstr "Flytt Bilde i Bilde"
 
+#, fuzzy
+msgid "Move down a line"
+msgstr "Gå nedover listen"
+
+#
+#, fuzzy
+msgid "Move down a screen"
+msgstr "gå til til siste oppføring"
+
 #
 msgid "Move east"
 msgstr "Kjør østover"
@@ -5886,6 +5951,16 @@ msgstr ""
 msgid "Move the text cursor to the last character"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Move to first line / screen"
+msgstr "gå til til neste oppføring"
+
+#
+#, fuzzy
+msgid "Move to last line / screen"
+msgstr "gå til til neste oppføring"
+
 msgid "Move to position X"
 msgstr "Flyttet til posisjon X"
 
@@ -5907,6 +5982,13 @@ msgstr "spol tilbake til forrige kapittel"
 #, fuzzy
 msgid "Move to the previous skin"
 msgstr "gå til til forrige oppføring"
+
+#, fuzzy
+msgid "Move up a line"
+msgstr "Flyttet til startposisjon"
+
+msgid "Move up a screen"
+msgstr ""
 
 #
 msgid "Move west"
@@ -6175,6 +6257,10 @@ msgstr "Det finnes ingen nye oppdateringer"
 
 msgid "No age block"
 msgstr ""
+
+#, fuzzy
+msgid "No config items available"
+msgstr "Det finnes ingen nye oppdateringer"
 
 #
 msgid ""
@@ -6630,9 +6716,6 @@ msgstr ""
 msgid "PULSe 4K(mini)"
 msgstr ""
 
-msgid "PVR"
-msgstr ""
-
 #
 msgid "Package list update"
 msgstr "Oppdaterer programvare"
@@ -6863,6 +6946,9 @@ msgstr ""
 
 msgid "Please connect your receiver to the internet"
 msgstr "Vennligst, koble mottakeren til internett"
+
+msgid "Please contact the manufacturer for clarification."
+msgstr ""
 
 #
 msgid "Please do not change any values unless you know what you are doing!"
@@ -7557,9 +7643,6 @@ msgstr "Opptak"
 msgid "Recall to previous service"
 msgstr ""
 
-msgid "Receiver or driver does not support FCC"
-msgstr ""
-
 #
 msgid "Reception settings"
 msgstr "Mottakerfohold"
@@ -7857,6 +7940,10 @@ msgid "Restart GUI now?"
 msgstr "Starte GUI på nytt?"
 
 #, fuzzy
+msgid "Restart Sleeptimer"
+msgstr "Tidtaker"
+
+#, fuzzy
 msgid "Restart both"
 msgstr "Starte på nytt- test"
 
@@ -8134,6 +8221,9 @@ msgid "Save"
 msgstr "Lagre"
 
 msgid "Save / Enter text and exit"
+msgstr ""
+
+msgid "Save all changed settings and exit"
 msgstr ""
 
 #, fuzzy
@@ -8597,6 +8687,12 @@ msgstr ""
 msgid "Select the movie path"
 msgstr "Velg målmappe for opptak"
 
+msgid "Select the next item in list or move cursor right"
+msgstr ""
+
+msgid "Select the previous item in list or move cursor left"
+msgstr ""
+
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr ""
 
@@ -8699,13 +8795,13 @@ msgstr ""
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr ""
 
-msgid "Select your provider, and press OK to start the scan"
-msgstr "Velg leverandør og trykk OK for å starte søk"
-
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr ""
 
 msgid "Select your time zone area or region."
+msgstr ""
+
+msgid "Select, toggle, process or edit the current entry"
 msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
@@ -8870,6 +8966,9 @@ msgid "Set action when movie playback is finished."
 msgstr "Still inn oppførsel når avspilling startes."
 
 msgid "Set all hotkey to default?"
+msgstr ""
+
+msgid "Set all the settings back as they were"
 msgstr ""
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
@@ -9075,6 +9174,16 @@ msgstr ""
 msgid "Show crypto info in infobar"
 msgstr "Vis krypteringsinfo på informasjonslinjen"
 
+#
+#, fuzzy
+msgid "Show default after description"
+msgstr "Vis utvidet beskrivelse"
+
+#
+#, fuzzy
+msgid "Show default on new line"
+msgstr "Vis informasjonslinje"
+
 msgid "Show detailed event info"
 msgstr "Vis detaljert programinformasjon"
 
@@ -9219,12 +9328,21 @@ msgstr "Vis kanal picons"
 msgid "Show servicelist or movies"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Show setup default values"
+msgstr "Vis programdetaljer"
+
 #, fuzzy
 msgid "Show simple second infobar"
 msgstr "Vis ekstra informasjonslinje"
 
 msgid "Show single service EPG"
 msgstr "Vis enkel kanal EPG"
+
+#, fuzzy
+msgid "Show softcam information"
+msgstr "Programvareadministrasjon"
 
 #
 #, fuzzy
@@ -9378,6 +9496,10 @@ msgstr "Din lengdegrad"
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr ""
+
+#, fuzzy
+msgid "Skin Selection"
+msgstr "Velg sikkerhetskopi"
 
 #, fuzzy
 msgid "Skin Selection Actions"
@@ -9688,6 +9810,22 @@ msgstr "Standby vifte %d spenning"
 msgid "Standby in "
 msgstr "Slå av om"
 
+#, fuzzy
+msgid "Start CableScan"
+msgstr "Kabel-TV søk"
+
+#, fuzzy
+msgid "Start Cablescan"
+msgstr "Kabel-TV søk"
+
+#, fuzzy
+msgid "Start Fastscan"
+msgstr "Hurtigsøk"
+
+#, fuzzy
+msgid "Start Sleeptimer"
+msgstr "Tidtaker"
+
 msgid "Start directory"
 msgstr "Start katalog"
 
@@ -9769,6 +9907,10 @@ msgstr "Stoppe"
 #
 msgid "Stop PiP"
 msgstr "Stoppe PiP (bilde i bilde)"
+
+#, fuzzy
+msgid "Stop Sleeptimer"
+msgstr "Tidtaker"
 
 msgid "Stop all current recordings"
 msgstr ""
@@ -10746,6 +10888,10 @@ msgstr ""
 msgid "Timer overview"
 msgstr "Tidtaker oversikt"
 
+#, fuzzy
+msgid "Timer recording failed. No space left on device!\n"
+msgstr "Tidtaker opptak"
+
 msgid "Timer recording location"
 msgstr "Tidtaker opptak"
 
@@ -10824,6 +10970,11 @@ msgstr "Til valg av undertekster"
 #
 msgid "Today"
 msgstr "Idag"
+
+#
+#, fuzzy
+msgid "Toggle Configuration Mode or AutoDisqc"
+msgstr "Oppsettstype: %s"
 
 msgid "Toggle HDMI In"
 msgstr ""
@@ -11500,6 +11651,10 @@ msgstr "Videoinnstilling"
 msgid "Video output"
 msgstr "Videoutgang"
 
+#, fuzzy
+msgid "Video settings"
+msgstr "A/V-innstilling"
+
 #
 msgid "Video setup"
 msgstr "Videooppsett"
@@ -12102,6 +12257,10 @@ msgid "Yellow DVB subtitles"
 msgstr "Gul DVB undertekst"
 
 #, fuzzy
+msgid "Yellow button function"
+msgstr "Velg sikkerhetskopi"
+
+#, fuzzy
 msgid "Yemen"
 msgstr "Bevegelse"
 
@@ -12435,10 +12594,6 @@ msgstr "et grafisk brukergrensesnitt for å tildele kanaler/leverandører/caids 
 msgid "about to start"
 msgstr "starter opp"
 
-#
-msgid "activate network adapter configuration"
-msgstr "aktiver nettverksinnstilling"
-
 #, fuzzy
 msgid "active"
 msgstr "Forhold"
@@ -12753,10 +12908,6 @@ msgstr ""
 #
 msgid "exit DVD player or return to file browser"
 msgstr "avslutt DVD spiller eller gå til til fil søker"
-
-#
-msgid "exit network adapter configuration"
-msgstr "avslutt nettverksinnstilling"
 
 #
 msgid "exit networkadapter setup menu"

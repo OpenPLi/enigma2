@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 17:44+0200\n"
+"POT-Creation-Date: 2024-06-21 11:25+0200\n"
 "PO-Revision-Date: 2024-01-17 10:49+0100\n"
 "Last-Translator: hasiok\n"
 "Language-Team: \n"
@@ -157,6 +157,9 @@ msgstr "%A %e %B %Y"
 
 msgid "%H:%M"
 msgstr "%H:%M"
+
+msgid "%R"
+msgstr ""
 
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
 msgid "%a %e %B %Y"
@@ -365,6 +368,10 @@ msgstr[0] "%s zaktualizowany pakiet dostępny"
 msgstr[1] "%s zaktualizowane pakiety dostępne"
 msgstr[2] "%s zaktualizowanych pakietów dostępnych"
 
+#, python-format
+msgid "%s%s(Default: %s)"
+msgstr ""
+
 msgid "'Minimum send interval' needs to be enabled to use this option."
 msgstr ""
 
@@ -396,6 +403,9 @@ msgstr "(pokaż opcjonalne menu audio DVD)"
 
 msgid "(unknown)"
 msgstr "(nieznany)"
+
+msgid "* = Restart Required"
+msgstr ""
 
 msgid "* Only available if more than one interface is active."
 msgstr "* Dostępne tylko gdy więcej niż jeden interfejs jest aktywny."
@@ -535,9 +545,6 @@ msgstr "<nieznany>"
 
 msgid "=NO STREAM\n"
 msgstr "=BRAK STRUMIENIA\n"
-
-msgid "??"
-msgstr "??"
 
 msgid "A"
 msgstr "A"
@@ -1194,6 +1201,10 @@ msgstr "Automatyczna instalacja zakończona"
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "Automatyczna instalacja - czekaj na aktualizację pakietów"
 
+#, fuzzy
+msgid "Automatic Language"
+msgstr "Skanowanie automatyczne"
+
 msgid "Automatic Scan"
 msgstr "Skanowanie automatyczne"
 
@@ -1365,6 +1376,10 @@ msgstr "Redukcja zakłóceń blokowych"
 
 msgid "Blue"
 msgstr "Niebieski"
+
+#, fuzzy
+msgid "Blue button function"
+msgstr "Wybierz funkcje"
 
 msgid "Bolivia (Plurinational State of)"
 msgstr "Boliwia"
@@ -1565,6 +1580,14 @@ msgstr "Kanada"
 
 msgid "Cancel"
 msgstr "Anuluj"
+
+#, fuzzy
+msgid "Cancel any changed settings and exit"
+msgstr "Cofnij wszystkie zmiany tekstu i wyjdź"
+
+#, fuzzy
+msgid "Cancel any changed settings and exit all menus"
+msgstr "Odrzuć wszystkie zmiany dla aktualnie aktywnej skórki i wyjdź z menu"
 
 msgid "Cancel any changes to the currently active skin"
 msgstr "Odrzuć wszystkie zmiany dla aktualnie aktywnej skórki"
@@ -1885,6 +1908,10 @@ msgstr "Moduł dostępu CI"
 msgid "Common Interface assignment"
 msgstr "Zadania Modułu CI"
 
+#, fuzzy
+msgid "Common Setup Actions"
+msgstr "Wybór Skórki"
+
 msgid "Communication"
 msgstr "Komunikacja"
 
@@ -2051,7 +2078,8 @@ msgstr "Ustaw czas (w godzinach) po jakim odbiornik przełączy się w tryb czuw
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "Ustaw w minutach czas po jakim pojawi się wygaszacz ekranu."
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
+#, fuzzy
+msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press blue to start/restart the sleeptimer or use yellow for stop active sleeptimer."
 msgstr "Ustaw czas (w minutach) dla wyłącznika czasowego. Wybierz opcję i wciśnij OK lub zielony aby uruchomić/zatrzymać timer usypiania"
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
@@ -2242,9 +2270,6 @@ msgstr "Konfiguracja wewnętrznej sieci LAN"
 
 msgid "Configure your network again"
 msgstr "Skonfiguruj ponownie ustawienia sieci"
-
-msgid "Configure your network settings and press OK to scan"
-msgstr "Skonfiguruj ustawienia sieci i wciśnij OK aby rozpocząć skanowanie"
 
 msgid "Configure your wireless LAN again"
 msgstr "Skonfiguruj ponownie sieć bezprzewodową"
@@ -2576,6 +2601,10 @@ msgstr "Domyślny typ timera"
 msgid "Default+Picon"
 msgstr "Domyślny+Picon"
 
+#, fuzzy, python-format
+msgid "Default: '%s'."
+msgstr "Domyślny"
+
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr "Zdefiniuj dodatkowe opóźnienie w milisekundach przed rozpoczęciem strumieni http(s), np. do podłączenia zdalnego tunera stosuje się złożony system DiSEqC."
 
@@ -2659,6 +2688,14 @@ msgstr "Usuń image"
 
 msgid "Delete all the text"
 msgstr "Usuń cały tekst"
+
+#, fuzzy
+msgid "Delete character to left of cursor or select AM times"
+msgstr "Usuń znak po lewej stronie kursora tekstu"
+
+#, fuzzy
+msgid "Delete character under cursor or select PM times"
+msgstr "Usuń znak pod kursorem tekstu"
 
 msgid "Delete entry"
 msgstr "Skasuj wpis"
@@ -2868,6 +2905,9 @@ msgstr "Wyświetlaj długość filmu w liście (z wyjątkiem stylu pojedynczej l
 msgid "Display setup"
 msgstr "Wyświetlacz"
 
+msgid "Display the virtual keyboard for data entry"
+msgstr ""
+
 msgid "Djibouti"
 msgstr "Dżibuti"
 
@@ -3021,6 +3061,10 @@ msgstr "Dominikana"
 
 msgid "Don't save and stop timeshift"
 msgstr "Nia zapisuj i zatrzymaj timeshift"
+
+#, fuzzy
+msgid "Don't show default"
+msgstr "Ustaw domyślny"
 
 msgid "Don't stop current event but disable coming events"
 msgstr "Nie zatrzymuj aktualnego wydarzenia ale wyłącz przyszłe"
@@ -3513,6 +3557,9 @@ msgstr "Wszędzie"
 
 msgid "Exceeds dual layer medium!"
 msgstr "Przekroczona pojemność nośnika dual layer!"
+
+msgid "Exclude first CA device"
+msgstr ""
 
 msgid "Execution finished!!"
 msgstr "Wykonywanie zakończone!"
@@ -4492,6 +4539,9 @@ msgstr "Importuj ze zdalnego odbiornika"
 msgid "Import remote receiver URL"
 msgstr "Importuj adres zdalnego odbiornika"
 
+msgid "In Setup screens choose whether to show the default value of the selected item in the description field."
+msgstr ""
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "Aby nagrywać z timera, TV został przełączony na nagrywany kanał!\n"
 
@@ -4727,7 +4777,8 @@ msgstr "Włoski"
 msgid "Italy"
 msgstr "Włochy"
 
-msgid "Items per page "
+#, fuzzy
+msgid "Items per page"
 msgstr "Linii na stronie "
 
 msgid "Items per page for list screen"
@@ -4756,6 +4807,12 @@ msgstr "Skocz do początku listy"
 
 msgid "Jump to end of list"
 msgstr "Skocz do końca listy"
+
+msgid "Jump to first item in list or the start of text"
+msgstr ""
+
+msgid "Jump to last item in list or the end of text"
+msgstr ""
 
 msgid "Jump to next marked position"
 msgstr "Skocz do następnej zaznaczonej pozycji"
@@ -5199,6 +5256,10 @@ msgstr "Indeks pamięci"
 msgid "Menu"
 msgstr "Menu"
 
+#, fuzzy
+msgid "Menu button function"
+msgstr "Wybierz funkcje"
+
 #, python-format
 msgid "Menusort (%s)"
 msgstr "Sortuj menu (%s)"
@@ -5308,6 +5369,14 @@ msgstr "Przełącz PiP do głównego ekranu"
 msgid "Move Picture in Picture"
 msgstr "Przesuń PiP"
 
+#, fuzzy
+msgid "Move down a line"
+msgstr "Przejdź w dół listy"
+
+#, fuzzy
+msgid "Move down a screen"
+msgstr "Przejdź w dół do ostatniej pozycji"
+
 msgid "Move east"
 msgstr "Przesuń na wschód"
 
@@ -5335,6 +5404,14 @@ msgstr "Przenieś kursor tekstu do pierwszego znaku"
 msgid "Move the text cursor to the last character"
 msgstr "Przenieś kursor tekstu do ostatniego znaku"
 
+#, fuzzy
+msgid "Move to first line / screen"
+msgstr "Przejdź w do następnej skórki"
+
+#, fuzzy
+msgid "Move to last line / screen"
+msgstr "Przejdź w do następnej skórki"
+
 msgid "Move to position X"
 msgstr "Idź do pozycji X"
 
@@ -5349,6 +5426,13 @@ msgstr "Cofnij do poprzedniej strony"
 
 msgid "Move to the previous skin"
 msgstr "Przejdź do poprzedniej skórki"
+
+#, fuzzy
+msgid "Move up a line"
+msgstr "Przesunięto na pozycję z indeksem"
+
+msgid "Move up a screen"
+msgstr ""
 
 msgid "Move west"
 msgstr "Przesuń na zachód"
@@ -5587,6 +5671,10 @@ msgstr "Brak dostępnych aktywnych subserwisów."
 
 msgid "No age block"
 msgstr "Brak ograniczeń"
+
+#, fuzzy
+msgid "No config items available"
+msgstr "Brak dostępnych aktualizacji"
 
 msgid ""
 "No data on transponder!\n"
@@ -5998,9 +6086,6 @@ msgstr ""
 msgid "PULSe 4K(mini)"
 msgstr ""
 
-msgid "PVR"
-msgstr ""
-
 msgid "Package list update"
 msgstr "Aktualizacja listy pakietów"
 
@@ -6209,6 +6294,9 @@ msgstr ""
 
 msgid "Please connect your receiver to the internet"
 msgstr "Podłącz odbiornik do internetu"
+
+msgid "Please contact the manufacturer for clarification."
+msgstr ""
 
 msgid "Please do not change any values unless you know what you are doing!"
 msgstr "Nie zmieniaj żadnych wartości (chyba, że wiesz co robisz...)!"
@@ -6838,9 +6926,6 @@ msgstr "Czerwony"
 msgid "Recall to previous service"
 msgstr "Powróć do poprzedniego kanału"
 
-msgid "Receiver or driver does not support FCC"
-msgstr "Odbiornik lub sterownik nie obsługuje FCC"
-
 msgid "Reception settings"
 msgstr "Ustawienia odbioru"
 
@@ -7109,6 +7194,10 @@ msgstr "Restart odbiornika"
 msgid "Restart GUI now?"
 msgstr "Zrestartować GUI teraz?"
 
+#, fuzzy
+msgid "Restart Sleeptimer"
+msgstr "Wyłącznik czasowy"
+
 msgid "Restart both"
 msgstr "Restartuj oba"
 
@@ -7352,6 +7441,10 @@ msgid "Save"
 msgstr "Zapisz"
 
 msgid "Save / Enter text and exit"
+msgstr "Zapisz / zatwierdź tekst i wyjdź"
+
+#, fuzzy
+msgid "Save all changed settings and exit"
 msgstr "Zapisz / zatwierdź tekst i wyjdź"
 
 msgid "Save and activate the currently selected skin"
@@ -7775,6 +7868,13 @@ msgstr "Wybierz model twojego urządzenia unicable / SCR. Jeśli nie ma go na li
 msgid "Select the movie path"
 msgstr "Wybierz ścieżkę do filmu"
 
+#, fuzzy
+msgid "Select the next item in list or move cursor right"
+msgstr "Wybierz strefę czasową w obrębie obszaru lub regionu."
+
+msgid "Select the previous item in list or move cursor left"
+msgstr ""
+
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr "Wybierz typ twojego urządzenia unicable. Do wyboru masz 'SCR Unicable' (typ Unicable) lub 'SCR JESS' (JESS, znany także jako Unicable II)."
 
@@ -7867,14 +7967,14 @@ msgstr "Wybierz swój kraj, jeśli nie dostępny, wybierz 'wszystkie'."
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr "Wybierz swojego nadawcę i region. Jeśli nie dostępne na liście, będziesz musiał wybrać jeden z pozostałych typów skanowania."
 
-msgid "Select your provider, and press OK to start the scan"
-msgstr "Wybierz nadawcę i wciśnij OK aby rozpocząć skanowanie"
-
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "Wybierz swój region. Jeśli nie dostępny, zmień 'Kraj' na 'Wszystkie' i wybierz jedną z domyślnych alternatyw."
 
 msgid "Select your time zone area or region."
 msgstr "Wybierz obszar lub region twojej strefy czasowej."
+
+msgid "Select, toggle, process or edit the current entry"
+msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "Wybór satelitów 1 (USALS)"
@@ -8025,6 +8125,9 @@ msgstr "Skonfiguruj zachowanie przy zakończeniu odtwarzania."
 
 msgid "Set all hotkey to default?"
 msgstr "Przestawić wszystkie klawisze do ustawień domyślnych?"
+
+msgid "Set all the settings back as they were"
+msgstr ""
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
 msgstr "Ustaw alternatywny tuner rezerwowy dla DVB-T/C lub ATSC"
@@ -8214,6 +8317,14 @@ msgstr "Ikony kodowania kanału"
 msgid "Show crypto info in infobar"
 msgstr "Informacje o kodowaniu na pasku info"
 
+#, fuzzy
+msgid "Show default after description"
+msgstr "Pokaż rozszerzony opis"
+
+#, fuzzy
+msgid "Show default on new line"
+msgstr "Pokaż pasek Info"
+
 msgid "Show detailed event info"
 msgstr "Pokaż szczegółowy opis audycji"
 
@@ -8347,11 +8458,19 @@ msgid "Show servicelist or movies"
 msgstr "Wyświetl listę kanałów lub nagrań"
 
 #, fuzzy
+msgid "Show setup default values"
+msgstr "Pokaż szczegóły wydarzenia"
+
+#, fuzzy
 msgid "Show simple second infobar"
 msgstr "Wyświetlanie SecondInfobar"
 
 msgid "Show single service EPG"
 msgstr "Wyświetl EPG pojedynczego kanału"
+
+#, fuzzy
+msgid "Show softcam information"
+msgstr "Informacje Softwaremanagera"
 
 msgid "Show softcam setup in extensions menu"
 msgstr "Skrót do ustawień softcam w menu rozszerzeń"
@@ -8485,6 +8604,10 @@ msgstr "Długość geograficzna"
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "Skórka i rozdzielczość: %s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection"
+msgstr "Wybór Skórki"
 
 #, fuzzy
 msgid "Skin Selection Actions"
@@ -8765,6 +8888,22 @@ msgstr "Wiatrak w standby %d napięcie"
 msgid "Standby in "
 msgstr "Tryb czuwania za "
 
+#, fuzzy
+msgid "Start CableScan"
+msgstr "Skanowanie kablówki"
+
+#, fuzzy
+msgid "Start Cablescan"
+msgstr "Testuj"
+
+#, fuzzy
+msgid "Start Fastscan"
+msgstr "Szybkie skanowanie"
+
+#, fuzzy
+msgid "Start Sleeptimer"
+msgstr "Wyłącznik czasowy"
+
 msgid "Start directory"
 msgstr "Katalog początkowy"
 
@@ -8835,6 +8974,10 @@ msgstr "Zatrzymaj"
 
 msgid "Stop PiP"
 msgstr "Zatrzymaj PiP"
+
+#, fuzzy
+msgid "Stop Sleeptimer"
+msgstr "Wyłącznik czasowy"
 
 msgid "Stop all current recordings"
 msgstr "Zatrzymaj wszystkie trwające nagrania"
@@ -9752,6 +9895,10 @@ msgstr ""
 msgid "Timer overview"
 msgstr "Opis timera"
 
+#, fuzzy
+msgid "Timer recording failed. No space left on device!\n"
+msgstr "Lokalizacja nagrań z timera"
+
 msgid "Timer recording location"
 msgstr "Lokalizacja nagrań z timera"
 
@@ -9819,6 +9966,10 @@ msgstr "Przejdź do wyboru napisów"
 
 msgid "Today"
 msgstr "Dzisiaj"
+
+#, fuzzy
+msgid "Toggle Configuration Mode or AutoDisqc"
+msgstr "Tryb konfiguracji: %s"
 
 msgid "Toggle HDMI In"
 msgstr "Włączaj HDMI In"
@@ -10430,6 +10581,10 @@ msgstr "Wybór trybu video."
 msgid "Video output"
 msgstr "Wyjście video"
 
+#, fuzzy
+msgid "Video settings"
+msgstr "Audio/Video"
+
 msgid "Video setup"
 msgstr "Ustawienia video"
 
@@ -11000,6 +11155,10 @@ msgstr "Żółty"
 msgid "Yellow DVB subtitles"
 msgstr "Żółte napisy DVB"
 
+#, fuzzy
+msgid "Yellow button function"
+msgstr "Wybierz funkcje"
+
 msgid "Yemen"
 msgstr "Jemen"
 
@@ -11322,9 +11481,6 @@ msgstr "Menu do przyporządkowywania kanałów/nadawców/CAIDów dla modułów C
 msgid "about to start"
 msgstr "zaraz się rozpocznie"
 
-msgid "activate network adapter configuration"
-msgstr "Aktywuj konfigurację adaptera sieciowego."
-
 msgid "active"
 msgstr "aktywny"
 
@@ -11602,9 +11758,6 @@ msgstr "Wykonaj cięcia (wymaga pluginu MovieCut)"
 
 msgid "exit DVD player or return to file browser"
 msgstr "Zamknij odtwarzacz DVD lub powróć do przeglądarki plików"
-
-msgid "exit network adapter configuration"
-msgstr "Zamknij menu konfiguracji adaptera sieciowego"
 
 msgid "exit networkadapter setup menu"
 msgstr "Zamknij menu konfiguracji adaptera sieciowego"
