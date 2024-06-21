@@ -147,7 +147,10 @@ def getImagelist():
 					date = max(date, datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime('%Y-%m-%d'))
 				except:
 					date = _("Unknown")
-				imagelist[slot] = {'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[-2].capitalize().strip()[:-6], date)}
+				try:
+					imagelist[slot] = {'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[0].capitalize().strip()[:-6], date)}
+				except IndexError:
+					imagelist[slot] = {'imagename': _("Unknown image")}
 			elif os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2.bak')):
 				imagelist[slot] = {'imagename': _("Deleted image")}
 			else:
