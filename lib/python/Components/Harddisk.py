@@ -176,13 +176,26 @@ class Harddisk:
 	def model(self):
 		try:
 			if self.device[:2] == "hd":
-				return readFile('/proc/ide/' + self.device + '/model')
+				return readFile("/proc/ide/" + self.device + "/model")
 			elif self.device[:2] == "sd":
-				vendor = readFile(self.sysfsPath('device/vendor'))
-				model = readFile(self.sysfsPath('device/model'))
-				return vendor + ' (' + model + ')'
-			elif self.device.startswith('mmcblk'):
-				return readFile(self.sysfsPath('device/name'))
+				try:
+					vendor = readFile(self.sysfsPath("device/vendor"))
+				except:
+					vendor = ""
+				try:
+					model = readFile(self.sysfsPath('device/model'))
+				except:
+					model = ""
+				if vendor and model:
+					return vendor + " (" + model + ")"
+				elif vendor:
+					return vendor
+				elif model:
+					return model
+				else:
+					return "-?-"
+			elif self.device.startswith("mmcblk"):
+				return readFile(self.sysfsPath("device/name"))
 			else:
 				raise Exception("[Harddisk] no hdX or sdX or mmcX")
 		except Exception as e:
