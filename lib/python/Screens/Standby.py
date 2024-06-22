@@ -107,6 +107,8 @@ class StandbyScreen(Screen):
 			del self.session.pip
 		self.session.pipshown = False
 
+		self.infoBarInstance and hasattr(self.infoBarInstance, "sleepTimer") and self.infoBarInstance.sleepTimer.stop()
+
 		if BoxInfo.getItem("ScartSwitch"):
 			self.avswitch.setInput("SCART")
 		else:
