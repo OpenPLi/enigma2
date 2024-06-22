@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-21 17:44+0200\n"
+"POT-Creation-Date: 2024-06-21 11:25+0200\n"
 "PO-Revision-Date: 2021-07-31 17:00+0800\n"
 "Last-Translator: 孤独之剑 <haotzyy1970@yahoo.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@yahoo.com>\n"
@@ -158,6 +158,9 @@ msgstr "%A %e %B %Y"
 
 msgid "%H:%M"
 msgstr "%时:%分"
+
+msgid "%R"
+msgstr ""
 
 #. TRANSLATORS: full date representations short dayname daynum monthname long year in strftime() format! See 'man strftime'
 msgid "%a %e %B %Y"
@@ -353,6 +356,10 @@ msgid_plural "%s updated packages available"
 msgstr[0] "%s 个更新包可用"
 msgstr[1] "%s 个更新包可用"
 
+#, python-format
+msgid "%s%s(Default: %s)"
+msgstr ""
+
 msgid "'Minimum send interval' needs to be enabled to use this option."
 msgstr ""
 
@@ -384,6 +391,9 @@ msgstr "（显示可选的DVD音频菜单）"
 
 msgid "(unknown)"
 msgstr "(未知)"
+
+msgid "* = Restart Required"
+msgstr ""
 
 msgid "* Only available if more than one interface is active."
 msgstr "* 仅在一个或多个网卡激活才有效."
@@ -524,9 +534,6 @@ msgstr "<未知>"
 
 msgid "=NO STREAM\n"
 msgstr "=流中没有数据\n"
-
-msgid "??"
-msgstr "??"
 
 msgid "A"
 msgstr "A"
@@ -1186,6 +1193,10 @@ msgstr "自动安装已完成"
 msgid "Autoinstalling please wait for packages being updated"
 msgstr "自动安装请等待更新包"
 
+#, fuzzy
+msgid "Automatic Language"
+msgstr "自动扫描"
+
 msgid "Automatic Scan"
 msgstr "自动扫描"
 
@@ -1358,6 +1369,10 @@ msgstr "块降噪"
 
 msgid "Blue"
 msgstr "蓝色"
+
+#, fuzzy
+msgid "Blue button function"
+msgstr "选择功能"
 
 msgid "Bolivia (Plurinational State of)"
 msgstr "多民族玻利维亚国"
@@ -1560,6 +1575,14 @@ msgstr "加拿大"
 
 msgid "Cancel"
 msgstr "取消"
+
+#, fuzzy
+msgid "Cancel any changed settings and exit"
+msgstr "取消任何文本更改并退出"
+
+#, fuzzy
+msgid "Cancel any changed settings and exit all menus"
+msgstr "取消对当前活动皮肤的任何更改并退出所有菜单"
 
 msgid "Cancel any changes to the currently active skin"
 msgstr "取消对当前活动皮肤的任何更改"
@@ -1887,6 +1910,10 @@ msgstr "通用接口 (CI)"
 msgid "Common Interface assignment"
 msgstr "通用接口选择"
 
+#, fuzzy
+msgid "Common Setup Actions"
+msgstr "主题选择操作"
+
 msgid "Communication"
 msgstr "通信"
 
@@ -2053,7 +2080,8 @@ msgstr "配置接收机进入待机模式的闲置小时数时间."
 msgid "Configure the duration in minutes for the screensaver."
 msgstr "配置屏保持续时间."
 
-msgid "Configure the duration in minutes for the sleeptimer. Select this entry and click OK or green to start/stop the sleeptimer"
+#, fuzzy
+msgid "Configure the duration in minutes for the sleeptimer. Select this entry and press blue to start/restart the sleeptimer or use yellow for stop active sleeptimer."
 msgstr "配置睡眠定时器持续分钟数,选择此项并按OK键或绿色键来开始/停止此睡眠定时器"
 
 msgid "Configure the duration when the receiver should go to shut down in case the receiver is in standby mode."
@@ -2244,9 +2272,6 @@ msgstr "配置本地网络"
 
 msgid "Configure your network again"
 msgstr "重新配置网络"
-
-msgid "Configure your network settings and press OK to scan"
-msgstr "配置网络设置并按OK键扫描"
 
 msgid "Configure your wireless LAN again"
 msgstr "重新配置无线网络"
@@ -2582,6 +2607,10 @@ msgstr "默认定时器类型"
 msgid "Default+Picon"
 msgstr "默认+Picon"
 
+#, fuzzy, python-format
+msgid "Default: '%s'."
+msgstr "缺省值"
+
 msgid "Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC."
 msgstr ""
 
@@ -2665,6 +2694,14 @@ msgstr "删除镜像"
 
 msgid "Delete all the text"
 msgstr "删除所有文本"
+
+#, fuzzy
+msgid "Delete character to left of cursor or select AM times"
+msgstr "删除文本光标左侧的字符"
+
+#, fuzzy
+msgid "Delete character under cursor or select PM times"
+msgstr "删除文本光标下的字符"
 
 msgid "Delete entry"
 msgstr "删除项目"
@@ -2878,6 +2915,9 @@ msgstr "在电影列表中显示电影长度(单行样式除外)."
 msgid "Display setup"
 msgstr "显示设置"
 
+msgid "Display the virtual keyboard for data entry"
+msgstr ""
+
 msgid "Djibouti"
 msgstr "吉布提"
 
@@ -3027,6 +3067,10 @@ msgstr "多米尼加共和国"
 
 msgid "Don't save and stop timeshift"
 msgstr "不保存并停止时移"
+
+#, fuzzy
+msgid "Don't show default"
+msgstr "设为默认"
 
 msgid "Don't stop current event but disable coming events"
 msgstr "不能停止当前事件,不过可以禁用下一个事件"
@@ -3526,6 +3570,9 @@ msgstr "随时"
 
 msgid "Exceeds dual layer medium!"
 msgstr "超出双层介质!"
+
+msgid "Exclude first CA device"
+msgstr ""
 
 msgid "Execution finished!!"
 msgstr "执行完毕!"
@@ -4508,6 +4555,9 @@ msgstr "从远程接收器URL导入"
 msgid "Import remote receiver URL"
 msgstr "导入远程接收器URL"
 
+msgid "In Setup screens choose whether to show the default value of the selected item in the description field."
+msgstr ""
+
 msgid "In order to record a timer, the TV was switched to the recording service!\n"
 msgstr "定时录制开始,即将切换到预录频道!\n"
 
@@ -4743,7 +4793,8 @@ msgstr "意大利语"
 msgid "Italy"
 msgstr "意大利"
 
-msgid "Items per page "
+#, fuzzy
+msgid "Items per page"
 msgstr "每页项目 "
 
 msgid "Items per page for list screen"
@@ -4772,6 +4823,12 @@ msgstr "跳转到列表开头"
 
 msgid "Jump to end of list"
 msgstr "切换到列表结尾"
+
+msgid "Jump to first item in list or the start of text"
+msgstr ""
+
+msgid "Jump to last item in list or the end of text"
+msgstr ""
 
 msgid "Jump to next marked position"
 msgstr "切换到下一个标记位置"
@@ -5205,6 +5262,10 @@ msgstr "内存索引"
 msgid "Menu"
 msgstr "菜单"
 
+#, fuzzy
+msgid "Menu button function"
+msgstr "选择功能"
+
 #, python-format
 msgid "Menusort (%s)"
 msgstr "菜单排序(%s)"
@@ -5311,6 +5372,14 @@ msgstr "切换画中画到主屏幕"
 msgid "Move Picture in Picture"
 msgstr "移动画中画"
 
+#, fuzzy
+msgid "Move down a line"
+msgstr "转到列表末尾"
+
+#, fuzzy
+msgid "Move down a screen"
+msgstr "向下移动到最后项目"
+
 msgid "Move east"
 msgstr "东移"
 
@@ -5338,6 +5407,14 @@ msgstr "将文本光标移动到第一个字符"
 msgid "Move the text cursor to the last character"
 msgstr "将文本光标移到最后一个字符"
 
+#, fuzzy
+msgid "Move to first line / screen"
+msgstr "移到下一个皮肤"
+
+#, fuzzy
+msgid "Move to last line / screen"
+msgstr "移到下一个皮肤"
+
 msgid "Move to position X"
 msgstr "移动到指定位置x"
 
@@ -5352,6 +5429,13 @@ msgstr "移到上一页"
 
 msgid "Move to the previous skin"
 msgstr "移到上一个皮肤"
+
+#, fuzzy
+msgid "Move up a line"
+msgstr "移动到索引位置"
+
+msgid "Move up a screen"
+msgstr ""
 
 msgid "Move west"
 msgstr "西移"
@@ -5587,6 +5671,10 @@ msgstr "没有可用的活动子频道."
 
 msgid "No age block"
 msgstr "没有年龄限制"
+
+#, fuzzy
+msgid "No config items available"
+msgstr "没有升级可用"
 
 msgid ""
 "No data on transponder!\n"
@@ -5998,10 +6086,6 @@ msgstr ""
 msgid "PULSe 4K(mini)"
 msgstr "脉冲4K"
 
-#, fuzzy
-msgid "PVR"
-msgstr "OVR"
-
 msgid "Package list update"
 msgstr "更新软件列表"
 
@@ -6207,6 +6291,9 @@ msgstr ""
 
 msgid "Please connect your receiver to the internet"
 msgstr "请设置接收机互联网连接"
+
+msgid "Please contact the manufacturer for clarification."
+msgstr ""
 
 msgid "Please do not change any values unless you know what you are doing!"
 msgstr "不要做任何改变,除非您知道您在干什么!"
@@ -6830,9 +6917,6 @@ msgstr "录制"
 msgid "Recall to previous service"
 msgstr "返回之前的频道"
 
-msgid "Receiver or driver does not support FCC"
-msgstr ""
-
 msgid "Reception settings"
 msgstr "接收设置"
 
@@ -7101,6 +7185,10 @@ msgstr "重启机器"
 msgid "Restart GUI now?"
 msgstr "立即重启接收机GUI?"
 
+#, fuzzy
+msgid "Restart Sleeptimer"
+msgstr "睡眠定时器"
+
 msgid "Restart both"
 msgstr "重启解密插件和解密卡"
 
@@ -7344,6 +7432,10 @@ msgid "Save"
 msgstr "保存"
 
 msgid "Save / Enter text and exit"
+msgstr "保存/输入文本并退出"
+
+#, fuzzy
+msgid "Save all changed settings and exit"
 msgstr "保存/输入文本并退出"
 
 msgid "Save and activate the currently selected skin"
@@ -7765,6 +7857,13 @@ msgstr "Ε选择您的SCR设备的型号.如果型号没有 列出,根据其规�
 msgid "Select the movie path"
 msgstr "选择电影路径"
 
+#, fuzzy
+msgid "Select the next item in list or move cursor right"
+msgstr "选择相应区域内的时区."
+
+msgid "Select the previous item in list or move cursor left"
+msgstr ""
+
 msgid "Select the protocol used by your SCR device. Choices are 'SCR Unicable' (Unicable), or 'SCR JESS' (JESS, also known as Unicable II)."
 msgstr "选择您的SCR设备使用的协议.选择是“scr” unicable（unicable）或scr jess（jess，也称unicable II）."
 
@@ -7859,14 +7958,14 @@ msgstr "选择国家(地区).如果不可用,请选择'全部'."
 msgid "Select your provider and region. If not present in this list you will need to select one of the other 'service scan types'."
 msgstr "选择提供商和地区.如果不在该列表中,您将需要选择另一种‘服务扫描类型’."
 
-msgid "Select your provider, and press OK to start the scan"
-msgstr "选择供应商,按OK键开始扫描"
-
 msgid "Select your region. If not available change 'Country' to 'all' and select one of the default alternatives."
 msgstr "选择您所在的地区,如果不可用,请将'国家'更改为'全部',然后选择一个默认选项."
 
 msgid "Select your time zone area or region."
 msgstr "选择时区或区域."
+
+msgid "Select, toggle, process or edit the current entry"
+msgstr ""
 
 msgid "Selecting satellites 1 (USALS)"
 msgstr "正在转到卫星1(极轴)"
@@ -8016,6 +8115,9 @@ msgstr "设置电影播放完成时的操作."
 
 msgid "Set all hotkey to default?"
 msgstr "重置所有热键?"
+
+msgid "Set all the settings back as they were"
+msgstr ""
 
 msgid "Set alternative fallback tuners for DVB-T/C or ATSC"
 msgstr "DVB-T/C或ATSC备用调谐器的识别"
@@ -8206,6 +8308,14 @@ msgstr "显示频道加密图标"
 msgid "Show crypto info in infobar"
 msgstr "在信息栏显示加密信息"
 
+#, fuzzy
+msgid "Show default after description"
+msgstr "显示扩展描述"
+
+#, fuzzy
+msgid "Show default on new line"
+msgstr "显示信息行"
+
 msgid "Show detailed event info"
 msgstr "显示事件详细信息"
 
@@ -8339,11 +8449,19 @@ msgid "Show servicelist or movies"
 msgstr "显示频道列表或电影"
 
 #, fuzzy
+msgid "Show setup default values"
+msgstr "显示事件详细内容"
+
+#, fuzzy
 msgid "Show simple second infobar"
 msgstr "显示第二信息栏"
 
 msgid "Show single service EPG"
 msgstr "单个EPG"
+
+#, fuzzy
+msgid "Show softcam information"
+msgstr "软件管理信息"
 
 msgid "Show softcam setup in extensions menu"
 msgstr "在菜单栏显示softcam扩展"
@@ -8478,6 +8596,10 @@ msgstr "经度"
 #, python-format
 msgid "Skin & Resolution: %s (%sx%s)\n"
 msgstr "皮肤和分辨率: %s (%sx%s)\n"
+
+#, fuzzy
+msgid "Skin Selection"
+msgstr "主题选择操作"
 
 msgid "Skin Selection Actions"
 msgstr "主题选择操作"
@@ -8757,6 +8879,22 @@ msgstr "%d 号待机风扇的电压"
 msgid "Standby in "
 msgstr "待机在 "
 
+#, fuzzy
+msgid "Start CableScan"
+msgstr "有线扫描"
+
+#, fuzzy
+msgid "Start Cablescan"
+msgstr "重新测试"
+
+#, fuzzy
+msgid "Start Fastscan"
+msgstr "快速扫描"
+
+#, fuzzy
+msgid "Start Sleeptimer"
+msgstr "睡眠定时器"
+
 msgid "Start directory"
 msgstr "启动目录"
 
@@ -8827,6 +8965,10 @@ msgstr "停止"
 
 msgid "Stop PiP"
 msgstr "停止画中画"
+
+#, fuzzy
+msgid "Stop Sleeptimer"
+msgstr "睡眠定时器"
 
 msgid "Stop all current recordings"
 msgstr "停止当前所有进行中的录制"
@@ -9736,6 +9878,10 @@ msgstr ""
 msgid "Timer overview"
 msgstr "自动定时器概述"
 
+#, fuzzy
+msgid "Timer recording failed. No space left on device!\n"
+msgstr "定时器位置"
+
 msgid "Timer recording location"
 msgstr "定时器位置"
 
@@ -9800,6 +9946,10 @@ msgstr "字幕选项"
 
 msgid "Today"
 msgstr "今天"
+
+#, fuzzy
+msgid "Toggle Configuration Mode or AutoDisqc"
+msgstr "配置模式：%s"
 
 msgid "Toggle HDMI In"
 msgstr "切换HDMI接入"
@@ -10404,6 +10554,10 @@ msgstr "选择视频模式."
 msgid "Video output"
 msgstr "视频输出"
 
+#, fuzzy
+msgid "Video settings"
+msgstr "音/视频设置"
+
 msgid "Video setup"
 msgstr "视频设置"
 
@@ -10976,6 +11130,10 @@ msgstr "黄色"
 msgid "Yellow DVB subtitles"
 msgstr "黄色DVB字幕"
 
+#, fuzzy
+msgid "Yellow button function"
+msgstr "选择功能"
+
 msgid "Yemen"
 msgstr "也门"
 
@@ -11297,9 +11455,6 @@ msgstr "分配服务/供应商/ caids常见接口模块的界面"
 msgid "about to start"
 msgstr "立即开始"
 
-msgid "activate network adapter configuration"
-msgstr "激活网卡配置"
-
 msgid "active"
 msgstr "激活"
 
@@ -11581,9 +11736,6 @@ msgstr "执行裁剪（需要电影裁剪插件）"
 
 msgid "exit DVD player or return to file browser"
 msgstr "退出DVD播放器或返回文件浏览器"
-
-msgid "exit network adapter configuration"
-msgstr "退出网卡配置"
 
 msgid "exit networkadapter setup menu"
 msgstr "退出网卡设置菜单"
