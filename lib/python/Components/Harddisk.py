@@ -186,14 +186,7 @@ class Harddisk:
 					model = readFile(self.sysfsPath('device/model'))
 				except:
 					model = ""
-				if vendor and model:
-					return vendor + " (" + model + ")"
-				elif vendor:
-					return vendor
-				elif model:
-					return model
-				else:
-					return "-?-"
+				return vendor and model and vendor + " (" + model + ")" or vendor and vendor or model and model or "-?-"
 			elif self.device.startswith("mmcblk"):
 				return readFile(self.sysfsPath("device/name"))
 			else:
