@@ -263,7 +263,7 @@ class RestoreMenu(Screen):
 			self.fill_list()
 
 
-class RestoreScreen(Screen, ConfigListScreen):
+class RestoreScreen(ConfigListScreen, Screen):
 	skin = """
 		<screen position="135,144" size="350,310" title="Restore is running..." >
 		<widget name="config" position="10,10" size="330,250" transparent="1" scrollbarMode="showOnDemand" />
