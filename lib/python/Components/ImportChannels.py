@@ -49,7 +49,7 @@ class ImportChannels:
 				sleep(5)
 				return self.getUrl(url, timeout)
 			print("[Import Channels] URLError ", e)
-			raise (e)
+			result = {}
 		return result
 
 	def getTerrestrialUrl(self):
