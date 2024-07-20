@@ -187,15 +187,14 @@ static PyObject *
 eConsolePy_write(eConsolePy* self, PyObject *args)
 {
 	char *data;
+	int data_len;
 	int len = -1;
-	if (!PyArg_ParseTuple(args, "s|i", &data, &len))
+	if (!PyArg_ParseTuple(args, "s#|i", &data, &data_len, &len))
 	{
 		PyErr_SetString(PyExc_TypeError,
 			"1st arg must be a string, optionaly 2nd arg can be the string length");
 		return NULL;
 	}
-	int data_len = strlen(data);
-
 	if (len < 0)
 		len = data_len;
 	self->cont->write(data, len);
