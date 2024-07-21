@@ -8,7 +8,7 @@ from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
 
 class Language:
 	def __init__(self):
-		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""), codeset="utf-8")
+		gettext.install('enigma2', resolveFilename(SCOPE_LANGUAGE, ""))
 		gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
 		gettext.textdomain("enigma2")
 		self.activeLanguage = 0
