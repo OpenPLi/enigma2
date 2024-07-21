@@ -213,7 +213,7 @@ int eSocket::writeBlock(const char *data, unsigned int len)
 	// and eDebug self can cause a call of writeBlock !!
 			struct timespec tp = {};
 			clock_gettime(CLOCK_MONOTONIC, &tp);
-			fprintf(stderr, "<%6lu.%06lu> [eSocket] write: %m\n", tp.tv_sec, tp.tv_nsec/1000);
+			fprintf(stderr, "<%6llu.%06lu> [eSocket] write: %m\n", tp.tv_sec, tp.tv_nsec/1000);
 		}
 		if (tw < 0)
 			tw = 0;
