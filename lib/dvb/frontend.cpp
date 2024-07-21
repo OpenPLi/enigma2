@@ -3240,6 +3240,7 @@ std::string eDVBFrontend::getCapabilities()
 		case SYS_DVBT2:		ss << " DVBT2"; break;
 		case SYS_TURBO:		ss << " TURBO"; break;
 		case SYS_DTMB:		ss << " DTMB"; break;
+		case SYS_DVBC2:		ss << " DVBC2"; break;
 		}
 	}
 
