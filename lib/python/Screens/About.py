@@ -216,7 +216,7 @@ class CommitInfo(Screen):
 
 		# get the branch to display from the Enigma version
 		try:
-			branch = "?sha=" + "-".join(about.getEnigmaVersionString().split("-")[3:])
+			branch = "?sha=" + about.getEnigmaVersionString().split("(")[1].split(")")[0].lower()
 		except:
 			branch = ""
 		branch_e2plugins = "?sha=python3"
