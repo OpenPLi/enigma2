@@ -3,6 +3,7 @@ import errno
 import os
 
 from enigma import eEnv
+from datetime import datetime
 from re import compile, split
 from stat import S_IMODE
 from sys import _getframe as getframe
@@ -335,6 +336,12 @@ def fileHas(f, content, mode="r"):
 		if content in text:
 			result = True
 	return result
+
+
+def fileDate(f):
+	if fileExists(f):
+		return datetime.fromtimestamp(os.stat(f).st_mtime).strftime("%Y-%m-%d")
+	return("1970-01-01")
 
 
 def fileReadXML(filename, default=None, *args, **kwargs):
