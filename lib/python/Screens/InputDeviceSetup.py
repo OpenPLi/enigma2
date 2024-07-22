@@ -258,7 +258,7 @@ class RemoteControlType(ConfigListScreen, Screen):
 			("24", _("Axas E4HD Ultra")),
 			("25", _("Zgemma H9(old model)/I55Plus/H8")),
 			("27", _("HD60/HD66SE/Multibox/Multibox SE")),
-			("28", _("I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10/H11")),
+			("28", _("I55SE/H7(new model)/H9(new model)/H9COMBO/H9TWIN/H9SE/H9COMBOSE/H10/H11/H17")),
 			("30", _("PULSe 4K(mini)"))
 		]
 
@@ -311,6 +311,7 @@ class RemoteControlType(ConfigListScreen, Screen):
 			("h9twinse", 28),
 			("h10", 28),
 			("h11", 28),
+			("h17", 28),
 			("pulse4k", 30),
 			("pulse4kmini", 30)
 		]
