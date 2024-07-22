@@ -1,6 +1,6 @@
 from Components.SystemInfo import BoxInfo, BoxInformation
 from Components.Console import Console
-from Tools.Directories import fileHas, fileExists
+from Tools.Directories import fileHas, fileExists, fileDate
 from datetime import datetime
 import os
 import glob
@@ -37,10 +37,8 @@ def getparam(line, param):
 
 
 def estimateSlotImageDate(imagedir):
-	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d") if fileExists(os.path.join(imagedir, "var/lib/opkg/status")) else "00000000"
-	date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d") if fileExists(os.path.join(imagedir, "usr/share/bootlogo.mvi")) else "00000000"
-	return datetime.strptime(max(date1, date2, date3), '%Y-%m-%d').strftime("%d-%m-%Y") # dates were compared for max as strings
+	maxdate = max(fileDate(os.path.join(imagedir, "usr/bin/enigma2")), fileDate(os.path.join(imagedir, "var/lib/opkg/status")), fileDate(os.path.join(imagedir, "usr/share/bootlogo.mvi")))
+	return datetime.strptime(maxdate, '%Y-%m-%d').strftime("%d-%m-%Y") # dates were compared for max as strings
 
 
 def getSlotImageInfo(slot, imagedir="/"):
