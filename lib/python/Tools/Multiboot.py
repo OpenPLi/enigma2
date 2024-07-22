@@ -36,27 +36,30 @@ def getparam(line, param):
 	return line.replace("userdataroot", "rootuserdata").rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
 
 
-def createInfo(slot, imagedir="/"):
-	BoxInfoInstance = BoxInformation(root=imagedir) if getCurrentImage() != slot else BoxInfo
-	Creator = BoxInfoInstance.getItem("distro", "").capitalize()
-	BuildImgVersion = BoxInfoInstance.getItem("imgversion")
-	BuildType = BoxInfoInstance.getItem("imagetype", "")[0:3]
-	BuildVer = BoxInfoInstance.getItem("imagebuild")
-	BuildDate = VerDate(imagedir)
-	BuildDev = str(idb).zfill(3) if BuildType and BuildType != "rel" and (idb := BoxInfoInstance.getItem("imagedevbuild")) else ""
-	return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildVer, BuildDev, "(%s)" % BuildDate) if x and str(x).strip()])
+def estimateSlotImageDate(imagedir):
+	date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
+	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d") if fileExists(os.path.join(imagedir, "var/lib/opkg/status")) else "00000000"
+	date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d") if fileExists(os.path.join(imagedir, "usr/share/bootlogo.mvi")) else "00000000"
+	return datetime.strptime(max(date1, date2, date3), '%Y-%m-%d').strftime("%d-%m-%Y") # dates were compared for max as strings
 
 
-def VerDate(imagedir):
-	date1 = date2 = date3 = "00000000"
-	if fileExists(os.path.join(imagedir, "var/lib/opkg/status")):
-		date1 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "var/lib/opkg/status")).st_mtime).strftime("%Y-%m-%d")
-	date2 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/bin/enigma2")).st_mtime).strftime("%Y-%m-%d")
-	if fileExists(os.path.join(imagedir, "usr/share/bootlogo.mvi")):
-		date3 = datetime.fromtimestamp(os.stat(os.path.join(imagedir, "usr/share/bootlogo.mvi")).st_mtime).strftime("%Y-%m-%d")
-	date = max(date1, date2, date3)  # this is comparing strings
-	date = datetime.strptime(date, '%Y-%m-%d').strftime("%d-%m-%Y")
-	return date
+def getSlotImageInfo(slot, imagedir="/"):
+	if os.path.isfile(os.path.join(imagedir, "usr/lib/enigma.info")):
+		print("[multiboot] [GetImagelist] using enigma.info")
+		BoxInfoInstance = BoxInformation(root=imagedir) if getCurrentImage() != slot else BoxInfo
+		Creator = BoxInfoInstance.getItem("distro", "").capitalize()
+		BuildImgVersion = BoxInfoInstance.getItem("imgversion")
+		BuildType = BoxInfoInstance.getItem("imagetype", "")[0:3]
+		BuildVer = BoxInfoInstance.getItem("imagebuild")
+		BuildDate = datetime.strptime(BuildVer, '%Y%m%d').strftime("%d-%m-%Y") if BuildVer else estimateSlotImageDate(imagedir)
+		BuildDev = str(idb).zfill(3) if BuildType and BuildType != "rel" and (idb := BoxInfoInstance.getItem("imagedevbuild")) else ""
+		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildDev, "(%s)" % BuildDate) if x and str(x).strip()])
+	else:
+		print("[multiboot] [GetImagelist] using etc/issue")
+		try:
+			return "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[0].capitalize().strip()[:-6], estimateSlotImageDate(imagedir))
+		except IndexError:
+			return _("Unknown image")
 
 
 def getMultibootslots():
@@ -163,16 +166,7 @@ def getImagelist():
 				Console().ePopen('mount %s %s' % (BoxInfo.getItem("canMultiBoot")[slot]['device'], tmp.dir))
 			imagedir = os.sep.join(filter(None, [tmp.dir, BoxInfo.getItem("canMultiBoot")[slot].get('rootsubdir', '')]))
 			if os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2')):
-				if os.path.isfile(os.path.join(imagedir, "usr/lib/enigma.info")):
-					print("[multiboot] [GetImagelist] using enigma.info")
-					imagelist[slot] = {'imagename': createInfo(slot, imagedir=imagedir)}
-				else:
-					print("[multiboot] [GetImagelist] using etc/issue")
-					date = VerDate(imagedir)
-					try:
-						imagelist[slot] = {'imagename': "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[0].capitalize().strip()[:-6], date)}
-					except IndexError:
-						imagelist[slot] = {'imagename': _("Unknown image")}
+				imagelist[slot] = {'imagename': getSlotImageInfo(slot, imagedir=imagedir)}
 			elif os.path.isfile(os.path.join(imagedir, 'usr/bin/enigma2.bak')):
 				imagelist[slot] = {'imagename': _("Deleted image")}
 			else:
