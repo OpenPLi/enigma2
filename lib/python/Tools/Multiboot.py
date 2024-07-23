@@ -48,10 +48,11 @@ def getSlotImageInfo(slot, imagedir="/"):
 		Creator = BoxInfoInstance.getItem("distro", "").capitalize()
 		BuildImgVersion = BoxInfoInstance.getItem("imgversion")
 		BuildType = BoxInfoInstance.getItem("imagetype", "")[0:3]
-		BuildVer = BoxInfoInstance.getItem("compiledate")
-		BuildDate = datetime.strptime(BuildVer, '%Y%m%d').strftime("%d-%m-%Y") if BuildVer else estimateSlotImageDate(imagedir)
+		BuildVer = BoxInfoInstance.getItem("imagebuild")
+		CompileDate = BoxInfoInstance.getItem("compiledate")
+		BuildDate = "(%s)" % datetime.strptime(CompileDate, '%Y%m%d').strftime("%d-%m-%Y") if CompileDate else estimateSlotImageDate(imagedir)
 		BuildDev = str(idb).zfill(3) if BuildType and BuildType != "rel" and (idb := BoxInfoInstance.getItem("imagedevbuild")) else ""
-		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildDev, "(%s)" % BuildDate) if x and str(x).strip()])
+		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildDev, BuildVer, BuildDate) if x and str(x).strip()])
 	else:
 		print("[multiboot] [GetImagelist] using etc/issue")
 		try:
