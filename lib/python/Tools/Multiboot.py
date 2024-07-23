@@ -36,9 +36,14 @@ def getparam(line, param):
 	return line.replace("userdataroot", "rootuserdata").rsplit('%s=' % param, 1)[1].split(' ', 1)[0]
 
 
-def estimateSlotImageDate(imagedir):
+def estimateSlotImageDate(imagedir, *arguments):
+	for argument in arguments:
+		try:
+			return datetime.strptime(argument, '%Y%m%d').strftime("(%d-%m-%Y)")
+		except (TypeError, ValueError):
+			pass
 	maxdate = max(fileDate(os.path.join(imagedir, "usr/bin/enigma2")), fileDate(os.path.join(imagedir, "var/lib/opkg/status")), fileDate(os.path.join(imagedir, "usr/share/bootlogo.mvi")))
-	return datetime.strptime(maxdate, '%Y-%m-%d').strftime("%d-%m-%Y") # dates were compared for max as strings
+	return datetime.strptime(maxdate, '%Y-%m-%d').strftime("(%d-%m-%Y)") # dates were compared for max as strings
 
 
 def getSlotImageInfo(slot, imagedir="/"):
@@ -49,17 +54,13 @@ def getSlotImageInfo(slot, imagedir="/"):
 		BuildImgVersion = BoxInfoInstance.getItem("imgversion")
 		BuildType = BoxInfoInstance.getItem("imagetype", "")[0:3]
 		BuildVer = BoxInfoInstance.getItem("imagebuild")
-		CompileDate = BoxInfoInstance.getItem("compiledate")
-		try:
-			BuildDate = "(%s)" % datetime.strptime(CompileDate, '%Y%m%d').strftime("%d-%m-%Y")
-		except (TypeError, ValueError):
-			BuidlDate = estimateSlotImageDate(imagedir)
+		BuildDate = estimateSlotImageDate(imagedir, BoxInfoInstance.getItem("compiledate"), BuildVer)
 		BuildDev = str(idb).zfill(3) if BuildType and BuildType != "rel" and (idb := BoxInfoInstance.getItem("imagedevbuild")) else ""
 		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildDev, BuildVer, BuildDate) if x and str(x).strip()])
 	else:
 		print("[multiboot] [GetImagelist] using etc/issue")
 		try:
-			return "%s (%s)" % (open(os.path.join(imagedir, "etc/issue")).readlines()[0].capitalize().strip()[:-6], estimateSlotImageDate(imagedir))
+			return "%s %s" % (open(os.path.join(imagedir, "etc/issue")).readlines()[0].capitalize().strip()[:-6], estimateSlotImageDate(imagedir))
 		except IndexError:
 			return _("Unknown image")
 
