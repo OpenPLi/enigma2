@@ -52,31 +52,23 @@ class ImportChannels:
 			result = {}
 		return result
 
+	def getFallbackSettingsValue(self, url, e2settingname):
+		result = self.getUrl("%s/api/settings" % url)
+		if result:
+			result = loads(result.decode('utf-8'))
+			if 'result' in result and result['result'] == True:
+				for key, value in result['settings']:
+					if key.endswith(e2settingname): #use the config key when the endp art but also the whole part matches
+						return value
+		return ""
+
 	def getTerrestrialUrl(self):
 		url = config.usage.remote_fallback_dvb_t.value
 		return url[:url.rfind(":")] if url else self.url
 
-	def getFallbackSettings(self):
-		result = self.getUrl("%s/api/settings" % self.getTerrestrialUrl())
-		if result:
-			result = loads(result.decode('utf-8'))
-			if 'result' in result and result['result'] == True:
-				return {result['settings'][i][0]: result['settings'][i][1] for i in range(0, len(result['settings']))}
-		return {}
-
-	def getFallbackSettingsValue(self, settings, e2settingname):
-		# complete key lookup
-		if e2settingname in settings:
-			return settings[e2settingname]
-		# partial key lookup
-		for e2setting in settings:
-			if e2settingname in e2setting:
-				return settings[e2setting]
-		return ""
-
-	def getTerrestrialRegion(self, settings):
+	def getTerrestrialRegion(self):
+		descr = self.getFallbackSettingsValue(self.getTerrestrialUrl(), ".terrestrial")
 		description = ""
-		descr = self.getFallbackSettingsValue(settings, ".terrestrial")
 		if "Europe" in descr:
 			description = "fallback DVB-T/T2 Europe"
 		if "Australia" in descr:
@@ -121,10 +113,8 @@ class ImportChannels:
 		return result
 
 	def threaded_function(self):
-		settings = self.getFallbackSettings()
-		self.getTerrestrialRegion(settings)
+		self.getTerrestrialRegion()
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
-
 		if "epg" in self.remote_fallback_import:
 			print("[Import Channels] Writing epg.dat file on server box")
 			try:
@@ -137,7 +127,7 @@ class ImportChannels:
 				return
 			print("[Import Channels] Get EPG Location")
 			try:
-				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/media/hdd/epg.dat"
+				epgdatfile = self.getFallbackSettingsValue(self.url, "config.misc.epgcache_filename") or "/media/hdd/epg.dat"
 				try:
 					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))))["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
