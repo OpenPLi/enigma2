@@ -41,7 +41,7 @@ class ImportChannels:
 		if self.header:
 			request.add_header("Authorization", self.header)
 		try:
-			result = urlopen(request, timeout=timeout)
+			result = urlopen(request, timeout=timeout).read()
 		except URLError as e:
 			if "[Errno -3]" in str(e.reason):
 				print("[Import Channels] Network is not up yet, delay 5 seconds")
@@ -57,7 +57,7 @@ class ImportChannels:
 		return url[:url.rfind(":")] if url else self.url
 
 	def getFallbackSettings(self):
-		result = self.getUrl("%s/api/settings" % self.getTerrestrialUrl()).read()
+		result = self.getUrl("%s/api/settings" % self.getTerrestrialUrl())
 		if result:
 			result = loads(result.decode('utf-8'))
 			if 'result' in result and result['result'] == True:
@@ -94,8 +94,7 @@ class ImportChannels:
 			try:
 				if remote:
 					try:
-						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).readlines()
-						content = map(lambda l: l.decode('utf-8', 'replace'), content)
+						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).decode('utf-8', 'replace').split('\n')
 					except Exception as e:
 						print("[Import Channels] Exception: %s" % str(e))
 						continue
@@ -129,7 +128,7 @@ class ImportChannels:
 		if "epg" in self.remote_fallback_import:
 			print("[Import Channels] Writing epg.dat file on server box")
 			try:
-				result = loads(self.getUrl("%s/api/saveepg" % self.url, timeout=30).read().decode('utf-8'))
+				result = loads(self.getUrl("%s/api/saveepg" % self.url, timeout=30).decode('utf-8'))
 				if 'result' not in result and result['result'] == False:
 					self.ImportChannelsDone(False, _("Error when writing epg.dat on the fallback receiver"))
 			except Exception as e:
@@ -140,9 +139,9 @@ class ImportChannels:
 			try:
 				epgdatfile = self.getFallbackSettingsValue(settings, "config.misc.epgcache_filename") or "/media/hdd/epg.dat"
 				try:
-					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))).read())["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
+					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))))["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
-					files = [file for file in loads(self.getUrl("%s/file?dir=/" % self.url).read())["files"] if os.path.basename(file).startswith("epg.dat")]
+					files = [file for file in loads(self.getUrl("%s/file?dir=/" % self.url))["files"] if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None
 			except Exception as e:
 				print("[Import Channels] Exception: %s" % str(e))
@@ -151,7 +150,7 @@ class ImportChannels:
 			if epg_location:
 				print("[Import Channels] Copy EPG file...")
 				try:
-					open(os.path.join(self.tmp_dir, "epg.dat"), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)).read())
+					open(os.path.join(self.tmp_dir, "epg.dat"), "wb").write(self.getUrl("%s/file?file=%s" % (self.url, epg_location)))
 				except Exception as e:
 					print("[Import Channels] Exception: %s" % str(e))
 					self.ImportChannelsDone(False, _("Error while retrieving epg.dat from the fallback receiver"))
@@ -174,7 +173,7 @@ class ImportChannels:
 			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio')
 
 			print("[Import Channels] Enumerate remote support files")
-			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)).read())["files"]:
+			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"]:
 				if os.path.basename(file).startswith(supportfiles):
 					files.append(file.replace(e2path, ''))
 
@@ -182,7 +181,7 @@ class ImportChannels:
 			for file in files:
 #				print("[Import Channels] Downloading %s..." % file)
 				try:
-					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).read())
+					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))))
 				except Exception as e:
 					print("[Import Channels] Exception: %s" % str(e))
 
