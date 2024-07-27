@@ -37,20 +37,19 @@ class ImportChannels:
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
-		request = Request(url)
-		if self.header:
-			request.add_header("Authorization", self.header)
-		try:
-			result = urlopen(request, timeout=timeout).read()
-		except URLError as e:
-			if "[Errno -3]" in str(e.reason):
-				print("[Import Channels] Network is not up yet, delay 5 seconds")
-				# network not up yet
-				sleep(5)
-				return self.getUrl(url, timeout)
-			print("[Import Channels] URLError ", e)
-			result = {}
-		return result
+		while True:
+			request = Request(url)
+			if self.header:
+				request.add_header("Authorization", self.header)
+			try:
+				return urlopen(request, timeout=timeout).read()
+			except URLError as e:
+				if "[Errno -3]" in str(e.reason):
+					print(f"[Import Channels] Network is not up yet while fetching {url} retry in 5 seconds")
+					sleep(5)
+				else:
+					print(f"[Import Channels] URLError {e} while fetching {url}")
+					return {}
 
 	def getFallbackSettingsValue(self, url, e2settingname):
 		result = self.getUrl("%s/api/settings" % url)
