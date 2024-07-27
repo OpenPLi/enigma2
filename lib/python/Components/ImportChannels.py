@@ -74,6 +74,7 @@ class ImportChannels:
 			description = "fallback DVB-T/T2 Europe"
 		if "Australia" in descr:
 			description = "fallback DVB-T/T2 Australia"
+		print(f"[Import Channels] Set Terrestrial Region to '{description}'")
 		config.usage.remote_fallback_dvbt_region.value = description
 
 	"""
