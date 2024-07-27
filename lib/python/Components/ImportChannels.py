@@ -34,6 +34,7 @@ class ImportChannels:
 					self.header = "Basic %s" % encodebytes(("%s:%s" % (config.usage.remote_fallback_openwebif_userid.value, config.usage.remote_fallback_openwebif_password.value)).encode("UTF-8")).strip().decode()
 			self.remote_fallback_import = config.usage.remote_fallback_import.value
 			self.thread = threading.Thread(target=self.threaded_function, name="ChannelsImport")
+			self.settings = {}
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
@@ -52,12 +53,13 @@ class ImportChannels:
 					return {}
 
 	def getFallbackSettingsValue(self, url, e2settingname):
-		result = self.getUrl("%s/api/settings" % url)
-		if result:
-			result = loads(result.decode('utf-8'))
-			if 'result' in result and result['result'] == True:
-				for key, value in result['settings']:
-					if key.endswith(e2settingname): #use the config key when the endp art but also the whole part matches
+		if url not in self.settings:
+			result = self.getUrl("%s/api/settings" % url)
+			if result:
+				self.settings['url'] = loads(result.decode('utf-8'))
+		if 'url' in self.settings and 'result' in self.settings['url'] and self.settings['url']['result'] == True:
+				for key, value in self.settings['url']['settings']:
+					if key.endswith(e2settingname): #use the config key when the endpart but also the whole part matches
 						return value
 		return ""
 
