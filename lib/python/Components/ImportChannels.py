@@ -38,6 +38,7 @@ class ImportChannels:
 			self.thread.start()
 
 	def getUrl(self, url, timeout=5):
+		try_counter = 0
 		while True:
 			request = Request(url)
 			if self.header:
@@ -48,6 +49,14 @@ class ImportChannels:
 				if "[Errno -3]" in str(e.reason):
 					print(f"[Import Channels] Network is not up yet while fetching {url} retry in 5 seconds")
 					sleep(5)
+				elif "[Errno 113]" in str(e.reason):
+					try_counter += 1
+					if try_counter >= 3:
+						print(f"[Import Channels] No route to host {url} tried {try_counter} time(s) and give up")
+						return {}
+					else:
+						print(f"[Import Channels] No route to host {url} tried {try_counter} time(s)")
+						sleep(5)
 				else:
 					print(f"[Import Channels] URLError {e} while fetching {url}")
 					return {}
