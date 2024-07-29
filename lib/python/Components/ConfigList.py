@@ -452,11 +452,16 @@ class ConfigListScreen:
 		self.keySave()
 
 	def dummyConfigActions(self, value):  # Temporary support for legacy code and plugins that hasn't yet been updated.
-		self["configActions"].setEnabled(value)
-		self["navigationActions"].setEnabled(value)
-		self["menuConfigActions"].setEnabled(value)
-		self["charConfigActions"].setEnabled(value)
-		self["editConfigActions"].setEnabled(value)
+		if "configActions" in self:
+			self["configActions"].setEnabled(value)
+		if "navigationActions" in self:
+			self["navigationActions"].setEnabled(value)
+		if "menuConfigActions" in self:
+			self["menuConfigActions"].setEnabled(value)
+		if "charConfigActions" in self:
+			self["charConfigActions"].setEnabled(value)
+		if "editConfigActions" in self:
+			self["editConfigActions"].setEnabled(value)
 
 	def dummyVKBActions(self, value):  # Temporary support for legacy code and plugins that hasn't yet been updated.
 		self["virtualKeyBoardActions"].setEnabled(value)
