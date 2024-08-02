@@ -1189,6 +1189,21 @@ class NimManager:
 	def getNimListForSat(self, orb_pos):
 		return [nim.slot for nim in self.nim_slots if nim.isCompatible("DVB-S") and not nim.isFBCLink() and orb_pos in [sat[0] for sat in self.getSatListForNim(nim.slot)]]
 
+	def getTunableReferences(self):
+		referenceList = []
+		for nim in self.nim_slots:
+			if nim.isCompatible("DVB-S") and not nim.isFBCLink():
+				for reference in [hex(satellite[0])[2:].zfill(4) for satellite in self.getSatListForNim(nim.slot)]:
+					if reference not in referenceList:
+						referenceList.append(reference)
+			elif nim.isCompatible("DVB-C") and not nim.isFBCLink() and 'ffff' not in reflist:
+				referenceList.append('ffff')
+			elif nim.isCompatible("DVB-T") and not nim.isFBCLink() and 'eeee' not in reflist:
+				referenceList.append('eeee')
+			elif nim.isCompatible("ATSC") and not nim.isFBCLink() and 'dddd' not in reflist:
+				referenceList.append('dddd')
+		return referenceList
+
 	def rotorLastPositionForNim(self, slotid, number=True):
 		available_slot = False
 		for slot in self.nim_slots:
