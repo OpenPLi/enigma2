@@ -201,7 +201,7 @@ class VideoEnhancementSetup(ConfigListScreen, Screen):
 		self.session.openWithCallback(self.keyYellowConfirm, MessageBox, _("Reset video enhancement settings to your last configuration?"), MessageBox.TYPE_YESNO, timeout=20, default=False)
 
 	def keyBlueConfirm(self, confirmed):
-		if not confirmed:
+		if confirmed:
 			if self.contrastEntry is not None:
 				config.pep.contrast.setValue(128)
 			if self.saturationEntry is not None:
