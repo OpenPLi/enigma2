@@ -10,6 +10,7 @@ from Components.ServiceList import refreshServiceList, redrawServiceList
 from Components.SystemInfo import BoxInfo
 import os
 import time
+import subprocess
 
 
 originalAudioTracks = "orj dos ory org esl qaa qaf und mis mul ORY ORJ Audio_ORJ oth"
@@ -792,33 +793,23 @@ def InitUsageConfig():
 	config.ntp = ConfigSubsection()
 
 	def timesyncChanged(configElement):
-		if configElement.value == "ntp" or configElement.value == "auto":
-			if not os.path.isfile('/var/spool/cron/crontabs/root') or not 'ntpdate-sync' in open('/var/spool/cron/crontabs/root').read():
-				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >> /var/spool/cron/crontabs/root")
-			if not os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
-				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
-		else:
-			if os.path.isfile('/var/spool/cron/crontabs/root'):
-				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/crontabs/root;")
-			if os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
-				Console().ePopen("unlink /etc/network/if-up.d/ntpdate-sync")
-
 		if configElement.value == "ntp":
+			os.system('ntpd -q')
 			print("[UsageConfig] NTP enabled, DVB time disabled")
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 		elif configElement.value == "auto":
-			res = os.system('grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
-			if res >> 8 == 0:
-				print("[UsageConfig] NTP auto and active, DVB time disabled")
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+			os.system('ntpd -q')
+			result = ""
+			try:
+				result = subprocess.check_output('ntpq -pn', shell=True, text=True)
+			except subprocess.CalledProcessError as e:
+				print("[Usageconfig]", e)
+			if "No association ID's returned" in result:
+				print("[UsageConfig] NTP disabled, DVB time enabled")
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 			else:
-				res = os.system('/usr/bin/ntpdate-sync && sleep 5 && grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
-				if res >> 8 == 0:
-					print("[UsageConfig] NTP auto and active, DVB time disabled")
-					eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-				else:
-					print("[UsageConfig] NTP auto but not active, DVB time enabled")
-					eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+				print("[UsageConfig] NTP enabled, DVB time disabled")
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 		else:
 			print("[UsageConfig] NTP disabled, DVB time enabled")
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
@@ -828,7 +819,21 @@ def InitUsageConfig():
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
 	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
-
+	config.ntp.server_old = ConfigText("pool.ntp.org")
+	def setNTPServer(configElement):
+		if configElement.value != config.ntp.server_old.value and configElement.value != "" and " " not in configElement.value:
+			f = open("/etc/ntp.conf", "r")
+			lst = f.readlines()
+			f = open("/etc/ntp.conf", "w")
+			for x in lst:
+				x1 = x.split()
+				if len(x1) > 1 and x1[0] == "server":
+					x1[1] = configElement.value
+					x = " ".join(x1) +"\n"
+				f.write(x)
+			f.close()
+			config.ntp.server_old.value = configElement.value
+	config.ntp.server.addNotifier(setNTPServer, immediate_feedback=False)
 
 def updateChoices(sel, choices):
 	if choices:
