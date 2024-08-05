@@ -556,6 +556,11 @@ class ConfigBoolean(ConfigElement):
 		# This should be set in the __init__() but has been done this way as a workaround for a stupid broken plugin that fails to call ConfigBoolean.__init__().
 		return ("1", "enable", "on", "true", "yes")
 
+	def isChanged(self):
+		#Make booleans checks with saved value non case sensitive
+		sv = self.saved_value or self.tostring(self.default)
+		strv = self.tostring(self.value)
+		return strv.lower() != sv.lower()
 
 class ConfigEnableDisable(ConfigBoolean):
 	def __init__(self, default=False, graphic=True):
