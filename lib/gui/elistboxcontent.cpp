@@ -722,13 +722,6 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 								painter.clippop();
 							}
 						}
-						else
-						{
-							eRect rect(ePoint(m_itemsize.width() - pixmap->size().width() - 15, offset.y() + (m_itemsize.height() - pixmap->size().height()) / 2), pixmap->size());
-							painter.clip(rect);
-							painter.blit(pixmap, rect.topLeft(), rect, gPainter::BT_ALPHABLEND);
-							painter.clippop();
-						}
 					}
 					/* type is borrowed */
 				} else if (value)
