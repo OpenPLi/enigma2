@@ -525,7 +525,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 			text = PyTuple_GET_ITEM(item, 0);
 			text = PyObject_Str(text); /* creates a new object - old object was borrowed! */
 			const char *string = (text && PyUnicode_Check(text)) ? PyUnicode_AsUTF8(text) : "<not-a-string>";
-			if (!strcmp(string,"---")) {
+			if (!strcmp(string,"---") && PyTuple_Size(item) == 1) {
 				sep = true;
 				if (m_sepline_color_set) {
 					painter.setForegroundColor(m_sepline_color);
