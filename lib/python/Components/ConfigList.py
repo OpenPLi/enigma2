@@ -1,5 +1,5 @@
-from enigma import eListbox, eListboxPythonConfigContent, ePoint, eRCInput, eTimer
-from skin import parameters, applySkinFactor
+from enigma import eListbox, eListboxPythonConfigContent, ePoint, eRCInput, eTimer, gRGB
+from skin import parameters, applySkinFactor, parseColor
 
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
 from Components.config import ConfigBoolean, ConfigElement, ConfigInteger, ConfigMacText, ConfigNothing, ConfigNumber, ConfigSelection, ConfigSequence, ConfigText, ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_ERASE, ACTIONKEY_FIRST, ACTIONKEY_LAST, ACTIONKEY_LEFT, ACTIONKEY_NUMBERS, ACTIONKEY_RIGHT, ACTIONKEY_SELECT, ACTIONKEY_TIMEOUT, ACTIONKEY_TOGGLE, configfile
@@ -26,6 +26,10 @@ class ConfigList(GUIComponent):
 		self.onSelectionChanged = []
 		self.current = None
 		self.session = session
+		self.sepLineColor = 0xFFFFFF
+		self.sepLineThickness = 1
+		self.l.setSeparatorLineColor(gRGB(self.sepLineColor))
+		self.l.setSepLineThickness(self.sepLineThickness)
 
 	def execBegin(self):
 		rcinput = eRCInput.getInstance()
@@ -141,6 +145,22 @@ class ConfigList(GUIComponent):
 	def moveBottom(self):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.moveEnd)
+	
+	def applySkin(self, desktop, screen):
+		if self.skinAttributes is not None:
+			attribs = []
+			for (attrib, value) in self.skinAttributes:
+				if attrib == "sepLineColor":
+					self.sepLineColor = parseColor(value).argb()
+				elif attrib == "sepLineThickness":
+					self.sepLineThickness = int(value)
+				else:
+					attribs.append((attrib, value))
+			self.skinAttributes = attribs
+		rc = GUIComponent.applySkin(self, desktop, screen)
+		self.l.setSeparatorLineColor(gRGB(self.sepLineColor))
+		self.l.setSepLineThickness(self.sepLineThickness)
+		return rc
 
 
 class ConfigListScreen:
