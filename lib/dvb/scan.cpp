@@ -7,6 +7,7 @@
 #include <dvbsi++/terrestrial_delivery_system_descriptor.h>
 #include <dvbsi++/t2_delivery_system_descriptor.h>
 #include <dvbsi++/cable_delivery_system_descriptor.h>
+#include <dvbsi++/logical_channel_descriptor.h>
 #include <dvbsi++/ca_identifier_descriptor.h>
 #include <dvbsi++/registration_descriptor.h>
 #include <dvbsi++/extension_descriptor.h>
@@ -23,6 +24,7 @@
 #include <lib/base/estring.h>
 #include <lib/dvb/dvb.h>
 #include <lib/dvb/db.h>
+#include <lib/python/python.h>
 #include <errno.h>
 #include "absdiff.h"
 
@@ -758,6 +760,9 @@ void eDVBScan::channelDone()
 					(*tsinfo)->getOriginalNetworkId());
 				bool T2 = false;
 				eDVBFrontendParametersTerrestrial t2transponder;
+				eOriginalNetworkID onid = (*tsinfo)->getOriginalNetworkId();
+				eTransportStreamID tsid = (*tsinfo)->getTransportStreamId();
+				eDVBNamespace ns(0);
 
 				for (DescriptorConstIterator desc = (*tsinfo)->getDescriptors()->begin();
 						desc != (*tsinfo)->getDescriptors()->end(); ++desc)
@@ -774,6 +779,10 @@ void eDVBScan::channelDone()
 						cable.set(d);
 						feparm->setDVBC(cable);
 
+						unsigned long hash=0;
+						feparm->getHash(hash);
+						ns = buildNamespace(onid, tsid, hash);
+
 						addChannelToScan(feparm);
 						break;
 					}
@@ -786,8 +795,17 @@ void eDVBScan::channelDone()
 						eDVBFrontendParametersTerrestrial terr;
 						terr.set(d);
 						feparm->setDVBT(terr);
+						
+						unsigned long hash=0;
+						feparm->getHash(hash);
+						ns = buildNamespace(onid, tsid, hash);
 
 						addChannelToScan(feparm);
+						break;
+					}
+					case LOGICAL_CHANNEL_DESCRIPTOR:
+					{
+						// we handle it later
 						break;
 					}
 					case S2_SATELLITE_DELIVERY_SYSTEM_DESCRIPTOR:
@@ -859,6 +877,18 @@ void eDVBScan::channelDone()
 							T2DeliverySystemDescriptor &d = (T2DeliverySystemDescriptor&)**desc;
 							t2transponder.set(d);
 
+							// fetch T2 namespace for LCN output, where frequency data may not be in SI table
+							ePtr<iDVBFrontend> fe;
+							ePtr<iDVBTransponderData> trdata;
+							if (!m_channel->getFrontend(fe))
+							{
+								fe->getTransponderData(trdata, true);
+								int freq = trdata->getFrequency();
+								long hash = 0xEEEE0000;
+								hash |= (freq/1000000)&0xFFFF;
+								ns = buildNamespace(onid, tsid, hash);  // used in case LOGICAL_CHANNEL_DESCRIPTOR
+							}  // end fetch T2 namespace
+
 							for (T2CellConstIterator cell = d.getCells()->begin();
 								cell != d.getCells()->end(); ++cell)
 							{
@@ -898,6 +928,42 @@ void eDVBScan::channelDone()
 					default:
 						SCAN_eDebug("[eDVBScan] descr<%x>", (*desc)->getTag());
 						break;
+					}
+				}
+				// we do this after the main loop because we absolutely need the namespace
+				for (DescriptorConstIterator desc = (*tsinfo)->getDescriptors()->begin();
+					desc != (*tsinfo)->getDescriptors()->end(); ++desc)
+				{
+					switch ((*desc)->getTag())
+					{
+						case LOGICAL_CHANNEL_DESCRIPTOR:
+						{
+							if (!(system == iDVBFrontend::feTerrestrial || system == iDVBFrontend::feCable))
+								break; // when current locked transponder is not terrestrial or cable ignore this descriptor
+
+							if (ns.get() == 0)
+								break; // invalid namespace
+
+							int signal = 0;
+							ePtr<iDVBFrontend> fe;
+
+							if (!m_channel->getFrontend(fe))
+								signal = fe->readFrontendData(iFrontendInformation_ENUMS::signalQuality);
+
+							LogicalChannelDescriptor &d = (LogicalChannelDescriptor&)**desc;
+							for (LogicalChannelListConstIterator it = d.getChannelList()->begin(); it != d.getChannelList()->end(); it++)
+							{
+								LogicalChannel *ch = *it;
+								if (ch->getVisibleServiceFlag())
+								{
+									eDVBDB::getInstance()->addLcnToDB(ns.get(), onid.get(), tsid.get(), eServiceID(ch->getServiceId()).get(), ch->getLogicalChannelNumber(), signal);
+									SCAN_eDebug("NAMESPACE: %08x ONID: %04x TSID: %04x SID: %04x LCN: %05d SIGNAL: %08d", ns.get(), onid.get(), tsid.get(), ch->getServiceId(), ch->getLogicalChannelNumber(), signal);
+								}
+							}
+							break;
+						}
+						default:
+							break;
 					}
 				}
 			}
@@ -1163,6 +1229,12 @@ void eDVBScan::start(const eSmartPtrList<iDVBFrontendParameters> &known_transpon
 		SCAN_eDebug("[eDVBScan] blind scan requested");
 		transponderlist = &m_ch_blindscan;
 	}
+
+	if (m_flags & scanRemoveServices)
+	{
+		eDVBDB::getInstance()->resetLcnDB();
+	}
+
 
 	for (eSmartPtrList<iDVBFrontendParameters>::const_iterator i(known_transponders.begin()); i != known_transponders.end(); ++i)
 	{
