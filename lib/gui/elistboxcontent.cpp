@@ -493,6 +493,8 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 	// Draw frame here so to be drawn under icons
 	if (selected && (!local_style || !local_style->m_selection) && (!local_style || !local_style->m_border_set))
 			style.drawFrame(painter, eRect(offset, m_itemsize), eWindowStyle::frameListboxEntry);
+		
+	bool sep = false;
 
 	if (m_list && cursorValid)
 	{
@@ -523,200 +525,210 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 			text = PyTuple_GET_ITEM(item, 0);
 			text = PyObject_Str(text); /* creates a new object - old object was borrowed! */
 			const char *string = (text && PyUnicode_Check(text)) ? PyUnicode_AsUTF8(text) : "<not-a-string>";
-			painter.renderText(eRect(ePoint(offset.x()+15, offset.y()), m_itemsize), string,
-			gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
-			Py_XDECREF(text);
-
-				/* when we have no label, align value to the left. (FIXME:
-				   don't we want to specifiy this individually?) */
-			int value_alignment_left = !*string;
-
-				/* now, handle the value. get 2nd part from tuple*/
-			if (PyTuple_Size(item) >= 2) // when no 2nd entry is in tuple this is a non selectable entry without config part
-				value = PyTuple_GET_ITEM(item, 1);
-
-			if (value)
-			{
-				ePyObject args = PyTuple_New(1);
-				PyTuple_SET_ITEM(args, 0, PyLong_FromLong(selected));
-
-					/* CallObject will call __call__ which should return the value tuple */
-				value = PyObject_CallObject(value, args);
-
-				if (PyErr_Occurred())
-					PyErr_Print();
-
-				Py_DECREF(args);
-					/* the PyInt was stolen. */
+			if (!strcmp(string,"---") && PyTuple_Size(item) == 1) {
+				sep = true;
+				if (m_sepline_color_set) {
+					painter.setForegroundColor(m_sepline_color);
+				}
+				//eDebug("[CONFIGCONTENT] Go to step 1 fill line thick: %d; at pos x: %d, y: %d, w: %d, h: %d", m_sepline_thickness, offset.x() + 15, offset.y() + (m_itemsize.height() - m_sepline_thickness)/2, m_itemsize.width() - 30, m_sepline_thickness);
+				painter.fill(eRect(offset.x()+15, offset.y() + (m_itemsize.height() - m_sepline_thickness)/2, m_itemsize.width() - 30, m_sepline_thickness));
+			} else {
+				painter.renderText(eRect(ePoint(offset.x()+15, offset.y()), m_itemsize), string, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
 			}
+			Py_XDECREF(text);
+			if (!sep) {
+					/* when we have no label, align value to the left. (FIXME:
+					   don't we want to specifiy this individually?) */
+				int value_alignment_left = !*string;
 
-				/*  check if this is really a tuple */
-			if (value && PyTuple_Check(value))
-			{
-					/* convert type to string */
-				ePyObject type = PyTuple_GET_ITEM(value, 0);
-				const char *atype = (type && PyUnicode_Check(type)) ? PyUnicode_AsUTF8(type) : 0;
+					/* now, handle the value. get 2nd part from tuple*/
+				if (PyTuple_Size(item) >= 2) // when no 2nd entry is in tuple this is a non selectable entry without config part
+					value = PyTuple_GET_ITEM(item, 1);
 
-				if (atype)
+				if (value)
 				{
-					if (!strcmp(atype, "text"))
+					ePyObject args = PyTuple_New(1);
+					PyTuple_SET_ITEM(args, 0, PyLong_FromLong(selected));
+
+						/* CallObject will call __call__ which should return the value tuple */
+					value = PyObject_CallObject(value, args);
+
+					if (PyErr_Occurred())
+						PyErr_Print();
+
+					Py_DECREF(args);
+						/* the PyInt was stolen. */
+				}
+
+					/*  check if this is really a tuple */
+				if (value && PyTuple_Check(value))
+				{
+						/* convert type to string */
+					ePyObject type = PyTuple_GET_ITEM(value, 0);
+					const char *atype = (type && PyUnicode_Check(type)) ? PyUnicode_AsUTF8(type) : 0;
+
+					if (atype)
 					{
-						ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
-						const char *value = (pvalue && PyUnicode_Check(pvalue)) ? PyUnicode_AsUTF8(pvalue) : "<not-a-string>";
-						painter.setFont(fnt2);
-						if (value_alignment_left)
-							painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
-						else
-							painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
-
-							/* pvalue is borrowed */
-					} else if (!strcmp(atype, "slider"))
-					{
-						ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
-						ePyObject psize = PyTuple_GET_ITEM(value, 2);
-
-							/* convert value to Long. fallback to -1 on error. */
-						int value = (pvalue && PyLong_Check(pvalue)) ? PyLong_AsLong(pvalue) : -1;
-						int size = (pvalue && PyLong_Check(psize)) ? PyLong_AsLong(psize) : 100;
-
-							/* calc. slider length */
-						int width = (m_itemsize.width() - m_seperation - 15) * value / size;
-						int height = m_itemsize.height();
-
-
-							/* draw slider */
-						//painter.fill(eRect(offset.x() + m_seperation, offset.y(), width, height));
-						if (m_slider_height % 2 != height % 2)
-							m_slider_height -= 1;
-						if(m_slider_height + 2*m_slider_space >= height) // frame out of selector = without frame
-							m_slider_space = 0;
-						int slider_y_offset = (height - m_slider_height) / 2;
-						if (m_slider_space)
+						if (!strcmp(atype, "text"))
 						{
-							ePoint tl(offset.x() + m_seperation, offset.y() + slider_y_offset - m_slider_space - 1);
-							ePoint tr(offset.x() + m_itemsize.width() - 15 - 1, tl.y());
-							ePoint bl(tl.x(), offset.y() + slider_y_offset + m_slider_height + m_slider_space);
-							ePoint br(tr.x(), bl.y());
-							painter.line(tl, tr);
-							painter.line(tr, br);
-							painter.line(br, bl);
-							painter.line(bl, tl);
-							painter.fill(eRect(offset.x() + m_seperation + m_slider_space + 1, offset.y() + slider_y_offset, width - 2*(m_slider_space + 1), m_slider_height));
-						}
-						else
-						{
-							painter.fill(eRect(offset.x() + m_seperation, offset.y() + slider_y_offset, width, m_slider_height));
-						}
-
-							/* pvalue is borrowed */
-					} else if (!strcmp(atype, "mtext"))
-					{
-						ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
-						const char *text = (pvalue && PyUnicode_Check(pvalue)) ? PyUnicode_AsUTF8(pvalue) : "<not-a-string>";
-						ePtr<eTextPara> para = new eTextPara(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize));
-						para->setFont(fnt2);
-						para->renderString(text, 0);
-
-						if (value_alignment_left)
-							para->realign(eTextPara::dirLeft);
-						else
-							para->realign(eTextPara::dirRight);
-
-						int glyphs = para->size();
-
-						ePyObject plist;
-
-						if (PyTuple_Size(value) >= 3)
-							plist = PyTuple_GET_ITEM(value, 2);
-
-						int entries = 0;
-
-						if (plist && PyList_Check(plist))
-							entries = PyList_Size(plist);
-
-						int left=0, right=0, last=-1, top=0, bottom=0;
-						bool isVertLB = m_listbox && m_listbox->getOrientation() == 1;
-						eRect bbox;
-						eRect pbox = para->getBoundBox();
-						for (int i = 0; i < entries; ++i)
-						{
-							ePyObject entry = PyList_GET_ITEM(plist, i);
-							int num = PyLong_Check(entry) ? PyLong_AsLong(entry) : -1;
-
-							if ((num < 0) || (num >= glyphs))
-								eWarning("[eListboxPythonMultiContent] glyph index %d in PythonConfigList out of bounds!", num);
-							else
-							{
-								if (last+1 != num && last != -1) {
-									if (isVertLB)
-										bbox = eRect(left, offset.y(), right-left, (m_itemsize.height() - pbox.height()) / 2);
-									else
-										bbox = eRect(offset.x(), top, bottom-top, (m_itemsize.width() - pbox.width()) / 2);
-									painter.fill(bbox);
-								}
-								para->setGlyphFlag(num, GS_INVERT);
-								bbox = para->getGlyphBBox(num);
-								if (last+1 != num || last == -1){
-									if (isVertLB)
-										left = bbox.left();
-									else
-										top = bbox.top();
-								}
-								if (isVertLB)
-									right = bbox.left() + bbox.width();
-								else
-									bottom = bbox.top() + bbox.height();
-								last = num;
-							}
-							/* entry is borrowed */
-						}
-						if (last != -1) {
-							if (isVertLB)
-								bbox = eRect(left, offset.y() + (m_itemsize.height() - pbox.height()) / 2, right - left, pbox.height());
-							else
-								bbox = eRect(offset.x() + (m_itemsize.width() - pbox.width()) / 2, top , bottom - top, pbox.width());
-							painter.fill(bbox);
-						}
-						if (isVertLB)
-							painter.renderPara(para, ePoint(0, m_itemsize.height() - pbox.height()) / 2);
-						else
-							painter.renderPara(para, ePoint(m_itemsize.width() - pbox.width(), 0) / 2);
-						/* pvalue is borrowed */
-						/* plist is 0 or borrowed */
-					}
-					else if (!strcmp(atype, "pixmap"))
-					{
-						ePyObject data;
-						ePyObject ppixmap = PyTuple_GET_ITEM(value, 1);
-
-						if (PyLong_Check(ppixmap) && data) /* if the pixemap is in fact a number, it refers to the 'data' list. */
-							ppixmap = PyTuple_GetItem(data, PyLong_AsLong(ppixmap));
-
-						ePtr<gPixmap> pixmap;
-						if (SwigFromPython(pixmap, ppixmap))
-						{
-							eDebug("[eListboxPythonMultiContent] (Pixmap) get pixmap failed");
-							const char *value = (ppixmap && PyUnicode_Check(ppixmap)) ? PyUnicode_AsUTF8(ppixmap) : "<not-a-string>";
+							ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
+							const char *value = (pvalue && PyUnicode_Check(pvalue)) ? PyUnicode_AsUTF8(pvalue) : "<not-a-string>";
 							painter.setFont(fnt2);
 							if (value_alignment_left)
 								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
 							else
 								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
-						}
-						else
+
+								/* pvalue is borrowed */
+						} else if (!strcmp(atype, "slider"))
 						{
-							eRect rect(ePoint(m_itemsize.width() - pixmap->size().width() - 15, offset.y() + (m_itemsize.height() - pixmap->size().height()) / 2), pixmap->size());
-							painter.clip(rect);
-							painter.blit(pixmap, rect.topLeft(), rect, gPainter::BT_ALPHABLEND);
-							painter.clippop();
+							ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
+							ePyObject psize = PyTuple_GET_ITEM(value, 2);
+
+								/* convert value to Long. fallback to -1 on error. */
+							int value = (pvalue && PyLong_Check(pvalue)) ? PyLong_AsLong(pvalue) : -1;
+							int size = (pvalue && PyLong_Check(psize)) ? PyLong_AsLong(psize) : 100;
+
+								/* calc. slider length */
+							int width = (m_itemsize.width() - m_seperation - 15) * value / size;
+							int height = m_itemsize.height();
+
+
+								/* draw slider */
+							//painter.fill(eRect(offset.x() + m_seperation, offset.y(), width, height));
+							if (m_slider_height % 2 != height % 2)
+								m_slider_height -= 1;
+							if(m_slider_height + 2*m_slider_space >= height) // frame out of selector = without frame
+								m_slider_space = 0;
+							int slider_y_offset = (height - m_slider_height) / 2;
+							if (m_slider_space)
+							{
+								ePoint tl(offset.x() + m_seperation, offset.y() + slider_y_offset - m_slider_space - 1);
+								ePoint tr(offset.x() + m_itemsize.width() - 15 - 1, tl.y());
+								ePoint bl(tl.x(), offset.y() + slider_y_offset + m_slider_height + m_slider_space);
+								ePoint br(tr.x(), bl.y());
+								painter.line(tl, tr);
+								painter.line(tr, br);
+								painter.line(br, bl);
+								painter.line(bl, tl);
+								painter.fill(eRect(offset.x() + m_seperation + m_slider_space + 1, offset.y() + slider_y_offset, width - 2*(m_slider_space + 1), m_slider_height));
+							}
+							else
+							{
+								painter.fill(eRect(offset.x() + m_seperation, offset.y() + slider_y_offset, width, m_slider_height));
+							}
+
+								/* pvalue is borrowed */
+						} else if (!strcmp(atype, "mtext"))
+						{
+							ePyObject pvalue = PyTuple_GET_ITEM(value, 1);
+							const char *text = (pvalue && PyUnicode_Check(pvalue)) ? PyUnicode_AsUTF8(pvalue) : "<not-a-string>";
+							ePtr<eTextPara> para = new eTextPara(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize));
+							para->setFont(fnt2);
+							para->renderString(text, 0);
+
+							if (value_alignment_left)
+								para->realign(eTextPara::dirLeft);
+							else
+								para->realign(eTextPara::dirRight);
+
+							int glyphs = para->size();
+
+							ePyObject plist;
+
+							if (PyTuple_Size(value) >= 3)
+								plist = PyTuple_GET_ITEM(value, 2);
+
+							int entries = 0;
+
+							if (plist && PyList_Check(plist))
+								entries = PyList_Size(plist);
+
+							int left=0, right=0, last=-1, top=0, bottom=0;
+							bool isVertLB = m_listbox && m_listbox->getOrientation() == 1;
+							eRect bbox;
+							eRect pbox = para->getBoundBox();
+							for (int i = 0; i < entries; ++i)
+							{
+								ePyObject entry = PyList_GET_ITEM(plist, i);
+								int num = PyLong_Check(entry) ? PyLong_AsLong(entry) : -1;
+
+								if ((num < 0) || (num >= glyphs))
+									eWarning("[eListboxPythonMultiContent] glyph index %d in PythonConfigList out of bounds!", num);
+								else
+								{
+									if (last+1 != num && last != -1) {
+										if (isVertLB)
+											bbox = eRect(left, offset.y(), right-left, (m_itemsize.height() - pbox.height()) / 2);
+										else
+											bbox = eRect(offset.x(), top, bottom-top, (m_itemsize.width() - pbox.width()) / 2);
+										painter.fill(bbox);
+									}
+									para->setGlyphFlag(num, GS_INVERT);
+									bbox = para->getGlyphBBox(num);
+									if (last+1 != num || last == -1){
+										if (isVertLB)
+											left = bbox.left();
+										else
+											top = bbox.top();
+									}
+									if (isVertLB)
+										right = bbox.left() + bbox.width();
+									else
+										bottom = bbox.top() + bbox.height();
+									last = num;
+								}
+								/* entry is borrowed */
+							}
+							if (last != -1) {
+								if (isVertLB)
+									bbox = eRect(left, offset.y() + (m_itemsize.height() - pbox.height()) / 2, right - left, pbox.height());
+								else
+									bbox = eRect(offset.x() + (m_itemsize.width() - pbox.width()) / 2, top , bottom - top, pbox.width());
+								painter.fill(bbox);
+							}
+							if (isVertLB)
+								painter.renderPara(para, ePoint(0, m_itemsize.height() - pbox.height()) / 2);
+							else
+								painter.renderPara(para, ePoint(m_itemsize.width() - pbox.width(), 0) / 2);
+						/* pvalue is borrowed */
+							/* plist is 0 or borrowed */
+						}
+						else if (!strcmp(atype, "pixmap"))
+						{
+							ePyObject data;
+							ePyObject ppixmap = PyTuple_GET_ITEM(value, 1);
+
+							if (PyLong_Check(ppixmap) && data) /* if the pixemap is in fact a number, it refers to the 'data' list. */
+								ppixmap = PyTuple_GetItem(data, PyLong_AsLong(ppixmap));
+
+							ePtr<gPixmap> pixmap;
+							if (SwigFromPython(pixmap, ppixmap))
+							{
+								eDebug("[eListboxPythonMultiContent] (Pixmap) get pixmap failed");
+								const char *value = (ppixmap && PyUnicode_Check(ppixmap)) ? PyUnicode_AsUTF8(ppixmap) : "<not-a-string>";
+								painter.setFont(fnt2);
+								if (value_alignment_left)
+									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
+								else
+									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
+							}
+							else
+							{
+								eRect rect(ePoint(m_itemsize.width() - pixmap->size().width() - 15, offset.y() + (m_itemsize.height() - pixmap->size().height()) / 2), pixmap->size());
+								painter.clip(rect);
+								/* painter.blit(pixmap, rect.topLeft(), rect, 0); */
+								painter.blit(pixmap, rect.topLeft(), rect, gPainter::BT_ALPHABLEND);
+								painter.clippop();
+							}
 						}
 					}
-				}
-				/* type is borrowed */
-			} else if (value)
-				eWarning("[eListboxPythonConfigContent] second value of tuple is not a tuple.");
-			if (value)
-				Py_DECREF(value);
+					/* type is borrowed */
+				} else if (value)
+					eWarning("[eListboxPythonConfigContent] second value of tuple is not a tuple.");
+				if (value)
+					Py_DECREF(value);
+			}
 		}
 
 	}

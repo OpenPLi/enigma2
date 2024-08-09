@@ -21,6 +21,11 @@ public:
 	void invalidate();
 	eSize getItemSize() { return m_itemsize; }
 	int getMaxItemTextWidth();
+	void setSeparatorLineColor(const gRGB &col) { 
+		m_sepline_color = col;
+		m_sepline_color_set = 1;
+	}
+	void setSepLineThickness(int value) { m_sepline_thickness = value; }
 #ifndef SWIG
 protected:
 	void cursorHome();
@@ -56,6 +61,9 @@ protected:
 	int m_itemwidth;
 	int m_max_text_width;
 	int m_orientation;
+	gRGB m_sepline_color;
+	int m_sepline_color_set;
+	int m_sepline_thickness;
 #endif
 };
 
@@ -66,6 +74,11 @@ public:
 	void setSeperation(int sep) { m_seperation = sep; }
 	int currentCursorSelectable();
 	void setSlider(int height, int space) { m_slider_height = height; m_slider_space = space; }
+	void setSeparatorLineColor(const gRGB &col) { 
+		m_sepline_color = col;
+		m_sepline_color_set = 1;
+	}
+	void setSepLineThickness(int value) { m_sepline_thickness = value; }
 private:
 	int m_seperation, m_slider_height, m_slider_space;
 };
