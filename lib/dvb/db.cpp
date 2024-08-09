@@ -787,6 +787,65 @@ void eDVBDB::loadServiceListV5(FILE * f)
 	eDebug("loaded %d channels/transponders and %d services", tcount, scount);
 }
 
+void eDVBDB::resetLcnDB()
+{
+	m_lcnmap.clear();
+	FILE *m_lcn_file = fopen(eEnv::resolve("${sysconfdir}/enigma2/lcndb").c_str(), "w");
+	if (m_lcn_file)
+		fclose(m_lcn_file);
+}
+
+void eDVBDB::saveLcnDB()
+{
+	std::string lfname = eEnv::resolve("${sysconfdir}/enigma2/lcndb");
+	CFile lf(lfname, "w");
+	if (lf)
+	{
+		for (auto &[key, value] : m_lcnmap)
+		{
+			value.write(lf, key);
+		}
+	}
+}
+
+void eDVBDB::addLcnToDB(int ns, int onid, int tsid, int sid, uint16_t lcn, uint32_t signal)
+{
+	eServiceReferenceDVB s = eServiceReferenceDVB(eDVBNamespace(ns), eTransportStreamID(tsid), eOriginalNetworkID(onid), eServiceID(sid), 0);
+	std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.find(s);
+	if (it != m_lcnmap.end())
+	{
+		it->second.Update(lcn, signal);
+	}
+	else
+	{
+		LCNData lcndata;
+		lcndata.Update(lcn, signal);
+		m_lcnmap.insert(std::pair<eServiceReferenceDVB, LCNData>(s, lcndata));
+	}
+}
+
+void eDVBDB::readLcnDBFile()
+{
+	char line[256];
+	m_lcnmap.clear();
+	std::string lfname = eEnv::resolve("${sysconfdir}/enigma2/lcndb");
+	CFile lf(lfname, "rt");
+	if(lf)
+	{
+		while (!feof(lf))
+		{
+			if (!fgets(line, sizeof(line), lf))
+				break;
+
+			LCNData lcndata;
+			eServiceReferenceDVB s = lcndata.parse(line);
+			if (s)
+				m_lcnmap.insert(std::pair<eServiceReferenceDVB, LCNData>(s, lcndata));
+
+		}
+	}
+}
+
 void eDVBDB::loadServicelist(const char *file)
 {
 	eDebug("[eDVBDB] ---- opening lame channel db");
@@ -815,6 +874,8 @@ void eDVBDB::loadServicelist(const char *file)
 		eDebug("[eDVBDB] services invalid, no transponders");
 		return;
 	}
+
+	readLcnDBFile();
 	// clear all transponders
 	int tcount = 0;
 	while (!feof(f))
@@ -1100,6 +1161,7 @@ void eDVBDB::saveServicelist(const char *file)
 void eDVBDB::saveServicelist()
 {
 	saveServicelist(eEnv::resolve("${sysconfdir}/enigma2/lamedb").c_str());
+	saveLcnDB();
 }
 
 void eDVBDB::saveIptvServicelist()
@@ -2115,6 +2177,30 @@ PyObject *eDVBDB::readATSC(ePyObject atsc_list, ePyObject tp_dict)
 	return Py_True;
 }
 
+PyObject *eDVBDB::getLcnDBData()
+{
+	ePyObject dest = PyList_New(0);
+	if (dest)
+	{
+		std::map<eServiceReferenceDVB, LCNData>::iterator it = m_lcnmap.begin();
+		for (;it != m_lcnmap.end();++it)
+		{
+			ePyObject tuple = PyTuple_New(6);
+			PyTuple_SET_ITEM(tuple, 0, PyLong_FromLongLong((unsigned long)it->second.NS));
+			PyTuple_SET_ITEM(tuple, 1, PyLong_FromLongLong((unsigned long)it->second.ONID));
+			PyTuple_SET_ITEM(tuple, 2, PyLong_FromLongLong((unsigned long)it->second.TSID));
+			PyTuple_SET_ITEM(tuple, 3, PyLong_FromLongLong((unsigned long)it->second.SID));
+			PyTuple_SET_ITEM(tuple, 4, PyLong_FromLongLong((unsigned long)it->second.LCN));
+			PyTuple_SET_ITEM(tuple, 5, PyLong_FromLongLong((unsigned long)it->second.SIGNAL));
+			PyList_Append(dest, tuple);
+			Py_DECREF(tuple);
+		}
+	} 
+	else
+		Py_RETURN_NONE;
+	return dest;
+}
+
 eDVBDB::~eDVBDB()
 {
 	instance=NULL;
@@ -2461,6 +2547,12 @@ RESULT eDVBDB::getService(const eServiceReferenceDVB &reference, ePtr<eDVBServic
 		return -ENOENT;
 	}
 	service = i->second;
+	return 0;
+}
+
+RESULT eDVBDB::getLcnDBData(std::map<eServiceReferenceDVB, LCNData> &data)
+{
+	data = m_lcnmap;
 	return 0;
 }
 
