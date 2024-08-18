@@ -391,18 +391,18 @@ class ServiceList(GUIComponent):
 
 	def setItemsPerPage(self):
 		numberOfRows = config.usage.servicelist_number_of_services.value
-		two_lines_val = int(config.usage.servicelist_twolines.value)
-		if two_lines_val:
+		self.two_lines_val = int(config.usage.servicelist_twolines.value)
+		if self.two_lines_val:
 			numberOfRows = int(numberOfRows / ((self.ItemHeightTwoLineSkin / self.ItemHeightSkin)) if self.ItemHeightSkin and self.ItemHeightTwoLineSkin else 2)
-		itemHeight = self.ItemHeightSkin if not two_lines_val else self.ItemHeightTwoLineSkin
+		itemHeight = self.ItemHeightTwoLineSkin if self.two_lines_val else self.ItemHeightSkin
 		if numberOfRows > 0:
 			itemHeight = self.listHeight // numberOfRows
-		if two_lines_val:
+		if self.two_lines_val:
 			self.ItemHeightTwoLine = itemHeight
 		else:
 			self.ItemHeight = itemHeight
-		if self.listHeight and itemHeight:
-			self.instance.resize(eSize(self.listWidth, self.listHeightOrig // itemHeight * itemHeight))
+		self.instance.resize(eSize(self.listWidth, self.listHeightOrig // self.ItemHeight * self.ItemHeight))
+		self.l.setItemHeight(self.ItemHeightTwoLine if self.two_lines_val else self.ItemHeight)
 
 	def getSelectionPosition(self):
 		# Adjust absolute index to index in displayed view
@@ -508,17 +508,15 @@ class ServiceList(GUIComponent):
 	def setMode(self, mode):
 		self.mode = mode
 		self.setItemsPerPage()
-		two_lines_val = int(config.usage.servicelist_twolines.value)
-		self.l.setItemHeight(self.ItemHeight if not two_lines_val else self.ItemHeightTwoLine)
-		self.l.setVisualMode(eListboxServiceContent.visModeComplex if not two_lines_val else eListboxServiceContent.visSkinDefined)
+		self.l.setVisualMode(eListboxServiceContent.visModeComplex if not self.two_lines_val else eListboxServiceContent.visSkinDefined)
 
-		if two_lines_val == 1:
+		if self.two_lines_val == 1:
 			timeText = _("min")
 			self.l.setTextTime(timeText)
-		if two_lines_val == 2:
+		if self.two_lines_val == 2:
 			nextTitle = _("NEXT") + ":  "
 			self.l.setNextTitle(nextTitle)
-		self.l.setHasNextEvent(two_lines_val == 2)
+		self.l.setHasNextEvent(self.two_lines_val == 2)
 
 		if config.usage.service_icon_enable.value:
 			self.l.setGetPiconNameFunc(getPiconName)
@@ -548,7 +546,7 @@ class ServiceList(GUIComponent):
 		self.l.setServiceTypeIconMode(int(config.usage.servicetype_icon_mode.value))
 		self.l.setCryptoIconMode(int(config.usage.crypto_icon_mode.value))
 		self.l.setRecordIndicatorMode(int(config.usage.record_indicator_mode.value))
-		self.l.setColumnWidth(-1 if two_lines_val else int(config.usage.servicelist_column.value))
+		self.l.setColumnWidth(-1 if self.two_lines_val else int(config.usage.servicelist_column.value))
 		self.l.setProgressBarMode(config.usage.show_event_progress_in_servicelist.value)
 		self.l.setChannelNumbersVisible(config.usage.show_channel_numbers_in_servicelist.value)
 		self.l.setAlternativeNumberingMode(config.usage.alternative_number_mode.value)
