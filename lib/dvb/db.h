@@ -125,7 +125,8 @@ class eDVBDB: public iDVBChannelList
 
 	std::map<std::string, eBouquet> m_bouquets;
 	
-	bool m_numbering_mode, m_load_unlinked_userbouquets;
+	bool m_numbering_mode;
+	int m_load_unlinked_userbouquets;
 #ifdef SWIG
 	eDVBDB();
 	~eDVBDB();
@@ -189,7 +190,7 @@ public:
 	void readLcnDBFile();
 #endif
 	void setNumberingMode(bool numberingMode);
-	void setLoadUnlinkedUserbouquets(bool value) { m_load_unlinked_userbouquets=value; }
+	void setLoadUnlinkedUserbouquets(int value) { m_load_unlinked_userbouquets=value; }
 	void renumberBouquet();
 	void loadServicelist(const char *filename);
 	static eDVBDB *getInstance() { return instance; }
