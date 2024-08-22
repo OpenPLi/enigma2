@@ -514,7 +514,7 @@ class ChannelContextMenu(Screen):
 				print("restore file ", file[:-4])
 				os.rename(file, file[:-4])
 		eDVBDBInstance = eDVBDB.getInstance()
-		eDVBDBInstance.setLoadUnlinkedUserbouquets(True)
+		eDVBDBInstance.setLoadUnlinkedUserbouquets("1")
 		eDVBDBInstance.reloadBouquets()
 		eDVBDBInstance.setLoadUnlinkedUserbouquets(config.misc.load_unlinked_userbouquets.value)
 		refreshServiceList()
