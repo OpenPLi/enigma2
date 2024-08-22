@@ -144,8 +144,13 @@ RESULT eBouquet::flushChanges()
 				goto err;
 			if ( i->name.length() ) {
 				std::string fullName = i->name;
+				std::string provPart = "•";
 				if (i->prov.length())
-					fullName += "•" + i->prov;
+				{
+					provPart += i->prov;
+					if (fullName.find(provPart) == std::string::npos)
+						fullName += provPart;
+				}
 				if ( fprintf(f, "#DESCRIPTION %s\r\n", fullName.c_str()) < 0 )
 					goto err;
 			}
