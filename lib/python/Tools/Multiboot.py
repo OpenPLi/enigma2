@@ -52,11 +52,8 @@ def getSlotImageInfo(slot, imagedir="/"):
 		BoxInfoInstance = BoxInformation(root=imagedir) if getCurrentImage() != slot else BoxInfo
 		Creator = BoxInfoInstance.getItem("distro", "").capitalize()
 		BuildImgVersion = BoxInfoInstance.getItem("imgversion")
-		BuildType = BoxInfoInstance.getItem("imagetype", "")[0:3]
-		BuildVer = BoxInfoInstance.getItem("imagebuild")
-		BuildDate = estimateSlotImageDate(imagedir, BoxInfoInstance.getItem("compiledate"), BuildVer)
-		BuildDev = str(idb).zfill(3) if BuildType and BuildType != "rel" and (idb := BoxInfoInstance.getItem("imagedevbuild")) else ""
-		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildType, BuildDev, BuildVer, BuildDate) if x and str(x).strip()])
+		BuildDate = estimateSlotImageDate(imagedir, BoxInfoInstance.getItem("compiledate"), BoxInfoInstance.getItem("imagebuild"))
+		return " ".join([str(x).strip() for x in (Creator, BuildImgVersion, BuildDate) if x and str(x).strip()])
 	else:
 		print("[multiboot] [GetImagelist] using etc/issue")
 		try:
