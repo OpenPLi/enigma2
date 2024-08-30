@@ -113,7 +113,7 @@ class TimerEntry:
 		return self.end <= time() and self.state == TimerEntry.StateWaiting
 
 	def abort(self):
-		self.end = time()
+		self.end = int(time())
 
 		# in case timer has not yet started, but gets aborted (so it's preparing),
 		# set begin to now.
