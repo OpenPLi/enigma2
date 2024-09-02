@@ -488,7 +488,7 @@ class MultibootSelection(SelectImage):
 		self["key_yellow"] = StaticText()
 		self["key_blue"] = StaticText()
 		self["description"] = Label()
-		self["list"] = ChoiceList([])
+		self["config"] = ChoiceList([])
 
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "KeyboardInputActions", "MenuActions"],
 		{
@@ -500,8 +500,6 @@ class MultibootSelection(SelectImage):
 			"blue": self.order,
 			"up": self.keyUp,
 			"down": self.keyDown,
-			"left": self.keyLeft,
-			"right": self.keyRight,
 			"upRepeated": self.keyUp,
 			"downRepeated": self.keyDown,
 			"leftRepeated": self.keyLeft,
@@ -559,10 +557,10 @@ class MultibootSelection(SelectImage):
 			list.append(ChoiceEntryComponent('', ((_("Boot to Android image")), "Android")))
 		if not list:
 			list.append(ChoiceEntryComponent('', ((_("No images found")), "Waiter")))
-		self["list"].setList(list)
+		self["config"].setList(list)
 		for index, slot in enumerate(list):
 			if type(slot[0][1]) is tuple and self.currentimageslot == slot[0][1][0] and (not BoxInfo.getItem("canMode12") or mode == slot[0][1][1]) or BoxInfo.getItem("hasKexec") and slot[0][1] == "Recovery" and recovery_booted:
-				self["list"].moveToIndex(index)
+				self["config"].moveToIndex(index)
 				break
 		self.selectionChanged()
 
@@ -582,13 +580,21 @@ class MultibootSelection(SelectImage):
 
 	def order(self):
 		if self.blue:
-			self["list"].setList([])
+			self["config"].setList([])
 			config.usage.multiboot_order.value = not config.usage.multiboot_order.value
 			config.usage.multiboot_order.save()
 			self.getImagesList()
 
 	def keyOk(self):
 		self.session.openWithCallback(self.doReboot, MessageBox, "%s:\n%s" % (_("Are you sure to reboot to"), self.currentSelected[0][0]), simple=True)
+
+	def keyUp(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveUp)
+		self.selectionChanged()
+
+	def keyDown(self):
+		self["config"].instance.moveSelection(self["config"].instance.moveDown)
+		self.selectionChanged()
 
 	def doReboot(self, answer):
 		if answer:
@@ -619,7 +625,7 @@ class MultibootSelection(SelectImage):
 			self.cancel(2)
 
 	def selectionChanged(self):
-		self.currentSelected = self["list"].l.getCurrentSelection()
+		self.currentSelected = self["config"].l.getCurrentSelection()
 		if isinstance(self.currentSelected[0][1], tuple) and self.currentimageslot != self.currentSelected[0][1][0]:
 			self["key_yellow"].setText(_("Delete Image"))
 		elif self.deletedImagesExists:
