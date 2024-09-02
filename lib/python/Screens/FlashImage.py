@@ -479,7 +479,7 @@ class FlashImage(Screen):
 class MultibootSelection(SelectImage):
 	def __init__(self, session, *args):
 		SelectImage.__init__(self, session)
-		self.skinName = ["MultibootSelection", "SelectImage"]
+		self.skinName = ["MultibootSelection", "Setup"]
 		self.expanded = []
 		self.tmp_dir = None
 		self.setTitle(_("Multiboot image selector"))
