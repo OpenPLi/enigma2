@@ -1196,11 +1196,11 @@ class NimManager:
 				for reference in [f"{satellite[0]:04x}" for satellite in self.getSatListForNim(nim.slot)]:
 					if reference not in referenceList:
 						referenceList.append(reference)
-			elif nim.isCompatible("DVB-C") and not nim.isFBCLink() and 'ffff' not in reflist:
+			elif nim.isCompatible("DVB-C") and not nim.isFBCLink() and 'ffff' not in referenceList:
 				referenceList.append('ffff')
-			elif nim.isCompatible("DVB-T") and not nim.isFBCLink() and 'eeee' not in reflist:
+			elif nim.isCompatible("DVB-T") and not nim.isFBCLink() and 'eeee' not in referenceList:
 				referenceList.append('eeee')
-			elif nim.isCompatible("ATSC") and not nim.isFBCLink() and 'dddd' not in reflist:
+			elif nim.isCompatible("ATSC") and not nim.isFBCLink() and 'dddd' not in referenceList:
 				referenceList.append('dddd')
 		return referenceList
 
