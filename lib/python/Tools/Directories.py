@@ -4,7 +4,7 @@ import os
 
 from enigma import eEnv
 from datetime import datetime
-from re import compile, split
+from re import compile
 from stat import S_IMODE
 from sys import _getframe as getframe
 from unicodedata import normalize
@@ -361,19 +361,10 @@ def fileReadXML(filename, default=None, *args, **kwargs):
 
 
 def getRecordingFilename(basename, dirname=None):
-	# Filter out non-allowed characters.
-	non_allowed_characters = "/.\\:*?<>|\""
-	basename = basename.replace("\xc2\x86", "").replace("\xc2\x87", "")
-	filename = ""
-	for c in basename:
-		if c in non_allowed_characters or ord(c) < 32:
-			c = "_"
-		filename += c
-	# Max filename length for ext4 is 255 (minus 8 characters for .ts.meta)
-	# but must not truncate in the middle of a multi-byte utf8 character!
-	# So convert the truncation to unicode and back, ignoring errors, the
-	# result will be valid utf8 and so xml parsing will be OK.
-	filename = filename[:247]
+	# The "replaces" remove dvb emphasis chars.
+	# Also, "." is replaced with "_" which respects the original code.
+	# Max filename length for ext4 is 255 bytes (minus 8 bytes for ".ts.meta", minus 4 bytes for "_%03d")
+	filename = sanitizeFilename(basename.replace("\xc2\x86", "").replace("\xc2\x87", "").replace(".", "_"), maxlen=243)
 	if dirname is not None:
 		if not dirname.startswith("/"):
 			dirname = os.path.join(defaultRecordingLocation(), dirname)
@@ -385,7 +376,7 @@ def getRecordingFilename(basename, dirname=None):
 	while True:
 		if not os.path.isfile(path + ".ts"):
 			return path
-		path += "_%03d" % i
+		path = "%s_%03d" % (filename, i)
 		i += 1
 
 # This is clearly a hack:
@@ -570,12 +561,12 @@ def shellquote(s):
 	return "'%s'" % s.replace("'", "'\\''")
 
 
-def sanitizeFilename(filename):
+def sanitizeFilename(filename, maxlen=255):  # 255 is max length in bytes in ext4 (and most other file systems)
 	"""Return a fairly safe version of the filename.
 
 	We don't limit ourselves to ascii, because we want to keep municipality
 	names, etc, but we do want to get rid of anything potentially harmful,
-	and make sure we do not exceed Windows filename length limits.
+	and make sure we do not exceed filename length limits.
 	Hence a less safe blacklist, rather than a whitelist.
 	"""
 	blacklist = ["\\", "/", ":", "*", "?", "\"", "<", ">", "|", "\0"]
@@ -584,34 +575,26 @@ def sanitizeFilename(filename):
 		"COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5",
 		"LPT6", "LPT7", "LPT8", "LPT9",
 	]  # Reserved words on Windows
-	filename = "".join(c for c in filename if c not in blacklist)
-	# Remove all charcters below code point 32
-	filename = "".join(c for c in filename if 31 < ord(c))
-	filename = normalize("NFKD", filename)
+	# Remove any blacklisted chars. Remove all charcters below code point 32. Normalize. Strip.
+	filename = normalize("NFKD", "".join(c for c in filename if c not in blacklist and ord(c) > 31)).strip()
+	if all([x == "." for x in filename]) or filename in reserved:  # if filename is a string of dots
+		filename = "__" + filename
+	# Most Unix file systems typically allow filenames of up to 255 bytes.
+	# However, the actual number of characters allowed can vary due to the
+	# representation of Unicode characters. Therefore length checks must
+	# be done in bytes, not unicode.
+	#
+	# Also we cannot leave the byte truncate in the middle of a multi-byte
+	# utf8 character! So, convert to bytes, truncate then get back to unicode,
+	# ignoring errors along the way, the result will be valid unicode.
+	# Prioritise maintaining the complete extension if possible.
+	# Any truncation of "root" or "ext" will be done at the end of the string
+	root, ext = os.path.splitext(filename.encode(encoding='utf-8', errors='ignore'))
+	if len(ext) > maxlen - (1 if root else 0):  # leave at least one char for root if root
+		ext = ext[:maxlen - (1 if root else 0)]
+	# convert back to unicode, ignoring any incomplete utf8 multibyte chars
+	filename = root[:maxlen - len(ext)].decode(encoding='utf-8', errors='ignore') + ext.decode(encoding='utf-8', errors='ignore')
 	filename = filename.rstrip(". ")  # Windows does not allow these at end
-	filename = filename.strip()
-	if all([x == "." for x in filename]):
-		filename = "__" + filename
-	if filename in reserved:
-		filename = "__" + filename
 	if len(filename) == 0:
 		filename = "__"
-	if len(filename) > 255:
-		parts = split(r"/|\\", filename)[-1].split(".")
-		if len(parts) > 1:
-			ext = "." + parts.pop()
-			filename = filename[:-len(ext)]
-		else:
-			ext = ""
-		if filename == "":
-			filename = "__"
-		if len(ext) > 254:
-			ext = ext[254:]
-		maxl = 255 - len(ext)
-		filename = filename[:maxl]
-		filename = filename + ext
-		# Re-check last character (if there was no extension)
-		filename = filename.rstrip(". ")
-		if len(filename) == 0:
-			filename = "__"
 	return filename
