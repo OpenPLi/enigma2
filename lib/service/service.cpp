@@ -25,6 +25,18 @@ static std::string encode(const std::string s)
 	return res;
 }
 
+RESULT eServiceReference::parseNameAndProviderFromName(std::string &sourceName, std::string& name, std::string& prov) {
+	prov = "";
+	if (!sourceName.empty()) {
+		std::vector<std::string> name_split = split(sourceName, "•");
+		name = name_split[0];
+		if (name_split.size() > 1) {
+			prov = name_split[1];
+		}
+	}
+	return 0;
+}
+
 eServiceReference::eServiceReference(const std::string &string)
 {
 	const char *c = string.c_str();
@@ -58,6 +70,13 @@ eServiceReference::eServiceReference(const std::string &string)
 				path = string;
 				name = string;
 			}
+
+			std::string res_name = "";
+			std::string res_provider = "";
+			eServiceReference::parseNameAndProviderFromName(name, res_name, res_provider);
+			name = res_name;
+			prov = res_provider;
+
 			eDebug("[eServiceReference] URL=%s name=%s", path.c_str(), name.c_str());
 			return;
 		}
@@ -112,6 +131,12 @@ eServiceReference::eServiceReference(const std::string &string)
 
 	path = urlDecode(path);
 	name = urlDecode(name);
+	
+	std::string res_name = "";
+	std::string res_provider = "";
+	eServiceReference::parseNameAndProviderFromName(name, res_name, res_provider);
+	name = res_name;
+	prov = res_provider;
 }
 
 std::string eServiceReference::toString() const
@@ -134,8 +159,14 @@ std::string eServiceReference::toString() const
 		ret += ':';
 		ret += encode(name);
 	}
-	if (!prov.empty()) {
-		ret += "•" + prov;
+	
+	std::string fullName = ret;
+	std::string provPart = "•";
+	if (!prov.empty())
+	{
+		provPart += prov;
+		if (fullName.find(provPart) == std::string::npos)
+			fullName += provPart;
 	}
 	return ret;
 }
