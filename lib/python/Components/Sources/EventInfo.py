@@ -21,7 +21,7 @@ class pServiceEvent:
 		self.m_ExtendedDescriptionNow = ""
 		self.m_ExtendedDescriptionNext = ""
 		self.m_Duration = 0
-		self.m_Begin = time()
+		self.m_Begin = int(time())
 		isPtr = not isinstance(service, eServiceReference)
 		sTagTitle = info.getInfoString(iServiceInformation.sTagTitle) if isPtr else info.getInfoString(service, iServiceInformation.sTagTitle)
 		if sTagTitle:
@@ -55,10 +55,10 @@ class pServiceEvent:
 		if seek:
 			length = seek.getLength()
 			if length[0] == 0:
-				self.m_Duration = length[1] / 90000
+				self.m_Duration = length[1] // 90000
 			position = seek.getPlayPosition()
 			if position[0] == 0:
-				self.m_Begin = time() - position[1] / 90000
+				self.m_Begin = int(time()) - position[1] // 90000
 
 	def getEventName(self):
 		return self.m_EventNameNow if self.now_or_next == self.NOW else self.m_EventNameNext
@@ -153,6 +153,7 @@ class EventInfo(PerServiceBase, Source):
 
 	def gotEvent(self, what):
 		if what == iPlayableService.evEnd:
+			self.__service = None
 			self.changed((self.CHANGED_CLEAR,))
 		else:
 			self.changed((self.CHANGED_ALL,))
@@ -161,9 +162,9 @@ class EventInfo(PerServiceBase, Source):
 		if not ref:
 			self.__service = None
 			self.changed((self.CHANGED_CLEAR,))
-			return
-		self.__service = ref
-		self.changed((self.CHANGED_ALL,))
+		else:
+			self.__service = ref
+			self.changed((self.CHANGED_ALL,))
 
 
 	def destroy(self):
