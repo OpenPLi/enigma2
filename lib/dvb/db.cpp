@@ -219,6 +219,16 @@ RESULT eDVBService::getName(const eServiceReference &ref, std::string &name)
 		name = m_service_name;
 	else
 		name = "(...)";
+
+	std::string res_name = "";
+	std::string res_provider = "";
+	eServiceReference::parseNameAndProviderFromName(name, res_name, res_provider);
+	name = res_name;
+
+	if (!res_provider.empty() && m_provider_name.empty()) {
+		m_provider_name = res_provider;
+	} 
+
 	return 0;
 }
 

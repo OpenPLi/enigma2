@@ -11,7 +11,11 @@ from unicodedata import normalize
 
 from xml.etree.ElementTree import Element, fromstring, parse
 
-pathExists = os.path.exists
+
+from os.path import exists as pathExists, isdir as pathIsdir, isfile as pathIsfile, join as pathJoin
+
+from os import listdir
+
 
 SCOPE_HOME = 0  # DEBUG: Not currently used in Enigma2.
 SCOPE_LANGUAGE = 1
@@ -559,6 +563,17 @@ def mediafilesInUse(session):
 
 def shellquote(s):
 	return "'%s'" % s.replace("'", "'\\''")
+
+def isPluginInstalled(pluginname, pluginfile="plugin", pluginType=None):
+	path = resolveFilename(SCOPE_PLUGINS)
+	pluginfolders = [name for name in listdir(path) if pathIsdir(pathJoin(path, name)) and name not in ["__pycache__"]]
+	if pluginType is None or pluginType in pluginfolders:
+		plugintypes = pluginType and [pluginType] or pluginfolders
+		for fileext in [".pyc", ".py"]:
+			for plugintype in plugintypes:
+				if pathIsfile(pathJoin(path, plugintype, pluginname, pluginfile + fileext)):
+					return True
+	return False
 
 
 def sanitizeFilename(filename, maxlen=255):  # 255 is max length in bytes in ext4 (and most other file systems)
