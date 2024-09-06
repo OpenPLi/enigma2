@@ -22,7 +22,9 @@ e2path = "/etc/enigma2"
 class ImportChannels:
 
 	def __init__(self):
-		if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value and not "ChannelsImport" in [x.name for x in threading.enumerate()]:
+		if "ChannelsImport" in [x.name for x in threading.enumerate()]:
+			print("[Import Channels] Import Channels Thread is already running")
+		elif config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback.value:
 			self.header = None
 			if config.usage.remote_fallback_enabled.value and config.usage.remote_fallback_import.value and config.usage.remote_fallback_import_url.value != "same" and config.usage.remote_fallback_import_url.value:
 				self.url = config.usage.remote_fallback_import_url.value.rsplit(":", 1)[0]
@@ -49,13 +51,13 @@ class ImportChannels:
 				if "[Errno -3]" in str(e.reason):
 					print(f"[Import Channels] Network is not up yet while fetching {url} retry in 5 seconds")
 					sleep(5)
-				elif "[Errno 113]" in str(e.reason):
+				elif "[Errno 113]" in str(e.reason) or "[Errno -2]" in str(e.reason):
 					try_counter += 1
 					if try_counter >= 3:
-						print(f"[Import Channels] No route to host {url} tried {try_counter} time(s) and give up")
+						print(f"[Import Channels] No route to host, name or service not known {url} tried {try_counter} time(s) and give up")
 						return {}
 					else:
-						print(f"[Import Channels] No route to host {url} tried {try_counter} time(s)")
+						print(f"[Import Channels] No route to host, name or service not known {url} tried {try_counter} time(s)")
 						sleep(5)
 				else:
 					print(f"[Import Channels] URLError {e} while fetching {url}")
@@ -97,7 +99,16 @@ class ImportChannels:
 			try:
 				if remote:
 					try:
-						content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))).decode('utf-8', 'replace').split('\n')
+#						print(f"[Import Channels] Fetching file {file}")
+						if os.path.exists(os.path.join(self.tmp_dir, os.path.basename(file))):
+							continue
+						else:
+							content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file)))
+							if content:
+								open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(content)
+								content = content.decode('utf-8', 'replace').split('\n')
+							else:
+								continue
 					except Exception as e:
 						print("[Import Channels] Exception: %s" % str(e))
 						continue
@@ -127,38 +138,39 @@ class ImportChannels:
 		self.tmp_dir = tempfile.mkdtemp(prefix="ImportChannels_")
 
 		if "channels" in self.remote_fallback_import:
-			print("[Import Channels] Enumerate remote files")
+			print("[Import Channels] Enumerate and Fetch remote files")
 			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio')
 
-			print("[Import Channels] Enumerate remote support files")
-			for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"]:
-				if os.path.basename(file).startswith(supportfiles):
-					files.append(file.replace(e2path, ''))
-
-			print("[Import Channels] Fetch remote files")
-			for file in files:
-#				print("[Import Channels] Downloading %s..." % file)
+			if files: # we should ensure we have at least the bouquets.tv file
 				try:
-					open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))))
+					print("[Import Channels] Enumerate and Fetch remote support files")
+					support_files = [file.replace(e2path, '') for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"] if os.path.basename(file).startswith(supportfiles)]
+					for file in support_files:
+						print("[Import Channels] Downloading %s..." % file)
+						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))))
 				except Exception as e:
-					print("[Import Channels] Exception: %s" % str(e))
+#					print("[Import Channels] Exception: %s" % str(e))
+					self.ImportChannelsDone(False, _("Could not retrieve the remote support files"))
+					return
+				print("[Import Channels] Enumerate local files")
+				files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
 
-			print("[Import Channels] Enumerate local files")
-			files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
+				print("[Import Channels] Removing old local files...")
+				for file in files:
+#					print("- Removing %s..." % file)
+					try:
+						os.remove(os.path.join(e2path, file))
+					except OSError:
+						print("[Import Channels] File %s did not exist" % file)
 
-			print("[Import Channels] Removing old local files...")
-			for file in files:
-#				print("- Removing %s..." % file)
-				try:
-					os.remove(os.path.join(e2path, file))
-				except OSError:
-					print("[Import Channels] File %s did not exist" % file)
-
-			print("[Import Channels] Updating files...")
-			files = [x for x in os.listdir(self.tmp_dir)]
-			for file in files:
-#				print("- Moving %s..." % file)
-				shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
+				print("[Import Channels] Updating files...")
+				files = [x for x in os.listdir(self.tmp_dir)]
+				for file in files:
+#					print("- Moving %s..." % file)
+					shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
+			else:
+				self.ImportChannelsDone(False, _("Could not retrieve the basic bouquets files"))
+				return
 
 		if "epg" in self.remote_fallback_import:
 			print("[Import Channels] Writing epg.dat file on server box")
@@ -202,6 +214,7 @@ class ImportChannels:
 						return
 			else:
 				self.ImportChannelsDone(False, _("No epg.dat file found on the fallback receiver"))
+				return
 
 		self.getTerrestrialRegion()
 		self.ImportChannelsDone(True, {"channels": _("Channels"), "epg": _("EPG"), "channels_epg": _("Channels and EPG")}[self.remote_fallback_import])
