@@ -96,19 +96,16 @@ class ImportChannels:
 		result = []
 		for file in files:
 			# read the contents of the file
+			content = None
 			try:
 				if remote:
 					try:
 #						print(f"[Import Channels] Fetching file {file}")
-						if os.path.exists(os.path.join(self.tmp_dir, os.path.basename(file))):
-							continue
-						else:
+						if not os.path.exists(os.path.join(self.tmp_dir, os.path.basename(file))):
 							content = self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file)))
 							if content:
 								open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(content)
 								content = content.decode('utf-8', 'replace').split('\n')
-							else:
-								continue
 					except Exception as e:
 						print("[Import Channels] Exception: %s" % str(e))
 						continue
@@ -119,18 +116,17 @@ class ImportChannels:
 				# for the moment just log and ignore
 				print("[Import Channels] %s" % str(e))
 				continue
-
 			# check the contents for more bouquet files
-			for line in content:
-#				print ("[Import Channels] %s" % line)
-				# check if it contains another bouquet reference, first tv type then radio type
-				r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line) or re.match('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
-				if r:
-					# recurse
-					result.extend(self.ImportGetFilelist(remote, r.group(1)))
-			# add add the file itself
-			result.append(file)
-
+			if content:
+				for line in content:
+	#				print ("[Import Channels] %s" % line)
+					# check if it contains another bouquet reference, first tv type then radio type
+					r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line) or re.match('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
+					if r:
+						# recurse
+						result.extend(self.ImportGetFilelist(remote, r.group(1)))
+				# add add the file itself
+				result.append(file)
 		# return the file list
 		return result
 
@@ -139,24 +135,19 @@ class ImportChannels:
 
 		if "channels" in self.remote_fallback_import:
 			print("[Import Channels] Enumerate and Fetch remote files")
-			files = self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio')
-
-			if files: # we should ensure we have at least the bouquets.tv file
+			if self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio'): # we should ensure we have at some files available
 				try:
 					print("[Import Channels] Enumerate and Fetch remote support files")
-					support_files = [file.replace(e2path, '') for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"] if os.path.basename(file).startswith(supportfiles)]
-					for file in support_files:
-						print("[Import Channels] Downloading %s..." % file)
+					for file in [file.replace(e2path, '') for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"] if os.path.basename(file).startswith(supportfiles)]:
+#						print("[Import Channels] Downloading %s..." % file)
 						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))))
 				except Exception as e:
-#					print("[Import Channels] Exception: %s" % str(e))
+					print("[Import Channels] Exception: %s" % str(e))
 					self.ImportChannelsDone(False, _("Could not retrieve the remote support files"))
 					return
-				print("[Import Channels] Enumerate local files")
-				files = self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')
 
-				print("[Import Channels] Removing old local files...")
-				for file in files:
+				print("[Import Channels] Enumarate and Removing old local files...")
+				for file in self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio'):
 #					print("- Removing %s..." % file)
 					try:
 						os.remove(os.path.join(e2path, file))
@@ -164,12 +155,11 @@ class ImportChannels:
 						print("[Import Channels] File %s did not exist" % file)
 
 				print("[Import Channels] Updating files...")
-				files = [x for x in os.listdir(self.tmp_dir)]
-				for file in files:
+				for file in [x for x in os.listdir(self.tmp_dir)]:
 #					print("- Moving %s..." % file)
 					shutil.move(os.path.join(self.tmp_dir, file), os.path.join(e2path, file))
 			else:
-				self.ImportChannelsDone(False, _("Could not retrieve the basic bouquets files"))
+				self.ImportChannelsDone(False, _("Could not retrieve basic bouquets files"))
 				return
 
 		if "epg" in self.remote_fallback_import:
