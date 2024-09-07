@@ -133,7 +133,7 @@ void eDVBCICcSession::addProgram(uint16_t program_number, std::vector<uint16_t>&
 	eDebugNoNewLine("\n");
 
 	for (std::vector<uint16_t>::iterator it = pids.begin(); it != pids.end(); ++it)
-		descrambler_set_pid(m_descrambler_fd, m_slot->getSlotID(), 1, *it);
+		descrambler_set_pid(m_descrambler_fd, m_slot, 1, *it);
 
 }
 
@@ -145,7 +145,7 @@ void eDVBCICcSession::removeProgram(uint16_t program_number, std::vector<uint16_
 	eDebugNoNewLine("\n");
 
 	for (std::vector<uint16_t>::iterator it = pids.begin(); it != pids.end(); ++it)
-		descrambler_set_pid(m_descrambler_fd, m_slot->getSlotID(), 0, *it);
+		descrambler_set_pid(m_descrambler_fd, m_slot, 0, *it);
 
 	// removing program means probably decoding on this slot is ending. So mark this slot as not descrambling
 	eDVBCI_UI::getInstance()->setDecodingState(m_slot->getSlotID(), 0);

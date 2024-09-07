@@ -142,6 +142,7 @@ def setBoxInfoItems():
 	model = BoxInfo.getItem("machine")
 	BoxInfo.setItem("InDebugMode", eGetEnigmaDebugLvl() >= 4)
 	BoxInfo.setItem("CommonInterface", model in ("h9combo", "h9combose", "h10", "pulse4kmini") and 1 or eDVBCIInterfaces.getInstance().getNumOfSlots())
+	BoxInfo.setItem("CiAlternativeCaHandling", model in ("pulse4k",  "pulse4kmini"))
 	BoxInfo.setItem("CommonInterfaceCIDelay", fileCheck("/proc/stb/tsmux/rmx_delay"))
 	for cislot in range(0, BoxInfo.getItem("CommonInterface")):
 		BoxInfo.setItem("CI%dSupportsHighBitrates" % cislot, fileCheck("/proc/stb/tsmux/ci%d_tsclk" % cislot))

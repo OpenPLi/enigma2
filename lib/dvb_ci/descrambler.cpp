@@ -133,7 +133,7 @@ int descrambler_set_key(int& desc_fd, eDVBCISlot *slot, int parity, unsigned cha
 	return 0;
 }
 
-int descrambler_set_pid(int desc_fd, int index, int enable, int pid)
+int descrambler_set_pid(int desc_fd, eDVBCISlot *slot, int enable, int pid)
 {
 	struct ca_pid p;
 	unsigned int flags = 0x80;
@@ -141,7 +141,7 @@ int descrambler_set_pid(int desc_fd, int index, int enable, int pid)
 	if (desc_fd < 0)
 		return -1;
 
-	if (index)
+	if (slot->getSlotID())
 		flags |= 0x40;
 
 	if (enable)
@@ -150,9 +150,15 @@ int descrambler_set_pid(int desc_fd, int index, int enable, int pid)
 	p.pid = pid;
 	p.index = flags;
 
-	if (ioctl(desc_fd, CA_SET_PID, &p) == -1) {
-		eWarning("[CI%d descrambler] set pid failed", index);
-		return -1;
+	if (ioctl(desc_fd, CA_SET_PID, &p) == -1) 
+	{
+		if (slot->getIsCA0Excluded())
+			return 0;
+		else
+		{
+			eWarning("[CI%d descrambler] set pid failed", slot->getSlotID());
+			return -1;
+		}
 	}
 
 	return 0;
@@ -164,7 +170,7 @@ int descrambler_init(int slot, uint8_t ca_demux_id)
 
 	std::string filename = "/dev/dvb/adapter0/ca" + std::to_string(ca_demux_id);
 
-	desc_fd = open(filename.c_str(), O_RDWR);
+	desc_fd = open(filename.c_str(), O_RDWR | O_NONBLOCK | O_CLOEXEC);
 	if (desc_fd == -1) {
 		eWarning("[CI%d descrambler] can not open %s", slot, filename.c_str());
 	}
