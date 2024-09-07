@@ -8,6 +8,7 @@
 
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci.h>
+#include <lib/dvb_ci/dvbci_ccmgr.h>
 
 #include <lib/base/eerror.h>
 
