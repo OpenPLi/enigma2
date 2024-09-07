@@ -8,7 +8,6 @@
 
 #include <lib/dvb_ci/descrambler.h>
 #include <lib/dvb_ci/dvbci.h>
-#include <lib/dvb_ci/dvbci_ccmgr.h>
 
 #include <lib/base/eerror.h>
 
@@ -154,7 +153,7 @@ int descrambler_set_pid(int desc_fd, int index, int enable, int pid)
 
 	if (ioctl(desc_fd, CA_SET_PID, &p) == -1) 
 	{
-		if (m_slot->getIsCA0Excluded())
+		if (eDVBCISlot *slot->getIsCA0Excluded())
 			return 0;
 		else
 		{
