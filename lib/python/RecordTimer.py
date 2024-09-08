@@ -329,7 +329,9 @@ class RecordTimerEntry(timer.TimerEntry):
 			if self.repeated:
 				epgcache = eEPGCache.getInstance()
 				#This might need further investigation. Dp npt get exactly the middle, take 20% so we usually expect to get first event.
-				queryTime = self.begin + (self.end - self.begin) // 5
+				begin = self.begin + config.recording.margin_before.value * 60
+				end = self.end - config.recording.margin_after.value * 60
+				queryTime = begin + (end - begin) // 5
 				evt = epgcache.lookupEventTime(rec_ref, queryTime)
 				if evt:
 					if self.rename_repeat:
