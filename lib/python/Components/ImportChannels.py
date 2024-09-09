@@ -119,7 +119,7 @@ class ImportChannels:
 			# check the contents for more bouquet files
 			if content:
 				for line in content:
-	#				print ("[Import Channels] %s" % line)
+#					print ("[Import Channels] %s" % line)
 					# check if it contains another bouquet reference, first tv type then radio type
 					r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line) or re.match('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
 					if r:
@@ -147,7 +147,7 @@ class ImportChannels:
 					return
 
 				print("[Import Channels] Enumarate and Removing old local files...")
-				for file in self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio'):
+				for file in set(self.ImportGetFilelist(False, 'bouquets.tv', 'bouquets.radio')):
 #					print("- Removing %s..." % file)
 					try:
 						os.remove(os.path.join(e2path, file))
