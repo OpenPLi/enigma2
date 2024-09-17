@@ -1328,10 +1328,7 @@ def readSkin(screen, skin, names, desktop):
 			else:
 				processScreen(s[0], context)
 		layout = widget.attrib.get("layout")
-		if layout == "stack":
-			cc = SkinContextStack
-		else:
-			cc = SkinContext
+		cc = SkinContextStack if layout == "stack" else SkinContext
 		try:
 			c = cc(context, widget.attrib.get("position"), widget.attrib.get("size"), widget.attrib.get("font"))
 		except Exception as err:
