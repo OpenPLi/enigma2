@@ -20,6 +20,7 @@ class Listbox(Renderer):
 		self.__content = None
 		self.__wrap_around = True
 		self.__selection_enabled = True
+		self.scale = None
 		self.__scrollbarMode = "showOnDemand"
 
 	GUI_WIDGET = eListbox
@@ -119,4 +120,5 @@ class Listbox(Renderer):
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs
+		self.scale = parent.scale
 		return Renderer.applySkin(self, desktop, parent)

@@ -292,6 +292,10 @@ class Screen(dict):
 				exec(f, globals(), locals())  # Python 3
 			else:
 				f()
+		for key in self:  # nudge TemplatedMultiContent so receives self.scale set above
+			val = self[key]
+			if "Components.Converter.TemplatedMultiContent" in str(getattr(val, "downstream_elements", None)):
+				val.downstream_elements.changed((val.CHANGED_DEFAULT,))
 
 	def deleteGUIScreen(self):
 		for (name, val) in self.items():
