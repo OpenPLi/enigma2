@@ -275,7 +275,7 @@ def parseCoordinate(s, e, size=0, font=None, scale=(1, 1)):
 		if "%" in s:
 			s = s.replace("%", "*e / 100")  # noqa: F841
 		if "f" in s:
-			f = getSkinFactor() if scale[0] == scale[1] else 1 # noqa: F841, only use getSkinFactor when screen.scale attribute is not present
+			f = getSkinFactor() if scale[0] == scale[1] else 1  # noqa: F841, only use getSkinFactor when screen.scale attribute is not present
 		# Don't bother trying an int() conversion,
 		# because at this point that's almost certainly
 		# going to throw an exception.

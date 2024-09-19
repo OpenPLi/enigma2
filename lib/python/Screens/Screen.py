@@ -245,7 +245,7 @@ class Screen(dict):
 		zPosition = 0
 		for (key, value) in self.skinAttributes:
 			if key in ("baseResolution", "resolution"):
-				self.scale = tuple([(self.scale[i][0], int(x)) for i,x in enumerate(value.split(","))])
+				self.scale = tuple([(self.scale[i][0], int(x)) for i, x in enumerate(value.split(","))])
 			elif key == "zPosition":
 				zPosition = int(value)
 		if not self.instance:
