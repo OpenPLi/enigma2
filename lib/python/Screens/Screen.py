@@ -1,6 +1,6 @@
 from os.path import isfile
 
-from enigma import eRCInput, eTimer, eWindow  # , getDesktop
+from enigma import eRCInput, eTimer, eWindow, getDesktop
 
 from skin import GUI_SKIN_ID, applyAllAttributes, menus, screens, setups
 from Components.config import config
@@ -241,15 +241,13 @@ class Screen(dict):
 				f()
 
 	def applySkin(self):
-		# DEBUG: baseRes = (getDesktop(GUI_SKIN_ID).size().width(), getDesktop(GUI_SKIN_ID).size().height())
-		baseRes = (720, 576)  # FIXME: A skin might have set another resolution, which should be the base res.
+		self.scale = ((getDesktop(GUI_SKIN_ID).size().width(), getDesktop(GUI_SKIN_ID).size().width()), (getDesktop(GUI_SKIN_ID).size().height(), getDesktop(GUI_SKIN_ID).size().height()))
 		zPosition = 0
 		for (key, value) in self.skinAttributes:
-			if key == "baseResolution":
-				baseRes = tuple([int(x) for x in value.split(",")])
+			if key in ("baseResolution", "resolution"):
+				self.scale = tuple([(self.scale[i][0], int(x)) for i,x in enumerate(value.split(","))])
 			elif key == "zPosition":
 				zPosition = int(value)
-		self.scale = ((baseRes[0], baseRes[0]), (baseRes[1], baseRes[1]))
 		if not self.instance:
 			self.instance = eWindow(self.desktop, zPosition)
 		if "title" not in self.skinAttributes and self.screenTitle:
