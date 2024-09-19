@@ -124,13 +124,13 @@ class TimerList(GUIComponent):
 			self.itemHeight = parseScale(value)
 
 		def setServiceNameFont(value):
-			self.serviceNameFont = parseFont(value, ((1, 1), (1, 1)))
+			self.serviceNameFont = parseFont(value, parent.scale)
 
 		def setEventNameFont(value):
-			self.eventNameFont = parseFont(value, ((1, 1), (1, 1)))
+			self.eventNameFont = parseFont(value, parent.scale)
 
 		def setFont(value):
-			self.font = parseFont(value, ((1, 1), (1, 1)))
+			self.font = parseFont(value, parent.scale)
 
 		def rowSplit(value):
 			self.rowSplit = parseScale(value)

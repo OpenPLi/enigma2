@@ -196,25 +196,25 @@ class ServiceList(GUIComponent):
 			pic and self.l.setPixmap(self.l.picServiceEventProgressbar, pic)
 
 		def serviceNameFont(value):
-			font = parseFont(value, ((1, 1), (1, 1)))
+			font = parseFont(value, parent.scale)
 			self.ServiceNameFontName = font.family
 			self.ServiceNameFontSize = font.pointSize
 
 		def serviceInfoFont(value):
-			font = parseFont(value, ((1, 1), (1, 1)))
+			font = parseFont(value, parent.scale)
 			self.ServiceInfoFontName = font.family
 			self.ServiceInfoFontSize = font.pointSize
-			font = parseFont(value, ((5, 6), (1, 1)))
+			font = parseFont(value, parent.scale)
 			self.ServiceNextInfoFontName = font.family
 			self.ServiceNextInfoFontSize = font.pointSize
 
 		def serviceRemainingInfoFont(value):
-			font = parseFont(value, ((1, 1), (1, 1)))
+			font = parseFont(value, parent.scale)
 			self.ServiceRemainingInfoFontName = font.family
 			self.ServiceRemainingInfoFontSize = font.pointSize
 
 		def serviceNumberFont(value):
-			font = parseFont(value, ((1, 1), (1, 1)))
+			font = parseFont(value, parent.scale)
 			self.ServiceNumberFontName = font.family
 			self.ServiceNumberFontSize = font.pointSize
 
