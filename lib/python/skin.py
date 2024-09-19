@@ -244,45 +244,48 @@ class SkinError(Exception):
 #
 
 
-def parseCoordinate(s, e, size=0, font=None):
+def parseCoordinate(s, e, size=0, font=None, scale=(1, 1)):
 	orig = s = s.strip()
 	if s.isdigit():  # For speed try a simple number first as these are the most common.
 		val = int(s)
 	elif s == "center":  # For speed as this can be common case.
-		val = 0 if not size else (e - size) // 2
+		return 0 if not size else (e - size) // 2
 	elif s == "e":
-		val = e
+		return e
 	elif s == "*":
 		return None
 	else:
+		if scale[0] != scale[1]:
+			e *= scale[1] / scale[0]
+			size *= scale[1] / scale[0]
 		if font is None and ("w" in s or "h" in s):
 			print("[Skin] Error: 'w' or 'h' is being used in a field where neither is valid. Input string: '%s'" % orig)
 			return 0
 		# No test on "e" because it's already a variable
 		if "center" in s:
-			center = (e - size) / 2
+			center = (e - size) / 2  # noqa: F841
 		if "c" in s:
-			c = e / 2
+			c = e / 2  # noqa: F841 do not remove c variable
 		if "w" in s:
 			s = s.replace("w", "*w")
-			w = float(font in fonts and fonts[font][3] or 0)
+			w = float(fonts[font][3] * scale[1] / scale[0] if font in fonts else 0)  # noqa: F841
 		if "h" in s:
 			s = s.replace("h", "*h")
-			h = float(font in fonts and fonts[font][2] or 0)
+			h = float(fonts[font][2] * scale[1] / scale[0] if font in fonts else 0)  # noqa: F841
 		if "%" in s:
-			s = s.replace("%", "*e / 100")
+			s = s.replace("%", "*e / 100")  # noqa: F841
 		if "f" in s:
-			f = getSkinFactor()
+			f = getSkinFactor() if scale[0] == scale[1] else 1 # noqa: F841, only use getSkinFactor when screen.scale attribute is not present
 		# Don't bother trying an int() conversion,
 		# because at this point that's almost certainly
 		# going to throw an exception.
-		try: # protects against junk in the input
-			val = int(eval(s))
+		try:  # protects against junk in the input
+			val = eval(s)
 		except Exception as err:
 			print("[Skin] %s '%s': Coordinate '%s', processed to '%s', cannot be evaluated!" % (type(err).__name__, err, orig, s))
 			val = 0
-	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s'." % (s, e, size, font, val))
-	return val
+	# print("[Skin] DEBUG: parseCoordinate s='%s', e='%s', size=%s, font='%s', val='%s', scale='%s'." % (s, e, size, font, val, str(scale)))
+	return int(val * scale[0] / scale[1] if scale[0] != scale[1] else val)
 
 
 def getParentSize(object, desktop):
