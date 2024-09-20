@@ -189,6 +189,7 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 	int border_size = 0;
 	int radius = 0;
 	int edges = 0;
+	bool alphablendtext = true;
 
 		/* get local listbox style, if present */
 	if (m_listbox)
@@ -309,6 +310,8 @@ void eListboxPythonStringContent::paint(gPainter &painter, eWindowStyle &style, 
 				painter.setForegroundColor(gRGB(0x808080));
 
 			int flags = 0;
+			if (alphablendtext)
+				flags |= gPainter::RT_BLEND;
 			if (local_style)
 			{
 				style_text_offset = local_style->m_text_offset;
@@ -420,6 +423,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 	int border_size = 0;
 	int radius = 0;
 	int edges = 0;
+	bool alphablendtext = true;
 
 	painter.clip(itemrect);
 	style.setStyle(painter, selected ? eWindowStyle::styleListboxSelected : eWindowStyle::styleListboxNormal);
@@ -498,6 +502,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 
 	if (m_list && cursorValid)
 	{
+		int alphablendflag = (alphablendtext) ? gPainter::RT_BLEND : 0;
 			/* get current list item */
 		ePyObject item = PyList_GET_ITEM(m_list, m_cursor); // borrowed reference!
 		ePyObject text, value;
@@ -533,7 +538,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 				//eDebug("[CONFIGCONTENT] Go to step 1 fill line thick: %d; at pos x: %d, y: %d, w: %d, h: %d", m_sepline_thickness, offset.x() + 15, offset.y() + (m_itemsize.height() - m_sepline_thickness)/2, m_itemsize.width() - 30, m_sepline_thickness);
 				painter.fill(eRect(offset.x()+15, offset.y() + (m_itemsize.height() - m_sepline_thickness)/2, m_itemsize.width() - 30, m_sepline_thickness));
 			} else {
-				painter.renderText(eRect(ePoint(offset.x()+15, offset.y()), m_itemsize), string, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
+				painter.renderText(eRect(ePoint(offset.x()+15, offset.y()), m_itemsize), string, alphablendflag | gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
 			}
 			Py_XDECREF(text);
 			if (!sep) {
@@ -563,7 +568,7 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 					/*  check if this is really a tuple */
 				if (value && PyTuple_Check(value))
 				{
-						/* convert type to string */
+					/* convert type to string */
 					ePyObject type = PyTuple_GET_ITEM(value, 0);
 					const char *atype = (type && PyUnicode_Check(type)) ? PyUnicode_AsUTF8(type) : 0;
 
@@ -575,9 +580,9 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 							const char *value = (pvalue && PyUnicode_Check(pvalue)) ? PyUnicode_AsUTF8(pvalue) : "<not-a-string>";
 							painter.setFont(fnt2);
 							if (value_alignment_left)
-								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
+								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, alphablendflag | gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
 							else
-								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
+								painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, alphablendflag | gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
 
 								/* pvalue is borrowed */
 						} else if (!strcmp(atype, "slider"))
@@ -709,9 +714,9 @@ void eListboxPythonConfigContent::paint(gPainter &painter, eWindowStyle &style, 
 								const char *value = (ppixmap && PyUnicode_Check(ppixmap)) ? PyUnicode_AsUTF8(ppixmap) : "<not-a-string>";
 								painter.setFont(fnt2);
 								if (value_alignment_left)
-									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
+									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, alphablendflag | gPainter::RT_HALIGN_LEFT | gPainter::RT_VALIGN_CENTER, border_color, border_size);
 								else
-									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
+									painter.renderText(eRect(ePoint(offset.x()-15, offset.y()), m_itemsize), value, alphablendflag | gPainter::RT_HALIGN_RIGHT| gPainter::RT_VALIGN_CENTER, border_color, border_size);
 							}
 							else
 							{
