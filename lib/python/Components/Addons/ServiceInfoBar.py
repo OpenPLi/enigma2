@@ -1,17 +1,15 @@
-from Components.Addons.GUIAddon import GUIAddon
-
 from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, iPlayableService, iRecordableService, eServiceReference, iServiceInformation, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, RT_VALIGN_TOP, RT_HALIGN_CENTER, eTimer, getDesktop, eSize, eStreamServer
 from skin import parseScale, applySkinFactor, parseColor, parseFont, parameters
 
-from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryText
-from Components.ServiceEventTracker import ServiceEventTracker
+from Components.Addons.GUIAddon import GUIAddon
+from Components.Converter.PliExtraInfo import createCurrentCaidLabel
 from Components.Converter.ServiceInfo import getVideoHeight
 from Components.Converter.VAudioInfo import StdAudioDesc
-from Components.Converter.PliExtraInfo import createCurrentCaidLabel
 from Components.Label import Label
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryText
+from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StreamService import StreamServiceList
 from Components.NimManager import nimmanager
-from Components.config import config
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
 from Tools.LoadPixmap import LoadPixmap
@@ -106,8 +104,9 @@ class ServiceInfoBar(GUIAddon):
 				self.updateAddon()
 
 	def scheduleAddonUpdate(self):
-		self.refreshAddon.stop()
-		self.refreshAddon.start(350)
+		if hasattr(self, "refreshAddon"):
+			self.refreshAddon.stop()
+			self.refreshAddon.start(300)
 
 	def checkCrypto_update(self):
 		if NavigationInstance.instance is not None:
@@ -145,11 +144,11 @@ class ServiceInfoBar(GUIAddon):
 			service = self.nav.getCurrentService()
 			info = service and service.info()
 			isRef = isinstance(service, eServiceReference)
-			#self.current_info = info
+			# self.current_info = info
 			if not info:
 				return None
 			video_height = None
-			video_aspect = None
+			# video_aspect = None
 			video_height = getVideoHeight(info)
 			if key == "videoRes":
 				if video_height >= 720 and video_height < 1500:
@@ -348,7 +347,7 @@ class ServiceInfoBar(GUIAddon):
 			elif attrib == "autoresizeMode":
 				self.autoresizeMode = value
 			elif attrib == "font":
-				self.font = parseFont(value, ((1, 1), (1, 1)))
+				self.font = parseFont(value, parent.scale)
 			elif attrib == "foregroundColor":
 				self.foreColor = parseColor(value).argb()
 			elif attrib == "textBackColor":

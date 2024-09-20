@@ -1,10 +1,10 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, RT_VALIGN_CENTER, RT_HALIGN_LEFT, eSize, getDesktop, gFont
+from enigma import eListbox, eListboxPythonMultiContent, BT_ALIGN_CENTER, RT_VALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_CENTER, BT_SCALE, eSize, getDesktop, gFont
 
 from skin import parseScale, parseColor, parseFont, applySkinFactor
 
-from Components.MultiContent import MultiContentEntryPixmapAlphaBlend
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryText
 from Components.Label import Label
 
 from Tools.Directories import resolveFilename, SCOPE_GUISKIN
@@ -26,7 +26,9 @@ class ColorButtonsSequence(GUIAddon):
 		self.colorIndicatorStyle = "pixmap"
 		self.orientations = {"orHorizontal": eListbox.orHorizontal, "orVertical": eListbox.orVertical}
 		self.orientation = eListbox.orHorizontal
+		self.renderType = "ImageTextRight"  # Currently supported are ImageTextRight, ImageTextOver and ColorTextOver
 		self.alignment = "left"
+		self.cornerRadius = 0
 		self.pixmaps = {}
 		self.colors = {}
 		self.textRenderer = Label("")
@@ -62,9 +64,15 @@ class ColorButtonsSequence(GUIAddon):
 
 		for x, val in sequence.items():
 			textColor = self.foreColor
+			buttonBgColor = self.foreColor
+
 			if x in self.colors:
-				textColor = parseColor(self.colors[x]).argb()
-			if x in self.pixmaps:
+				if self.renderType == "ImageTextRight":
+					textColor = parseColor(self.colors[x]).argb()
+				else:
+					buttonBgColor = parseColor(self.colors[x]).argb()
+
+			if self.renderType != "ImageTextOver" and x in self.pixmaps:
 				pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[x]))
 				if pic:
 					pixd_size = pic.size()
@@ -92,11 +100,34 @@ class ColorButtonsSequence(GUIAddon):
 				if textWidth < (minSectorWidth - self.spacingButtons - (self.spacingPixmapText if pic else 0) - pixd_width):
 					textWidth = minSectorWidth - self.spacingButtons - (self.spacingPixmapText if pic else 0) - pixd_width
 			if buttonText:
-				if textColor is not None:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, xPos, yPos, textWidth, height - 2, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, buttonText, textColor))
+				textFlags = RT_HALIGN_LEFT | RT_VALIGN_CENTER
+				textPaddings = 0
+				backColor = None
+				if self.renderType in ["ColorTextOver", "ImageTextOver"]:
+					textFlags = RT_HALIGN_CENTER | RT_VALIGN_CENTER
+					textPaddings = self.spacingPixmapText
+					backColor = buttonBgColor
+
+				if self.renderType == "ImageTextOver":
+					if x in self.pixmaps:
+						pic = LoadPixmap(resolveFilename(SCOPE_GUISKIN, self.pixmaps[x]))
+						if pic:
+							res.append(MultiContentEntryPixmapAlphaBlend(
+								pos=(xPos, yPos),
+								size=(textWidth + textPaddings * 2, height),
+								png=pic,
+								backcolor=0x000000, backcolor_sel=None, flags=BT_SCALE, corner_radius=self.cornerRadius))
+						res.append(MultiContentEntryText(
+							pos=(xPos + textPaddings, yPos), size=(textWidth, height - 2),
+							font=0, flags=textFlags,
+							text=buttonText, color=textColor, color_sel=textColor))
 				else:
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, xPos, yPos, textWidth, height - 2, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, buttonText))
-				xPos += textWidth + self.spacingButtons
+					res.append(MultiContentEntryText(
+						pos=(xPos, yPos), size=(textWidth + textPaddings * 2, height - 2),
+						font=0, flags=textFlags,
+						text=buttonText, color=textColor, color_sel=textColor, backcolor=backColor, corner_radius=self.cornerRadius))
+
+				xPos += textWidth + textPaddings * 2 + self.spacingButtons
 			if xPos > width and self.layoutStyle != "fluid":
 				self.layoutStyle = "fluid"
 				return self.buildEntry(sequence)
@@ -138,11 +169,15 @@ class ColorButtonsSequence(GUIAddon):
 					self.instance.setOrientation(eListbox.orHorizontal)
 					self.l.setOrientation(eListbox.orHorizontal)
 			elif attrib == "font":
-				self.font = parseFont(value, ((1, 1), (1, 1)))
+				self.font = parseFont(value, parent.scale)
 			elif attrib == "foregroundColor":
 				self.foreColor = parseColor(value).argb()
 			elif attrib == "textColors":
 				self.colors = dict(item.split(':') for item in value.split(','))
+			elif attrib == "buttonCornerRadius":
+				self.cornerRadius = parseScale(value)
+			elif attrib == "renderType":
+				self.renderType = value
 			else:
 				attribs.append((attrib, value))
 		self.skinAttributes = attribs

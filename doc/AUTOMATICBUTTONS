@@ -24,13 +24,15 @@ in the screens correctly as if we had added them manually to every single screen
   alignment="left"
   zPosition="2"
   spacing="10"
-  spacingPixmapText="10" />
+  spacingPixmapText="10"
+  buttonCornerRadius="6" />
 
 Attributes:
   connection: comma separated list of the buttons this widget will control.
   pixmaps: comma separated list that contains "key_name" then a ":" then the path to the graphic to be used.
   spacing: is the spacing between the text and the next button.
   spacingPixmapText: is the spacing between the graphic and the text.
+  buttonCornerRadius (optional): add rounding to corners.
   
 By default the foreground text color will be the same as the default listbox text color. But this can be altered for each
 button with the "textColors" attribute.
@@ -52,7 +54,8 @@ Example widget with colored text:
   alignment="left"
   zPosition="2"
   spacing="10"
-  spacingPixmapText="10" />
+  spacingPixmapText="10"
+  buttonCornerRadius="6" />
 
 It is also possible to have colored text and no graphics:
 
@@ -67,7 +70,41 @@ It is also possible to have colored text and no graphics:
   transparent="1"
   alignment="left"
   zPosition="2"
-  spacing="10" />
+  spacing="10"
+  buttonCornerRadius="6" />
+
+Superimpose text over the graphic rather that have the graphic to the side of the text.
+
+<widget 
+  addon="ColorButtonsSequence"
+  connection="key_red,key_green,key_yellow,key_blue" 
+  pixmaps="key_red:buttons/key_red.png,key_green:buttons/key_green.png,key_yellow:buttons/key_yellow.png,key_blue:buttons/key_blue.png" 
+  position="0,0"
+  size="e,36" 
+  font="Regular;26" 
+  backgroundColor="background5" 
+  alignment="left" 
+  zPosition="10" 
+  spacing="40" 
+  spacingPixmapText="10" 
+  buttonCornerRadius="6" 
+  renderType="ImageTextOver" />
+
+Superimpose texted over a coloured background (no graphic).
+
+<widget addon="ColorButtonsSequence" 
+  connection="key_red,key_green,key_yellow,key_blue" 
+  textColors="key_red:red,key_green:green,key_yellow:yellow,key_blue:blue" 
+  position="0,0" 
+  size="e,36" 
+  font="Regular;26" 
+  backgroundColor="background5" 
+  alignment="left" 
+  zPosition="10" 
+  spacing="40" 
+  spacingPixmapText="10" 
+  buttonCornerRadius="6" 
+  renderType="ColorTextOver" />
 
 =========================================================================================================================================================================
 
@@ -85,7 +122,7 @@ It is also possible to have colored text and no graphics:
 Attributes:
   connection: comma separated list of the buttons this widget will control.
   pixmaps: comma separated list that contains "key_name" then a ":" then the path to the graphic to be used.
-  spacing: is the spacing between the text and the next button.
+  spacing: is the spacing between buttons.
 
 In "connection" and "pixmap" add the buttons you want this widget to display.
 
