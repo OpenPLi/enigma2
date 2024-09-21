@@ -941,7 +941,7 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 	gRGB currentforeground = foreground;
 	const gRGB background = (m_blend && surface->bpp == 32) ? gRGB(currentforeground.r, currentforeground.g, currentforeground.b, 200) : cbackground;
 
-	register int opcode = -1;
+	int opcode = -1;
 
 	__u32 lookup32_normal[16];
 	__u32 lookup32_invert[16];
@@ -1104,7 +1104,7 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 			int rx = rxbase, ry = rybase;
 			__u8 *d = dbase;
 			__u8 *s = sbase;
-			register int sx = sxbase;
+			int sx = sxbase;
 			int sy = sybase;
 			if ((sy+ry) >= clip.rects[c].bottom())
 				sy = clip.rects[c].bottom()-ry;
@@ -1133,15 +1133,15 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 				{
 				case 0: 		// 4bit lookup to 8bit
 					{
-						register int extra_buffer_stride = buffer_stride - sx;
-						register __u8 *td=d;
+						int extra_buffer_stride = buffer_stride - sx;
+						__u8 *td=d;
 						for (int ay = 0; ay < sy; ay++)
 						{
-							register int ax;
+							int ax;
 
 							for (ax=0; ax<sx; ax++)
 							{
-								register int b=(*s++)>>4;
+								int b=(*s++)>>4;
 								if(b)
 									*td=lookup8[b];
 								++td;
@@ -1153,14 +1153,14 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 					break;
 				case 1:	// 8bit direct
 					{
-						register int extra_buffer_stride = buffer_stride - sx;
-						register __u8 *td=d;
+						int extra_buffer_stride = buffer_stride - sx;
+						__u8 *td=d;
 						for (int ay = 0; ay < sy; ay++)
 						{
-							register int ax;
+							int ax;
 							for (ax=0; ax<sx; ax++)
 							{
-								register int b=*s++;
+								int b=*s++;
 								*td++^=b;
 							}
 							s += extra_source_stride;
@@ -1171,13 +1171,13 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 				case 2: // 16bit
 					{
 						int extra_buffer_stride = (buffer_stride >> 1) - sx;
-						register __u16 *td = (__u16*)d;
+						__u16 *td = (__u16*)d;
 						for (int ay = 0; ay != sy; ay++)
 						{
-								register int ax;
+								int ax;
 								for (ax = 0; ax != sx; ax++)
 								{
-									register int b = (*s++) >> 4;
+									int b = (*s++) >> 4;
 									if (b)
 										*td = lookup16[b];
 									++td;
@@ -1189,14 +1189,14 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 					break;
 				case 3: // 32bit
 					{
-						register int extra_buffer_stride = (buffer_stride >> 2) - sx;
-						register __u32 *td=(__u32*)d;
+						int extra_buffer_stride = (buffer_stride >> 2) - sx;
+						__u32 *td=(__u32*)d;
 						for (int ay = 0; ay < sy; ay++)
 						{
-							register int ax;
+							int ax;
 							for (ax=0; ax<sx; ax++)
 							{
-								register int b=(*s++)>>4;
+								int b=(*s++)>>4;
 								if(b)
 									*td=lookup32[b];
 								++td;
@@ -1208,14 +1208,14 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 					break;
 				case 4: // 32-bit blend
 					{
-						register int extra_buffer_stride = (buffer_stride >> 2) - sx;
-						register __u32 *td = (__u32 *)d;
+						int extra_buffer_stride = (buffer_stride >> 2) - sx;
+						__u32 *td = (__u32 *)d;
 						for (int ay = 0; ay < sy; ay++)
 						{
-							register int ax;
+							int ax;
 							for (ax = 0; ax < sx; ax++)
 							{
-								register int b = (*s++) >> 4;
+								int b = (*s++) >> 4;
 								if (b)
 								{
 									// unsigned char frame_a = (*td) >> 24 & 0xFF;
