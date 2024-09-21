@@ -1,5 +1,5 @@
 from Components.GUIComponent import GUIComponent
-from skin import parseColor, parseFont, parseScale, applySkinFactor
+from skin import parseColor, parseFont, parseScale, applySkinFactor, mergeScale
 
 from enigma import eListboxServiceContent, eListbox, eServiceCenter, eServiceReference, gFont, eRect, eSize
 from Tools.LoadPixmap import LoadPixmap
@@ -204,7 +204,7 @@ class ServiceList(GUIComponent):
 			font = parseFont(value, parent.scale)
 			self.ServiceInfoFontName = font.family
 			self.ServiceInfoFontSize = font.pointSize
-			font = parseFont(value, parent.scale)
+			font = parseFont(value, mergeScale(parent.scale, ((5, 6), (1, 1))))
 			self.ServiceNextInfoFontName = font.family
 			self.ServiceNextInfoFontSize = font.pointSize
 

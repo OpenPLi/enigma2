@@ -416,6 +416,11 @@ def parseScale(s):
 	return val
 
 
+def mergeScale(s1, s2):
+	#  merge ((w, w), (h, h)) with ((x, x), (y, y))
+	return ((s1[0][0] * s2[0][0], s1[0][1] * s2[0][1]), (s1[1][0] * s2[1][0], s1[1][1] * s2[1][1]))
+
+
 def loadPixmap(path, desktop, width=0, height=0):
 	option = path.find("#")
 	if option != -1:
