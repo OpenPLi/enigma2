@@ -900,6 +900,9 @@ void gDC::exec(const gOpcode *o)
 			int correction = o->parm.renderText->area.height() - bbox.height() - 2;
 			offset += ePoint(0, correction);
 		}
+
+		para->setBlend(flags & gPainter::RT_BLEND);
+		
 		if (o->parm.renderText->border)
 		{
 			para->blit(*this, offset, m_background_color_rgb, o->parm.renderText->bordercolor, true);

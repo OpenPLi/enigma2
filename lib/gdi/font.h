@@ -145,6 +145,7 @@ class eTextPara: public iObject
 	int bboxValid;
 	eRect boundBox;
 	bool doTopBottomReordering;
+	bool m_blend;
 
 	int appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
 			bool activate_newcolor, unsigned long newcolor);
@@ -156,7 +157,7 @@ public:
 		: current_font(0), replacement_font(0), fallback_font(0),
 		current_face(0), replacement_face(0), fallback_face(0),
 		area(area), cursor(start), maximum(0, 0), left(start.x()), charCount(0), totalheight(0),
-		bboxValid(0), doTopBottomReordering(false)
+		bboxValid(0), doTopBottomReordering(false), m_blend(false)
 	{
 	}
 	virtual ~eTextPara();
@@ -171,7 +172,9 @@ public:
 
 	void clear();
 
-	void blit(gDC &dc, const ePoint &offset, const gRGB &background, const gRGB &foreground, bool border = false);
+	void setBlend(bool blend) { m_blend = blend; }
+
+	void blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, const gRGB &foreground, bool border = false);
 
 	enum
 	{

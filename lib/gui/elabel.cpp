@@ -110,6 +110,9 @@ int eLabel::event(int event, void *data, void *data2)
 			if (!m_nowrap)
 				flags |= gPainter::RT_WRAP;
 
+			if (m_blend)
+				flags |= gPainter::RT_BLEND;
+
 				/* if we don't have shadow, m_shadow_offset will be 0,0 */
 			painter.renderText(eRect(-m_shadow_offset.x(), -m_shadow_offset.y(), size().width(), size().height()), m_text, flags, m_border_color, m_border_size);
 
@@ -218,6 +221,16 @@ void eLabel::setNoWrap(int nowrap)
 	if (m_nowrap != nowrap)
 	{
 		m_nowrap = nowrap;
+		invalidate();
+	}
+}
+
+void eLabel::setAlphatest(int alphatest)
+{
+	bool blend = (alphatest > 0); // blend if BT_ALPHATEST or BT_ALPHABLEND
+	if (m_blend != blend)
+	{
+		m_blend = blend;
 		invalidate();
 	}
 }

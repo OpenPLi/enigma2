@@ -1,6 +1,6 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from enigma import eListbox, eListboxPythonMultiContent, gFont, RT_BLEND, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import applySkinFactor, parseFont, parseColor
 
@@ -86,7 +86,7 @@ class ScreenHeader(GUIAddon):
 				res.append(MultiContentEntryText(
 					pos=(xPos, yPos),
 					size=(self.instance.size().width() - xPos, itemHeight),
-					font=fontIndex, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+					font=fontIndex, flags=RT_BLEND | RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 					text=x.text,
 					color=foreColor, color_sel=foreColor,
 					backcolor=self.backgroundColor, backcolor_sel=self.backgroundColor))
