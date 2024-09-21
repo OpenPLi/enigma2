@@ -1,6 +1,6 @@
 from Components.Addons.GUIAddon import GUIAddon
 
-from enigma import eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER, getDesktop, eSize
+from enigma import eListbox, eListboxPythonMultiContent, gFont, RT_BLEND, RT_HALIGN_LEFT, RT_VALIGN_CENTER, getDesktop, eSize
 
 from skin import applySkinFactor, parseFont, parseColor, parseScale
 
@@ -64,7 +64,7 @@ class MainMenu(GUIAddon):
 		res.append(MultiContentEntryText(
 				pos=(xPos, 0),
 				size=(textWidth, self.itemHeight),
-				font=0, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER,
+				font=0, flags=RT_BLEND | RT_HALIGN_LEFT | RT_VALIGN_CENTER,
 				text=item_text,
 				color=self.foregroundColor, color_sel=self.foregroundColorSelected,
 				backcolor=None, backcolor_sel=None))
