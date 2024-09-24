@@ -396,10 +396,10 @@ class EPGList(GUIComponent):
 			print("[EPGList] wrong '%s' skin parameters" % string)
 
 		def setEventItemFont(value):
-			self.eventItemFont = parseFont(value, ((1, 1), (1, 1)))
+			self.eventItemFont = parseFont(value, parent.scale)
 
 		def setEventTimeFont(value):
-			self.eventTimeFont = parseFont(value, ((1, 1), (1, 1)))
+			self.eventTimeFont = parseFont(value, parent.scale)
 
 		def setIconDistance(value):
 			self.iconDistance = parseScale(value)
