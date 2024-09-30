@@ -445,7 +445,7 @@ class Wizard(Screen):
 
 		if self.showConfig and self.wizard[self.currStep]["config"]["screen"] is not None:
 			self["config"].instance.moveSelection(self["config"].instance.moveUp)
-		elif self.showList and len(self.wizard[self.currStep]["evaluatedlist"]) > 0:
+		elif self.showList and "evaluatedlist" in self.wizard[self.currStep] and len(self.wizard[self.currStep]["evaluatedlist"]) > 0:
 			if "onselect" in self.wizard[self.currStep]:
 				self.selection = self["list"].current[-1]
 				print("self.selection:", self.selection)
