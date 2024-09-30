@@ -862,7 +862,7 @@ void eListbox::setTextOffset(const ePoint &textoffset)
 	m_style.m_text_offset = textoffset;
 }
 
-void eListbox::setBackgroundColor(gRGB &col)
+void eListbox::setBackgroundColor(const gRGB &col)
 {
 	m_style.m_background_color = col;
 	m_style.m_background_color_set = 1;
