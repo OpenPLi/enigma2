@@ -243,7 +243,6 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 
 def getActiveSubservicesForCurrentChannel(service):
 	activeSubservices = []
-	subservices = service and service.subServices()
 	if info := service and service.info():
 		sRef = info.getInfoString(iServiceInformation.sServiceref)
 		url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
