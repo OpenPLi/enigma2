@@ -243,6 +243,7 @@ def getPossibleSubservicesForCurrentChannel(current_service):
 
 def getActiveSubservicesForCurrentChannel(service):
 	activeSubservices = []
+	subservices = service and service.subServices()
 	if info := service and service.info():
 		sRef = info.getInfoString(iServiceInformation.sServiceref)
 		url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
@@ -258,7 +259,7 @@ def getActiveSubservicesForCurrentChannel(service):
 				if events and len(events) == 1:
 					event = events[0]
 					title = event[2]
-					if title and "Sendepause" not in title:
+					if title and ("Sendepause" not in title and "Sky Sport Kompakt" not in title):
 						starttime = datetime.datetime.fromtimestamp(event[0]).strftime('%H:%M')
 						endtime = datetime.datetime.fromtimestamp(event[0] + event[1]).strftime('%H:%M')
 						current_show_name = "%s [%s-%s]" % (title, str(starttime), str(endtime))
@@ -273,7 +274,7 @@ def getActiveSubservicesForCurrentChannel(service):
 
 def hasActiveSubservicesForCurrentChannel(service):
 	activeSubservices = getActiveSubservicesForCurrentChannel(service)
-	return bool(activeSubservices and len(activeSubservices))
+	return bool(activeSubservices and len(activeSubservices) > 1)
 
 
 class InfoBarDish:
