@@ -323,7 +323,7 @@ class EPGList(GUIComponent):
 
 	def fillSingleEPG(self, service):
 		t = int(time())
-		epg_time = t - config.epg.histminutes.getValue() * 60
+		epg_time = t - (int(config.epg.histminutes.value) * 60)
 		test = ['RIBDT', (service.ref.toString(), 0, epg_time, -1)]
 		self.list = self.queryEPG(test)
 		self.l.setList(self.list)
