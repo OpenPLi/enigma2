@@ -81,6 +81,7 @@ listscreen = config.misc.graph_mepg.default_mode.value
 
 
 class EPGList(GUIComponent):
+	buildEntryExtensionFunctions = []
 	def __init__(self, selChangedCB=None, timer=None, time_epoch=120, overjump_empty=True, epg_bouquet=None):
 		GUIComponent.__init__(self)
 		self.cur_event = None
@@ -734,6 +735,8 @@ class EPGList(GUIComponent):
 					size=(r2.w - 2 * self.eventBorderVerWidth, r2.h - 2 * self.eventBorderHorWidth),
 					png=self.selEvPix,
 					flags=BT_SCALE))
+		for f in EPGList.buildEntryExtensionFunctions:
+			f(res, self, service, service_name, events, picon, serviceref)
 		return res
 
 	def selEntry(self, dir, visible=True):
