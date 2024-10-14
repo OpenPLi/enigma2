@@ -1873,10 +1873,10 @@ class ChannelSelectionBase(Screen):
 						self.enterPath(self.bouquet_root)
 
 	def keyNumber0(self, number):
-		if len(self.servicePath) > 1 and not self.selectionNumber:
-			self.keyGoUp()
-		else:
+		if self.selectionNumber:
 			self.keyNumberGlobal(number)
+		elif len(self.servicePath) > 1:
+			self.keyGoUp()
 
 	def keyNumberGlobal(self, number):
 		if self.isBasePathEqual(self.bouquet_root):
