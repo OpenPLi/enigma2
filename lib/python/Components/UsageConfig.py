@@ -475,10 +475,17 @@ def InitUsageConfig():
 	config.epg.opentv.addNotifier(EpgSettingsChanged)
 
 	def wdhm(number):
-		units = ((_("week"), _("day"), _("hour"), _("minute")), (_("weeks"), _("days"), _("hours"), _("minutes")), (7 * 24 * 60, 24 * 60, 60, 1))
-		for i, d in enumerate(units[2]): 
+		units = (7 * 24 * 60, 24 * 60, 60, 1)
+		for i, d in enumerate(units):
 			if unit := int(number / d):
-				return "%s %s" % (unit, units[0 if unit == 1 else 1][i])
+				if i == 3:
+					return "%s" % (ngettext("%d minute", "%d minuts", unit) % unit)
+				elif i == 2:
+					return "%s" % (ngettext("%d hour", "%d hours", unit) % unit)
+				elif i == 1:
+					return "%s" % (ngettext("%d day", "%d days", unit) % unit)
+				else:
+					return "%s" % (ngettext("%d week", "%d weeks", unit) % unit)
 		return _("0 minutes")
 	choices = [(i, wdhm(i)) for i in [i * 15 for i in range(0, 4)] + [i * 60 for i in range(1, 9)] + [i * 120 for i in range(5, 12)] + [i * 24 * 60 for i in range(1, 8)]]
 	config.epg.histminutes = ConfigSelection(default=0, choices=choices)
