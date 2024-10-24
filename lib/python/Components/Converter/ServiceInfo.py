@@ -1,5 +1,5 @@
 from Components.Converter.Converter import Converter
-from enigma import iServiceInformation, iPlayableService
+from enigma import iServiceInformation, iPlayableService, eServiceReference
 from Screens.InfoBarGenerics import hasActiveSubservicesForCurrentChannel
 from Components.Element import cached
 
@@ -153,7 +153,8 @@ class ServiceInfo(Converter):
 	@cached
 	def getBoolean(self):
 		service = self.source.service
-		info = service and service.info()
+		isRef = isinstance(service, eServiceReference)
+		info = service.info() if (service and not isRef) else None
 		if info:
 			if self.type == self.HAS_TELETEXT:
 				tpid = info.getInfo(iServiceInformation.sTXTPID)
