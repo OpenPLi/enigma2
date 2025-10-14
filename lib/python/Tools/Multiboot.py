@@ -5,6 +5,7 @@ import os
 import glob
 import tempfile
 import subprocess
+import re
 
 class tmp:
 	dir = None
@@ -89,8 +90,11 @@ def getCurrentImage():
 						return slot
 
 
+
 def getCurrentImageMode():
-	return bool(SystemInfo["canMultiBoot"]) and SystemInfo["canMode12"] and int(open('/sys/firmware/devicetree/base/chosen/bootargs', 'r').read().replace('\0', '').split('=')[-1])
+	if BoxInfo.getItem("canMultiBoot") and BoxInfo.getItem("canMode12"):
+		results = re.search(r"\bboxmode=(\d+)\b", open("/sys/firmware/devicetree/base/chosen/bootargs", "r").read())
+		return results and int(results.group(1))
 
 
 def deleteImage(slot):
