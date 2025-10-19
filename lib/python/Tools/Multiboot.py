@@ -92,7 +92,7 @@ def getCurrentImage():
 
 
 def getCurrentImageMode():
-	if BoxInfo.getItem("canMultiBoot") and BoxInfo.getItem("canMode12"):
+	if SystemInfo["canMultiBoot"] and SystemInfo["canMode12"]:
 		results = re.search(r"\bboxmode=(\d+)\b", open("/sys/firmware/devicetree/base/chosen/bootargs", "r").read())
 		return results and int(results.group(1))
 
