@@ -2,7 +2,7 @@ from enigma import eListbox, eListboxPythonConfigContent, ePoint, eRCInput, eTim
 from skin import parameters, applySkinFactor, parseColor
 
 from Components.ActionMap import HelpableActionMap, HelpableNumberActionMap
-from Components.config import ConfigBoolean, ConfigElement, ConfigInteger, ConfigMacText, ConfigNothing, ConfigNumber, ConfigSelection, ConfigSequence, ConfigText, ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_ERASE, ACTIONKEY_FIRST, ACTIONKEY_LAST, ACTIONKEY_LEFT, ACTIONKEY_NUMBERS, ACTIONKEY_RIGHT, ACTIONKEY_SELECT, ACTIONKEY_TIMEOUT, ACTIONKEY_TOGGLE, configfile
+from Components.config import ConfigBoolean, ConfigElement, ConfigInteger, ConfigMacText, ConfigNumber, ConfigSelection, ConfigSequence, ConfigText, ACTIONKEY_0, ACTIONKEY_ASCII, ACTIONKEY_BACKSPACE, ACTIONKEY_DELETE, ACTIONKEY_ERASE, ACTIONKEY_FIRST, ACTIONKEY_LAST, ACTIONKEY_LEFT, ACTIONKEY_NUMBERS, ACTIONKEY_RIGHT, ACTIONKEY_SELECT, ACTIONKEY_TIMEOUT, ACTIONKEY_TOGGLE, configfile
 from Components.GUIComponent import GUIComponent
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
@@ -11,12 +11,16 @@ from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.Standby import QUIT_RESTART, TryQuitMainloop
 from Screens.VirtualKeyBoard import VirtualKeyBoard
+from gettext import gettext
+
+# Set up translation function
+_ = gettext
 
 
 class ConfigList(GUIComponent):
 	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
-		self.l = eListboxPythonConfigContent()	# noqa: E741
+		self.l = eListboxPythonConfigContent()  # noqa: E741
 		seperation = parameters.get("ConfigListSeperator", applySkinFactor(200))
 		self.l.setSeperation(seperation)
 		height, space = parameters.get("ConfigListSlider", applySkinFactor(17, 0))
@@ -249,7 +253,7 @@ class ConfigListScreen:
 		self.setRestartMessage(None)
 		self.onChangedEntry = []
 		self.onSave = []
-		self.manipulatedItems = []	# keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
+		self.manipulatedItems = []  # keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
 		if self.noNativeKeys not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.noNativeKeys)
 		if self.handleInputHelpers not in self["config"].onSelectionChanged:
@@ -333,9 +337,6 @@ class ConfigListScreen:
 
 	def keyOK(self):  # This is the deprecated version of keySelect!
 		self.keySelect()
-
-	def keyText(self):
-		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
 
 	def keyText(self):
 		if "config" not in self:
@@ -472,7 +473,7 @@ class ConfigListScreen:
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
-	def run(self):	# Allow ConfigList based screens to be processed from the Wizard.
+	def run(self):  # Allow ConfigList based screens to be processed from the Wizard.
 		self.keySave()
 
 	def dummyConfigActions(self, value):  # Temporary support for legacy code and plugins that hasn't yet been updated.
@@ -485,7 +486,7 @@ class ConfigListScreen:
 		self["virtualKeyBoardActions"].setEnabled(value)
 
 
-class DummyActions:	 # Temporary support for legacy code and plugins that hasn't yet been updated.
+class DummyActions:  # Temporary support for legacy code and plugins that hasn't yet been updated.
 	def setEnabled(self, enabled):
 		pass
 
