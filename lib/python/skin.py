@@ -12,7 +12,7 @@ from Tools.Directories import SCOPE_CURRENT_LCDSKIN, SCOPE_CURRENT_SKIN, SCOPE_F
 from Tools.Import import my_import
 from Tools.LoadPixmap import LoadPixmap
 
-DEFAULT_SKIN = BoxInfo.getItem("HasFullHDSkinSupport") and "E2-DarkOS/skin.xml" or "PLi-HD/skin.xml"  # SD hardware is no longer supported by the default skin.
+DEFAULT_SKIN = BoxInfo.getItem("HasFullHDSkinSupport") and "Aglare-FHD-PLI/skin.xml" or "PLi-HD/skin.xml"  # SD hardware is no longer supported by the default skin.
 EMERGENCY_SKIN = "skin_default/skin.xml"
 EMERGENCY_NAME = "Stone II"
 DEFAULT_DISPLAY_SKIN = "skin_default/skin_display.xml"
@@ -32,7 +32,7 @@ colors = {  # Dictionary of skin color names.
 	"key_text": gRGB(0x00ffffff),
 	"key_yellow": gRGB(0x00a08500)
 }
-BodyFont = ("Regular", 20, 24, 18) # font which is used when a font alias definition is missing from the "fonts" dict.
+BodyFont = ("Regular", 20, 24, 18)  # font which is used when a font alias definition is missing from the "fonts" dict.
 fonts = {  # Dictionary of predefined and skin defined font aliases.
 	"Body": BodyFont
 }
@@ -1304,7 +1304,7 @@ def readSkin(screen, skin, names, desktop):
 			renderer = rendererClass()  # Instantiate renderer.
 			if source:
 				renderer.connect(source)  # Connect to source.
-				renderer.label_name = wsource or wname #allows that it can be checked a label exists in the skin
+				renderer.label_name = wsource or wname  # allows that it can be checked a label exists in the skin
 			attributes = renderer.skinAttributes = []
 			collectAttributes(attributes, widget, context, skinPath, ignore=("render", "source"))
 			screen.renderer.append(renderer)

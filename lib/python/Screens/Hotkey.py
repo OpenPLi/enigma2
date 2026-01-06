@@ -2,7 +2,7 @@ from Components.ActionMap import ActionMap, HelpableActionMap, NumberActionMap
 from Components.Sources.StaticText import StaticText
 from Components.ChoiceList import ChoiceList, ChoiceEntryComponent
 from Components.SystemInfo import BoxInfo
-from Components.config import config, ConfigSubsection, ConfigText, ConfigYesNo
+from Components.config import config, ConfigSubsection, ConfigYesNo
 from Components.PluginComponent import plugins
 from Screens.ChoiceBox import ChoiceBox
 from Screens.Screen import Screen
@@ -15,6 +15,10 @@ from enigma import eServiceReference
 from Components.Pixmap import Pixmap
 from Components.Label import Label
 import os
+from gettext import gettext
+
+# Set up translation function
+_ = gettext
 
 
 class hotkey:
@@ -22,7 +26,7 @@ class hotkey:
 	hotkeys = [(_("Red") + " " + _("long"), "red_long", ""),
 		(_("Green") + " " + _("long"), "green_long", ""),
 		(_("Yellow") + " " + _("long"), "yellow_long", "Plugins/Extensions/GraphMultiEPG/1"),
-		(_("Blue") + " " + _("long"), "blue_long", "SoftcamSetup"),
+		(_("Blue") + " " + _("long"), "blue_long", "Plugins/Extensions/tvManager/"),
 		("F1/LAN", "f1", ""),
 		("F1" + " " + _("long"), "f1_long", ""),
 		("F2", "f2", ""),
@@ -31,8 +35,8 @@ class hotkey:
 		("F3" + " " + _("long"), "f3_long", ""),
 		("F4", "f4", ""),
 		("F4" + " " + _("long"), "f4_long", ""),
-		(_("Red"), "red", ""),
-		(_("Green"), "green", ""),
+		(_("Red"), "red", "Module/Screens.About/MemoryInfo"),
+		(_("Green"), "green", "Module/Screens.PluginBrowser/PluginBrowser"),
 		(_("Yellow"), "yellow", ""),
 		(_("Blue"), "blue", ""),
 		("Rec", "rec", ""),

@@ -13,10 +13,16 @@ from Components.config import config, ConfigYesNo, ConfigIP, NoSave, ConfigText,
 from Components.ConfigList import ConfigListScreen
 from Components.PluginComponent import plugins
 from Components.ActionMap import ActionMap, NumberActionMap, HelpableActionMap
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
+from Tools.Directories import resolveFilename, fileReadLines, SCOPE_PLUGINS, SCOPE_CURRENT_SKIN
 from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from enigma import eTimer
+from gettext import gettext
+
+# Set up translation function
+_ = gettext
+
+MODULE_NAME = __name__.split(".")[-1]
 
 
 class NetworkAdapterSelection(Screen, HelpableScreen):
@@ -195,7 +201,150 @@ class NetworkAdapterSelection(Screen, HelpableScreen):
 				if selection is not None:
 					self.session.openWithCallback(self.AdapterSetupClosed, NetworkWizard, selection[0])
 
+# lulu
+class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		HelpableScreen.__init__(self)
+		self.setTitle(_("Configure nameservers"))
+		self.backupNameserverList = iNetwork.getNameserverList()[:]
+		print("[NetworkSetup] backup-list:", self.backupNameserverList)
 
+		self["key_red"] = StaticText(_("Cancel"))
+		self["key_green"] = StaticText(_("Save"))
+
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
+		{
+			"cancel": (self.keyCancel, _("Exit nameserver configuration")),
+		})
+
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
+		{
+			"green": (self.save, _("Activate current configuration")),
+			"left": (self.keyLeft, _("Change to another server")),
+			"right": (self.keyRight, _("Change to another server")),
+		})
+
+		self.list = []
+		ConfigListScreen.__init__(self, self.list)
+		self.createSetup()
+		strdns = str(self.backupNameserverList)
+		dhcp_router = str([list(x[1]) for x in self.getNetworkRoutes()]).replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
+		dns = strdns.replace("[[", "[").replace("]]", "]").replace(",", ".").replace("].", "]")
+		if config.usage.dns.value not in ("google", "quad9security", "quad9nosecurity", "cloudflare", "opendns", "opendns-2", "nordvpn"):
+			if dhcp_router != dns:
+				config.usage.dns.default = "staticip"
+				config.usage.dns.value = config.usage.dns.default
+				servername = _("Static IP Router")
+			else:
+				config.usage.dns.default = "dhcp-router"
+				config.usage.dns.value = config.usage.dns.default
+				servername = _("DHCP Router")
+		else:
+			if "8. 8." in dns:
+				servername = _("Google DNS")
+			elif "9. 9. 9. 9" in dns:
+				servername = _("Quad9 Security")
+			elif "9. 9. 9. 10" in dns:
+				servername = _("Quad9 No Security")
+			elif "222. 222" in dns:
+				servername = _("OpenDNS")
+			elif "220. 222" in dns:
+				servername = _("OpenDNS-2")
+			elif "103. 86" in dns:
+				servername = _("NordVPN")
+			else:
+				servername = _("Cloudflare")
+		introduction = _("Press LEFT or RIGHT to choose another server. Then press Green Button to save it.")
+		if "0. 0. 0. 0" in dns:
+			introduction = _("WARNING: The DNS were not saved in your settings.\n\nActive server: %s\nDNS Active: %s\n\nIt is necessary to choose a server and save with GREEN button!.") % (servername, dns)
+			self["introduction"] = StaticText(introduction)
+		elif config.usage.dns.value == "staticip":
+			self["introduction"] = StaticText(_("%s\n\nYou can use the DNS provided by other servers in Static IP Router.") % introduction)
+		elif config.usage.dns.value == "dhcp-router":
+			self["introduction"] = StaticText(_("%s\n\nIf the DNS of other servers are still kept in the DHCP Router, to get the DNS from your Router, reboot receiver.") % introduction)
+		else:
+			self["introduction"] = StaticText(introduction)
+
+	def createSetup(self):
+		self.nameservers = iNetwork.getNameserverList()
+		if config.usage.dns.value == 'google':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[8, 8, 8, 8])), NoSave(ConfigIP(default=[8, 8, 4, 4]))]
+		elif config.usage.dns.value == 'quad9security':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 9])), NoSave(ConfigIP(default=[149, 112, 112, 112]))]
+		elif config.usage.dns.value == 'quad9nosecurity':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[9, 9, 9, 10])), NoSave(ConfigIP(default=[149, 112, 112, 10]))]
+		elif config.usage.dns.value == 'opendns':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 222, 222])), NoSave(ConfigIP(default=[208, 67, 220, 220]))]
+		elif config.usage.dns.value == 'opendns-2':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[208, 67, 220, 222])), NoSave(ConfigIP(default=[208, 67, 222, 220]))]
+		elif config.usage.dns.value == 'cloudflare':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[1, 1, 1, 1])), NoSave(ConfigIP(default=[1, 0, 0, 1]))]
+		elif config.usage.dns.value == 'nordvpn':
+				self.nameserverEntries = [NoSave(ConfigIP(default=[103, 86, 96, 100])), NoSave(ConfigIP(default=[103, 86, 99, 100]))]
+		elif config.usage.dns.value == 'dhcp-router':
+				self.nameserverEntries = [NoSave(ConfigIP(default=nameRoutes)) for nameRoutes in [list(x[1]) for x in self.getNetworkRoutes()]]
+		else:
+				self.nameserverEntries = [NoSave(ConfigIP(default=nameserver)) for nameserver in self.nameservers]
+		self.list = []
+		self["config"].list = self.list
+		self.ListDNSServers = (_("DNS server name"), config.usage.dns)
+		self.list.append(self.ListDNSServers)
+		i = 1
+		for x in self.nameserverEntries:
+				self.list.append((_("DNS %d") % (i), x))
+				i += 1
+
+	def newConfig(self):
+		if self["config"].getCurrent() == self.ListDNSServers:
+				self.createSetup()
+
+	def keyLeft(self):
+		ConfigListScreen.keyLeft(self)
+		self.newConfig()
+
+	def keyRight(self):
+		ConfigListScreen.keyRight(self)
+		self.newConfig()
+
+	def save(self):
+		self.RefreshNameServerUsed()
+		iNetwork.clearNameservers()
+		for nameserver in self.nameserverEntries:
+				iNetwork.addNameserver(nameserver.value)
+		iNetwork.writeNameserverConfig()
+		Setup.keySave(self)
+
+	def keyCancel(self):
+		current = self["config"].getCurrent()[1]
+		index = self["config"].getCurrentIndex()
+		dnsList = self["config"].getList()
+		self.dns = len(dnsList)
+		if current:
+				Setup.keySave(self) if self.dns <= index < self.dns + current else Setup.keyCancel(self)
+
+	def RefreshNameServerUsed(self):
+		print("[NetworkSetup] currentIndex:", self["config"].getCurrentIndex())
+		index = self["config"].getCurrentIndex()
+		if index < len(self.nameservers):
+			self.createSetup()
+
+	def getNetworkRoutes(self):
+		# # cat /proc/net/route
+		# Iface   Destination     Gateway         Flags   RefCnt  Use     Metric  Mask            MTU     Window  IRTT
+		# eth0    00000000        FE08A8C0        0003    0       0       0       00000000        0       0       0
+		# eth0    0008A8C0        00000000        0001    0       0       0       00FFFFFF        0       0       0
+		gateways = []
+		lines = []
+		lines = fileReadLines("/proc/net/route", lines, source=MODULE_NAME)
+		headings = lines.pop(0)
+		for line in lines:
+			data = line.split()
+			if data[1] == "00000000" and int(data[3]) & 0x03 and data[7] == "00000000":  # If int(flags) & 0x03 is True this is a gateway (0x02) and it is up (0x01).
+				gateways.append((data[0], tuple(reversed([int(data[2][x:x + 2], 16) for x in range(0, len(data[2]), 2)]))))
+		return gateways
+
+# lulu
 class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 	def __init__(self, session, networkinfo, essid=None):
 		Screen.__init__(self, session)
@@ -215,7 +364,24 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.oldInterfaceState = iNetwork.getAdapterAttribute(self.iface, "up")
 
 		self.createConfig()
+		# lulu
+		self["OkCancelActions"] = HelpableActionMap(self, ["OkCancelActions"],
+		{
+			"cancel": (self.keyCancel, _("exit network adapter configuration")),
+			"ok": (self.keySave, _("activate network adapter configuration")),
+		})
 
+		self["ColorActions"] = HelpableActionMap(self, ["ColorActions"],
+		{
+			"red": (self.keyCancel, _("exit network adapter configuration")),
+			"green": (self.keySave, _("activate network adapter configuration")),
+			"blue": (self.KeyBlue, _("open nameserver configuration")),
+		})
+
+		self["actions"] = NumberActionMap(["SetupActions"],
+		{
+			"ok": self.keySave,
+		}, -2)
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, fullUI=True)
 		self.createSetup()
@@ -241,7 +407,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self["introduction2"] = StaticText(_("Press OK to activate the settings."))
 		self["key_red"] = StaticText(_("Cancel"))
 		self["key_green"] = StaticText(_("Save"))
-
+		# lulu
+		self["key_blue"] = StaticText(_("Edit DNS"))
 		self["VKeyIcon"] = Boolean(False)
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
@@ -352,6 +519,10 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 				))
 		self["config"].list = self.list
 
+	# lulu
+	def KeyBlue(self):
+		self.session.openWithCallback(self.NameserverSetupClosed, NameserverSetup)
+	# lulu
 	def keySave(self):
 		self.hideInputHelp()
 		if self["config"].isChanged():
@@ -492,6 +663,16 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 			if current[1].help_window.instance is not None:
 				current[1].help_window.instance.hide()
 
+	# lulu
+	def NameserverSetupClosed(self, *ret):
+		iNetwork.loadNameserverConfig()
+		nameserver = (iNetwork.getNameserverList() + [[0, 0, 0, 0]] * 2)[0:2]
+		self.primaryDNS = NoSave(ConfigIP(default=nameserver[0]))
+		self.secondaryDNS = NoSave(ConfigIP(default=nameserver[1]))
+		self.createSetup()
+		self.layoutFinished()
+	# lulu
+
 
 class AdapterSetupConfiguration(Screen, HelpableScreen):
 	def __init__(self, session, iface):
@@ -587,6 +768,9 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 				self.session.openWithCallback(self.AdapterSetupClosed, AdapterSetup, self.iface)
 		if self["menulist"].getCurrent()[1] == 'test':
 			self.session.open(NetworkAdapterTest, self.iface)
+		# lulu
+		if self["menulist"].getCurrent()[1] == 'dns':
+			self.session.open(NameserverSetup)
 		if self["menulist"].getCurrent()[1] == 'scanwlan':
 			try:
 				from Plugins.SystemPlugins.WirelessLan.plugin import WlanScan
@@ -679,6 +863,7 @@ class AdapterSetupConfiguration(Screen, HelpableScreen):
 	def genMainMenu(self):
 		menu = [
 			(_("Adapter settings"), "edit"),
+			(_("Nameserver settings"), "dns"),
 			(_("Network test"), "test"),
 			(_("Restart network"), "lanrestart")
 		]

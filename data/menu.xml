@@ -9,7 +9,7 @@
 			use stuff from module.
 		(Of course you must specify at least one of module, screen.)
 	<plugin [extensions/system="pluginname"] [screen="classname"]>[arguments]</plugin>
-		Either "extensions" or "system" must be used. "extensions" is for 
+		Either "extensions" or "system" must be used. "extensions" is for
 		Plugin.Extensions plugins and "system" is for Plugins.SystemPlugins.
 	<plugin [extensions="pluginname"] [screen="classname"]>[arguments]</plugin>
 		Executes Screen called "classname" from module "Plugins.Extensions.pluginname.plugin".
@@ -21,6 +21,78 @@
 	<code> .. code .. </code>
 		Python "exec"s code.
 -->
+	<!-- Menu /  by lululla-->
+	<menu key="menu_Menu" level="0" text="Corvoboys Menu">
+		<item key="LSAddon" weight="0" level="0" text="Addon Panel">
+			<code>
+from Plugins.Extensions.LinuxsatPanel.plugin import LinuxsatPanel
+self.session.open(LinuxsatPanel)
+</code>
+		</item>
+		<item weight="10" level="0" text="Softcam Manager" key="CamManager">
+			<code>
+from Plugins.Extensions.tvManager.plugin import tvManager
+self.session.open(tvManager)
+</code>
+		</item>
+		<item weight="12" level="0" text="EPGImport" key="EPGImport">
+			<code>
+from Plugins.Extensions.EPGImport.plugin import EPGImportConfig
+self.session.open(EPGImportConfig)
+</code>
+		</item>
+		<item weight="12" level="0" text="LCN" key="Terrestrial">
+			<code>
+from Screens.Terrestrial import PluginSetup
+self.session.open(PluginSetup)
+</code>
+		</item>
+		<!-- <item weight="13" level="0" text="Vavoo Stream Live" key="vavoo">
+			<code>
+from Screens.vavoo import VavooScreen
+self.session.open(VavooScreen)
+</code>
+		</item> -->
+		<item weight="13" level="0" text="Vavoo Stream Live" key="vavoo">
+			<code>
+from Screens.vavoo import PluginMain
+PluginMain(self.session)
+	</code>
+		</item>
+		<item weight="14" level="0" text="Radio Stream" key="radiom">
+			<code>
+from Screens.radio import radiom1
+self.session.open(radiom1)
+</code>
+		</item>
+		<item weight="15" level="0" text="Skin Setup" key="AglareSetup">
+			<code>
+from Plugins.Extensions.Aglare.plugin import AglareSetup
+self.session.open(AglareSetup)
+</code>
+		</item>
+		<item weight="20" level="0" text="Plugin Browser Style" key="BrowserStyle">
+			<setup id="usage"/>
+		</item>
+		<item weight="21" level="0" text="Picon Path" key="SetPiconPath">
+			<setup id="userinterface"/>
+		</item>
+		<item weight="22" level="0" text="AcheScript" key="OpenScript">
+			<code>
+from Screens.AcheScript import OpenScript
+self.session.open(OpenScript)
+
+</code>
+		</item>
+		<item weight="22" level="0" text="CrashLog Viewer" key="CrashLog">
+			<code>
+from Screens.crashlog import CrashLogScreen
+self.session.open(CrashLogScreen)
+
+</code>
+		</item>
+	</menu>
+	<!-- Menu /  by lululla-->
 		<item key="timer_edit" level="0" text="Timer"><screen module="TimerEdit" screen="TimerEditList"/></item>
 		<item key="scart_switch" level="1" text="VCR scart" conditional="config.usage.show_vcr_scart.value" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 

@@ -10,12 +10,13 @@ from sys import _getframe as getframe
 from unicodedata import normalize
 from traceback import print_exc
 from xml.etree.ElementTree import Element, fromstring, parse
-
-
-from os.path import exists as pathExists, isdir as pathIsdir, isfile as pathIsfile, join as pathJoin
-
 from os import listdir
-
+from os import F_OK, R_OK, W_OK, access, link, remove, rename
+from os.path import exists as pathExists, isdir as pathIsdir, isfile as pathIsfile, join as pathJoin  # , normpath as normPath, dirname as dirName
+from os.path import splitext
+from tempfile import mkstemp
+from errno import ENOENT
+DEFAULT_MODULE_NAME = __name__.split(".")[-1]
 
 SCOPE_HOME = 0  # DEBUG: Not currently used in Enigma2.
 SCOPE_LANGUAGE = 1
@@ -351,7 +352,7 @@ def fileHas(f, content, mode="r"):
 def fileDate(f):
 	if fileExists(f):
 		return datetime.fromtimestamp(os.stat(f).st_mtime).strftime("%Y-%m-%d")
-	return("1970-01-01")
+	return ("1970-01-01")
 
 
 def fileReadXML(filename, default=None, *args, **kwargs):
@@ -570,6 +571,7 @@ def mediafilesInUse(session):
 def shellquote(s):
 	return "'%s'" % s.replace("'", "'\\''")
 
+
 def isPluginInstalled(pluginname, pluginfile="plugin", pluginType=None):
 	path = resolveFilename(SCOPE_PLUGINS)
 	pluginfolders = [name for name in listdir(path) if pathIsdir(pathJoin(path, name)) and name not in ["__pycache__"]]
@@ -619,3 +621,133 @@ def sanitizeFilename(filename, maxlen=255):  # 255 is max length in bytes in ext
 	if len(filename) == 0:
 		filename = "__"
 	return filename
+
+
+# lulu
+def fileUpdateLine(filename, conditionValue, replacementValue, create=False, source=DEFAULT_MODULE_NAME, debug=False):
+	line = fileReadLine(filename, default="", source=source, debug=debug)
+	create = False if conditionValue and not line.startswith(conditionValue) else create
+	return fileWriteLine(filename, replacementValue, source=source, debug=debug) if create or (conditionValue and line.startswith(conditionValue)) else 0
+
+
+def fileReadLine(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
+	line = None
+	try:
+		with open(filename) as fd:
+			line = fd.read().strip().replace("\0", "")
+		# msg = "Read"
+	except OSError as err:
+		if err.errno != ENOENT:  # ENOENT - No such file or directory.
+			print("[%s] Error %d: Unable to read a line from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
+		line = default
+		# msg = "Default"
+	# if debug or forceDebug:
+		# print("[%s] Line %d: %s '%s' from file '%s'." % (source, getframe(1).f_lineno, msg, line, filename))
+	return line
+
+
+def fileReadLines(filename, default=None, source=DEFAULT_MODULE_NAME, debug=False):
+	lines = None
+	try:
+		with open(filename) as fd:
+			lines = fd.read().splitlines()
+		# msg = "Read"
+	except OSError as err:
+		if err.errno != ENOENT:  # ENOENT - No such file or directory.
+			print("[%s] Error %d: Unable to read lines from file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
+		lines = default
+		# msg = "Default"
+	# if debug or forceDebug:
+		# length = len(lines) if lines else 0
+		# print("[%s] Line %d: %s %d lines from file '%s'." % (source, getframe(1).f_lineno, msg, length, filename))
+	return lines
+
+
+def fileWriteLine(filename, line, source=DEFAULT_MODULE_NAME, debug=False):
+	try:
+		with open(filename, "w") as fd:
+			fd.write(str(line))
+		# msg = "Wrote"
+		result = 1
+	except OSError as err:
+		print("[%s] Error %d: Unable to write a line to file '%s'!  (%s)" % (source, err.errno, filename, err.strerror))
+		# msg = "Failed to write"
+		result = 0
+	# if debug or forceDebug:
+		# print("[%s] Line %d: %s '%s' to file '%s'." % (source, getframe(1).f_lineno, msg, line, filename))
+	return result
+
+
+def fileWriteLines(filename, lines, source=DEFAULT_MODULE_NAME, debug=False):
+	try:
+		with open(filename, "w") as fd:
+			if isinstance(lines, list):
+				lines.append("")
+				lines = "\n".join(lines)
+			fd.write(lines)
+		# msg = "Wrote"
+		result = 1
+	except OSError as err:
+		print("[%s] Error %d: Unable to write %d lines to file '%s'!  (%s)" % (source, err.errno, len(lines), filename, err.strerror))
+		# msg = "Failed to write"
+		# result = 0
+	# if debug or forceDebug:
+		# print("[%s] Line %d: %s %d lines to file '%s'." % (source, getframe(1).f_lineno, msg, len(lines), filename))
+	return result
+
+
+def fileAccess(file, mode="r"):
+	accMode = F_OK
+	if "r" in mode:
+		accMode |= R_OK
+	if "w" in mode:
+		accMode |= W_OK
+	result = False
+	try:
+		result = access(file, accMode)
+	except OSError as err:
+		print("[Directories] Error %d: Couldn't determine file '%s' access mode!  (%s)" % (err.errno, file, err.strerror))
+	return result
+
+
+def fileContains(file, content, mode="r"):
+	result = False
+	if fileExists(file, mode):
+		with open(file, mode) as fd:
+			text = fd.read()
+		if content in text:
+			result = True
+	return result
+
+
+def renameDir(oldPath, newPath):
+	try:
+		rename(oldPath, newPath)
+		return 1
+	except OSError as err:
+		print("[Directories] Error %d: Couldn't rename directory '%s' to '%s'!  (%s)" % (err.errno, oldPath, newPath, err.strerror))
+	return 0
+
+
+def hasHardLinks(path):  # Test if the volume containing path supports hard links.
+	try:
+		fd, srcName = mkstemp(prefix="HardLink_", suffix=".test", dir=path, text=False)
+	except OSError as err:
+		print("[Directories] Error %d: Creating temp file!  (%s)" % (err.errno, err.strerror))
+		return False
+	dstName = "%s.link" % splitext(srcName)[0]
+	try:
+		link(srcName, dstName)
+		result = True
+	except OSError as err:
+		print("[Directories] Error %d: Creating hard link!  (%s)" % (err.errno, err.strerror))
+		result = False
+	try:
+		remove(srcName)
+	except OSError as err:
+		print("[Directories] Error %d: Removing source file!  (%s)" % (err.errno, err.strerror))
+	try:
+		remove(dstName)
+	except OSError as err:
+		print("[Directories] Error %d: Removing destination file!  (%s)" % (err.errno, err.strerror))
+	return result

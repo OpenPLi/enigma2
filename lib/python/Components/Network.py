@@ -1,11 +1,18 @@
 import os
 import netifaces as ni
+from os.path import isfile
 from re import sub, compile as re_compile
 from struct import pack
 from socket import inet_ntoa
 from Components.Console import Console
 from Components.PluginComponent import plugins
 from Plugins.Plugin import PluginDescriptor
+from Components.config import config
+
+from gettext import gettext
+
+# Set up translation function
+_ = gettext
 
 
 class Network:
@@ -121,6 +128,24 @@ class Network:
 					fp.write("\n")
 				fp.write("\n")
 		self.configuredNetworkAdapters = self.configuredInterfaces
+		self.writeNameserverConfig()
+
+	def writeNameserverConfig(self):
+		try:
+			if config.usage.dns.value.lower() in ("dhcp-router", "staticip"):
+				fp = open('/etc/resolv.conf', 'w')
+				for nameserver in self.nameservers:
+					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+				fp.close()
+				if isfile("/etc/enigma2/nameservers"):
+					Console().ePopen('rm /etc/enigma2/nameservers')
+			else:
+				fp = open('/etc/enigma2/nameservers', 'w')
+				for nameserver in self.nameservers:
+					fp.write("nameserver %d.%d.%d.%d\n" % tuple(nameserver))
+				fp.close()
+		except:
+			print("[Network]")
 
 	def loadNetworkConfig(self, iface, callback=None):
 		interfaces = []
@@ -185,7 +210,7 @@ class Network:
 			safe_ifaces = self.ifaces.copy()
 			for intf in safe_ifaces:
 				if 'preup' in safe_ifaces[intf] and safe_ifaces[intf]['preup']:
-					safe_ifaces[intf]['preup'] = sub(' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
+					safe_ifaces[intf]['preup'] = sub(r' -k "\S*" ', ' -k ********* ', safe_ifaces[intf]['preup'])
 			print("[Network] self.ifaces after loading: ", safe_ifaces)
 			self.config_ready = True
 			self.msgPlugins()
@@ -200,7 +225,7 @@ class Network:
 		except (ValueError, IOError) as er:
 			print("[Network.py] resolv.conf - opening failed", er)
 		else:
-			ipRegexp = "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+			ipRegexp = r"[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
 			nameserverPattern = re_compile("nameserver +" + ipRegexp)
 			ipPattern = re_compile(ipRegexp)
 			for line in resolv:

@@ -81,6 +81,20 @@ self.selectKey("RED")
 self.selectKey("OK")
 			</code>
 		</step>
+		<step id="password">
+			<text value="Please setup a password"/>
+			<config screen="ChangePasswordScreen" module="ChangePassword" type="ConfigList"/>
+			<code>
+self.clearSelectedKeys()
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+self.selectKey("BLUE")
+self.selectKey("RED")
+self.selectKey("OK")
+			</code>
+		</step>
 		<step id="nima">
 			<condition>
 from Components.NimManager import nimmanager
@@ -261,6 +275,25 @@ self.selectKey("RED")
 self.selectKey("OK")
 			</code>
 		</step>
+	<step id="nimq">
+		<condition>
+from Components.NimManager import nimmanager
+self.condition = len(nimmanager.nim_slots) > 10 and not nimmanager.nim_slots[10].empty and not nimmanager.nim_slots[10].isFBCLink()
+</condition>
+		<text value="Please set up tuner K"/>
+		<displaytext value="Please set up tuner K"/>
+		<config screen="NimSetup" module="Satconfig" args="10" type="ConfigList"/>
+		<code>
+self.clearSelectedKeys()
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+self.selectKey("BLUE")
+self.selectKey("RED")
+self.selectKey("OK")
+</code>
+	</step>
 		<step id="nimq">
 			<condition>
 from Components.NimManager import nimmanager
