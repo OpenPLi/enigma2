@@ -311,17 +311,40 @@ class NameserverSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.RefreshNameServerUsed()
 		iNetwork.clearNameservers()
 		for nameserver in self.nameserverEntries:
-				iNetwork.addNameserver(nameserver.value)
+			iNetwork.addNameserver(nameserver.value)
 		iNetwork.writeNameserverConfig()
-		Setup.keySave(self)
+		self.keySave()
 
 	def keyCancel(self):
-		current = self["config"].getCurrent()[1]
-		index = self["config"].getCurrentIndex()
-		dnsList = self["config"].getList()
-		self.dns = len(dnsList)
-		if current:
-				Setup.keySave(self) if self.dns <= index < self.dns + current else Setup.keyCancel(self)
+		current = self["config"].getCurrent()
+		if current and len(current) > 1:
+			current = current[1]
+			index = self["config"].getCurrentIndex()
+			dnsList = self["config"].getList()
+			self.dns = len(dnsList)
+			if current:
+				if self.dns <= index < self.dns + current:
+					self.keySave()
+				else:
+					super().keyCancel()
+		else:
+			super().keyCancel()
+
+	# def save(self):
+		# self.RefreshNameServerUsed()
+		# iNetwork.clearNameservers()
+		# for nameserver in self.nameserverEntries:
+				# iNetwork.addNameserver(nameserver.value)
+		# iNetwork.writeNameserverConfig()
+		# Setup.keySave(self)
+
+	# def keyCancel(self):
+		# current = self["config"].getCurrent()[1]
+		# index = self["config"].getCurrentIndex()
+		# dnsList = self["config"].getList()
+		# self.dns = len(dnsList)
+		# if current:
+				# Setup.keySave(self) if self.dns <= index < self.dns + current else Setup.keyCancel(self)
 
 	def RefreshNameServerUsed(self):
 		print("[NetworkSetup] currentIndex:", self["config"].getCurrentIndex())
