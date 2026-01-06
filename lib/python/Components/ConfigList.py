@@ -16,7 +16,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 class ConfigList(GUIComponent):
 	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
-		self.l = eListboxPythonConfigContent()  # noqa: E741
+		self.l = eListboxPythonConfigContent()	# noqa: E741
 		seperation = parameters.get("ConfigListSeperator", applySkinFactor(200))
 		self.l.setSeperation(seperation)
 		height, space = parameters.get("ConfigListSlider", applySkinFactor(17, 0))
@@ -145,7 +145,7 @@ class ConfigList(GUIComponent):
 	def moveBottom(self):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.moveEnd)
-	
+
 	def applySkin(self, desktop, screen):
 		if self.skinAttributes is not None:
 			attribs = []
@@ -249,7 +249,7 @@ class ConfigListScreen:
 		self.setRestartMessage(None)
 		self.onChangedEntry = []
 		self.onSave = []
-		self.manipulatedItems = []  # keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
+		self.manipulatedItems = []	# keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
 		if self.noNativeKeys not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.noNativeKeys)
 		if self.handleInputHelpers not in self["config"].onSelectionChanged:
@@ -337,13 +337,13 @@ class ConfigListScreen:
 	def keyText(self):
 		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
 
-	def keyTextCallback(self, callback=None):
-		if callback is not None:
-			prev = str(self.getCurrentValue())
-			self["config"].getCurrent()[1].setValue(callback)
-			self["config"].invalidateCurrent()
-			if callback != prev:
-				self.entryChanged()
+	def keyText(self):
+		if "config" not in self:
+			return
+		current = self["config"].getCurrent()
+		if not current or len(current) < 2:
+			return
+		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
 
 	def keySelection(self):
 		currConfig = self["config"].getCurrent()
@@ -472,7 +472,7 @@ class ConfigListScreen:
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
-	def run(self):  # Allow ConfigList based screens to be processed from the Wizard.
+	def run(self):	# Allow ConfigList based screens to be processed from the Wizard.
 		self.keySave()
 
 	def dummyConfigActions(self, value):  # Temporary support for legacy code and plugins that hasn't yet been updated.
@@ -485,7 +485,7 @@ class ConfigListScreen:
 		self["virtualKeyBoardActions"].setEnabled(value)
 
 
-class DummyActions:  # Temporary support for legacy code and plugins that hasn't yet been updated.
+class DummyActions:	 # Temporary support for legacy code and plugins that hasn't yet been updated.
 	def setEnabled(self, enabled):
 		pass
 
