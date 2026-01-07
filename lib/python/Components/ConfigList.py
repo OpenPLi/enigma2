@@ -20,7 +20,7 @@ _ = gettext
 class ConfigList(GUIComponent):
 	def __init__(self, list, session=None):
 		GUIComponent.__init__(self)
-		self.l = eListboxPythonConfigContent()  # noqa: E741
+		self.l = eListboxPythonConfigContent()	# noqa: E741
 		seperation = parameters.get("ConfigListSeperator", applySkinFactor(200))
 		self.l.setSeperation(seperation)
 		height, space = parameters.get("ConfigListSlider", applySkinFactor(17, 0))
@@ -253,7 +253,7 @@ class ConfigListScreen:
 		self.setRestartMessage(None)
 		self.onChangedEntry = []
 		self.onSave = []
-		self.manipulatedItems = []  # keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
+		self.manipulatedItems = []	# keep track of all manipulated items including ones that have been removed from self["config"].list (currently used by Setup.py)
 		if self.noNativeKeys not in self.onLayoutFinish:
 			self.onLayoutFinish.append(self.noNativeKeys)
 		if self.handleInputHelpers not in self["config"].onSelectionChanged:
@@ -345,6 +345,17 @@ class ConfigListScreen:
 		if not current or len(current) < 2:
 			return
 		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
+
+	def keyTextCallback(self, callback=None):
+		"""
+		Callback chiamata dopo la chiusura della VirtualKeyBoard
+		"""
+		if callback is not None and "config" in self:
+			current = self["config"].getCurrent()
+			if current and len(current) > 1:
+				current[1].setValue(callback)
+				self["config"].invalidateCurrent()
+				self.entryChanged()
 
 	def keySelection(self):
 		currConfig = self["config"].getCurrent()
@@ -473,7 +484,7 @@ class ConfigListScreen:
 		from Screens.Setup import SetupSummary
 		return SetupSummary
 
-	def run(self):  # Allow ConfigList based screens to be processed from the Wizard.
+	def run(self):	# Allow ConfigList based screens to be processed from the Wizard.
 		self.keySave()
 
 	def dummyConfigActions(self, value):  # Temporary support for legacy code and plugins that hasn't yet been updated.
@@ -486,7 +497,7 @@ class ConfigListScreen:
 		self["virtualKeyBoardActions"].setEnabled(value)
 
 
-class DummyActions:  # Temporary support for legacy code and plugins that hasn't yet been updated.
+class DummyActions:	 # Temporary support for legacy code and plugins that hasn't yet been updated.
 	def setEnabled(self, enabled):
 		pass
 
