@@ -5,6 +5,10 @@ import re
 from Tools.HardwareInfo import HardwareInfo
 from Components.SystemInfo import BoxInfo
 from sys import maxsize, modules, version_info
+from gettext import gettext, ngettext
+
+# Set up translation function
+_ = gettext
 
 
 def getVersionString():
@@ -30,7 +34,8 @@ def getFlashDateString():
 
 
 def returndate(date):
-    return "%s-%s-%s" % (date[:4], date[4:6], date[6:8])
+	return "%s-%s-%s" % (date[:4], date[4:6], date[6:8])
+
 
 def getBuildDateString():
 	return returndate(BoxInfo.getItem("compiledate"))
@@ -55,7 +60,7 @@ def getEnigmaVersionString():
 	return enigma_version
 
 
-#maybe in future it is better to swig the branch string - for now I retrieve it from the VersionString
+# maybe in future it is better to swig the branch string - for now I retrieve it from the VersionString
 def getEnigmaBranchString():
 	import enigma
 	return enigma.getEnigmaVersionString()[11:]
@@ -180,7 +185,7 @@ def GetIPsFromNetworkInterfaces():
 	is_64bits = maxsize > 2**32
 	struct_size = 40 if is_64bits else 32
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-	max_possible = 8 # initial value
+	max_possible = 8  # initial value
 	while True:
 		_bytes = max_possible * struct_size
 		names = array.array('B')

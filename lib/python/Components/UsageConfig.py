@@ -1,22 +1,26 @@
 # -*- coding: utf-8 -*-
-from Components.Harddisk import harddiskmanager
 from Components.Console import Console
-from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, ConfigPassword, ConfigIP, NoSave
-from Tools.Directories import defaultRecordingLocation
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
-
+from Components.Harddisk import harddiskmanager
 from Components.NimManager import nimmanager
 from Components.Renderer.FrontpanelLed import ledPatterns, PATTERN_ON, PATTERN_OFF, PATTERN_BLINK
 from Components.ServiceList import refreshServiceList, redrawServiceList
 from Components.SystemInfo import BoxInfo
+from Components.config import ConfigIP, ConfigSet, ConfigLocations
+from Components.config import ConfigSelection, ConfigText, ConfigNumber
+from Components.config import ConfigSelectionNumber, ConfigClock, ConfigPassword
+from Components.config import ConfigSlider, ConfigEnableDisable, ConfigInteger
+from Components.config import ConfigSubDict, ConfigDictionarySet
+from Components.config import ConfigSubsection, ConfigYesNo, config, NoSave
+from Tools.Directories import defaultRecordingLocation
+from enigma import eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
+from enigma import setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff
 import os
 import time
-import subprocess
-
-from gettext import gettext, ngettext
+import gettext
 
 # Set up translation function
-_ = gettext
+_ = gettext.gettext
 
 originalAudioTracks = "orj dos ory org esl qaa qaf und qae mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
@@ -546,7 +550,7 @@ def InitUsageConfig():
 		for i, d in enumerate(units):
 			if unit := int(number / d):
 				if i == 3:
-					return "%s" % (ngettext("%d minute", "%d minutes", unit) % unit)
+					return "%s" % (ngettext("%d minute", "%d minuts", unit) % unit)
 				elif i == 2:
 					return "%s" % (ngettext("%d hour", "%d hours", unit) % unit)
 				elif i == 1:
@@ -907,11 +911,11 @@ def InitUsageConfig():
 	# config.oscaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
 	# config.oscaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
 	# choiceList = [
-	#	(0, _("Disabled"))
+	#   (0, _("Disabled"))
 	# ] + [(x, ngettext("%d Second", "%d Seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3)]
 	# config.oscaminfo.autoUpdate = ConfigSelection(default=10, choices=choiceList)
 	# choiceList = [
-	#	(0, _("Disabled"))
+	#   (0, _("Disabled"))
 	# ] + [(x, ngettext("%d Second", "%d Seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3)]
 	# config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
 	# BoxInfo.setItem("OScamInstalled", False)
@@ -933,75 +937,43 @@ def InitUsageConfig():
 	# lulu
 	config.ntp = ConfigSubsection()
 
-	def chronyStatusFinished(result, retval, action):
-		match action:
-			case 'disable':
-				if retval == 0:
-					Console().ePopen('/etc/init.d/chronyd stop')
-				Console().ePopen('update-rc.d chronyd disable 3')
-			case 'enable':
-				Console().ePopen('update-rc.d chronyd enable 3')
-				if retval == 3:
-					Console().ePopen('/etc/init.d/chronyd start')
-			case 'sync' if retval == 0:
-				if retval == 0:
-					Console().ePopen('/etc/init.d/chronyd reload')
-				else:
-					Console().ePopen('/etc/init.d/chronyd start')
-			case _:
-				print("[UsageConfig] Unsupported Chrony status action: %s" % action)
-
 	def timesyncChanged(configElement):
-		if configElement.value == "dvb":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
-			print("[UsageConfig] NTP disabled, DVB time enabled")
-		elif configElement.value == "auto":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
-			try:
-				result = subprocess.check_output('chronyc tracking', shell=True, text=True)
-			except subprocess.CalledProcessError as e:
-				result = ""
-				print("[Usageconfig]", e)
-			if "Reference ID	: 00000000 ()" in result:
-				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
-				print("[UsageConfig] NTP disabled, DVB time enabled")
-			else:
-				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-				print("[UsageConfig] NTP enabled, DVB time disabled")
-		elif configElement.value == "ntp":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+		if configElement.value == "ntp" or configElement.value == "auto":
+			if not os.path.isfile('/var/spool/cron/crontabs/root') or 'ntpdate-sync' not in open('/var/spool/cron/crontabs/root').read():
+				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >> /var/spool/cron/crontabs/root")
+			if not os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
+				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
+		else:
+			if os.path.isfile('/var/spool/cron/crontabs/root'):
+				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/crontabs/root;")
+			if os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
+				Console().ePopen("unlink /etc/network/if-up.d/ntpdate-sync")
+
+		if configElement.value == "ntp":
 			print("[UsageConfig] NTP enabled, DVB time disabled")
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+		elif configElement.value == "auto":
+			res = os.system('grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
+			if res >> 8 == 0:
+				print("[UsageConfig] NTP auto and active, DVB time disabled")
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+			else:
+				res = os.system('/usr/bin/ntpdate-sync && sleep 5 && grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
+				if res >> 8 == 0:
+					print("[UsageConfig] NTP auto and active, DVB time disabled")
+					eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+				else:
+					print("[UsageConfig] NTP auto but not active, DVB time enabled")
+					eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+		else:
+			print("[UsageConfig] NTP disabled, DVB time enabled")
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 
 		eEPGCache.getInstance().timeUpdated()
 
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
-	config.ntp.timesync.addNotifier(timesyncChanged, initial_call=False)
-	config.ntp.server = ConfigText("", fixed_size=False)
-	config.ntp.server_old = ConfigText("")
-
-	def setNTPServer(configElement):
-		if configElement.value != config.ntp.server_old.value and " " not in configElement.value:
-			f = open("/etc/chrony.conf", "r")
-			lst = f.readlines()
-			f = open("/etc/chrony.conf", "w")
-			for x in lst:
-				x1 = x.split()
-				if len(x1) > 1 and (x1[0] == "server" or x1[0] == "#server"):
-					if configElement.value == "":
-						x1[0] = "#server"
-						x = " ".join(x1) + "\n"
-					else:
-						x = "server %s iburst minpoll 3 prefer\n" % configElement.value
-				f.write(x)
-			f.close()
-			config.ntp.server_old.value = configElement.value
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
-			print("[UsageConfig] NTP enabled, local server is set to: %s" % configElement.value)
-	config.ntp.server.addNotifier(setNTPServer, immediate_feedback=False)
+	config.ntp.timesync.addNotifier(timesyncChanged)
+	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
 
 
 def updateChoices(sel, choices):
@@ -1020,7 +992,7 @@ def updateChoices(sel, choices):
 
 def preferredPath(path):
 	if config.usage.setup_level.index < 2 or path == "<default>" or not path:
-		return None	 # config.usage.default_path.value, but delay lookup until usage
+		return None   # config.usage.default_path.value, but delay lookup until usage
 	elif path == "<current>":
 		return config.movielist.last_videodir.value
 	elif path == "<timer>":

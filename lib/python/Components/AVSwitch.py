@@ -2,8 +2,13 @@ from Components.config import config, ConfigSlider, ConfigSelection, ConfigYesNo
 from enigma import eAVSwitch, eDVBVolumecontrol, getDesktop
 from Components.SystemInfo import BoxInfo
 import os
+from gettext import gettext
 
-iAVSwitch = None # will be initialized later, allows to import name 'iAVSwitch' from 'Components.AVSwitch'
+# Set up translation function
+_ = gettext
+
+iAVSwitch = None  # will be initialized later, allows to import name 'iAVSwitch' from 'Components.AVSwitch'
+
 
 class AVSwitch:
 	def setInput(self, input):
@@ -21,17 +26,17 @@ class AVSwitch:
 
 	def getOutputAspect(self):
 		valstr = config.av.aspectratio.value
-		if valstr in ("4_3_letterbox", "4_3_panscan"): # 4:3
+		if valstr in ("4_3_letterbox", "4_3_panscan"):  # 4:3
 			return (4, 3)
-		elif valstr == "16_9": # auto ... 4:3 or 16:9
+		elif valstr == "16_9":  # auto ... 4:3 or 16:9
 			try:
-				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read(): # 4:3
+				if "1" in open("/proc/stb/vmpeg/0/aspect", "r").read():  # 4:3
 					return (4, 3)
 			except IOError:
 				pass
-		elif valstr in ("16_9_always", "16_9_letterbox"): # 16:9
+		elif valstr in ("16_9_always", "16_9_letterbox"):  # 16:9
 			pass
-		elif valstr in ("16_10_letterbox", "16_10_panscan"): # 16:10
+		elif valstr in ("16_10_letterbox", "16_10_panscan"):  # 16:10
 			return (16, 10)
 		return (16, 9)
 
@@ -60,9 +65,9 @@ class AVSwitch:
 
 	def setAspectWSS(self, aspect=None):
 		if not config.av.wss.value:
-			value = 2 # auto(4:3_off)
+			value = 2  # auto(4:3_off)
 		else:
-			value = 1 # auto
+			value = 1  # auto
 		eAVSwitch.getInstance().setWSS(value)
 
 
@@ -80,66 +85,56 @@ def InitAVSwitch():
 		colorformat_choices["svideo"] = "S-Video"
 
 	config.av.colorformat = ConfigSelection(choices=colorformat_choices, default="cvbs")
+
+	def read_policy_choices(file_path, policy_dict, key, description):
+		"""
+		Legge le opzioni di policy dal file e aggiorna il dizionario delle scelte.
+		"""
+		try:
+			if key in open(file_path).read():
+				policy_dict.update({key: description})
+		except FileNotFoundError:
+			pass  # File non trovato, ignora
+		except Exception as e:
+			print("[Config] Error reading {}: {}".format(file_path, e))
+	# Configurazione aspectratio
 	config.av.aspectratio = ConfigSelection(choices={
-			"4_3_letterbox": _("4:3 Letterbox"),
-			"4_3_panscan": _("4:3 PanScan"),
-			"16_9": "16:9",
-			"16_9_always": _("16:9 always"),
-			"16_10_letterbox": _("16:10 Letterbox"),
-			"16_10_panscan": _("16:10 PanScan"),
-			"16_9_letterbox": _("16:9 Letterbox")},
-			default="16_9")
+		"4_3_letterbox": _("4:3 Letterbox"),
+		"4_3_panscan": _("4:3 PanScan"),
+		"16_9": "16:9",
+		"16_9_always": _("16:9 always"),
+		"16_10_letterbox": _("16:10 Letterbox"),
+		"16_10_panscan": _("16:10 PanScan"),
+		"16_9_letterbox": _("16:9 Letterbox")},
+		default="16_9")
+
 	config.av.aspect = ConfigSelection(choices={
-			"4_3": "4:3",
-			"16_9": "16:9",
-			"16_10": "16:10",
-			"auto": _("automatic")},
-			default="auto")
+		"4_3": "4:3",
+		"16_9": "16:9",
+		"16_10": "16:10",
+		"auto": _("automatic")},
+		default="auto")
+
+	# Configurazione policy_169
 	policy2_choices = {
-	# TRANSLATORS: (aspect ratio policy: black bars on top/bottom) in doubt, keep english term.
-	"letterbox": _("Letterbox"),
-	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
-	try:
-		if "full" in open("/proc/stb/video/policy2_choices").read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
-			policy2_choices.update({"full": _("Full screen")})
-	except:
-		pass
-	try:
-		if "auto" in open("/proc/stb/video/policy2_choices").read():
-			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
-			policy2_choices.update({"auto": _("Auto")})
-	except:
-		pass
+		"letterbox": _("Letterbox"),
+		"panscan": _("Pan&scan"),
+		"scale": _("Just scale"),
+	}
+	read_policy_choices("/proc/stb/video/policy2_choices", policy2_choices, "full", _("Full screen"))
+	read_policy_choices("/proc/stb/video/policy2_choices", policy2_choices, "auto", _("Auto"))
+
 	config.av.policy_169 = ConfigSelection(choices=policy2_choices, default="letterbox")
+
+	# Configurazione policy_43
 	policy_choices = {
-	# TRANSLATORS: (aspect ratio policy: black bars on left/right) in doubt, keep english term.
-	"pillarbox": _("Pillarbox"),
-	# TRANSLATORS: (aspect ratio policy: cropped content on left/right) in doubt, keep english term
-	"panscan": _("Pan&scan"),
-	# TRANSLATORS: (aspect ratio policy: scale as close to fullscreen as possible)
-	"scale": _("Just scale")}
-	try:
-		if "nonlinear" in open("/proc/stb/video/policy_choices").read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, with stretching the left/right)
-			policy_choices.update({"nonlinear": _("Nonlinear")})
-	except:
-		pass
-	try:
-		if "full" in open("/proc/stb/video/policy_choices").read():
-			# TRANSLATORS: (aspect ratio policy: display as fullscreen, even if the content aspect ratio does not match the screen ratio)
-			policy_choices.update({"full": _("Full screen")})
-	except:
-		pass
-	try:
-		if "auto" in open("/proc/stb/video/policy_choices").read():
-			# TRANSLATORS: (aspect ratio policy: automatically select the best aspect ratio mode)
-			policy_choices.update({"auto": _("Auto")})
-	except:
-		pass
+		"pillarbox": _("Pillarbox"),
+		"panscan": _("Pan&scan"),
+		"scale": _("Just scale"),
+	}
+	read_policy_choices("/proc/stb/video/policy_choices", policy_choices, "nonlinear", _("Nonlinear"))
+	read_policy_choices("/proc/stb/video/policy_choices", policy_choices, "full", _("Full screen"))
+	read_policy_choices("/proc/stb/video/policy_choices", policy_choices, "auto", _("Auto"))
 	config.av.policy_43 = ConfigSelection(choices=policy_choices, default="pillarbox")
 	config.av.tvsystem = ConfigSelection(choices={"pal": "PAL", "ntsc": "NTSC", "multinorm": "multinorm"}, default="pal")
 	config.av.wss = ConfigEnableDisable(default=True)
@@ -170,7 +165,7 @@ def InitAVSwitch():
 	config.av.tvsystem.addNotifier(setSystem)
 	config.av.wss.addNotifier(setWSS)
 
-	iAVSwitch.setInput("ENCODER") # init on startup
+	iAVSwitch.setInput("ENCODER")  # init on startup
 	BoxInfo.setItem("ScartSwitch", eAVSwitch.getInstance().haveScartSwitch())
 
 	def ch(node):
