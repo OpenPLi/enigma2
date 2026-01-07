@@ -149,7 +149,7 @@ class AutoInstallWizard(Screen):
 				raise Exception("failed to execute command!")
 				self.appClosed(True)
 		except Exception as e:
-			print('err:', str(e))
+			print(e)
 			self.appClosed(True)
 
 	def dataAvail(self, data):
