@@ -347,9 +347,6 @@ class ConfigListScreen:
 		self.session.openWithCallback(self.keyTextCallback, VirtualKeyBoard, title=self.getCurrentEntry(), text=str(self.getCurrentValue()))
 
 	def keyTextCallback(self, callback=None):
-		"""
-		Callback chiamata dopo la chiusura della VirtualKeyBoard
-		"""
 		if callback is not None and "config" in self:
 			current = self["config"].getCurrent()
 			if current and len(current) > 1:
