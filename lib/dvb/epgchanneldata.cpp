@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iomanip>
 
+#define NAME_ARRY_SIZE 34
 
 eEPGChannelData::eEPGChannelData(eEPGTransponderDataReader *ml)
 	:epgReader(ml)
@@ -750,7 +751,7 @@ uint8_t *eEPGChannelData::delimitName( uint8_t *in, uint8_t *out, int len_in )
 	// This function converts the mhw name into a string.
 	// Constraint: "length of out" = "length of in" + 1.
 	int i;
-	for ( i=0; i < len_in; i++ )
+	for ( i=0; i < len_in && i < NAME_ARRY_SIZE; i++ )
 		out[i] = in[i];
 
 	i = len_in - 1;
@@ -833,7 +834,7 @@ void eEPGChannelData::timeMHW2DVB( u_char day, u_char hours, u_char minutes, u_c
 void eEPGChannelData::storeMHWTitle(std::map<uint32_t, mhw_title_t>::iterator itTitle, std::string sumText, const uint8_t *data)
 // data is borrowed from calling proc to save memory space.
 {
-	uint8_t name[34];
+	uint8_t name[NAME_ARRY_SIZE];
 
 	// For each title a separate EIT packet will be sent to eEPGCache::sectionRead()
 	bool isMHW2 = itTitle->second.mhw2_mjd_hi || itTitle->second.mhw2_mjd_lo ||

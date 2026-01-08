@@ -470,3 +470,4 @@ class EPGList(GUIComponent):
 		self.listbox.setFont(0, self.eventItemFont)
 		self.listbox.setFont(1, self.eventTimeFont)
 		return GUIComponent.applySkin(self, desktop, parent)
+												
