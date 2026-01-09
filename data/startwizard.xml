@@ -93,20 +93,6 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-	   
-  
-	  
-		   
-					   
-  
-	  
-	 
-	   
-	   
-		
-	   
-	  
-	 
             </code>
 	</step>
 	<step id="nima">
@@ -299,20 +285,15 @@ self.condition = len(nimmanager.nim_slots) > 10 and not nimmanager.nim_slots[10]
 		<config screen="NimSetup" module="Satconfig" args="10" type="ConfigList"/>
 		<code>
 self.clearSelectedKeys()
-	 
-	   
 self.selectKey("LEFT")
 self.selectKey("RIGHT")
-	   
-	  
-	 
 </code>
 	</step>
 	<step id="nimq">
 		<condition>
 from Components.NimManager import nimmanager
 self.condition = len(nimmanager.nim_slots) > 10 and not nimmanager.nim_slots[10].empty and not nimmanager.nim_slots[10].isFBCLink()
-</condition>
+		</condition>
 		<text value="Please set up tuner K"/>
 		<displaytext value="Please set up tuner K"/>
 		<config screen="NimSetup" module="Satconfig" args="10" type="ConfigList"/>
@@ -331,7 +312,7 @@ self.selectKey("OK")
 		<condition>
 from Components.NimManager import nimmanager
 self.condition = len(nimmanager.nim_slots) > 17 and not nimmanager.nim_slots[17].empty
-            </condition>
+</condition>
 		<text value="Please set up tuner R"/>
 		<config screen="NimSetup" module="Satconfig" args="17" type="ConfigList"/>
 		<code>
@@ -343,17 +324,16 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
+</code>
 	</step>
-	<!--
-    <step id="channels">
-        <condition>
+		<step id="channels">
+			<condition>
 from Components.NimManager import nimmanager
 self.condition = nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
-            </condition>
-        <text value="Do you want to install a channel list?"/>
-        <config screen="InstallWizard" module="InstallWizard" args="1" type="ConfigList"/>
-        <code>
+			</condition>
+			<text value="Do you want to install a channel list?"/>
+			<config screen="InstallWizard" module="InstallWizard" args="1" type="ConfigList"/>
+			<code>
 self.clearSelectedKeys()
 self.selectKey("UP")
 self.selectKey("DOWN")
@@ -362,17 +342,16 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
-    </step>
-    
-    <step id="fallbacktuner">
-        <condition>
+			</code>
+		</step>
+		<step id="fallbacktuner">
+			<condition>
 from Components.NimManager import nimmanager
 self.condition = not nimmanager.somethingConnected() and config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
-            </condition>
-        <text value="Please configure the fallback tuner setup"/>
-        <config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList"/>
-        <code>
+			</condition>
+			<text value="Please configure the fallback tuner setup"/>
+			<config screen="SetupFallbacktuner" module="SetupFallbacktuner" type="ConfigList"/>
+			<code>
 self.clearSelectedKeys()
 self.selectKey("UP")
 self.selectKey("DOWN")
@@ -381,16 +360,16 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
-    </step>
-    <step id="doscan">
-        <text value="What type of service scan do you want?"/>
-        <condition>
+			</code>
+		</step>
+		<step id="doscan">
+			<text value="What type of service scan do you want?"/>
+			<condition>
 from Components.NimManager import nimmanager
 self.condition = nimmanager.somethingConnected()
-            </condition>
-        <config screen="InstallWizard" module="InstallWizard" args="3" type="ConfigList"/>
-        <code>
+			</condition>
+			<config screen="InstallWizard" module="InstallWizard" args="3" type="ConfigList"/>
+			<code>
 self.clearSelectedKeys()
 self.selectKey("UP")
 self.selectKey("DOWN")
@@ -399,43 +378,15 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
-    </step>
-    <step id="plugins">
-        <condition>
+			</code>
+		</step>
+		<step id="plugins">
+			<condition>
 self.condition = config.misc.installwizard.hasnetwork.value and config.misc.installwizard.opkgloaded.value
-            </condition>
-        <text value="Do you want to install Plugins?"/>
-        <config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList"/>
-   
-   
-  
-	
-	
-  
-	
-   
-  
-	
-   
-	
-				  
-						
-		
-						
-					
-					  
-					  
-					   
-					  
-					 
-					
-				   
-			   
-						 
-																	 
-																						
-        <code>
+			</condition>
+			<text value="Do you want to install Plugins?"/>
+			<config screen="InstallWizard" module="InstallWizard" args="2" type="ConfigList"/>
+			<code>
 self.clearSelectedKeys()
 self.selectKey("UP")
 self.selectKey("DOWN")
@@ -444,22 +395,21 @@ self.selectKey("RIGHT")
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
-    </step>
-     -->
+			</code>
+		</step>
 	<step id="setup">
 		<text value="Please setup the following basic configs!"/>
 		<config screen="Setup" module="Setup" args="'wizardsetup'" type="ConfigList"/>
 		<code>
-            self.clearSelectedKeys()
-            self.selectKey("UP")
-            self.selectKey("DOWN")
-            self.selectKey("LEFT")
-            self.selectKey("RIGHT")
-            self.selectKey("BLUE")
-            self.selectKey("RED")
-            self.selectKey("OK")
-        </code>
+self.clearSelectedKeys()
+self.selectKey("UP")
+self.selectKey("DOWN")
+self.selectKey("LEFT")
+self.selectKey("RIGHT")
+self.selectKey("BLUE")
+self.selectKey("RED")
+self.selectKey("OK")
+</code>
 	</step>
 	<step id="end" laststep="true">
 		<text value="Thank you for using the wizard. Your receiver is now ready for use.\nPress Blue or OK to start using your receiver."/>
@@ -468,6 +418,6 @@ self.clearSelectedKeys()
 self.selectKey("BLUE")
 self.selectKey("RED")
 self.selectKey("OK")
-            </code>
+</code>
 	</step>
 </wizard>
