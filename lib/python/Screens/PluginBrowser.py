@@ -44,21 +44,8 @@ config.pluginfilter = ConfigSubsection()
 config.misc.pluginLayout = ConfigSelection(default=PLUGIN_GRID, choices=[
 	(PLUGIN_LIST, _("View as list")),
 	(PLUGIN_GRID, _("View as grid"))])
-config.misc.pluginstyle = ConfigSelection(default=2, choices=[
+config.misc.pluginstyle = ConfigSelection(default=1, choices=[
 	(1, _("Style 1")),
-	(2, _("Style 2")),
-	(3, _("Style 3")),
-	(4, _("Style 4")),
-	(5, _("Style 5")),
-	(6, _("Style 6")),
-	(7, _("Style 7")),
-	# (8, _("Style 8")),
-	# (9, _("Style 9")),
-	# (10, _("Style 10")),
-	# (11, _("Style 11")),
-	# (12, _("Style 12")),
-	# (13, _("Style 13")),
-	# (14, _("Style 14"))
 ])
 config.pluginfilter.kernel = ConfigYesNo(default=False)
 config.pluginfilter.drivers = ConfigYesNo(default=True)
@@ -195,7 +182,17 @@ class PluginBrowser(Screen, ProtectedScreen):
 		return config.ParentalControl.setuppinactive.value and (not config.ParentalControl.config_sections.main_menu.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and config.ParentalControl.config_sections.plugin_browser.value
 
 	def menu(self):  # lulu
-		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginFilter)
+		self.remembered_layout = config.misc.pluginLayout.value
+		self.session.openWithCallback(self.menuClosed, PluginFilter)
+
+	def menuClosed(self, returnValue=None):  # lulu
+		if hasattr(self, 'remembered_layout'):
+			if config.misc.pluginLayout.value != self.remembered_layout:
+				print("[PluginBrowser] Layout cambiato nel menu, chiudo la schermata.")
+				self.close()
+				return
+
+		self.PluginDownloadBrowserClosed(returnValue)
 
 	def exit(self):  # lulu
 		self.close(True)
@@ -320,7 +317,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginDownloadBrowser, PluginDownloadBrowser.DOWNLOAD, self.firsttime)
 		self.firsttime = False
 
-	def PluginDownloadBrowserClosed(self, returnValue):
+	def PluginDownloadBrowserClosed(self, returnValue=None):
 		if returnValue is None:
 			self.updateList()
 			self.checkWarnings()
@@ -339,310 +336,7 @@ class PluginBrowser(Screen, ProtectedScreen):
 				self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginManager)
 
 
-class PluginDownloadBrowser(Screen):
-	DOWNLOAD = 0
-	REMOVE = 1
-	PLUGIN_PREFIX = 'enigma2-plugin-'
-	lastDownloadDate = None
-
-	def __init__(self, session, type=0, needupdate=True):
-		Screen.__init__(self, session)
-
-		self.type = type
-		self.needupdate = needupdate
-
-		self.container = eConsoleAppContainer()
-		self.container.appClosed.append(self.runFinished)
-		self.container.dataAvail.append(self.dataAvail)
-		self.onLayoutFinish.append(self.startRun)
-		self.setTitle(_("Downloadable new plugins") if self.type == self.DOWNLOAD else _("Remove plugins"))
-		self.list = []
-		self["list"] = PluginList(self.list)
-		self.pluginlist = []
-		self.expanded = []
-		self.installedplugins = []
-		self.plugins_changed = False
-		self.reload_settings = False
-		self.check_softcams = False
-		self.check_settings = False
-		self.install_settings_name = ''
-		self.remove_settings_name = ''
-		self["text"] = Label(_("Downloading plugin information. Please wait...") if self.type == self.DOWNLOAD else _("Getting plugin information. Please wait..."))
-		self["key_red"] = Label(_("Cancel"))
-		self["key_green"] = Label(_("Expand"))
-		self["key_blue"] = Label(_("Remove plugins") if self.type == self.DOWNLOAD else _("Download plugins"))
-		self.run = 0
-		self.remainingdata = ""
-		self["actions"] = ActionMap(["WizardActions"],
-		{
-			"ok": self.go,
-			"back": self.requestClose,
-		})
-		self["PluginDownloadActions"] = ActionMap(["ColorActions"], {
-			"blue": self.delete if self.type == self.DOWNLOAD else self.download,
-			"red": self.requestClose,
-			"green": self.go}
-		)
-		if os.path.isfile('/usr/bin/opkg'):
-			self.opkg = '/usr/bin/opkg'
-			self.opkg_install = self.opkg + ' install'
-			self.opkg_remove = self.opkg + ' remove --autoremove'
-		else:
-			self.opkg = 'opkg'
-			self.opkg_install = 'opkg install -force-defaults'
-			self.opkg_remove = self.opkg + ' remove'
-		self["list"].onSelectionChanged.append(self.selectionChanged)
-
-	def selectionChanged(self):
-		selection = self["list"].l.getCurrentSelection()
-		if selection:
-			selection = selection[0]
-			if isinstance(selection, str):  # category
-				self["key_green"].text = _("Collapse") if selection in self.expanded else _("Expand")
-			else:
-				self["key_green"].text = _("Install plugin") if self.type == self.DOWNLOAD else _("Remove plugin")
-
-	def go(self):
-		selection = self["list"].l.getCurrentSelection()
-		if selection:
-			selection = selection[0]
-			if isinstance(selection, str):  # category
-				if selection in self.expanded:
-					self.expanded.remove(selection)
-				else:
-					self.expanded.append(selection)
-				self.updateList()
-			else:
-				if self.type == self.DOWNLOAD:
-					self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to download\nthe plugin \"%s\"?") % selection.name)
-				elif self.type == self.REMOVE:
-					self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to remove\nthe plugin \"%s\"?") % selection.name)
-
-	def delete(self):
-		self.requestClose(1)
-
-	def download(self):
-		self.requestClose(0)
-
-	def requestClose(self, returnValue=None):
-		if self.plugins_changed:
-			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-		if self.reload_settings:
-			self["text"].setText(_("Reloading bouquets and services..."))
-			eDVBDB.getInstance().reloadBouquets()
-			eDVBDB.getInstance().reloadServicelist()
-			from Components.ParentalControl import parentalControl
-			parentalControl.open()
-			refreshServiceList()
-		if self.check_softcams:
-			BoxInfo.setItem("HasSoftcamInstalled", hassoftcaminstalled())
-		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
-		self.container.appClosed.remove(self.runFinished)
-		self.container.dataAvail.remove(self.dataAvail)
-		self.close(returnValue)
-
-	def resetPostInstall(self):
-		try:
-			del self.postInstallCall
-		except:
-			pass
-
-	def installDestinationCallback(self, result):
-		if result is not None:
-			dest = result[1]
-			if dest.startswith('/'):
-				# Custom install path, add it to the list too
-				dest = os.path.normpath(dest)
-				extra = '--add-dest %s:%s -d %s' % (dest, dest, dest)
-				Opkg.opkgAddDestination(dest)
-			else:
-				extra = '-d ' + dest
-			self.doInstall(self.installFinished, self["list"].l.getCurrentSelection()[0].name + ' ' + extra)
-		else:
-			self.resetPostInstall()
-
-	def runInstall(self, val):
-		if val:
-			if self.type == self.DOWNLOAD:
-				if self["list"].l.getCurrentSelection()[0].name.startswith("picons-"):
-					supported_filesystems = frozenset(('ext4', 'ext3', 'ext2', 'reiser', 'reiser4', 'jffs2', 'ubifs', 'rootfs'))
-					candidates = []
-					import Components.Harddisk
-					mounts = Components.Harddisk.getProcMounts()
-					for partition in harddiskmanager.getMountedPartitions(False, mounts):
-						if partition.filesystem(mounts) in supported_filesystems:
-							candidates.append((partition.description, partition.mountpoint))
-					if candidates:
-						from Components.Renderer import Picon
-						self.postInstallCall = Picon.initPiconPaths
-						self.session.openWithCallback(self.installDestinationCallback, ChoiceBox, title=_("Install picons on"), list=candidates)
-					return
-				self.install_settings_name = self["list"].l.getCurrentSelection()[0].name
-				if self["list"].l.getCurrentSelection()[0].name.startswith('settings-'):
-					self.check_settings = True
-					self.startOpkgListInstalled(self.PLUGIN_PREFIX + 'settings-*')
-				else:
-					self.runSettingsInstall()
-			elif self.type == self.REMOVE:
-				self.doRemove(self.installFinished, self["list"].l.getCurrentSelection()[0].name)
-
-	def doRemove(self, callback, pkgname):
-		pkgname = self.PLUGIN_PREFIX + pkgname
-		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_remove + Opkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig")
-
-	def doInstall(self, callback, pkgname):
-		pkgname = self.PLUGIN_PREFIX + pkgname
-		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_install + " " + pkgname, "sync"], skin="Console_Pig")
-
-	def runSettingsRemove(self, val):
-		if val:
-			self.doRemove(self.runSettingsInstall, self.remove_settings_name)
-
-	def runSettingsInstall(self):
-		self.doInstall(self.installFinished, self.install_settings_name)
-
-	def startOpkgListInstalled(self, pkgname=PLUGIN_PREFIX + '*'):
-		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list_installed '%s'" % pkgname)
-
-	def startOpkgListAvailable(self):
-		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list '" + self.PLUGIN_PREFIX + "*'")
-
-	def startRun(self):
-		listsize = self["list"].instance.size()
-		self["list"].instance.hide()
-		self.listWidth = listsize.width()
-		self.listHeight = listsize.height()
-		if self.type == self.DOWNLOAD:
-			if self.needupdate and not PluginDownloadBrowser.lastDownloadDate or (time() - PluginDownloadBrowser.lastDownloadDate) > 3600:
-				# Only update from internet once per hour
-				self.container.execute(self.opkg + " update")
-				PluginDownloadBrowser.lastDownloadDate = time()
-			else:
-				self.run = 1
-				self.startOpkgListInstalled()
-		elif self.type == self.REMOVE:
-			self.run = 1
-			self.startOpkgListInstalled()
-
-	def installFinished(self):
-		if hasattr(self, 'postInstallCall'):
-			try:
-				self.postInstallCall()
-			except Exception as ex:
-				print("[PluginBrowser] postInstallCall failed:", ex)
-			self.resetPostInstall()
-		try:
-			os.unlink('/tmp/opkg.conf')
-		except:
-			pass
-		for plugin in self.pluginlist:
-			if plugin[3] == self["list"].l.getCurrentSelection()[0].name:
-				self.pluginlist.remove(plugin)
-				break
-		self.plugins_changed = True
-		if self["list"].l.getCurrentSelection()[0].name.startswith("settings-"):
-			self.reload_settings = True
-		if self["list"].l.getCurrentSelection()[0].name.startswith("softcams-"):
-			self.check_softcams = True
-		self.expanded = []
-		self.updateList()
-		self["list"].moveToIndex(0)
-
-	def runFinished(self, retval):
-		if self.check_settings:
-			self.check_settings = False
-			self.runSettingsInstall()
-			return
-		self.remainingdata = ""
-		if self.run == 0:
-			self.run = 1
-			if self.type == self.DOWNLOAD:
-				self.startOpkgListInstalled()
-		elif self.run == 1 and self.type == self.DOWNLOAD:
-			self.run = 2
-			pluginlist = []
-			self.pluginlist = pluginlist
-			for plugin in Opkg.enumPlugins(self.PLUGIN_PREFIX):
-				if plugin[0] not in self.installedplugins:
-					pluginlist.append(plugin + (plugin[0][15:],))
-			if pluginlist:
-				pluginlist.sort()
-				self.updateList()
-				self["text"].instance.hide()
-				self["list"].instance.show()
-			else:
-				self["text"].setText(_("No new plugins found"))
-		else:
-			if self.pluginlist:
-				self.updateList()
-				self["text"].instance.hide()
-				self["list"].instance.show()
-			else:
-				self["text"].setText(_("No new plugins found"))
-
-	def dataAvail(self, str):
-		# prepend any remaining data from the previous call
-		str = self.remainingdata + str.decode()
-		# split in lines
-		lines = str.split('\n')
-		# 'str' should end with '\n', so when splitting, the last line should be empty. If this is not the case, we received an incomplete line
-		if len(lines[-1]):
-			# remember this data for next time
-			self.remainingdata = lines[-1]
-			lines = lines[0:-1]
-		else:
-			self.remainingdata = ""
-
-		if self.check_settings:
-			self.check_settings = False
-			self.remove_settings_name = str.split(' - ')[0].replace(self.PLUGIN_PREFIX, '')
-			self.session.openWithCallback(self.runSettingsRemove, MessageBox, _('You already have a channel list installed,\nwould you like to remove\n"%s"?') % self.remove_settings_name)
-			return
-
-		if self.run == 1:
-			for x in lines:
-				plugin = x.split(" - ", 2)
-				# 'opkg list_installed' only returns name + version, no description field
-				if len(plugin) >= 2:
-					if not plugin[0].endswith('-dev') and not plugin[0].endswith('-staticdev') and not plugin[0].endswith('-dbg') and not plugin[0].endswith('-doc') and not plugin[0].endswith('-src'):
-						if plugin[0] not in self.installedplugins:
-							if self.type == self.DOWNLOAD:
-								self.installedplugins.append(plugin[0])
-							else:
-								if len(plugin) == 2:
-									plugin.append('')
-								plugin.append(plugin[0][15:])
-								self.pluginlist.append(plugin)
-
-	def updateList(self):
-		list = []
-		expandableIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expandable-plugins.png"))
-		expandedIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expanded-plugins.png"))
-		verticallineIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/verticalline-plugins.png"))
-
-		self.plugins = {}
-		for x in self.pluginlist:
-			split = x[3].split('-', 1)
-			if len(split) < 2:
-				continue
-			if split[0] not in self.plugins:
-				self.plugins[split[0]] = []
-
-			self.plugins[split[0]].append((PluginDescriptor(name=x[3], description=x[2], icon=verticallineIcon), split[1], x[1]))
-
-		for x in self.plugins.keys():
-			if x in self.expanded:
-				list.append(PluginCategoryComponent(x, expandedIcon, self.listWidth))
-				list.extend([PluginDownloadComponent(plugin[0], plugin[1], plugin[2], self.listWidth) for plugin in self.plugins[x]])
-			else:
-				list.append(PluginCategoryComponent(x, expandableIcon, self.listWidth))
-		self.list = list
-		self["list"].l.setList(list)
-
-
 # lulu
-
-
 class PluginBrowserNew(Screen):
 
 	def __init__(self, session):
@@ -653,14 +347,6 @@ class PluginBrowserNew(Screen):
 		self.current = 0
 		self.current_page = 0
 		if config.misc.pluginstyle.value == 1:
-			self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style1.jpg" transparent="1" zPosition="-1" />'
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#FFFFFF"
-			self.primaryColor = "#000000"
-			self.primaryColorLabel = "#00ffffff"
-			self.secondaryColor = "#1b3c85"
-			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 2:
 			self.backgroundPixmap = ""
 			self.backgroundColor = "#44000000"
 			self.foregroundColor = "#FFFFFF"
@@ -668,111 +354,6 @@ class PluginBrowserNew(Screen):
 			self.primaryColorLabel = "#00ffffff"
 			self.secondaryColor = "#1b3c85"
 			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 3:
-			self.backgroundPixmap = ""
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#FFFFFF"
-			self.primaryColor = "#000000"
-			self.primaryColorLabel = "#00ffffff"
-			self.secondaryColor = "#1b3c85"
-			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 4:
-			self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style4.jpg" transparent="1" zPosition="-1" />'
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#FFFFFF"
-			self.primaryColor = "#000000"
-			self.primaryColorLabel = "#00ffffff"
-			self.secondaryColor = "#1b3c85"
-			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 5:
-			self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style5.jpg" transparent="1" zPosition="-1" />'
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#FFFFFF"
-			self.primaryColor = "#000000"
-			self.primaryColorLabel = "#00ffffff"
-			self.secondaryColor = "#1b3c85"
-			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 6:
-			# if isFullHD():
-			self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style6.jpg" transparent="1" zPosition="-1" />'
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#000080ff"
-			self.primaryColor = "#451b49"
-			self.primaryColorLabel = "#DCE1E3"
-			self.secondaryColor = "#725083"
-			self.secondaryColorLabel = "#00ffc000"
-		elif config.misc.pluginstyle.value == 7:
-			self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style7.jpg" transparent="1" zPosition="-1" />'
-			self.backgroundColor = "#44000000"
-			self.foregroundColor = "#000080ff"
-			self.primaryColor = "#000000"
-			self.primaryColorLabel = "#00ffffff"
-			self.secondaryColor = "#1b3c85"
-			self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 8:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style8.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 9:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style9.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 10:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style10.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 11:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style11.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 12:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style12.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 13:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style13.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
-		# elif config.misc.pluginstyle.value == 14:
-			# self.backgroundPixmap = '<ePixmap position="0,0" size="1920,1080" pixmap="skin_default/style14.jpg" transparent="1" zPosition="-1" />'
-			# self.backgroundColor = "#44000000"
-			# self.foregroundColor = "#000080ff"
-			# self.primaryColor = "#451b49"
-			# self.primaryColorLabel = "#DCE1E3"
-			# self.secondaryColor = "#1b3c85"
-			# self.secondaryColorLabel = "#00ffc000"
-
 		else:
 			self.backgroundPixmap = ""
 			self.backgroundColor = "#44000000"
@@ -782,6 +363,7 @@ class PluginBrowserNew(Screen):
 			self.secondaryColor = "#4e4e4e"
 			self.secondaryColorLabel = "#00000000"
 		self.skin = self.buildSkin()
+
 		self.firsttime = True
 		self.list = []
 		self["list"] = PluginList(self.list)
@@ -789,30 +371,58 @@ class PluginBrowserNew(Screen):
 		self["plugin_description"] = Label()
 		self["key_red"] = self["red"] = Label(_("Remove plugins"))
 		self["key_green"] = self["green"] = Label(_("Download plugins"))
-		self["PluginDownloadActions"] = ActionMap(["ColorActions", "SetupActions", "DirectionActions", "MenuActions"],
-												  {"red": self.delete,
-												   "green": self.download,
-												   "cancel": self.exit,
-												   "right": self.keyRight,
-												   "left": self.keyLeft,
-												   "up": self.keyUp,
-												   "down": self.keyDown,
-												   "ok": self.ok,
-												   "menu": self.menu}, -1)
+		self["PluginDownloadActions"] = ActionMap(
+			[
+				"ColorActions",
+				"SetupActions",
+				"DirectionActions",
+				"MenuActions"
+			],
+			{
+				"red": self.delete,
+				"green": self.download,
+				"cancel": self.exit,
+				"right": self.keyRight,
+				"left": self.keyLeft,
+				"up": self.keyUp,
+				"down": self.keyDown,
+				"ok": self.ok,
+				"menu": self.menu
+			}, -1
+		)
 		self.onFirstExecBegin.append(self.checkWarnings)
 		self.onLayoutFinish.append(self.setIcons)
 		self.onLayoutFinish.append(self.activeBox)
 		self.onLayoutFinish.append(self.saveListsize)
 		self.setTitle(_("Plugin browser"))
+
+		self.onChangedEntry = []
+		self["list"].onSelectionChanged.append(self.selectionChanged)
+
 		if config.pluginfilter.userfeed.value != "http://":
 			if not fileExists("/etc/opkg/user-feed.conf"):
 				CreateFeedConfig()
 
+	def selectionChanged(self):
+		if self.plugins and self.current < len(self.plugins):
+			desc = self.plugins[self.current][1]
+			self["plugin_description"].setText(desc)
+
+	def menu(self):  # lulu
+		self.remembered_layout = config.misc.pluginLayout.value
+		self.session.openWithCallback(self.menuClosed, PluginFilter)
+
+	def menuClosed(self, returnValue=None):  # lulu
+		if hasattr(self, 'remembered_layout'):
+			if config.misc.pluginLayout.value != self.remembered_layout:
+				print("[PluginBrowserNew] Layout cambiato nel menu, chiudo la schermata.")
+				self.close()
+				return
+
+		self.PluginDownloadBrowserClosed(returnValue)
+
 	def exit(self):
 		self.close()
-
-	def menu(self):
-		self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginFilter)
 
 	def saveListsize(self):
 		listsize = self["list"].instance.size()
@@ -824,12 +434,6 @@ class PluginBrowserNew(Screen):
 
 	def buildSkin(self):
 		if isFullHD():
-			# panel backgroundColor
-			backgroundColor = self.backgroundColor
-			# panel foregroundColor
-			foregroundColor = self.foregroundColor
-			# panel backgroundPixmap
-			backgroundPixmap = self.backgroundPixmap
 			# panel position
 			posxstart = 50
 			posystart = 190
@@ -873,33 +477,7 @@ class PluginBrowserNew(Screen):
 			sizex5 = 220
 			sizey5 = 85
 			font5 = 40
-			# keys eLabel
-			# eLabelx1 = 67
-			# eLabely1 = 1065
-			# eLabelx2 = 393
-			# eLabely2 = 1065
-			# eLabelx3 = 719
-			# eLabely3 = 1065
-			# eLabelx4 = 1045
-			# eLabely4 = 1065
-			# eLabel1ysizex = 300
-			# eLabel1ysizey = 8
-			# # keys function
-			# positionxkey1=67
-			# positionxkey2=393
-			# positionxkey3=719
-			# positionxkey4=1045
-			# positionykey=1013
-			# sizekeysx=300
-			# sizekeysy=50
-			# fontkey=32
 		else:
-			# panel backgroundColor
-			backgroundColor = self.backgroundColor
-			# panel foregroundColor
-			foregroundColor = self.foregroundColor
-			# panel backgroundPixmap
-			backgroundPixmap = self.backgroundPixmap
 			# panel position
 			posxstart = 10
 			posystart = 110
@@ -943,59 +521,71 @@ class PluginBrowserNew(Screen):
 			sizex5 = 160
 			sizey5 = 50
 			font5 = 27
-			# keys eLabel
-			# eLabelx1 = 67
-			# eLabely1 = 712
-			# eLabelx2 = 293
-			# eLabely2 = 712
-			# eLabelx3 = 519
-			# eLabely3 = 712
-			# eLabelx4 = 750
-			# eLabely4 = 712
-			# eLabel1ysizex = 200
-			# eLabel1ysizey = 5
-			# # keys function
-			# positionxkey1=67
-			# positionxkey2=293
-			# positionxkey3=519
-			# positionxkey4=750
-			# positionykey=677
-			# sizekeysx=200
-			# sizekeysy=35
-			# fontkey=28
 		posx = posxstart
 		posy = posystart
 		list_dummy = []
 		skincontent = ""
 		skin = """
 			<screen name="PluginBrowserNew" position="%d,%d" size="%d,%d" flags="wfNoBorder" backgroundColor="%s">
-				%s
-				<eLabel text="Plugin Browser" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#00ffffff" backgroundColor="#44000000" transparent="1" zPosition="2" />
-				<widget name="plugin_description" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="%s" backgroundColor="#44000000" transparent="1" zPosition="2" />
-				<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" horizontalAlignment="right" backgroundColor="#44000000" transparent="1" foregroundColor="#00ffffff">
-					<convert type="ClockToText">
-				</convert>
-				</widget>
-				<widget backgroundColor="#44000000" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#000080ff" horizontalAlignment="right" render="Label"  source="global.CurrentTime" transparent="1">
+			%s
+			<eLabel text="Plugin Browser" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#00ffffff" backgroundColor="#44000000" transparent="1" zPosition="2" />
+			<widget name="plugin_description" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="%s" backgroundColor="#44000000" transparent="1" zPosition="2" />
+			<widget source="global.CurrentTime" render="Label" position="%d,%d" size="%d,%d" font="Regular;%d" horizontalAlignment="right" backgroundColor="#44000000" transparent="1" foregroundColor="#00ffffff">
+				<convert type="ClockToText">
+			</convert>
+			</widget>
+			<widget backgroundColor="#44000000" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#000080ff" horizontalAlignment="right" render="Label"  source="global.CurrentTime" transparent="1">
 				<convert type="ClockToText">FullDate</convert>
-				</widget>
-				<widget name="pages" foregroundColor="#000080ff" position="%d,%d" size="%d,%d" font="Regular;%d" zPosition="2" horizontalAlignment="center" verticalAlignment="center" transparent="1" />
-				<!--#####red####/-->
-				<ePixmap pixmap="buttons/redbutton.png" position="32,1064" size="300,6" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
-				<widget source="key_red" render="Pixmap" pixmap="buttons/redbutton.png" position="32,1064" size="300,6" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
-				  <convert type="ConditionalShowHide" />
-				</widget>
-				<widget name="key_red" position="27,1016" size="310,45" zPosition="11" font="Regular; 30" noWrap="1" valign="center" halign="center" backgroundColor="background" objectTypes="key_red,Button,Label" transparent="1" />
-				<widget source="key_red" render="Label" position="27,1016" size="310,45" zPosition="11" font="Regular; 30" noWrap="1" valign="center" halign="center" backgroundColor="background" objectTypes="key_red,StaticText" transparent="1" />
-				<!--#####green####/-->
-				<ePixmap pixmap="buttons/greenbutton.png" position="342,1064" size="300,6" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
-				<widget source="key_green" render="Pixmap" pixmap="buttons/greenbutton.png" position="342,1064" size="300,6" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
-				  <convert type="ConditionalShowHide" />
-				</widget>
-				<widget name="key_green" position="337,1016" size="310,45" zPosition="11" font="Regular; 30" valign="center" halign="center" backgroundColor="background" objectTypes="key_green,Button,Label" transparent="1" />
-				<widget source="key_green" render="Label" position="337,1016" size="310,45" zPosition="11" font="Regular; 30" valign="center" halign="center" backgroundColor="background" objectTypes="key_green,StaticText" transparent="1" />
-
-			""" % (positionx, positiony, sizex, sizey, backgroundColor, backgroundPixmap, positionx1, positiony1, sizex1, sizey1, font1, positionx2, positiony2, sizex2, sizey2, font2, foregroundColor, positionx3, positiony3, sizex3, sizey3, font3, positionx4, positiony4, sizex4, sizey4, font4, positionx5, positiony5, sizex5, sizey5, font5)  # , eLabelx1, eLabely1, eLabel1ysizex, eLabel1ysizey, eLabelx2, eLabely2, eLabel1ysizex, eLabel1ysizey, positionxkey1, positionykey, sizekeysx, sizekeysy, fontkey, positionxkey2, positionykey, sizekeysx, sizekeysy, fontkey)
+			</widget>
+			<widget name="pages" foregroundColor="#000080ff" position="%d,%d" size="%d,%d" font="Regular;%d" zPosition="2" horizontalAlignment="center" verticalAlignment="center" transparent="1" />
+			<!--#####red####/-->
+			<ePixmap pixmap="buttons/redbutton.png" position="32,1064" size="300,6" alphatest="blend" objectTypes="key_red,Button,Label" transparent="1" />
+			<widget source="key_red" render="Pixmap" pixmap="buttons/redbutton.png" position="32,1064" size="300,6" alphatest="blend" objectTypes="key_red,StaticText" transparent="1">
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget name="key_red" position="27,1016" size="310,45" zPosition="11" font="Regular; 30" noWrap="1" valign="center" halign="center" backgroundColor="background" objectTypes="key_red,Button,Label" transparent="1" />
+			<widget source="key_red" render="Label" position="27,1016" size="310,45" zPosition="11" font="Regular; 30" noWrap="1" valign="center" halign="center" backgroundColor="background" objectTypes="key_red,StaticText" transparent="1" />
+			<!--#####green####/-->
+			<ePixmap pixmap="buttons/greenbutton.png" position="342,1064" size="300,6" alphatest="blend" objectTypes="key_green,Button,Label" transparent="1" />
+			<widget source="key_green" render="Pixmap" pixmap="buttons/greenbutton.png" position="342,1064" size="300,6" alphatest="blend" objectTypes="key_green,StaticText" transparent="1">
+				<convert type="ConditionalShowHide" />
+			</widget>
+			<widget name="key_green" position="337,1016" size="310,45" zPosition="11" font="Regular; 30" valign="center" halign="center" backgroundColor="background" objectTypes="key_green,Button,Label" transparent="1" />
+			<widget source="key_green" render="Label" position="337,1016" size="310,45" zPosition="11" font="Regular; 30" valign="center" halign="center" backgroundColor="background" objectTypes="key_green,StaticText" transparent="1" />
+			""" % (
+			positionx,
+			positiony,
+			sizex,
+			sizey,
+			self.backgroundColor,
+			self.backgroundPixmap,
+			positionx1,
+			positiony1,
+			sizex1,
+			sizey1,
+			font1,
+			positionx2,
+			positiony2,
+			sizex2,
+			sizey2,
+			font2,
+			self.foregroundColor,
+			positionx3,
+			positiony3,
+			sizex3,
+			sizey3,
+			font3,
+			positionx4,
+			positiony4,
+			sizex4,
+			sizey4,
+			font4,
+			positionx5,
+			positiony5,
+			sizex5,
+			sizey5,
+			font5
+		)
 		count = 0
 		for x, p in enumerate(plugins.getPlugins(PluginDescriptor.WHERE_PLUGINMENU)):
 			x += 1
@@ -1186,9 +776,319 @@ class PluginBrowserNew(Screen):
 			try:
 				from Plugins.SystemPlugins.SoftwareManager.plugin import PluginManager
 			except ImportError:
-				self.session.open(MessageBox, _("The software management extension is not installed!\nPlease install it."), type=MessageBox.TYPE_INFO, timeout=10)
+				self.session.open(
+					MessageBox,
+					_("The software management extension is not installed!\nPlease install it."),
+					type=MessageBox.TYPE_INFO,
+					timeout=10
+				)
 			else:
 				self.session.openWithCallback(self.PluginDownloadBrowserClosed, PluginManager)
+
+
+class PluginDownloadBrowser(Screen):
+	DOWNLOAD = 0
+	REMOVE = 1
+	PLUGIN_PREFIX = 'enigma2-plugin-'
+	lastDownloadDate = None
+
+	def __init__(self, session, type=0, needupdate=True):
+		Screen.__init__(self, session)
+
+		self.type = type
+		self.needupdate = needupdate
+
+		self.container = eConsoleAppContainer()
+		self.container.appClosed.append(self.runFinished)
+		self.container.dataAvail.append(self.dataAvail)
+		self.onLayoutFinish.append(self.startRun)
+		self.setTitle(_("Downloadable new plugins") if self.type == self.DOWNLOAD else _("Remove plugins"))
+		self.list = []
+		self["list"] = PluginList(self.list)
+		self.pluginlist = []
+		self.expanded = []
+		self.installedplugins = []
+		self.plugins_changed = False
+		self.reload_settings = False
+		self.check_softcams = False
+		self.check_settings = False
+		self.install_settings_name = ''
+		self.remove_settings_name = ''
+		self["text"] = Label(_("Downloading plugin information. Please wait...") if self.type == self.DOWNLOAD else _("Getting plugin information. Please wait..."))
+		self["key_red"] = Label(_("Cancel"))
+		self["key_green"] = Label(_("Expand"))
+		self["key_blue"] = Label(_("Remove plugins") if self.type == self.DOWNLOAD else _("Download plugins"))
+		self.run = 0
+		self.remainingdata = ""
+		self["actions"] = ActionMap(
+			[
+				"WizardActions"
+			],
+			{
+				"ok": self.go,
+				"back": self.requestClose,
+			}
+		)
+		self["PluginDownloadActions"] = ActionMap(["ColorActions"], {
+			"blue": self.delete if self.type == self.DOWNLOAD else self.download,
+			"red": self.requestClose,
+			"green": self.go}
+		)
+		if os.path.isfile('/usr/bin/opkg'):
+			self.opkg = '/usr/bin/opkg'
+			self.opkg_install = self.opkg + ' install'
+			self.opkg_remove = self.opkg + ' remove --autoremove'
+		else:
+			self.opkg = 'opkg'
+			self.opkg_install = 'opkg install -force-defaults'
+			self.opkg_remove = self.opkg + ' remove'
+		self["list"].onSelectionChanged.append(self.selectionChanged)
+
+	def selectionChanged(self):
+		selection = self["list"].l.getCurrentSelection()
+		if selection:
+			selection = selection[0]
+			if isinstance(selection, str):  # category
+				self["key_green"].text = _("Collapse") if selection in self.expanded else _("Expand")
+			else:
+				self["key_green"].text = _("Install plugin") if self.type == self.DOWNLOAD else _("Remove plugin")
+
+	def go(self):
+		selection = self["list"].l.getCurrentSelection()
+		if selection:
+			selection = selection[0]
+			if isinstance(selection, str):  # category
+				if selection in self.expanded:
+					self.expanded.remove(selection)
+				else:
+					self.expanded.append(selection)
+				self.updateList()
+			else:
+				if self.type == self.DOWNLOAD:
+					self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to download\nthe plugin \"%s\"?") % selection.name)
+				elif self.type == self.REMOVE:
+					self.session.openWithCallback(self.runInstall, MessageBox, _("Do you really want to remove\nthe plugin \"%s\"?") % selection.name)
+
+	def delete(self):
+		self.requestClose(1)
+
+	def download(self):
+		self.requestClose(0)
+
+	def requestClose(self, returnValue=None):
+		if self.plugins_changed:
+			plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		if self.reload_settings:
+			self["text"].setText(_("Reloading bouquets and services..."))
+			eDVBDB.getInstance().reloadBouquets()
+			eDVBDB.getInstance().reloadServicelist()
+			from Components.ParentalControl import parentalControl
+			parentalControl.open()
+			refreshServiceList()
+		if self.check_softcams:
+			BoxInfo.setItem("HasSoftcamInstalled", hassoftcaminstalled())
+		plugins.readPluginList(resolveFilename(SCOPE_PLUGINS))
+		self.container.appClosed.remove(self.runFinished)
+		self.container.dataAvail.remove(self.dataAvail)
+		self.close(returnValue)
+
+	def resetPostInstall(self):
+		try:
+			del self.postInstallCall
+		except:
+			pass
+
+	def installDestinationCallback(self, result):
+		if result is not None:
+			dest = result[1]
+			if dest.startswith('/'):
+				# Custom install path, add it to the list too
+				dest = os.path.normpath(dest)
+				extra = '--add-dest %s:%s -d %s' % (dest, dest, dest)
+				Opkg.opkgAddDestination(dest)
+			else:
+				extra = '-d ' + dest
+			self.doInstall(self.installFinished, self["list"].l.getCurrentSelection()[0].name + ' ' + extra)
+		else:
+			self.resetPostInstall()
+
+	def runInstall(self, val):
+		if val:
+			if self.type == self.DOWNLOAD:
+				if self["list"].l.getCurrentSelection()[0].name.startswith("picons-"):
+					supported_filesystems = frozenset(('ext4', 'ext3', 'ext2', 'reiser', 'reiser4', 'jffs2', 'ubifs', 'rootfs'))
+					candidates = []
+					import Components.Harddisk
+					mounts = Components.Harddisk.getProcMounts()
+					for partition in harddiskmanager.getMountedPartitions(False, mounts):
+						if partition.filesystem(mounts) in supported_filesystems:
+							candidates.append((partition.description, partition.mountpoint))
+					if candidates:
+						from Components.Renderer import Picon
+						self.postInstallCall = Picon.initPiconPaths
+						self.session.openWithCallback(self.installDestinationCallback, ChoiceBox, title=_("Install picons on"), list=candidates)
+					return
+				self.install_settings_name = self["list"].l.getCurrentSelection()[0].name
+				if self["list"].l.getCurrentSelection()[0].name.startswith('settings-'):
+					self.check_settings = True
+					self.startOpkgListInstalled(self.PLUGIN_PREFIX + 'settings-*')
+				else:
+					self.runSettingsInstall()
+			elif self.type == self.REMOVE:
+				self.doRemove(self.installFinished, self["list"].l.getCurrentSelection()[0].name)
+
+	def doRemove(self, callback, pkgname):
+		pkgname = self.PLUGIN_PREFIX + pkgname
+		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_remove + Opkg.opkgExtraDestinations() + " " + pkgname, "sync"], skin="Console_Pig")
+
+	def doInstall(self, callback, pkgname):
+		pkgname = self.PLUGIN_PREFIX + pkgname
+		self.session.openWithCallback(callback, Console, cmdlist=[self.opkg_install + " " + pkgname, "sync"], skin="Console_Pig")
+
+	def runSettingsRemove(self, val):
+		if val:
+			self.doRemove(self.runSettingsInstall, self.remove_settings_name)
+
+	def runSettingsInstall(self):
+		self.doInstall(self.installFinished, self.install_settings_name)
+
+	def startOpkgListInstalled(self, pkgname=PLUGIN_PREFIX + '*'):
+		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list_installed '%s'" % pkgname)
+
+	def startOpkgListAvailable(self):
+		self.container.execute(self.opkg + Opkg.opkgExtraDestinations() + " list '" + self.PLUGIN_PREFIX + "*'")
+
+	def startRun(self):
+		listsize = self["list"].instance.size()
+		self["list"].instance.hide()
+		self.listWidth = listsize.width()
+		self.listHeight = listsize.height()
+		if self.type == self.DOWNLOAD:
+			if self.needupdate and not PluginDownloadBrowser.lastDownloadDate or (time() - PluginDownloadBrowser.lastDownloadDate) > 3600:
+				# Only update from internet once per hour
+				self.container.execute(self.opkg + " update")
+				PluginDownloadBrowser.lastDownloadDate = time()
+			else:
+				self.run = 1
+				self.startOpkgListInstalled()
+		elif self.type == self.REMOVE:
+			self.run = 1
+			self.startOpkgListInstalled()
+
+	def installFinished(self):
+		if hasattr(self, 'postInstallCall'):
+			try:
+				self.postInstallCall()
+			except Exception as ex:
+				print("[PluginBrowser] postInstallCall failed:", ex)
+			self.resetPostInstall()
+		try:
+			os.unlink('/tmp/opkg.conf')
+		except:
+			pass
+		for plugin in self.pluginlist:
+			if plugin[3] == self["list"].l.getCurrentSelection()[0].name:
+				self.pluginlist.remove(plugin)
+				break
+		self.plugins_changed = True
+		if self["list"].l.getCurrentSelection()[0].name.startswith("settings-"):
+			self.reload_settings = True
+		if self["list"].l.getCurrentSelection()[0].name.startswith("softcams-"):
+			self.check_softcams = True
+		self.expanded = []
+		self.updateList()
+		self["list"].moveToIndex(0)
+
+	def runFinished(self, retval=None):
+		if self.check_settings:
+			self.check_settings = False
+			self.runSettingsInstall()
+			return
+		self.remainingdata = ""
+		if self.run == 0:
+			self.run = 1
+			if self.type == self.DOWNLOAD:
+				self.startOpkgListInstalled()
+		elif self.run == 1 and self.type == self.DOWNLOAD:
+			self.run = 2
+			pluginlist = []
+			self.pluginlist = pluginlist
+			for plugin in Opkg.enumPlugins(self.PLUGIN_PREFIX):
+				if plugin[0] not in self.installedplugins:
+					pluginlist.append(plugin + (plugin[0][15:],))
+			if pluginlist:
+				pluginlist.sort()
+				self.updateList()
+				self["text"].instance.hide()
+				self["list"].instance.show()
+			else:
+				self["text"].setText(_("No new plugins found"))
+		else:
+			if self.pluginlist:
+				self.updateList()
+				self["text"].instance.hide()
+				self["list"].instance.show()
+			else:
+				self["text"].setText(_("No new plugins found"))
+
+	def dataAvail(self, str):
+		# prepend any remaining data from the previous call
+		str = self.remainingdata + str.decode()
+		# split in lines
+		lines = str.split('\n')
+		# 'str' should end with '\n', so when splitting, the last line should be empty. If this is not the case, we received an incomplete line
+		if len(lines[-1]):
+			# remember this data for next time
+			self.remainingdata = lines[-1]
+			lines = lines[0:-1]
+		else:
+			self.remainingdata = ""
+
+		if self.check_settings:
+			self.check_settings = False
+			self.remove_settings_name = str.split(' - ')[0].replace(self.PLUGIN_PREFIX, '')
+			self.session.openWithCallback(self.runSettingsRemove, MessageBox, _('You already have a channel list installed,\nwould you like to remove\n"%s"?') % self.remove_settings_name)
+			return
+
+		if self.run == 1:
+			for x in lines:
+				plugin = x.split(" - ", 2)
+				# 'opkg list_installed' only returns name + version, no description field
+				if len(plugin) >= 2:
+					if not plugin[0].endswith('-dev') and not plugin[0].endswith('-staticdev') and not plugin[0].endswith('-dbg') and not plugin[0].endswith('-doc') and not plugin[0].endswith('-src'):
+						if plugin[0] not in self.installedplugins:
+							if self.type == self.DOWNLOAD:
+								self.installedplugins.append(plugin[0])
+							else:
+								if len(plugin) == 2:
+									plugin.append('')
+								plugin.append(plugin[0][15:])
+								self.pluginlist.append(plugin)
+
+	def updateList(self):
+		list = []
+		expandableIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expandable-plugins.png"))
+		expandedIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/expanded-plugins.png"))
+		verticallineIcon = LoadPixmap(resolveFilename(SCOPE_CURRENT_SKIN, "icons/verticalline-plugins.png"))
+
+		self.plugins = {}
+		for x in self.pluginlist:
+			split = x[3].split('-', 1)
+			if len(split) < 2:
+				continue
+			if split[0] not in self.plugins:
+				self.plugins[split[0]] = []
+
+			self.plugins[split[0]].append((PluginDescriptor(name=x[3], description=x[2], icon=verticallineIcon), split[1], x[1]))
+
+		for x in self.plugins.keys():
+			if x in self.expanded:
+				list.append(PluginCategoryComponent(x, expandedIcon, self.listWidth))
+				list.extend([PluginDownloadComponent(plugin[0], plugin[1], plugin[2], self.listWidth) for plugin in self.plugins[x]])
+			else:
+				list.append(PluginCategoryComponent(x, expandableIcon, self.listWidth))
+		self.list = list
+		self["list"].l.setList(list)
 
 
 class PluginFilter(ConfigListScreen, Screen):
@@ -1293,6 +1193,20 @@ class PluginDownloadManager(PluginDownloadBrowser):
 		self.skinName = ["PluginDownloadBrowser"]
 
 
-if config.misc.pluginLayout.value == PLUGIN_GRID:
-	PluginBrowser = PluginBrowserNew
+_PluginBrowserList = PluginBrowser
+_PluginBrowserGrid = PluginBrowserNew
+
+
 # lulu
+class PluginBrowserWrapper:
+	def __new__(cls, session, *args, **kwargs):
+		if config.misc.pluginLayout.value == PLUGIN_GRID:
+			instance = _PluginBrowserGrid.__new__(_PluginBrowserGrid)
+		else:
+			instance = _PluginBrowserList.__new__(_PluginBrowserList)
+
+		instance.__init__(session, *args, **kwargs)
+		return instance
+
+
+PluginBrowser = PluginBrowserWrapper
