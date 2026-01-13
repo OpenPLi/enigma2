@@ -177,23 +177,19 @@ class PluginBrowser(Screen, ProtectedScreen):
 			if not fileExists("/etc/opkg/user-feed.conf"):
 				CreateFeedConfig()
 
-	def isProtected(self):	# lulu
+	def isProtected(self):  # lulu
 		return config.ParentalControl.setuppinactive.value and (not config.ParentalControl.config_sections.main_menu.value or hasattr(self.session, 'infobar') and self.session.infobar is None) and config.ParentalControl.config_sections.plugin_browser.value
 
-	def menu(self):	 # lulu
-		self.remembered_layout = config.misc.pluginLayout.value
-		self.session.openWithCallback(self.menuClosed, PluginFilter)
+	def menu(self):
+		def keyMenuCallback():
+			if config.pluginfilter.userfeed.value != "https://":
+				CreateFeedConfig()
+			self.checkWarnings()
+			self.updateList()
 
-	def menuClosed(self, returnValue=None):	 # lulu
-		if hasattr(self, 'remembered_layout'):
-			if config.misc.pluginLayout.value != self.remembered_layout:
-				print("[PluginBrowser] Layout cambiato nel menu, chiudo la schermata.")
-				self.close()
-				return
+		self.session.openWithCallback(keyMenuCallback, PluginFilter)
 
-		self.PluginDownloadBrowserClosed(returnValue)
-
-	def exit(self):	 # lulu
+	def exit(self):  # lulu
 		self.close(True)
 
 	def saveListsize(self):
@@ -407,18 +403,14 @@ class PluginBrowserNew(Screen):
 			desc = self.plugins[self.current][1]
 			self["plugin_description"].setText(desc)
 
-	def menu(self):	 # lulu
-		self.remembered_layout = config.misc.pluginLayout.value
-		self.session.openWithCallback(self.menuClosed, PluginFilter)
+	def menu(self):
+		def keyMenuCallback():
+			if config.pluginfilter.userfeed.value != "https://":
+				CreateFeedConfig()
+			self.checkWarnings()
+			self.updateList()
 
-	def menuClosed(self, returnValue=None):	 # lulu
-		if hasattr(self, 'remembered_layout'):
-			if config.misc.pluginLayout.value != self.remembered_layout:
-				print("[PluginBrowserNew] Layout cambiato nel menu, chiudo la schermata.")
-				self.close()
-				return
-
-		self.PluginDownloadBrowserClosed(returnValue)
+		self.session.openWithCallback(keyMenuCallback, PluginFilter)
 
 	def exit(self):
 		self.close()
@@ -533,7 +525,7 @@ class PluginBrowserNew(Screen):
 				<convert type="ClockToText">
 			</convert>
 			</widget>
-			<widget backgroundColor="#44000000" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#000080ff" horizontalAlignment="right" render="Label"	source="global.CurrentTime" transparent="1">
+			<widget backgroundColor="#44000000" position="%d,%d" size="%d,%d" font="Regular;%d" foregroundColor="#000080ff" horizontalAlignment="right" render="Label"  source="global.CurrentTime" transparent="1">
 				<convert type="ClockToText">FullDate</convert>
 			</widget>
 			<widget name="pages" foregroundColor="#000080ff" position="%d,%d" size="%d,%d" font="Regular;%d" zPosition="2" horizontalAlignment="center" verticalAlignment="center" transparent="1" />
@@ -847,7 +839,7 @@ class PluginDownloadBrowser(Screen):
 		selection = self["list"].l.getCurrentSelection()
 		if selection:
 			selection = selection[0]
-			if isinstance(selection, str):	# category
+			if isinstance(selection, str):  # category
 				self["key_green"].text = _("Collapse") if selection in self.expanded else _("Expand")
 			else:
 				self["key_green"].text = _("Install plugin") if self.type == self.DOWNLOAD else _("Remove plugin")
@@ -856,7 +848,7 @@ class PluginDownloadBrowser(Screen):
 		selection = self["list"].l.getCurrentSelection()
 		if selection:
 			selection = selection[0]
-			if isinstance(selection, str):	# category
+			if isinstance(selection, str):  # category
 				if selection in self.expanded:
 					self.expanded.remove(selection)
 				else:
@@ -1099,7 +1091,7 @@ class PluginFilter(Screen, ConfigListScreen):
 		self["HelpWindow"] = Pixmap()
 		self["HelpWindow"].hide()
 		self["status"] = StaticText()
-		self["labelExitsave"] = Label("[Exit] = " + _("Cancel") + "				 [Ok] =" + _("Save"))
+		self["labelExitsave"] = Label("[Exit] = " + _("Cancel") + "              [Ok] =" + _("Save"))
 		self.list = []
 		self.onChangedEntry = []
 		self["actions"] = ActionMap(
@@ -1165,6 +1157,8 @@ class PluginFilter(Screen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].save()
 		configfile.save()
+		self.createSetup()
+		self.selectionChanged()
 
 	def keySave(self):
 		self.saveAll()
