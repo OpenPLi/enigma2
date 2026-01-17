@@ -162,7 +162,6 @@ class PluginBrowser(Screen, ProtectedScreen):
 		)
 
 		self.help = False
-
 		self.number = 0
 		self.nextNumberTimer = eTimer()
 		self.nextNumberTimer.callback.append(self.okbuttonClick)
@@ -182,14 +181,11 @@ class PluginBrowser(Screen, ProtectedScreen):
 
 	def menu(self):
 		def keyMenuCallback():
-			if config.pluginfilter.userfeed.value != "https://":
-				CreateFeedConfig()
-			self.checkWarnings()
-			self.updateList()
+			self.close()
 
 		self.session.openWithCallback(keyMenuCallback, PluginFilter)
 
-	def exit(self):  # lulu
+	def exit(self):
 		self.close(True)
 
 	def saveListsize(self):
@@ -405,10 +401,7 @@ class PluginBrowserNew(Screen):
 
 	def menu(self):
 		def keyMenuCallback():
-			if config.pluginfilter.userfeed.value != "https://":
-				CreateFeedConfig()
-			self.checkWarnings()
-			self.updateList()
+			self.close()
 
 		self.session.openWithCallback(keyMenuCallback, PluginFilter)
 
@@ -785,10 +778,8 @@ class PluginDownloadBrowser(Screen):
 
 	def __init__(self, session, type=0, needupdate=True):
 		Screen.__init__(self, session)
-
 		self.type = type
 		self.needupdate = needupdate
-
 		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.runFinished)
 		self.container.dataAvail.append(self.dataAvail)
@@ -1195,9 +1186,13 @@ class PluginBrowserWrapper:
 			instance = _PluginBrowserGrid.__new__(_PluginBrowserGrid)
 		else:
 			instance = _PluginBrowserList.__new__(_PluginBrowserList)
-
 		instance.__init__(session, *args, **kwargs)
 		return instance
+
+	@classmethod
+	def createInstance(cls, session):
+		"""Crea un'istanza per instantiateDialog"""
+		return cls.__new__(cls, session)
 
 
 PluginBrowser = PluginBrowserWrapper
