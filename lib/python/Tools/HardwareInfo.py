@@ -41,6 +41,7 @@ class HardwareInfo:
 
 		# standard values
 		self.machine_name = BoxInfo.getItem("machine") # This contains the value where the image is buld from
+		self.machinebuild_name = BoxInfo.getItem("machinebuild") # This contains the value for compatibility with OE-A
 		self.device_model = BoxInfo.getItem("model") # This may contain more information about the specific model
 		self.device_hw = BoxInfo.getItem("displaymodel")
 
@@ -70,6 +71,9 @@ class HardwareInfo:
 
 	def get_machine_name(self):
 		return hw_info.machine_name
+
+	def get_machinebuild_name(self):
+		return hw_info.machinebuild_name
 
 	def has_hdmi(self):
 		return hw_info.device_hdmi
