@@ -1,7 +1,7 @@
 from os import listdir, path as ospath
 from re import sub
 
-from enigma import ePixmap, ePicLoad, eServiceCenter, eServiceReference, iServiceInformation,
+from enigma import ePixmap, ePicLoad, eServiceCenter, eServiceReference, iServiceInformation
 
 from Components.config import config
 from Components.Harddisk import harddiskmanager
