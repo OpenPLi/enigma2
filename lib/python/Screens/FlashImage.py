@@ -42,7 +42,8 @@ class SelectImage(Screen):
 		self.imagesList = {}
 		self.setIndex = 0
 		self.expanded = []
-		self.model = HardwareInfo().get_machinebuild_name()
+		self.model = HardwareInfo().get_machine_name()
+		self.machine = HardwareInfo().get_machinebuild_name()
 		self.selectedImage = ["OpenPLi", {"url": "https://downloads.openpli.org/json/%s" % self.model, "model": self.model}]
 		self.models = [self.model]
 		self.setTitle(_("Select image"))
@@ -93,6 +94,8 @@ class SelectImage(Screen):
 			for model in self.models:
 				if '-%s-' % model or '-%_' % model in file:
 					return True
+				if '-%s-' % self.model or '-%_' % self.model in file:
+					return True
 			return False
 
 		def conditional_sort(ls, f):
@@ -100,7 +103,7 @@ class SelectImage(Screen):
 			return [w if not f(w) else next(y) for w in ls]
 
 		if not self.imageBrandList:
-				url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.model)
+				url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.machine)
 				try:
 					self.imageBrandList = json.load(urlopen(url, timeout=3))
 				except:
