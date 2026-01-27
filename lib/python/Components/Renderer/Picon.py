@@ -1,7 +1,7 @@
 from os import listdir, path as ospath
 from re import sub
 
-from enigma import ePixmap, ePicLoad, eServiceReference
+from enigma import ePixmap, ePicLoad, eServiceCenter, eServiceReference, iServiceInformation
 
 from Components.config import config
 from Components.Harddisk import harddiskmanager
@@ -75,6 +75,11 @@ class PiconLocator:
 	def getPiconName(self, serviceRef):
 		if serviceRef is None:
 			return ""
+		service = eServiceReference(serviceRef)
+		if service.getPath().startswith("/") and serviceRef.startswith("1:"):  # for when serviceRef is a recording path
+			info = eServiceCenter.getInstance().info(eServiceReference(serviceRef))
+			refstr = info and info.getInfoString(service, iServiceInformation.sServiceref)
+			serviceRef = refstr and eServiceReference(refstr).toCompareString()
 		# remove the path and name fields, and replace ":" by "_"
 		fields = GetWithAlternative(serviceRef).split(":", 10)[:10]
 		if not fields or len(fields) < 10:
