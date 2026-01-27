@@ -43,6 +43,7 @@ class SelectImage(Screen):
 		self.setIndex = 0
 		self.expanded = []
 		self.model = HardwareInfo().get_machine_name()
+		self.machine = HardwareInfo().get_machinebuild_name()
 		self.selectedImage = ["OpenPLi", {"url": "https://downloads.openpli.org/json/%s" % self.model, "model": self.model}]
 		self.models = [self.model]
 		self.setTitle(_("Select image"))
@@ -93,6 +94,8 @@ class SelectImage(Screen):
 			for model in self.models:
 				if '-%s-' % model or '-%_' % model in file:
 					return True
+				if '-%s-' % self.model or '-%_' % self.model in file:
+					return True
 			return False
 
 		def conditional_sort(ls, f):
@@ -100,13 +103,18 @@ class SelectImage(Screen):
 			return [w if not f(w) else next(y) for w in ls]
 
 		if not self.imageBrandList:
-				url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.model)
+				url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.machine)
 				try:
 					self.imageBrandList = json.load(urlopen(url, timeout=3))
 				except:
-					print("[FlashImage] getImageBrandList Error: Unable to load json data from URL '%s'!" % url)
+					url = "%s%s" % ("https://raw.githubusercontent.com/OpenPLi/FlashImage/main/", self.model)
+					try:
+						self.imageBrandList = json.load(urlopen(url, timeout=3))
+					except:
+						print("[FlashImage] getImageBrandList Error: Unable to load json data from URL '%s'!" % url)
 				if self.imageBrandList:
-					self.imageBrandList.update({self.selectedImage[0]: self.selectedImage[1]})
+					if "OpenPLi" in self.imageBrandList.keys():
+						self.selectedImage[1] = self.imageBrandList["OpenPLi"]
 					self.models = set([self.imageBrandList[image]['model'] for image in self.imageBrandList.keys()])
 					if len(self.imageBrandList) > 1:
 						self["key_blue"].setText(_("Other Images"))
@@ -616,7 +624,7 @@ class MultibootSelection(SelectImage):
 				else:
 					shutil.copyfile(startupfile, os.path.join(self.tmp_dir, "STARTUP"))
 			else:
-				model = HardwareInfo().get_machine_name()
+				model = HardwareInfo().get_machinebuild_name()
 				if slot[1] == 1:
 					startupFileContents = "boot emmcflash0.kernel%s 'root=/dev/mmcblk0p%s rw rootwait %s_4.boxmode=1'\n" % (slot[0], slot[0] * 2 + 1, model)
 				else:
@@ -673,7 +681,7 @@ class KexecInit(Screen):
 
 	def RootInitEnd(self, *args, **kwargs):
 		from Screens.Standby import TryQuitMainloop
-		model = HardwareInfo().get_machine_name()
+		model = HardwareInfo().get_machinebuild_name()
 		for usbslot in range(1, 4):
 			if pathExists("/media/hdd/%s/linuxrootfs%s" % (model, usbslot)):
 				Console().ePopen("cp -R /media/hdd/%s/linuxrootfs%s . /" % (model, usbslot))
