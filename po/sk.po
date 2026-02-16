@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-01 17:09+0200\n"
-"PO-Revision-Date: 2026-02-12 15:25+0100\n"
+"PO-Revision-Date: 2026-02-16 09:28+0100\n"
 "Last-Translator: Andrej Tobola <andrej.tobola@gmail.com>\n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -624,7 +624,7 @@ msgid "A recording is currently running. Please stop the recording before starti
 msgstr "Práve prebieha nahrávanie. Pred spustením vyhľadávania zastavte nahrávanie."
 
 msgid "A repeating event is currently recording. What would you like to do?"
-msgstr "Práve sa zaznamenáva opakujúci sa program. Čo by ste chceli urobiť?"
+msgstr "Práve sa nahráva opakujúca sa udalosť. Čo by ste chceli urobiť?"
 
 #, python-format
 msgid "A required tool (%s) was not found."
@@ -790,7 +790,7 @@ msgid "Add recording (indefinitely)"
 msgstr "Pridať nahrávanie (na dobu neurčitú)"
 
 msgid "Add recording (stop after current event)"
-msgstr "Pridať nahrávanie (zastaviť po aktuálnom programe)"
+msgstr "Pridať nahrávanie (zastaviť po aktuálnej udalosti)"
 
 msgid "Add service"
 msgstr "Pridať stanicu"
@@ -820,7 +820,7 @@ msgid "Add to parental protection"
 msgstr "Pridať do rodičovskej ochrany"
 
 msgid "Add/remove change timer for current event"
-msgstr "Pridať/odstrániť časovač pre aktuálny program"
+msgstr "Pridať/odstrániť/zmeniť časovač pre aktuálnu udalosť"
 
 msgid "Additional cable of motorized LNB"
 msgstr "Dodatočný kábel motorizovaného LNB"
@@ -865,7 +865,7 @@ msgid "Afghanistan"
 msgstr "Afganistan"
 
 msgid "After event"
-msgstr "Po programe"
+msgstr "Po udalosti"
 
 msgid "Aland Islands"
 msgstr "Alandské ostrovy"
@@ -880,7 +880,7 @@ msgid "Algeria"
 msgstr "Alžírsko"
 
 msgid "Alignment of events"
-msgstr "Zoradenie programov"
+msgstr "Zosúladenie udalostí"
 
 msgid "Alignment of service names"
 msgstr "Zoradenie náźvov staníc"
@@ -2073,7 +2073,7 @@ msgid "Configure for how long the infobar will remain visible after activation."
 msgstr "Nastavte, ako dlho bude infobar viditeľný po aktivácii."
 
 msgid "Configure how long finished events should remain visible in the EPG. Useful when you need information about an event which has just finished, or has been delayed (or for plugins that support catchup)."
-msgstr "Konfigurácia toho, ako dlho majú zostať dokončené programy viditeľné v EPG. Užitočné, ak potrebujete informácie o práve skončenom programe alebo o programe, ktorý bola posunutý (alebo pre doplnky, ktoré podporujú funkciu catchup)."
+msgstr "Nastavte, ako dlho majú byť dokončené udalosti viditeľné v EPG. Je to užitočné, ak potrebujete informácie o udalosti, ktorá práve skončila alebo bola odložená (alebo pre doplnky, ktoré podporujú dobiehanie)."
 
 msgid "Configure how many channels are shown in the selection list."
 msgstr "Konfigurácia počtu kanálov zobrazených v zozname staníc."
@@ -2538,8 +2538,8 @@ msgid ""
 "Current event is over.\n"
 "Select an option to save the timeshift file."
 msgstr ""
-"Aktuálna relácia skončila.\n"
-"Zvoľte uloženie súboru časového posunu."
+"Aktuálna udalosť skončila.\n"
+"Vyberte možnosť uloženia súboru časového posunu."
 
 #, python-format
 msgid "Current mode: %s \n"
@@ -2984,7 +2984,7 @@ msgid "Disable background scanning"
 msgstr "Vypnúť skenovanie na pozadí"
 
 msgid "Disable current event but not coming events"
-msgstr "Vypnúť aktuálny program, ale nezrušiť nasledujúce programy"
+msgstr "Vypnúť aktuálnu udalosť, ale nie nadchádzajúce udalosti"
 
 msgid "Disable move mode"
 msgstr "Zrušiť presun"
@@ -3123,7 +3123,7 @@ msgstr "Naozaj chcete odstrániť záložku %s?"
 
 #, python-format
 msgid "Do you really want to stop current event and delete timer %s?"
-msgstr "Naozaj chcete zastaviť aktuálny program a zmazať časovač %s?"
+msgstr "Naozaj chcete zastaviť aktuálnu udalosť a odstrániť časovač %s?"
 
 msgid "Do you want this?"
 msgstr "Chcete to?"
@@ -3479,7 +3479,7 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Povolenie vzdialenému Enigma2 prijímaču pokúsiť sa naladiť stanice, ktoré nie je možné naladiť lokálne (napr. tuner je zaneprázdnený alebo typ stanice nie je k dispozícii). Zadajte úplnú adresu URL, vrátane http:// a číslo portu (obvykle ...: 8001 ), napríklad http://druhy_box: 8001."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
-msgstr "Povoliť nastavenie časového intervalu pre filtrovanie programov v SingleEPG pomocou tlačidla „Stop“."
+msgstr "Povoliť nastavenie časového intervalu pre filtrovanie udalostí v SingleEPG pomocou tlačidla „Stop“."
 
 msgid "Enable teletext caching"
 msgstr "Povoliť ukladanie teletextu do medzipamäte"
@@ -3530,7 +3530,7 @@ msgid "End favourites edit"
 msgstr "Skončiť úpravu obľúbených"
 
 msgid "End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save."
-msgstr "Koniec časového intervalu, počas ktorého sa musia začať zobrazovať programy. Ak je filter aktívny, použite klávesy 3 a 6 na nastavenie koncového času a klávesu 0 na uloženie."
+msgstr "Koniec časového intervalu, počas ktorého sa musia začať zobrazovať udalosti. Ak je filter aktívny, použite klávesy 3 a 6 na nastavenie koncového času a klávesu 0 na uloženie."
 
 msgid "End time"
 msgstr "Čas ukončenia"
@@ -3700,19 +3700,19 @@ msgid "Ethiopia"
 msgstr "Etiópia"
 
 msgid "Event View Actions"
-msgstr "Akcie zobrazenia programov"
+msgstr "Akcie zobrazenia udalosti"
 
 msgid "Event View EPG Actions"
-msgstr "Zobrazenie programov EPG Akcie"
+msgstr "Akcie zobrazenia EPG udalosti"
 
 msgid "Event font size (relative to skin size)"
 msgstr "Veľkosť písma programu (v pomere k veľkosti vzhľadu)"
 
 msgid "Event name first"
-msgstr "Názov programu na začiatku"
+msgstr "Názov udalosti na začiatku"
 
 msgid "Event view"
-msgstr "Zobrazenie programu"
+msgstr "Zobrazenie udalostí"
 
 msgid "Event view context menu"
 msgstr "Kontextové menu zobrazenia programu"
@@ -4328,19 +4328,19 @@ msgid "Goto index position"
 msgstr "Prejsť na východziu pozíciu"
 
 msgid "Goto next day of events"
-msgstr "Prejsť na ďalší deň zoznamu relácií"
+msgstr "Prejsť na ďalší deň udalostí"
 
 msgid "Goto next page of events"
-msgstr "Prejsť na ďalšiu stranu zoznamu relácií"
+msgstr "Prejsť na ďalšiu stranu udalostí"
 
 msgid "Goto position"
-msgstr "Otočiť do pozície"
+msgstr "Ísť na pozíciu"
 
 msgid "Goto previous day of events"
-msgstr "Prejsť na predchádzajúci deň zoznamu relácií"
+msgstr "Prejsť na predchádzajúci deň udalostí"
 
 msgid "Goto previous page of events"
-msgstr "Choď na predchádzajúcu stranu relácií"
+msgstr "Ísť na predchádzajúcu stranu udalostí"
 
 msgid "Goto primetime / now"
 msgstr "Prejsť na hlavný vysielací čas"
@@ -4676,7 +4676,7 @@ msgid "If set to 'yes' signal values (SNR, etc) will be calculated from API V3. 
 msgstr "Ak je nastavené na 'áno' , hodnoty signálu (SNR, atď) budú vypočítané z API v3. Toto je stará API verzia, ktorá je už nahradená novšou."
 
 msgid "If set to 'yes' the same commands will be sent to the TV for deep standby events, as are sent during regular standby events."
-msgstr "Ak je nastavené na 'Áno', rovnaký príkaz bude odoslaný do TV aj v režime programov hlbokého spánku, aký je zasielaný i počas regulérnych programov pohotovostného režimu."
+msgstr "Ak je nastavené na 'Áno', rovnaké príkazy budú odoslané do TV aj v režime udalostí vypnutého prijímača, ako sú odosielané aj počas bežných udalostí pohotovostného režimu."
 
 msgid "If set to 'yes', allows you to use timeshift with alternative audio plugins."
 msgstr "Ak je nastavené na „áno“, umožňuje vám použiť časový posun s alternatívnymi zvukovými doplnkami."
@@ -5159,7 +5159,7 @@ msgid "Kexec MultiBoot Manager"
 msgstr "Kexec MultiBoot Manažér"
 
 msgid "Key Events"
-msgstr "Kľúčové programy"
+msgstr "Kľúčové udalosti"
 
 msgid "Keyboard"
 msgstr "Klávesnica"
@@ -5983,7 +5983,7 @@ msgid "New Zealand"
 msgstr "Nový Zéland"
 
 msgid "News/Current Affairs/Social"
-msgstr "Správy/Aktuálne programy/Sociálne"
+msgstr "Správy/Aktuálne udalosti/Spoločenské"
 
 msgctxt "button label, 'next screen'"
 msgid "Next"
@@ -7593,7 +7593,7 @@ msgid "Rename entry"
 msgstr "Premenovať položku"
 
 msgid "Rename name and description for new events"
-msgstr "Premenujte názov a popis pre nové relácie"
+msgstr "Premenovať názov a popis nových udalosti"
 
 msgid "Repeat"
 msgstr "Opakovať"
@@ -7985,7 +7985,7 @@ msgid "Save timeshift in movie dir and zap"
 msgstr "Uložiť súbor časového posunu do priečinka filmov a prepnúť"
 
 msgid "Save timeshift only for current event"
-msgstr "Uložiť súbor časového posunu iba pre aktuálnu reláciu"
+msgstr "Uložiť časový posun len pre aktuálnu udalosť"
 
 msgid "Scaler sharpness"
 msgstr "Ostrosť škálovania"
@@ -8684,7 +8684,7 @@ msgid "Set the port of the OpenWebif from your fallback tuner"
 msgstr "Nastavenie portu OpenWebif z vášho záložného tunera"
 
 msgid "Set the type of the progress indication in the channel selection screen (right alignment only available in single line mode)."
-msgstr "Nastavenie typu indikácie priebehu na obrazovke výberu kanála (zarovnanie doprava je k dispozícii len v režime jedného riadku)."
+msgstr "Nastavenie typu indikácie priebehu v zozname staníc (zarovnanie doprava je k dispozícii len v režime jedného riadku)."
 
 msgid "Set time window to 1 hour"
 msgstr "Nastaviť časové okno na 1 hodinu"
@@ -8843,13 +8843,13 @@ msgid "Show disabled timers (local only)"
 msgstr "Zobraziť vypnuté časovače (len miestne)"
 
 msgid "Show event details"
-msgstr "Zobraziť detaily o programe"
+msgstr "Zobraziť podrobnosti o udalosti"
 
 msgid "Show event-progress in channel selection"
-msgstr "Zobraziť priebeh programu v zozname staníc"
+msgstr "Zobraziť priebeh udalosti v zozname staníc"
 
 msgid "Show eventinfo plugins"
-msgstr "Zobraziť doplnky informácií o programe"
+msgstr "Zobraziť eventinfo doplnky"
 
 msgid "Show extended description"
 msgstr "Zobraziť rozšírený opis"
@@ -9005,7 +9005,7 @@ msgid "Show the radio player..."
 msgstr "Zobraziť prehrávač rádia..."
 
 msgid "Show the service information on two lines in the channel selection screen. You can choose between the current event description below the channel name, or the current event description next to the channel name, and the next event description on the second line."
-msgstr "Zobrazenie informácií o službe na dvoch riadkoch na obrazovke výberu kanála. Môžete si vybrať medzi popisom aktuálneho programu pod názvom kanála alebo popisom aktuálneho programu vedľa názvu kanála a popisom ďalšieho programu v druhom riadku."
+msgstr "Zobraziť informácie o službe na dvoch riadkoch v zozname staníc. Môžete si vybrať medzi popisom aktuálnej udalosti pod názvom stanice alebo popisom aktuálnej udalosti vedľa názvu stanice a popisom nasledujúcej udalosti na druhom riadku."
 
 msgid "Show the tv player..."
 msgstr "Zobraziť TV prehrávač..."
@@ -9388,7 +9388,7 @@ msgid "Standby LED"
 msgstr "LED v pohotovostnom režime"
 
 msgid "Standby after current event"
-msgstr "Pohotovostný režim po aktuálnom programe"
+msgstr "Pohotovostný režim po aktuálnej udalosti"
 
 #, python-format
 msgid "Standby fan %d PWM"
@@ -9423,13 +9423,13 @@ msgid "Start instant recording"
 msgstr "Spustiť okamžité nahrávanie"
 
 msgid "Start of the time interval during which events must begin to be displayed. If the filter is active, use keys 1 and 4 to adjust the start time, and key 0 to save."
-msgstr "Začiatok časového intervalu, počas ktorého sa musia začať zobrazovať programy. Ak je filter aktívny, použite klávesy 1 a 4 na nastavenie času začiatku a klávesu 0 na uloženie."
+msgstr "Začiatok časového intervalu, počas ktorého sa musia začať zobrazovať udalosti. Ak je filter aktívny, použite klávesy 1 a 4 na nastavenie času začiatku a klávesu 0 na uloženie."
 
 msgid "Start offline decode"
 msgstr "Spustiť offline dekódovanie"
 
 msgid "Start recording current event"
-msgstr "Spustiť nahrávanie aktuálneho programu"
+msgstr "Spustiť nahrávanie aktuálnej udalosti"
 
 msgid "Start recording?"
 msgstr "Spustiť nahrávanie?"
@@ -9507,10 +9507,10 @@ msgid "Stop and delete recordings:"
 msgstr "Zastaviť a zmazať nahrávky:"
 
 msgid "Stop current event and disable coming events"
-msgstr "Zastaviť aktuálny program a zrušiť nasledujúce programy"
+msgstr "Zastaviť aktuálnu udalosť a zrušiť nasledujúce udalosti"
 
 msgid "Stop current event but not coming events"
-msgstr "Zastaviť aktuálny program, ale nezrušiť nasledujúce programy"
+msgstr "Zastaviť aktuálnu udalosť, ale nie nadchádzajúce udalosti"
 
 msgid "Stop current stream"
 msgstr "Zastaviť aktuálny stream"
@@ -9933,12 +9933,12 @@ msgid ""
 "Thank you for using the wizard. Your receiver is now ready for use.\n"
 "Press Blue or OK to start using your receiver."
 msgstr ""
-"Ďakujeme, že používate sprievodcu. Váš prijímač je teraz pripravený na použitie.\n"
+"Ďakujeme, že ste použili sprievodcu. Váš prijímač je teraz pripravený na použitie.\n"
 "Stlačte modré tlačidlo alebo tlačidlo OK a začnite používať prijímač."
 
 #, python-format
 msgid "The %d min remaining before the end of the event."
-msgstr "Do konca relácie ostáva %d min."
+msgstr "%d minút zostáva do konca udalosti"
 
 msgid "The DVD standard doesn't support H.264 (HDTV) video streams. Do you want to create a special format data DVD (which will not play in stand-alone DVD players) instead?"
 msgstr "Štandard DVD nepodporuje H.264 (HDTV) video streamy. Chcete vytvoriť špeciálny formát dátového disku DVD (ktorý sa nebude dať prehrať v klasických DVD prehrávačoch)?"
@@ -10709,7 +10709,7 @@ msgid "Two lines"
 msgstr "Dva riadky"
 
 msgid "Two lines and next event"
-msgstr "Dva riadky a nasledujúci program"
+msgstr "Dva riadky a nasledujúca udalosť"
 
 msgid "Type"
 msgstr "Typ"
@@ -11047,7 +11047,7 @@ msgid "Using fixed address"
 msgstr "Používam pevnú adresu"
 
 msgid "Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'."
-msgstr "Pomocou tlačidla „Stop“ sa cyklicky prepína zobrazenie programov začínajúcich: „mimo intervalu“, „v rámci intervalu“ a „bez filtrovania“ namiesto „v rámci intervalu“, „mimo intervalu“ a „bez filtrovania“."
+msgstr "Pomocou tlačidla „Stop“ sa cyklicky prepína zobrazenie udalostí začínajúcich: „mimo intervalu“, „v rámci intervalu“ a „bez filtrovania“ namiesto „v rámci intervalu“, „mimo intervalu“ a „bez filtrovania“."
 
 #, python-format
 msgid "Using tuner %s"
@@ -11422,22 +11422,22 @@ msgid "When enabled extra information is shown on the infobar. This can also be 
 msgstr "Ak je táto funkcia zapnutá, na informačnej lište sa zobrazia ďalšie informácie. Túto funkciu možno okamžite prepnúť aj podržaním tlačidla OK, keď nie je viditeľná informačná lišta."
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
-msgstr "Ak povolené, PiP môže byť ukončený tlačidlom EXIT."
+msgstr "Ak je povolené, PiP môže byť ukončený tlačidlom EXIT."
 
 msgid "When enabled the arrow buttons around the OK button will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Ak povolené, tlačidlá so šípkami okolo tlačidla OK budú mať funkcie prepínania ako v systéme \"neutríno\" namiesto funkcií v Enigma2 štýle."
+msgstr "Ak je povolené, tlačidlá so šípkami okolo tlačidla OK budú mať funkcie prepínania ako v systéme \"neutríno\" namiesto funkcií v Enigma2 štýle."
 
 msgid "When enabled the left, right, CH+/-, B+/-, P+/- buttons will follow the 'neutrino' style zap controls instead of the enigma2 style."
-msgstr "Ak povolené, funkcie tlačidiel doľava, doprava, CH +/-, B+ /-, P+ /- budú fungovať v \"neutríno\" štýle ovládania namiesto štýlu Enigma2."
+msgstr "Ak je povolené, funkcie tlačidiel doľava, doprava, CH +/-, B+ /-, P+ /- budú fungovať v \"neutríno\" štýle ovládania namiesto štýlu Enigma2."
 
 msgid "When enabled the receiver will automatically return to standby when the TV is turned off."
 msgstr "Ak je povolené, prijímač sa automaticky vráti do pohotovostného režimu pri vypnutí TV."
 
 msgid "When enabled the receiver will automatically wake from standby when the TV is turned on."
-msgstr "Ak povolené, prijímač sa automaticky prebudí z pohotovostného režimu pri zapnutí TV."
+msgstr "Ak je povolené, prijímač sa automaticky prebudí z pohotovostného režimu pri zapnutí TV."
 
 msgid "When enabled the set top box is able to wakeup on LAN"
-msgstr "Ak povolené, prijímač je schopný prebudenia v sieti LAN"
+msgstr "Ak je povolené, prijímač je schopný prebudenia v sieti LAN"
 
 msgid "When enabled the timer from the fallback receiver is imported"
 msgstr "Ak je povolené, bude importovaný časovač zo záložného tuneru"
@@ -11449,7 +11449,7 @@ msgid "When enabled then when you select a new channel in the channel selection 
 msgstr "Ak je táto možnosť povolená, pri výbere nového kanála vo výbere kanálov sa výber kanálov nezatvorí. Zatvorí sa iba vtedy, keď vyberiete aktuálnu službu prehrávania. Toto je druh režimu náhľadu"
 
 msgid "When enabled you can control the volume with the arrow buttons instead of getting the channel selection list"
-msgstr "Ak povolené môžete ovládať hlasitosť pomocou tlačidiel so šípkami namiesto získania zoznamu výberu stanice"
+msgstr "Ak je povolené môžete ovládať hlasitosť pomocou tlačidiel so šípkami namiesto získania zoznamu výberu stanice"
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Ak je povolené, môžete upravovať OpenWebIf nastavenia záložného tuneru"
@@ -11476,58 +11476,58 @@ msgid "When enabled, ECM data will be included in http streams. This allows a cl
 msgstr "Ak je povolené, budú dáta ECM zahrnuté do http streamov. To umožní klientskemu prijímaču vykonávať dekódovanie."
 
 msgid "When enabled, EIT data will be included in http streams. This allows a client receiver to show EPG."
-msgstr "Ak povolené, EIT údaje sa zahrnú do http streamov. To umožní vzdialenému prijímaču zobraziť EPG."
+msgstr "Ak je povolené, EIT údaje sa zahrnú do http streamov. To umožní vzdialenému prijímaču zobraziť EPG."
 
 msgid "When enabled, HDMI-CEC is enabled with standard configuration"
 msgstr "Ak je povolené, HDMI-CEC sa aktivuje so štandardnou konfiguráciou"
 
 msgid "When enabled, a popup message will be shown when a movie has finished and the next one will start."
-msgstr "Ak povolené, zobrazí sa správa keď skončil film a nasledujúci začne."
+msgstr "Ak je povolené, zobrazí sa správa keď skončil film a nasledujúci začne."
 
 msgid "When enabled, a popup message will be shown when a recording starts."
-msgstr "Ak povolené, pri začatí nahrávania sa zobrazí správa vo vyskakovacom okne."
+msgstr "Ak je povolené, pri začatí nahrávania sa zobrazí správa vo vyskakovacom okne."
 
 msgid "When enabled, a radio background image will be visible while listening to a radio channel."
-msgstr "Ak povolené, pri počúvaní rozhlasových staníc sa zobrazí obrázok pozadia."
+msgstr "Ak je povolené, pri počúvaní rozhlasových staníc sa zobrazí obrázok pozadia."
 
 msgid "When enabled, a recording is allowed to interrupt live tv, when there are no free tuners."
-msgstr "Ak povolené, nahrávke je dovolené prerušiť živé televízne vysielanie, ak nie sú k dispozícii žiadne voľné tunery."
+msgstr "Ak je povolené, nahrávke je dovolené prerušiť živé televízne vysielanie, ak nie sú k dispozícii žiadne voľné tunery."
 
 msgid "When enabled, a warning will be displayed and the user will get an option to stop or to continue the timeshift."
-msgstr "Ak povolené, zobrazí sa varovanie a užívateľ dostane možnosť zastaviť alebo pokračovať v časovom posune."
+msgstr "Ak je povolené, zobrazí sa varovanie a užívateľ dostane možnosť zastaviť alebo pokračovať v časovom posune."
 
 msgid "When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off."
-msgstr "Ak povolené, vždy dekódovať prijímané http streamy. Zaberie viac systémových prostriedkov (dekódovanie demuxery), Aktivujte, iba ak to bude nevyhnutné. Jednotlivé streamy sú vždy dekódované, ak je pridané 0x100 v type služby, bez ohľadu na toto nastavenie. Predvolene: vypnuté."
+msgstr "Ak je povolené, vždy dekódovať prijímané http streamy. Zaberie viac systémových prostriedkov (dekódovanie demuxery), Aktivujte, iba ak to bude nevyhnutné. Jednotlivé streamy sú vždy dekódované, ak je pridané 0x100 v type služby, bez ohľadu na toto nastavenie. Predvolene: vypnuté."
 
 msgid "When enabled, authentication is required to watch http streams."
-msgstr "Ak povolené, pre sledovanie http streamov sa bude vyžadovať prihlásenie."
+msgstr "Ak je povolené, pre sledovanie http streamov sa bude vyžadovať prihlásenie."
 
 msgid "When enabled, channel numbering will start at '1' for each bouquet."
-msgstr "Ak povolené, číslovanie staníc bude začínať od \"1\" vo všetkých prehľadoch."
+msgstr "Ak je povolené, číslovanie staníc bude začínať od \"1\" vo všetkých prehľadoch."
 
 msgid "When enabled, content with an aspect ratio of 4:3 will be stretched to fit the screen."
-msgstr "Ak povolené, obsah s pomerom strán 4:3, sa zväčší na celú obrazovku."
+msgstr "Ak je povolené, obsah s pomerom strán 4:3, sa zväčší na celú obrazovku."
 
 msgid "When enabled, continue to the next bouquet when the last channel of the current bouquet is reached while changing channels."
-msgstr "Ak povolené, pokračovať na ďalší prehľad, keď sa dosiahne posledná stanica aktuálneho prehľadu pri zmene kanálov."
+msgstr "Ak je povolené, pokračovať na ďalší prehľad, keď sa dosiahne posledná stanica aktuálneho prehľadu pri zmene kanálov."
 
 msgid "When enabled, deleted recordings are moved to the trash can, instead of being deleted immediately."
-msgstr "Ak povolené, odstránené nahrávky sú presunuté do koša, namiesto toho aby sa okamžite odstránili."
+msgstr "Ak je povolené, odstránené nahrávky sú presunuté do koša, namiesto toho aby sa okamžite odstránili."
 
 msgid "When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead."
-msgstr "Ak je povolené, zobrazí aktuálne/nasledujúce EIT (EPG) v informačnej lište. Ak nie je povolené, zobrazí aktuálny/nasledujúci program z vyrovnávacej pamäte EPG."
+msgstr "Ak je táto funkcia zapnutá, zobrazujú sa údaje o aktuálnej/nasledujúcej udalosti EIT (EPG) v informačnej lište. Ak je táto funkcia vypnutá, zobrazujú sa namiesto toho údaje o aktuálnej/nasledujúcej udalosti z vyrovnávacej pamäte EPG."
 
 msgid "When enabled, encryption info will be shown in the infobar (when supported by the skin)."
-msgstr "Ak povolené, na informačnom paneli sa zobrazí informácia o kódovaní (ak je podporované zvoleným vzhľadom)."
+msgstr "Ak je povolené, na informačnom paneli sa zobrazí informácia o kódovaní (ak je podporované zvoleným vzhľadom)."
 
 msgid "When enabled, error messages related to zapping will not be shown."
-msgstr "Ak povolené, chybové hlásenia súvisiace s prepínaním staníc sa nezobrazia."
+msgstr "Ak je povolené, chybové hlásenia súvisiace s prepínaním staníc sa nezobrazia."
 
 msgid "When enabled, external subtitles will be always turned on for playback movie."
-msgstr "Ak povolené, počas prehrávania filmu sa vždy zobrazia externé titulkov."
+msgstr "Ak je povolené, počas prehrávania filmu sa vždy zobrazia externé titulkov."
 
 msgid "When enabled, graphical DVB subtitles are preferred over teletext subtitles, when both types are available."
-msgstr "Ak povolené, budú grafické DVB titulky uprednostnené pred teletextovými (v prípade dostupnosti oboch typov)."
+msgstr "Ak je povolené, budú grafické DVB titulky uprednostnené pred teletextovými (v prípade dostupnosti oboch typov)."
 
 msgid "When enabled, graphical DVB subtitles will be centered horizontally."
 msgstr "Ak je povolené, budú grafické DVB titulky vodorovne vycentrované."
@@ -11557,70 +11557,70 @@ msgid "When enabled, services may be grouped in multiple bouquets."
 msgstr "Ak je povolené, môžu byť služby zoskupené do niekoľkých prehľadov."
 
 msgid "When enabled, show channel numbers in the channel selection screen."
-msgstr "Ak povolené, v zozname staníc sa zobrazia ich poradové čísla."
+msgstr "Ak je povolené, v zozname staníc sa zobrazia ich poradové čísla."
 
 msgid "When enabled, subtitles for the hearing impaired can be used."
-msgstr "Ak povolené, môžu byť použité titulky pre sluchovo hendikepovaných."
+msgstr "Ak je povolené, môžu byť použité titulky pre sluchovo hendikepovaných."
 
 msgid "When enabled, subtitles for the hearing impaired will be preferred over normal subtitles, when both types are available."
-msgstr "Ak povolené, titulky pre sluchovo hendikepovaných budú uprednostnené pred štandardnými titulkami (ak sú oba typy k dispozícii)."
+msgstr "Ak je povolené, titulky pre sluchovo hendikepovaných budú uprednostnené pred štandardnými titulkami (ak sú oba typy k dispozícii)."
 
 msgid "When enabled, teletext pages will be cached, allowing faster access."
-msgstr "Ak povolené, teletextové stránky budú ukladané do vyrovnávacej pamäte, čo umožňí rýchlejší prístup k nim."
+msgstr "Ak je povolené, teletextové stránky budú ukladané do vyrovnávacej pamäte, čo umožňí rýchlejší prístup k nim."
 
 msgid "When enabled, teletext subtitles will be displayed at their original position."
-msgstr "Ak povolené, budú teletextové titulky zobrazované na svojej pôvodnej pozícii."
+msgstr "Ak je povolené, budú teletextové titulky zobrazované na svojej pôvodnej pozícii."
 
 msgid "When enabled, the VCR scart option will be shown on the main menu"
-msgstr "Ak povolené, v hlavnom menu sa zobrazí položka VCR scart"
+msgstr "Ak je povolené, v hlavnom menu sa zobrazí položka VCR scart"
 
 msgid "When enabled, the channel selection list will be hidden while listening to a radio channel. When disabled, the option 'Auto play last service in radio mode' is available."
 msgstr "Keď je táto možnosť povolená, pri počúvaní rozhlasovej stanice bude zoznam staníc skrytý. Keď je vypnutá, je k dispozícii možnosť „Automatické prehrávanie poslednej služby v režime rádia“."
 
 msgid "When enabled, the infobar will be displayed when a new event starts."
-msgstr "Ak povolené, pri začatí novej relácie sa zobrazí informačný panel."
+msgstr "Ak je táto funkcia zapnutá, pri začatí novej udalosti sa zobrazí informačný panel."
 
 msgid "When enabled, the infobar will be displayed when changing channels."
-msgstr "Ak povolené, pri prepínaní staníc sa zobrazí informačný panel."
+msgstr "Ak je povolené, pri prepínaní staníc sa zobrazí informačný panel."
 
 msgid "When enabled, the infobar will be displayed when skipping forwards/backwards during media playback."
-msgstr "Ak povolené, počas skoku vpred/vzad pri prehrávaní médií sa zobrazí informačný panel."
+msgstr "Ak je povolené, počas skoku vpred/vzad pri prehrávaní médií sa zobrazí informačný panel."
 
 msgid "When enabled, the lenght of each recording will be shown in the movielist (this might cause some additional loading time)."
-msgstr "Ak povolené, zobrazí sa dĺžka každej nahrávky v zozname filmov (môže to spôsobiť predĺženie načítavania)."
+msgstr "Ak je povolené, zobrazí sa dĺžka každej nahrávky v zozname filmov (môže to spôsobiť predĺženie načítavania)."
 
 msgid "When enabled, the receiver will automatically use the audio track which you selected before."
-msgstr "Ak povolené, prijímač automaticky použije zvukovú stopu, ktorú ste predtým vybrali."
+msgstr "Ak je povolené, prijímač automaticky použije zvukovú stopu, ktorú ste predtým vybrali."
 
 msgid "When enabled, the receiver will automatically use the subtitles which you selected before."
-msgstr "Ak povolené, prijímač automaticky použije titulky, ktoré ste predtým vybrali."
+msgstr "Ak je povolené, prijímač automaticky použije titulky, ktoré ste predtým vybrali."
 
 msgid "When enabled, the receiver will no longer monitor the tuned transponder for possible changes. Do not use this option unless you know what you are doing."
 msgstr "Ak je povolené, prijímač prestane sledovať zmeny na naladenom transpondéri. Túto možnosť nepoužívajte, ak neviete čo to môže spôsobiť."
 
 msgid "When enabled, the receiver will select an AC3 track (when available)."
-msgstr "Ak povolené, prijímač zvolí AC3 stopu (ak je dostupná)."
+msgstr "Ak je povolené, prijímač zvolí AC3 stopu (ak je dostupná)."
 
 msgid "When enabled, the receiver will select an AC3+ track (when available)."
-msgstr "Ak povolené, prijímač zvolí AC3+ stopu (ak je dostupná)."
+msgstr "Ak je povolené, prijímač zvolí AC3+ stopu (ak je dostupná)."
 
 msgid "When enabled, then when changing bouquets, set the cursor on the service from the channel history in the channel selection list."
 msgstr "Keď je táto možnosť povolená, pri zmene prehľadu staníc nastavte kurzor na službu z histórie kanálov v zozname na výber kanálov."
 
 msgid "When enabled, this setting has more weight than 'Preferred tuner for recordings'."
-msgstr "Ak povolené, toto nastavenie má väčšiu váhu ako \"Preferovaný tuner pre nahrávky\"."
+msgstr "Ak je povolené, toto nastavenie má väčšiu váhu ako \"Preferovaný tuner pre nahrávky\"."
 
 msgid "When enabled, this setting has more weight than 'Preferred tuner'."
-msgstr "Ak povolené, toto nastavenie má väčšiu váhu ako \"Preferovaný tuner\"."
+msgstr "Ak je povolené, toto nastavenie má väčšiu váhu ako \"Preferovaný tuner\"."
 
 msgid "When enabled, timeshift starts automatically in background after specified time."
-msgstr "Ak povolené, časový posun sa spustí automaticky na pozadí po uvedenom čase."
+msgstr "Ak je povolené, časový posun sa spustí automaticky na pozadí po uvedenom čase."
 
 msgid "When enabled, use DHCP for the IP configuration."
-msgstr "Ak povolené, použije DHCP pre konfiguráciu IP."
+msgstr "Ak je povolené, použije DHCP pre konfiguráciu IP."
 
 msgid "When enabled, your receiver will detect activity on the VCR SCART input."
-msgstr "Ak povolené, bude Váš prijímač sledovať aktivitu na vstupe VCR SCART."
+msgstr "Ak je povolené, bude Váš prijímač sledovať aktivitu na vstupe VCR SCART."
 
 msgid "When nonzero, a recording will start earlier than the starting time indicated by the EPG."
 msgstr "Ak nenulové, nahrávanie začne skôr než v čase z EPG."
@@ -12493,7 +12493,7 @@ msgid "list style single line"
 msgstr "jednoriadkový zoznam"
 
 msgid "listens to hotplug events"
-msgstr "počúvanie do hotplug programov"
+msgstr "počúvanie do hotplug udalostí"
 
 msgid "literature"
 msgstr "literatúra"
