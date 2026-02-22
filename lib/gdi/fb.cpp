@@ -185,7 +185,7 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
 	memset(lfb, 0, stride*yRes);
 
 #ifdef HAVE_HIFBLAYER
-	if (m_available_total > (stride * yRes * 3))
+	if (access("/etc/hifblayer", F_OK) == 0 && m_available_total > (stride * yRes * 3))
 	{
 		HIFB_LAYER_INFO_S layerinfo;
 		if (ioctl(fbFd, FBIOGET_LAYER_INFO, &layerinfo) < 0)
