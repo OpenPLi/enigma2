@@ -10,7 +10,10 @@ class VariableValue:
 		except:
 			self.__value = 0
 		if self.instance:
-			self.instance.setValue(self.__value)
+			try:
+				self.instance.setValue(self.__value)
+			except TypeError:
+				self.instance.setValue(0)
 
 	def getValue(self):
 		return self.__value

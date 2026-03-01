@@ -14,7 +14,7 @@ from Components.Label import Label
 from Components.ProgressBar import ProgressBar
 
 from Tools.StbHardware import getFPVersion
-from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl
+from enigma import eTimer, eLabel, eConsoleAppContainer, getDesktop, eGetEnigmaDebugLvl, eDVBCSAEngine
 
 from Components.GUIComponent import GUIComponent
 from skin import applySkinFactor, parameters, parseScale
@@ -51,6 +51,12 @@ class About(Screen):
 		AboutText += _("Kernel version: ") + about.getKernelVersionString() + "\n"
 
 		AboutText += _("DVB driver version: ") + about.getDriverInstalledDate() + "\n"
+
+		if eDVBCSAEngine.isAvailable():
+			libName = eDVBCSAEngine.getLibraryName()
+			libVersion = eDVBCSAEngine.getLibraryVersion()
+			if libName and libVersion:
+				AboutText += _("Software descrambling: ") + libName + " " + libVersion + "\n"
 
 		GStreamerVersion = about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)

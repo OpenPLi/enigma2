@@ -16,6 +16,19 @@ LOGFILE = "hdmicec.log"
 # CEC Version's table
 CEC = ["1.1", "1.2", "1.2a", "1.3", "1.3a", "1.4", "2.0?", "unknown"]
 
+CEC_BOX_DEVICES = (
+    0x1,  # Recording Device 1
+    0x2,  # Recording Device 2
+    0x9,  # Recording Device 3
+    0x3,  # Tuner 1
+    0x6,  # Tuner 2
+    0x7,  # Tuner 3
+    0xA,  # Playback Device 1
+    0x4,  # Playback Device 2
+    0x8,  # Playback Device 3
+    0xB,  # Reserved / next HDMI device
+)
+
 cmdList = {
 	0x00: "<Polling Message>",
 	0x04: "<Image View On>",
@@ -102,6 +115,7 @@ config.hdmicec.repeat_wakeup_timer = ConfigSelection(default="3", choices=[("0",
 config.hdmicec.debug = ConfigSelection(default="0", choices=[("0", _("Disabled")), ("1", _("Messages")), ("2", _("Key Events")), ("3", _("All"))])
 config.hdmicec.bookmarks = ConfigLocations(default=[LOGPATH])
 config.hdmicec.log_path = ConfigDirectory(LOGPATH)
+config.hdmicec.standby_running_boxes = ConfigYesNo(default=False)
 config.hdmicec.next_boxes_detect = ConfigYesNo(default=False)
 config.hdmicec.sourceactive_zaptimers = ConfigYesNo(default=False)
 config.hdmicec.ethernet_pc_used = ConfigYesNo(default=False)
@@ -286,6 +300,9 @@ class HdmiCec:
 				messages.append("sourceactive")
 			if config.hdmicec.report_active_menu.value:
 				messages.append("menuactive")
+			if config.hdmicec.standby_running_boxes.value:
+				for i in CEC_BOX_DEVICES:
+					self.sendMessages(i, ("standby",))
 			if messages:
 				self.sendMessages(0, messages)
 
@@ -451,8 +468,8 @@ class HdmiCec:
 			elif cmd == 0x9F: # request get CEC version
 				self.sendMessage(message.getAddress(), 'sendcecversion')
 
-			# handle standby request from the tv
-			if cmd == 0x36 and config.hdmicec.handle_tv_standby.value:
+			# handle standby request from the tv or from starting box (if is enabled "All active receivers in standby")
+			if cmd == 0x36 and ( config.hdmicec.handle_tv_standby.value or config.hdmicec.standby_running_boxes.value):
 				# avoid echoing the 'System Standby' command back to the tv
 				self.handlingStandbyFromTV = True
 				# handle standby

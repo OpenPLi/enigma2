@@ -22,6 +22,9 @@ class fbClass
 	int m_manual_blit;
 	int m_number_of_pages;
 	int m_phys_mem;
+	int m_phys_mem_base;
+	unsigned char *m_lfb_base;
+	int m_available_total;
 #ifdef SWIG
 	fbClass(const char *fb=FB_DEV);
 	~fbClass();

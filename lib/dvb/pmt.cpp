@@ -165,6 +165,7 @@ void eDVBServicePMTHandler::PMTready(int error)
 		case streamserver:
 		case scrambled_streamserver:
 		case streamclient:
+		case scrambled_livetv:
 			eEPGTransponderDataReader::getInstance()->PMTready(this);
 			break;
 		default:
@@ -853,6 +854,13 @@ int eDVBServicePMTHandler::getPVRChannel(ePtr<iDVBPVRChannel> &pvr_channel)
 		return -1;
 }
 
+void eDVBServicePMTHandler::allocatePVRChannel()
+{
+	eDVBChannelID chid;
+	m_resourceManager->allocatePVRChannel(chid, m_pvr_channel);
+	m_pvr_channel->getDemux(m_demux, 0);
+}
+
 void eDVBServicePMTHandler::SDTScanEvent(int event)
 {
 	switch (event)
@@ -1106,4 +1114,9 @@ void eDVBServicePMTHandler::removeCaHandler()
 	m_ca_disabled = true;
 	if (m_channel)
 		eDVBCIInterfaces::getInstance()->removePMTHandler(this);
+}
+
+bool eDVBServicePMTHandler::isCiConnected()
+{
+	return eDVBCIInterfaces::getInstance()->isCiConnected(this);
 }

@@ -919,6 +919,20 @@ def InitUsageConfig():
 	config.cccaminfo.blacklist = ConfigText(default="/etc/enigma2/CCcamInfo.blacklisted", fixed_size=False)
 	config.cccaminfo.profiles = ConfigText(default="/etc/enigma2/CCcamInfo.profiles", fixed_size=False)
 	# lulu
+	config.softcsa = ConfigSubsection()
+	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
+		(0, _("Quick")),
+		(1, _("Normal"))
+	])
+	config.softcsa.syncMode = ConfigSelection(default=0, choices=[
+		(0, _("Automatic")),
+		(1, _("Synchronous"))
+	])
+	config.softcsa.waitForDataTimeout = ConfigSelection(
+		default=800,
+		choices=[(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+	config.softcsa.useStreamRelayWhitelist = ConfigYesNo(default=True)
 	config.ntp = ConfigSubsection()
 
 	def timesyncChanged(configElement):

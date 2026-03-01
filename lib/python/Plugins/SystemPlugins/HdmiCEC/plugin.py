@@ -61,6 +61,7 @@ class HdmiCECSetupScreen(ConfigListScreen, Screen):
 			self.list.append((_("Minimum send interval"), config.hdmicec.minimum_send_interval, _("Delay between CEC commands when sending a series of commands. Some devices require this delay for correct functioning, usually between 50-150ms.")))
 			self.list.append((_("Repeat leave standby messages"), config.hdmicec.repeat_wakeup_timer, _("The command to wake from standby will be sent multiple times.")))
 			self.list.append((_("Send 'sourceactive' before zap timers"), config.hdmicec.sourceactive_zaptimers, _("Command the TV to switch to the correct HDMI input when zap timers activate.")))
+			self.list.append((_("All active receivers in standby"), config.hdmicec.standby_running_boxes, _("Switch all other connected HDMI-CEC enabed receivers (not TV or audio systems) to standby when this box wakes up.")))
 			self.list.append((_("Detect other boxes before standby"), config.hdmicec.next_boxes_detect, _("Before sending the command to switch the TV to standby, the receiver tests if all the other devices plugged to TV are in standby. If they are not, the 'sourceinactive' command will be sent to the TV instead of the 'standby' command.")))
 			if config.hdmicec.next_boxes_detect.value:
 				for i in range(len(config.hdmicec.ethbox)):

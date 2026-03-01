@@ -382,6 +382,15 @@ void eEncoder::freeEncoder(int encoderfd)
 
 	encoder[encoder_index].state = EncoderContext::state_finishing;
 	encoder[encoder_index].kill();
+
+	// Send STOP_TRANSCODING ioctl before closing (required for BCM encoders!)
+	if(bcm_encoder && encoder[encoder_index].encoder_fd >= 0)
+	{
+		eDebug("[eEncoder] freeEncoder: sending STOP_TRANSCODING ioctl");
+		if(ioctl(encoder[encoder_index].encoder_fd, IOCTL_BROADCOM_STOP_TRANSCODING, 0))
+			eWarning("[eEncoder] freeEncoder: STOP_TRANSCODING ioctl failed");
+	}
+
 	encoder[encoder_index].navigation_instance->getCurrentService(service);
 
 	service->tap(tservice);

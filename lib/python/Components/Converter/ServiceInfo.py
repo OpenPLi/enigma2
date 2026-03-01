@@ -92,6 +92,7 @@ class ServiceInfo(Converter):
 	IS_VIDEO_MPEG2 = 35
 	IS_VIDEO_AVC = 36
 	IS_VIDEO_HEVC = 37
+	IS_SOFTCSA = 38
 
 	def __init__(self, type):
 		Converter.__init__(self, type)
@@ -134,6 +135,7 @@ class ServiceInfo(Converter):
 				"IsVideoMPEG2": (self.IS_VIDEO_MPEG2, (iPlayableService.evUpdatedInfo,)),
 				"IsVideoAVC": (self.IS_VIDEO_AVC, (iPlayableService.evUpdatedInfo,)),
 				"IsVideoHEVC": (self.IS_VIDEO_HEVC, (iPlayableService.evUpdatedInfo,)),
+				"IsSoftCSA": (self.IS_SOFTCSA, (iPlayableService.evUpdatedInfo,)),
 			}[type]
 		if self.type in (self.IS_SD, self.IS_HD, self.IS_SD_AND_WIDESCREEN, self.IS_SD_AND_NOT_WIDESCREEN, self.IS_4K, self.IS_1080, self.IS_720):
 			self.videoHeight = 0
@@ -189,7 +191,9 @@ class ServiceInfo(Converter):
 						return True
 				return False
 			elif self.type == self.IS_CRYPTED:
-				return info.getInfo(iServiceInformation.sIsCrypted) == 1
+				return info.getInfo(iServiceInformation.sIsCrypted) == 1 and info.getInfo(iServiceInformation.sIsSoftCSA) != 1
+			elif self.type == self.IS_SOFTCSA:
+				return info.getInfo(iServiceInformation.sIsSoftCSA) == 1
 			elif self.type == self.SUBSERVICES_AVAILABLE:
 				return hasActiveSubservicesForCurrentChannel(service)
 			elif self.type == self.HAS_HBBTV:

@@ -183,17 +183,18 @@ class InfoBarStreamRelay:
 
 	def streamrelayChecker(self, playref):
 		is_stream_relay = False
-		playrefstring, renamestring = self.splitref(playref.toString())
-		if '%3a//' not in playrefstring and playrefstring in self.__srefs:
-			url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
-			if "127.0.0.1" in url:
-				playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
-			else:
-				playrefmod = playrefstring
-			playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), renamestring or ServiceReference(playref).getServiceName()))
-			is_stream_relay = True
-			print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
-			playref.setCompareSref(playrefstring, True)
+		if config.softcsa.useStreamRelayWhitelist.value:
+			playrefstring, renamestring = self.splitref(playref.toString())
+			if '%3a//' not in playrefstring and playrefstring in self.__srefs:
+				url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
+				if "127.0.0.1" in url:
+					playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
+				else:
+					playrefmod = playrefstring
+				playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), renamestring or ServiceReference(playref).getServiceName()))
+				is_stream_relay = True
+				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
+				playref.setCompareSref(playrefstring, True)
 		return playref, is_stream_relay
 
 	def checkService(self, service):

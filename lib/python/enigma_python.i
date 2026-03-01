@@ -91,6 +91,7 @@ is usually caused by not marking PSignals as immutable.
 #include <lib/dvb/sec.h>
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/dvbtime.h>
+#include <lib/dvb/csaengine.h>
 #include <lib/dvb/pmt.h>
 #include <lib/dvb/cahandler.h>
 #include <lib/dvb/fastscan.h>
@@ -250,6 +251,7 @@ typedef long time_t;
 %include <lib/dvb/frontend.h>
 %include <lib/dvb/pmt.h>
 %include <lib/dvb/cahandler.h>
+%include <lib/dvb/csaengine.h>
 %include <lib/dvb/fastscan.h>
 %include <lib/dvb/cablescan.h>
 %include <lib/components/scan.h>
