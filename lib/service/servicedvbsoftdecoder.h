@@ -121,9 +121,14 @@ private:
 	sigc::connection m_first_cw_conn;
 	bool m_decoder_started;
 
+	// Pre-buffer: delay decoder start to let DVR data accumulate
+	ePtr<eTimer> m_buffer_timer;
+	void onBufferTimerExpired();
+
 	ePtr<eTimer> m_health_timer;
 	pts_t m_last_pts;
 	int m_stall_count;
+	int m_recovery_attempts;
 	bool m_stream_stalled;
 	bool m_paused;
 	int64_t m_last_health_check;
@@ -133,7 +138,8 @@ private:
 	void onSessionActivated(bool active);
 	void onFirstCwReceived();
 	void onWaitForFirstDataTimeout();
-	void startDecoderWithDvrWait();
+	void startDecoderOrBuffer();
+	void startDecoder();
 	void serviceEventSource(int event);
 	void recordEvent(int event);
 	void videoEvent(struct iTSMPEGDecoder::videoEvent event);

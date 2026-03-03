@@ -50,8 +50,15 @@ public:
 
 	virtual RESULT setDescrambler(ePtr<iServiceScrambled>) = 0;
 
+	// Discard data on sync write timeout instead of retrying.
+	// Use for live soft decoding where stale data is worthless and
+	virtual void setDiscardOnTimeout(bool discard) = 0;
+
 	// Wait for first data to be written (for SoftDecoder sync)
 	virtual bool waitForFirstData(int timeout_ms) = 0;
+
+	// Set write accumulation threshold (0 = continuous writing)
+	virtual void setMinWrite(size_t size) = 0;
 
 	enum {
 		eventWriteError,

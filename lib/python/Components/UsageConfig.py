@@ -930,7 +930,11 @@ def InitUsageConfig():
 	])
 	config.softcsa.waitForDataTimeout = ConfigSelection(
 		default=800,
-		choices=[(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+	config.softcsa.bufferTime = ConfigSelection(
+		default=0,
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
 	)
 	config.softcsa.useStreamRelayWhitelist = ConfigYesNo(default=True)
 	config.ntp = ConfigSubsection()
