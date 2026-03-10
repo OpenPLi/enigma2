@@ -357,7 +357,7 @@ int eDVBSoftDecoder::setupRecorder()
 	// Start record thread
 	m_record->start();
 
-	int wait_timeout = eConfigManager::getConfigIntValue("config.softcsa.waitForDataTimeout", 800);
+	int wait_timeout = eConfigManager::getConfigIntValue("config.softcsa.waitForDataTimeout", 0);
 
 	// Disabled (0): start decoder immediately, no CW waiting
 	if (wait_timeout == 0)

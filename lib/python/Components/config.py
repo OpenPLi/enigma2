@@ -457,9 +457,7 @@ class ConfigSelection(ConfigElement):
 				callback()
 
 	def selectNext(self):
-		nchoices = len(self.choices)
-		i = self.choices.index(self.value)
-		self.value = self.choices[(i + 1) % nchoices]
+		self.value = self.choices[(self.choices.index(self.value) + 1) % len(self.choices)]
 
 	def getText(self):
 		if self._descr is None:
@@ -495,6 +493,12 @@ class ConfigSelection(ConfigElement):
 		self.value = value
 
 	description = property(lambda self: descriptionList(self.choices.choices, self.choices.type))
+
+	# for compatibility with other distros (so we can use their plugins)
+	setSelectionList = setChoices
+
+	def getSelectionList(self):
+		return list(zip(self.choices.__list__(), self.description.__list__()))
 
 
 # This is the control, and base class, for binary decisions.
