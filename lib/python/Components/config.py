@@ -494,6 +494,11 @@ class ConfigSelection(ConfigElement):
 
 	description = property(lambda self: descriptionList(self.choices.choices, self.choices.type))
 
+	# for compatibility with other distros (so we can use their plugins)
+	setSelectionList = setChoices
+	def getSelectionList(self):
+		return list(zip(self.choices.__list__(), self.description.__list__()))
+
 
 # This is the control, and base class, for binary decisions.
 #
