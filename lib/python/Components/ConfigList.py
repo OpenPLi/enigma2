@@ -357,9 +357,11 @@ class ConfigListScreen:
 
 	def keySelectionCallback(self, answer):
 		if answer:
+			prev = str(self.getCurrentValue())
 			self["config"].getCurrent()[1].value = answer[1]
 			self["config"].invalidateCurrent()
-			self.entryChanged()
+			if answer[1] != prev:
+				self.entryChanged()
 
 	def keyTop(self):
 		self["config"].moveTop()
