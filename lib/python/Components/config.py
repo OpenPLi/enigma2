@@ -496,6 +496,7 @@ class ConfigSelection(ConfigElement):
 
 	# for compatibility with other distros (so we can use their plugins)
 	setSelectionList = setChoices
+
 	def getSelectionList(self):
 		return list(zip(self.choices.__list__(), self.description.__list__()))
 
