@@ -457,9 +457,7 @@ class ConfigSelection(ConfigElement):
 				callback()
 
 	def selectNext(self):
-		nchoices = len(self.choices)
-		i = self.choices.index(self.value)
-		self.value = self.choices[(i + 1) % nchoices]
+		self.value = self.choices[(self.choices.index(self.value) + 1) % len(self.choices)]
 
 	def getText(self):
 		if self._descr is None:
