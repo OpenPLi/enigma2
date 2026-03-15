@@ -365,8 +365,8 @@ int eDVBServiceRecord::setupSoftwareDescrambler(eDVBServicePMTHandler::program& 
 		{
 			uint16_t ecm_pid = program.caids.front().capid;
 			uint16_t caid = program.caids.front().caid;
+			eDebug("[eDVBServiceRecord] Requesting ECM monitor on PID %d, CAID 0x%04X", ecm_pid, caid);
 			m_csa_session->startECMMonitor(demux, ecm_pid, caid);
-			eDebug("[eDVBServiceRecord] Started ECM monitor for recording, ECM PID=%d, CAID=0x%04X", ecm_pid, caid);
 		}
 	}
 
