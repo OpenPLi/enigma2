@@ -91,7 +91,7 @@ class ResumePoints():
 		self.cacheCleanTimer.stop()
 		for sref, v in list(self.resumePointCache.items()):
 			if "%3a//" in sref:  # resume point is stream
-				if now > v[0] + 7 * 24 * 60 * 60:  # keep stream resume points maximum one week
+				if now > v[0] + 90 * 24 * 60 * 60:  # keep stream resume points maximum 90 days
 					del self.resumePointCache[sref]
 					changed = True
 			else:
