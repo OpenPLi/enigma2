@@ -120,6 +120,7 @@ class Navigation:
 				startPlayingServiceOrGroup = adjust[2]
 			adjust = adjust[0]
 		oldref = self.currentlyPlayingServiceOrGroup
+		oldservref = self.currentlyPlayingServiceReference
 		current_service_source = None
 		is_async_play = False
 		if InfoBarInstance:
@@ -149,7 +150,7 @@ class Navigation:
 				InfoBarInstance.serviceStarted()
 
 			if ref.flags & eServiceReference.isGroup:
-				oldref = self.currentlyPlayingServiceReference or eServiceReference()
+				oldref = oldservref or eServiceReference()
 				playref = getBestPlayableServiceReference(ref, oldref)
 				if playref and config.misc.use_ci_assignment.value and not isPlayableForCur(playref):
 					alternative_ci_ref = ResolveCiAlternative(ref, playref)
