@@ -256,7 +256,7 @@ class PictureInPicture(Screen):
 		if playingref and service == playingref:
 			return True
 		info = eServiceCenter.getInstance().info(service)
-		oldref = self.currentService or eServiceReference()
+		oldref = self.currentServiceReference or eServiceReference()
 		if info and info.isPlayable(service, oldref):
 			return True
 		return False
