@@ -301,7 +301,8 @@ class AdapterSetup(ConfigListScreen, HelpableScreen, Screen):
 		self.dhcpConfigEntry.addNotifier(self.createSetup, initial_call=False)
 		self.ipConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "ip")) or [0, 0, 0, 0])
 		self.netmaskConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "netmask") or [255, 0, 0, 0]))
-		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=iNetwork.getAdapterAttribute(self.iface, "gateway") and True or False))
+		gw = iNetwork.getAdapterAttribute(self.iface, "gateway")
+		self.hasGatewayConfigEntry = NoSave(ConfigYesNo(default=(gw and gw != [0,0,0,0]) and True or False))
 		self.hasGatewayConfigEntry.addNotifier(self.createSetup, initial_call=False)
 		self.gatewayConfigEntry = NoSave(ConfigIP(default=iNetwork.getAdapterAttribute(self.iface, "gateway") or [0, 0, 0, 0]))
 		nameserver = (iNetwork.getIfaceNameservers(self.iface) + [[0, 0, 0, 0]] * 2)[:2]

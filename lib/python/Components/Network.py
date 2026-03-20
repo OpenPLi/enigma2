@@ -64,7 +64,7 @@ class Network:
 		return [int(n) for n in ip.split('.')]
 
 	def getAddrInet(self, iface, callback):
-		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False, "dns-nameservers": []}
+		data = {'up': False, 'dhcp': False, 'preup': False, 'predown': False, "dns-nameservers": [], 'gateway': [0, 0, 0, 0]}
 		try:
 			if os.path.exists('/sys/class/net/%s/operstate' % iface):
 				data['up'] = int(open('/sys/class/net/%s/flags' % iface).read().strip(), 16) & 1 == 1
@@ -75,12 +75,12 @@ class Network:
 			data['netmask'] = self.convertIP(nit[ni.AF_INET][0]['netmask'])
 			data['bcast'] = self.convertIP(nit[ni.AF_INET][0]['broadcast'])
 			data['mac'] = nit[ni.AF_LINK][0]['addr']  # mac
-			data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0])  # default gw
+			if ni.gateways()['default'][ni.AF_INET][1] == iface:
+				data['gateway'] = self.convertIP(ni.gateways()['default'][ni.AF_INET][0])  # default gw
 		except (KeyError, ValueError, IOError):
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
-			data['gateway'] = [0, 0, 0, 0]
 		if iface in self.ifaces:
 			self.ifaces[iface].update(data)
 		else:
