@@ -771,6 +771,10 @@ public:
 
 	virtual RESULT setRadioPic(const std::string &filename) = 0;
 
+	/** Release demux filters by closing fds (no DMX_STOP ioctl).
+	 *  Prevents deadlock/crash on mipsel PVR-sourced demuxes. */
+	virtual void freeDecoder() { /* default no-op; mipsel decoder overrides */ }
+
 	struct videoEvent
 	{
 		enum { eventUnknown = 0,
