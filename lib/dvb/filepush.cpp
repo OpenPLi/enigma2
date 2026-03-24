@@ -8,19 +8,18 @@
 //#define SHOW_WRITE_TIME
 
 DEFINE_REF(eFilePushThread);
-eFilePushThread::eFilePushThread(int io_prio_class, int io_prio_level, int blocksize, size_t buffersize, int flags)
-	: prio_class(io_prio_class),
-	  prio(io_prio_level),
-	  m_sg(NULL),
-	  m_stop(1),
-	  m_send_pvr_commit(0),
-	  m_stream_mode(0),
-	  m_flags(flags),
-	  m_blocksize(blocksize),
-	  m_buffersize(buffersize),
-	  m_buffer((unsigned char *)malloc(buffersize)),
-	  m_messagepump(eApp, 0),
-	  m_run_state(0)
+
+eFilePushThread::eFilePushThread(int blocksize, size_t buffersize, int flags):
+	 m_sg(NULL),
+	 m_stop(1),
+	 m_send_pvr_commit(0),
+	 m_stream_mode(0),
+	 m_flags(flags),
+	 m_blocksize(blocksize),
+	 m_buffersize(buffersize),
+	 m_buffer((unsigned char *)malloc(buffersize)),
+	 m_messagepump(eApp, 0),
+	 m_run_state(0)
 {
 	if (m_buffer == NULL)
 		eFatal("[eFilePushThread] Failed to allocate %zu bytes", buffersize);
@@ -58,7 +57,6 @@ void eFilePushThread::thread()
 {
 	ignore_but_report_signals();
 	hasStarted(); /* "start()" blocks until we get here */
-	setIoPrio(prio_class, prio);
 	eDebug("[eFilePushThread] START thread");
 
 	do
@@ -139,13 +137,7 @@ void eFilePushThread::thread()
 					struct pollfd pfd = {};
 					pfd.fd = m_fd_dest;
 					pfd.events = POLLIN;
-#ifdef DREAMNEXTGEN
-					// Shorter poll timeout for timeshift to reduce blocking
-					int poll_timeout = (m_flags == 1) ? 100 : 250;
-					switch (poll(&pfd, 1, poll_timeout))
-#else
 					switch (poll(&pfd, 1, 250)) // wait for 250ms
-#endif
 					{
 					case 0:
 						if ((++poll_timeout_count % 20) == 0)
@@ -183,11 +175,7 @@ void eFilePushThread::thread()
 					continue;
 				}
 				else if (m_flags == 1) { // timeshift
-#ifdef DREAMNEXTGEN
-					usleep(15000);  // 15 milliseconds - balance between responsiveness and CPU
-#else
 					usleep(200000);  // 200 milliseconds
-#endif
 					continue;
 				}
 				else if (++eofcount < 10)
@@ -219,14 +207,8 @@ void eFilePushThread::thread()
 						}
 						if (w < 0 && (errno == EINTR || errno == EAGAIN || errno == EBUSY))
 						{
-#if HAVE_CPULOADFIX
-							sleep(2);
-#endif
 #if HAVE_HISILICON
-							usleep(100000); // 100 milliseconds
-#endif
-#ifdef DREAMNEXTGEN
-							usleep(2000); // 2ms, fast retry to keep audio fed
+							usleep(100000);
 #endif
 							continue;
 						}
@@ -352,164 +334,24 @@ void eFilePushThread::filterRecordData(const unsigned char *data, int len)
 {
 }
 
-eFilePushThreadRecorder::eFilePushThreadRecorder(unsigned char *buffer, size_t buffersize) : m_fd_source(-1),
-																							 m_buffersize(buffersize),
-																							 m_buffer(buffer),
-																							 m_overflow_count(0),
-																							 m_buffer_fill(0),
-																							 m_stop(1),
-																							 m_messagepump(eApp, 0)
+
+
+
+eFilePushThreadRecorder::eFilePushThreadRecorder(unsigned char* buffer, size_t buffersize):
+	m_fd_source(-1),
+	m_buffersize(buffersize),
+	m_buffer(buffer),
+	m_overflow_count(0),
+	m_stop(1),
+	m_buffer_fill(0),
+	m_buffer_min_write(0),
+	m_messagepump(eApp, 0)
 {
-	m_protocol = m_stream_id = m_session_id = m_packet_no = 0;
 	CONNECT(m_messagepump.recv_msg, eFilePushThreadRecorder::recvEvent);
 
 	/* Ensure min_write doesn't exceed buffer size */
 	if (m_buffer_min_write > m_buffersize)
 		m_buffer_min_write = m_buffersize;
-}
-
-#define copy16(a, i, v)           \
-	{                             \
-		a[i] = ((v) >> 8) & 0xFF; \
-		a[i + 1] = (v)&0xFF;      \
-	}
-#define copy32(a, i, v)                \
-	{                                  \
-		a[i] = ((v) >> 24) & 0xFF;     \
-		a[i + 1] = ((v) >> 16) & 0xFF; \
-		a[i + 2] = ((v) >> 8) & 0xFF;  \
-		a[i + 3] = (v)&0xFF;           \
-	}
-#define _PROTO_RTSP_UDP 1
-#define _PROTO_RTSP_TCP 2
-
-int eFilePushThreadRecorder::pushReply(void *buf, int len)
-{
-	m_reply.insert(m_reply.end(), (unsigned char *)buf, (unsigned char *)buf + len);
-	eDebug("pushed reply of %d bytes", len);
-	return 0;
-}
-
-static int errs;
-
-int64_t eFilePushThreadRecorder::getTick()
-{ //ms
-	struct timespec ts = {};
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	return (ts.tv_nsec / 1000000) + (ts.tv_sec * 1000);
-}
-
-// wrapper around ::read, to read multiple of 188 or error (it does not block)
-int eFilePushThreadRecorder::read_ts(int fd, unsigned char *buf, int size)
-{
-	int rb = 0, bytes = 0;
-	int left = size;
-	do
-	{
-		rb = ::read(fd, buf + bytes, left);
-		if (rb > 0 && ((bytes % 188) != 0))
-			eDebug("%s read %d out of %d bytes, total %d, size %d, fd %d", ((bytes + rb) % 188) ? "incomplete" : "completed", rb, left, bytes, size, fd);
-
-		if (rb <= 0 && errno != EAGAIN && errno != EINTR)
-			return rb;
-
-		if (rb > 0)
-		{
-			bytes += rb;
-			left -= rb;
-		}
-		if ((bytes % 188) != 0)
-		{
-			left = 188 - (bytes % 188);
-		}
-
-	} while ((bytes % 188) != 0);
-
-	if (bytes == 0)
-		return rb;
-
-	return bytes;
-}
-
-int eFilePushThreadRecorder::read_dmx(int fd, void *m_buffer, int size)
-{
-	unsigned char *buf;
-	int it = 0, pos = 0, bytes = 0;
-	int max_pack = 42;
-	int i, left;
-	static int cnt;
-	unsigned char *b;
-	uint64_t start = getTick();
-	while (size - pos > 188 + 16)
-	{
-		left = size - pos - 16;
-		left = (left > 188 * max_pack) ? 188 * max_pack : (((int)(left / 188) - 1) * 188);
-		if (left < 188)
-			break;
-
-		buf = (unsigned char *)m_buffer + pos;
-
-		bytes = read_ts(fd, buf + 16, left);
-
-		if (bytes <= 0 && errno != EAGAIN && errno != EINTR)
-		{
-			eDebug("error reading from DMX handle %d, errno %d: %m", fd, errno);
-			break;
-		}
-
-		if (bytes > 0)
-		{
-			if ((bytes % 188) != 0)
-				eDebug("incomplete packet read from %d with size %d", fd, bytes);
-
-			m_packet_no++;
-			it++;
-			for (i = 0; i < bytes; i += 188)
-			{
-				b = buf + 16 + i;
-				int pid = (b[1] & 0x1F) * 256 + b[2];
-
-				if ((b[3] & 0x80)) // mark decryption failed if not decrypted by enigma
-				{
-					if ((errs++ % 100) == 0)
-						eDebug("decrypt errs %d, pid %d, m_buffer %p, pos %d, buf %p, i %d: %02X %02X %02X %02X", errs, pid, m_buffer, pos, buf, i, b[0], b[1], b[2], b[3]);
-					b[1] |= 0x1F;
-					b[2] |= 0xFF;
-				}
-			}
-			buf[0] = 0x24;
-			buf[1] = 0;
-			copy16(buf, 2, (uint16_t)(bytes + 12));
-			copy16(buf, 4, 0x8021);
-			copy16(buf, 6, m_stream_id);
-			copy32(buf, 8, cnt);
-			copy32(buf, 12, m_session_id);
-			cnt++;
-			pos += bytes + 16;
-		}
-		if (m_reply.size() > 0)
-		{
-			pos = m_reply.size();
-			buf[0] = 0;
-			memcpy(m_buffer, m_reply.data(), pos);
-			eDebug("added reply of %d bytes", pos);
-			m_reply.clear();
-			break; // reply to the server ASAP
-		}
-		uint64_t ts = getTick() - start;
-
-		if ((pos > 0) && (bytes == -1) && (ts > 50)) // do not block more than 50ms if there is available data
-			break;
-
-		if (bytes < 0)
-			usleep(5000);
-	}
-	uint64_t ts = getTick() - start;
-	if (ts > 1000)
-		eDebug("returning %d bytes from %d, last read %d bytes in %jd ms (iteration %d)", pos, size, bytes, ts, m_packet_no);
-	if (pos == 0)
-		return bytes;
-	return pos;
 }
 
 void eFilePushThreadRecorder::thread()
@@ -518,7 +360,6 @@ void eFilePushThreadRecorder::thread()
 	ignore_but_report_signals();
 	hasStarted(); /* "start()" blocks until we get here */
 #endif
-	setIoPrio(IOPRIO_CLASS_RT, 7);
 	eDebug("[eFilePushThreadRecorder] THREAD START (min_write=%zu KB, buffersize=%zu KB)", m_buffer_min_write >> 10, m_buffersize >> 10);
 
 #ifdef HAVE_HISILICON
@@ -531,13 +372,6 @@ void eFilePushThreadRecorder::thread()
 	hasStarted();
 #endif
 
-	if (m_protocol == _PROTO_RTSP_TCP)
-	{
-		int flags = fcntl(m_fd_source, F_GETFL, 0);
-		flags |= O_NONBLOCK;
-		if (fcntl(m_fd_source, F_SETFL, flags) == -1)
-			eDebug("[eFilePushThreadRecorder] failed setting DMX handle %d in non-blocking mode, error %d: %s", m_fd_source, errno, strerror(errno));
-	}
 
 	m_buffer_fill = 0;
 
@@ -546,11 +380,6 @@ void eFilePushThreadRecorder::thread()
 	while (!m_stop)
 	{
 		ssize_t bytes;
-		if (m_protocol == _PROTO_RTSP_TCP)
-		{
-			bytes = read_dmx(m_fd_source, m_buffer + m_buffer_fill, m_buffersize - m_buffer_fill);
-		}
-		else
 		{
 		/* this works around the buggy Broadcom encoder that always returns even if there is no data */
 		/* (works like O_NONBLOCK even when not opened as such), prevent idle waiting for the data */
