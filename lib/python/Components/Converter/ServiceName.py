@@ -60,7 +60,7 @@ class ServiceName(Converter):
 			if not ref:
 				if self.source.info:
 					sref = hasattr(self.source, "serviceref") and self.source.serviceref
-					nref = sref and resolveAlternate(sref)
+					nref = resolveAlternate(sref)
 					if nref:
 						sref = nref
 					return sref and sref.toString()
