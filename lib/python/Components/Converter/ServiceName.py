@@ -60,11 +60,10 @@ class ServiceName(Converter):
 			if not ref:
 				if self.source.info:
 					sref = hasattr(self.source, "serviceref") and self.source.serviceref
-					sref = sref or ref
 					nref = resolveAlternate(sref)
 					if nref:
 						sref = nref
-					return sref.toString()
+					return sref and sref.toString()
 				refstr = info.getInfoString(iServiceInformation.sServiceref)
 				return refstr
 			nref = resolveAlternate(ref)

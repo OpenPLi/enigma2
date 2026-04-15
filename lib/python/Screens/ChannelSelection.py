@@ -2118,10 +2118,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.recallBouquetMode()
 
 	def __evServiceStart(self):
-		if self.dopipzap and hasattr(self.session, 'pip'):
-			self.servicelist.setPlayableIgnoreService(self.session.pip.getCurrentService() or eServiceReference())
+		if self.dopipzap and hasattr(self.session, "pip"):
+			self.servicelist.setPlayableIgnoreService(self.session.pip.getCurrentServiceReference() or eServiceReference())
 		else:
-			self.servicelist.setPlayableIgnoreService(self.session.nav.getCurrentServiceReferenceOriginal() or eServiceReference())
+			self.servicelist.setPlayableIgnoreService(self.session.nav.getCurrentlyPlayingServiceReference() or eServiceReference())
 
 	def __evServiceEnd(self):
 		self.servicelist.setPlayableIgnoreService(eServiceReference())
