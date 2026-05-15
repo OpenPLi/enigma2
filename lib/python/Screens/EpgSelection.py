@@ -119,6 +119,7 @@ class EPGSelection(Screen, HelpableScreen):
 			})
 		self["EPGFilterActions"] = HelpableActionMap(self, ["EPGFilterActions"],
 			{
+				"instantRecord": (self.instantRecButtonPressed, _("Sort EPG by rating")),
 				"filter": (self.stopButtonPressed, _("EPG filter switching")),
 				"startDown": (self.filterStartDown, _("Start time") + " -"),
 				"startUp": (self.filterStartUp, _("Start time") + " +"),
@@ -313,7 +314,7 @@ class EPGSelection(Screen, HelpableScreen):
 
 	def fillFilteredSingleEPG(self, timespan):
 		self.serviceToTitle(self.currentService)
-		self.setTitle(self.instance.getTitle() + timespan)
+		self.setSingleEpgTitle()
 		self["list"].fillSingleEPG(self.currentService, self.sort_type, self.filtering)
 
 	def resetFiltering(self):
@@ -357,16 +358,28 @@ class EPGSelection(Screen, HelpableScreen):
 	def filterEndUp(self):
 		self.filtering and self.filterShiftTimespan('end', 1)
 
+	def instantRecButtonPressed(self):
+		rating = self.sort_type & 0x30
+		normal = self.sort_type & 0x01
+		if rating == 0x00:
+			rating = 0x10
+		elif rating == 0x10:
+			rating = 0x20
+		else:
+			rating = 0x00
+		self.sort_type = normal | rating
+		self["list"].sortSingleEPG(self.sort_type)
+		self.setSingleEpgTitle()
+
 	def yellowButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
 			self["list"].updateMultiEPG(-1)
 		elif self.type == EPG_TYPE_SINGLE:
-			if self.sort_type == 0:
-				self.sort_type = 1
-			else:
-				self.sort_type = 0
+			self.sort_type &= ~0x30 # remove rating flag
+			self.sort_type ^= 0x01
 			self["list"].sortSingleEPG(self.sort_type)
 			self.setSortDescription()
+			self.setSingleEpgTitle()
 		elif self.type == EPG_TYPE_SIMILAR:
 			cur = self["list"].getCurrent()
 			cur_event = cur and cur[0]
@@ -375,16 +388,27 @@ class EPGSelection(Screen, HelpableScreen):
 				self.session.open(EPGSelection, None, None, event)
 
 	def setSortDescription(self):
-		if self.sort_type == 1:
+		if self.sort_type & 0x01:
 			# TRANSLATORS: This must fit into the header button in the EPG-List
 			self["key_yellow"].setText(_("Sort time"))
 		else:
 			# TRANSLATORS: This must fit into the header button in the EPG-List
 			self["key_yellow"].setText(_("Sort A-Z"))
 
+	def setSingleEpgTitle(self):
+		text = self.saved_title + ' - ' + self.currentService.getServiceName()
+		if self.filtering:
+			text += "   " + self.getTimespanText()
+		if self.sort_type & 0x10:
+			text += " - " + _("Rating 0-18")
+		elif self.sort_type & 0x20:
+			text += " - " + _("Rating 18-0")
+		self.setTitle(text)
+
 	def resetSortStatus(self):
 		self.sort_type = 0
 		self.setSortDescription()
+		self.setSingleEpgTitle()
 
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:

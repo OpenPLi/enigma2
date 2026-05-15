@@ -1,6 +1,6 @@
 from Components.GUIComponent import GUIComponent
 
-from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eServiceReference
 
 from Tools.Alternatives import CompareWithAlternatives
 from Tools.LoadPixmap import LoadPixmap
@@ -363,14 +363,31 @@ class EPGList(GUIComponent):
 			self.instance.moveSelectionTo(idx - 1)
 		self.selectionChanged()
 
+	def getEventRating(self, event):
+		try:
+			ref = event[0]
+			if isinstance(ref, str):
+				ref = eServiceReference(ref)
+			ev = self.epgcache.lookupEventId(ref, int(event[1]))
+			if ev:
+				p = ev.getParentalData()
+				if p:
+					return p.getRating() or 0
+		except Exception as e:
+			print("[EPG rating error]", event[4], type(event[0]), event[0], event[1], e)
+		return 0
+
 	def sortSingleEPG(self, type):
 		list = self.list
 		if list:
 			event_id = self.getSelectedEventId()
-			if type == 1:
+			if type & 0x10:
+				list.sort(key=lambda x: (self.getEventRating(x), x[2]))
+			elif type & 0x20:
+				list.sort(key=lambda x: (-self.getEventRating(x), x[2]))
+			elif type & 0x01:
 				list.sort(key=lambda x: (x[4] and x[4].lower(), x[2]))
 			else:
-				assert (type == 0)
 				list.sort(key=lambda x: x[2])
 			self.l.invalidate()
 			self.moveToEventId(event_id)
