@@ -74,6 +74,7 @@ class EPGSelection(Screen, HelpableScreen):
 			self.currentService = ServiceReference(service)
 			self.zapFunc = zapFunc
 			self.sort_type = 0
+			self["Event"].ratingSortActive = False
 			self.original_cfg_filter_start = config.epg.filter_start.value[:]
 			self.original_cfg_filter_end = config.epg.filter_end.value[:]
 			self.setSortDescription()
@@ -359,17 +360,19 @@ class EPGSelection(Screen, HelpableScreen):
 		self.filtering and self.filterShiftTimespan('end', 1)
 
 	def instantRecButtonPressed(self):
-		rating = self.sort_type & 0x30
-		normal = self.sort_type & 0x01
-		if rating == 0x00:
-			rating = 0x10
-		elif rating == 0x10:
-			rating = 0x20
-		else:
-			rating = 0x00
-		self.sort_type = normal | rating
-		self["list"].sortSingleEPG(self.sort_type)
-		self.setSingleEpgTitle()
+		if config.epg.ratingsort.value:
+			rating = self.sort_type & 0x30
+			normal = self.sort_type & 0x01
+			if rating == 0x00:
+				rating = 0x10
+			elif rating == 0x10:
+				rating = 0x20
+			else:
+				rating = 0x00
+			self.sort_type = normal | rating
+			self.updateRatingSortActive()
+			self["list"].sortSingleEPG(self.sort_type)
+			self.setSingleEpgTitle()
 
 	def yellowButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
@@ -377,6 +380,7 @@ class EPGSelection(Screen, HelpableScreen):
 		elif self.type == EPG_TYPE_SINGLE:
 			self.sort_type &= ~0x30 # remove rating flag
 			self.sort_type ^= 0x01
+			self.updateRatingSortActive()
 			self["list"].sortSingleEPG(self.sort_type)
 			self.setSortDescription()
 			self.setSingleEpgTitle()
@@ -409,6 +413,14 @@ class EPGSelection(Screen, HelpableScreen):
 		self.sort_type = 0
 		self.setSortDescription()
 		self.setSingleEpgTitle()
+
+	def updateRatingSortActive(self):
+		self["Event"].ratingSortActive = (
+			self.type == EPG_TYPE_SINGLE and
+			config.epg.ratingsort.value and
+			config.epg.ratingsort_showratings.value and
+			bool(self.sort_type & 0x30)
+		)
 
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:

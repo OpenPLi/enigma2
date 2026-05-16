@@ -520,6 +520,8 @@ def InitUsageConfig():
 	config.epg.filter_end.addNotifier(validateEPGFilterTimes)
 	config.epg.filter_reversal = ConfigYesNo(default=False)
 	config.epg.filter_keepsorting = ConfigYesNo(default=False)
+	config.epg.ratingsort = ConfigYesNo(default=False)
+	config.epg.ratingsort_showratings = ConfigYesNo(default=False)
 
 	def correctInvalidEPGDataChange(configElement):
 		eServiceEvent.setUTF8CorrectMode(int(configElement.value))
