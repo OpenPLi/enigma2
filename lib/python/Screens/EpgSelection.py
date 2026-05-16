@@ -371,6 +371,7 @@ class EPGSelection(Screen, HelpableScreen):
 				rating = 0x00
 			self.sort_type = normal | rating
 			self.updateRatingSortActive()
+			self.redrawEvent()
 			self["list"].sortSingleEPG(self.sort_type)
 			self.setSingleEpgTitle()
 
@@ -421,6 +422,9 @@ class EPGSelection(Screen, HelpableScreen):
 			config.epg.ratingsort_showratings.value and
 			bool(self.sort_type & 0x30)
 		)
+
+	def redrawEvent(self):
+		self["Event"].changed((self["Event"].CHANGED_ALL,))
 
 	def blueButtonPressed(self):
 		if self.type == EPG_TYPE_MULTI:
