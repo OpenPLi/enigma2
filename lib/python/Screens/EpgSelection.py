@@ -414,6 +414,7 @@ class EPGSelection(Screen, HelpableScreen):
 		self.sort_type = 0
 		self.setSortDescription()
 		self.setSingleEpgTitle()
+		self.updateRatingSortActive()
 
 	def updateRatingSortActive(self):
 		self["Event"].ratingSortActive = (
