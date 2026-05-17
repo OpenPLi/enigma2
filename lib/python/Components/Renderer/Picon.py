@@ -84,14 +84,33 @@ class PiconLocator:
 		fields = GetWithAlternative(serviceRef).split(":", 10)[:10]
 		if not fields or len(fields) < 10:
 			return ""
-		basenames = ["_".join(fields), (p := "1_0_1_%s_0_0_0") % (x := ("_".join(fields[3:7]))), p % (x[:-4] + "0000")]
-		for basename in dict.fromkeys(basenames).keys():  # skip duplicates, maintain order
+		full_ref = "_".join(fields)  # 1. Full service reference
+		partial_ref = "1_0_1_%s_0_0_0" % "_".join(fields[3:7])  # 2. SID, TSID, ONID and NAMESPACE with padding
+		partial_ignore_subnet = "1_0_1_%s_0_0_0" % ("_".join(fields[3:7])[:-4] + "0000")  # 3. SID, TSID, ONID and NAMESPACE with padding, ignoring namespace subnet differences
+		basenames = [full_ref, partial_ref, partial_ignore_subnet]
+
+		pngname = ""
+		for basename in dict.fromkeys(basenames):  # skip duplicates, maintain order
 			if pngname := self.findPicon(basename):
 				break
+
 		if not pngname:  # picon by channel name
-			if (sname := eServiceReference(serviceRef).getServiceName()) and "SID 0x" not in sname and (utf8_name := sanitizeFilename(sname).lower()) and utf8_name != "__":  # avoid lookups on zero length service names
-				legacy_name = sub("[^a-z0-9]", "", utf8_name.replace("&", "and").replace("+", "plus").replace("*", "star"))  # legacy ascii service name picons
-				pngname = self.findPicon(utf8_name) or legacy_name and self.findPicon(legacy_name) or self.findPicon(sub(r"(fhd|uhd|hd|sd|4k)$", "", utf8_name).strip()) or legacy_name and self.findPicon(sub(r"(fhd|uhd|hd|sd|4k)$", "", legacy_name).strip())
+			sname = eServiceReference(serviceRef).getServiceName().replace('\x80', '').replace('\x86', '').replace('\x87', '')
+			if sname and "SID 0x" not in sname:  # avoid lookups on unresolved or zero-length service names
+				utf8_name = sanitizeFilename(sname).lower()
+				if utf8_name and utf8_name != "__":
+					utf8_stripped = sub(r"(fhd|uhd|hd|sd|4k)$", "", utf8_name).strip()
+					pngname = (
+						self.findPicon(utf8_name)  # 4. UTF8SNP name
+						or (utf8_stripped and self.findPicon(utf8_stripped))  # 5. UTF8SNP name with resolution suffix stripped
+					)
+					if not pngname:
+						legacy_name = sub("[^a-z0-9]", "", utf8_name.replace("&", "and").replace("+", "plus").replace("*", "star"))
+						legacy_stripped = sub(r"(fhd|uhd|hd|sd|4k)$", "", legacy_name).strip()
+						pngname = (
+							self.findPicon(legacy_name)  # 6. SNP name
+							or (legacy_stripped and self.findPicon(legacy_stripped))  # 7. SNP name with resolution suffix stripped
+						)
 		return pngname
 
 
