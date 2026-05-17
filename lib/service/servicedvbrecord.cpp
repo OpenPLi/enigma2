@@ -1,5 +1,6 @@
 #include <lib/service/servicedvbrecord.h>
 #include <lib/dvb/csasession.h>
+#include <lib/dvb/csaengine.h>
 #include <lib/dvb/cahandler.h>
 #include <lib/base/eerror.h>
 #include <lib/dvb/db.h>
@@ -369,7 +370,11 @@ int eDVBServiceRecord::doPrepare()
 
 int eDVBServiceRecord::setupSoftwareDescrambler(eDVBServicePMTHandler::program& program)
 {
-	eDebug("[eDVBServiceRecord] Setting up software descrambler");
+	// libdvbcsa missing -> software descrambling not possible, skip all setup
+	if (!eDVBCSAEngine::isAvailable())
+		return -1;
+
+	eDebug("[eDVBServiceRecord] Setting up CSA session for recording");
 
 	// Create CSA session for this recording
 	eServiceReferenceDVB ref = (eServiceReferenceDVB&)m_ref;
