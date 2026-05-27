@@ -434,7 +434,7 @@ int eFilePushThreadRecorder::read_ts(int fd, unsigned char *buf, int size)
 int eFilePushThreadRecorder::read_dmx(int fd, void *m_buffer, int size)
 {
 	unsigned char *buf;
-	int it = 0, pos = 0, bytes = 0;
+	int pos = 0, bytes = 0;
 	int max_pack = 42;
 	int i, left;
 	static int cnt;
@@ -463,7 +463,6 @@ int eFilePushThreadRecorder::read_dmx(int fd, void *m_buffer, int size)
 				eDebug("incomplete packet read from %d with size %d", fd, bytes);
 
 			m_packet_no++;
-			it++;
 			for (i = 0; i < bytes; i += 188)
 			{
 				b = buf + 16 + i;
