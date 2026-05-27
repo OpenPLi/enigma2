@@ -5,6 +5,7 @@
 #include <lib/dvb/idvb.h>
 #include <lib/dvb/idemux.h>
 #include <lib/dvb/pvrparse.h>
+#include <lib/service/iservicescrambled.h>
 #include "filepush.h"
 
 class eDVBDemux: public iDVBDemux
@@ -24,7 +25,7 @@ public:
 
 	RESULT createSectionReader(eMainloop *context, ePtr<iDVBSectionReader> &reader);
 	RESULT createPESReader(eMainloop *context, ePtr<iDVBPESReader> &reader);
-	RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, int packetsize = 188, bool streaming=false);
+	RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, int packetsize = 188, bool streaming=false, bool sync_mode=false, bool is_streaming_output=false);
 	RESULT getMPEGDecoder(ePtr<iTSMPEGDecoder> &reader, int index);
 	RESULT getSTC(pts_t &pts, int num);
 	RESULT getCADemuxID(uint8_t &id) { id = demux; return 0; }
@@ -102,6 +103,12 @@ public:
 	int getFirstPTS(pts_t &pts);
 	void setTargetFD(int fd) { m_fd_dest = fd; }
 	void enableAccessPoints(bool enable) { m_ts_parser.enableAccessPoints(enable); }
+	void setDescrambler(ePtr<iServiceScrambled> serviceDescrambler) { m_serviceDescrambler = serviceDescrambler; }
+	void setDiscardOnTimeout(bool discard) { m_discard_on_timeout = discard; }
+
+	// Virtual: wait for first data (only ScrambledThread actually waits)
+	virtual bool waitForFirstData(int /*timeout_ms*/) { return true; }
+
 protected:
 	int asyncWrite(int len);
 	/* override */ int writeData(int len);
@@ -116,20 +123,23 @@ protected:
 			memset(&aio, 0, sizeof(aiocb));
 			buffer = NULL;
 		}
-		int wait();
+		int wait(const volatile int* stop_flag = nullptr, int* short_write_count = nullptr);
 		int start(int fd, off_t offset, size_t nbytes, void* buffer);
-		int poll(); // returns 1 if busy, 0 if ready, <0 on error return
+		int poll(int* short_write_count = nullptr); // returns 1 if busy, 0 if ready, <0 on error return
 		int cancel(int fd); // returns <0 on error, 0 cancelled, >0 bytes written?
 	};
 	eMPEGStreamParserTS m_ts_parser;
 	off_t m_current_offset;
 	int m_fd_dest;
 	bool m_sync_mode;
+	bool m_discard_on_timeout;
 	typedef std::vector<AsyncIO> AsyncIOvector;
 	unsigned char* m_allocated_buffer;
 	AsyncIOvector m_aio;
 	AsyncIOvector::iterator m_current_buffer;
 	std::vector<int> m_buffer_use_histogram;
+	ePtr<iServiceScrambled> m_serviceDescrambler;
+	int m_aio_short_write_count = 0;
 };
 
 class eDVBRecordStreamThread: public eDVBRecordFileThread
@@ -142,11 +152,35 @@ protected:
 	void flush();
 };
 
+// Note: flush() inherited from StreamThread (cancel behavior)
+class eDVBRecordScrambledThread: public eDVBRecordStreamThread
+{
+public:
+	eDVBRecordScrambledThread(int packetsize, int buffersize = -1, bool sync_mode = false, bool is_streaming = false);
+	~eDVBRecordScrambledThread();
+
+	// Wait for first data to be written (for decoder sync)
+	/* override */ bool waitForFirstData(int timeout_ms);
+
+	// Reset the first-data flag (call before start() if reusing)
+	void resetFirstDataFlag();
+
+protected:
+	int writeData(int len);
+
+private:
+	// Synchronization for first data notification
+	pthread_mutex_t m_data_ready_mutex;
+	pthread_cond_t m_data_ready_cond;
+	bool m_first_data_written;
+	bool m_is_streaming;
+};
+
 class eDVBTSRecorder: public iDVBTSRecorder, public sigc::trackable
 {
 	DECLARE_REF(eDVBTSRecorder);
 public:
-	eDVBTSRecorder(eDVBDemux *demux, int packetsize, bool streaming);
+	eDVBTSRecorder(eDVBDemux *demux, int packetsize, bool streaming, bool sync_mode = false, bool is_streaming_output = false);
 	~eDVBTSRecorder();
 
 	RESULT setBufferSize(int size);
@@ -167,6 +201,11 @@ public:
 	RESULT getFirstPTS(pts_t &pts);
 
 	RESULT connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnection> &conn);
+
+	RESULT setDescrambler(ePtr<iServiceScrambled>);
+	void setDiscardOnTimeout(bool discard);
+	bool waitForFirstData(int timeout_ms);
+	void setMinWrite(size_t size) override;
 private:
 	RESULT startPID(int pid);
 	void stopPID(int pid);

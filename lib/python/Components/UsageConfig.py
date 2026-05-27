@@ -1,79 +1,24 @@
-# -*- coding: utf-8 -*-
-from Components.Console import Console
 from Components.Harddisk import harddiskmanager
+from Components.Console import Console
+from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, ConfigPassword, ConfigIP, NoSave
+from Tools.Directories import defaultRecordingLocation
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
+from Components.About import GetIPsFromNetworkInterfaces
 from Components.NimManager import nimmanager
 from Components.Renderer.FrontpanelLed import ledPatterns, PATTERN_ON, PATTERN_OFF, PATTERN_BLINK
 from Components.ServiceList import refreshServiceList, redrawServiceList
 from Components.SystemInfo import BoxInfo
-from Components.config import ConfigIP, ConfigSet, ConfigLocations
-from Components.config import ConfigSelection, ConfigText, ConfigNumber
-from Components.config import ConfigSelectionNumber, ConfigClock, ConfigPassword
-from Components.config import ConfigSlider, ConfigEnableDisable, ConfigInteger
-from Components.config import ConfigSubDict, ConfigDictionarySet
-from Components.config import ConfigSubsection, ConfigYesNo, config, NoSave
-from Tools.Directories import defaultRecordingLocation
-from enigma import eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
-from enigma import setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff
 import os
 import time
-import gettext
+import subprocess
 
-# Set up translation function
-_ = gettext.gettext
 
 originalAudioTracks = "orj dos ory org esl qaa qaf und qae mis mul ORY ORJ Audio_ORJ oth"
 visuallyImpairedCommentary = "NAR qad"
 
 
-# lulu
-
-def mountipkpth():
-	mdevices = []
-	mount_points = [
-		('/media/usb', '/media/usb/picon'),
-		('/media/usb1', '/media/usb1/picon'),
-		('/media/hdd', '/media/hdd/picon'),
-		('/media/hdd2', '/media/hdd2/picon'),
-		('/media/sdcard', '/media/sdcard/picon'),
-		('/media/sd', '/media/sd/picon'),
-		('/universe', '/universe/picon'),
-		('/media/ba', '/media/ba/picon'),
-		('/data', '/data/picon')
-	]
-
-	if os.path.exists('/proc/mounts'):
-		with open('/proc/mounts', 'r') as f:
-			for line in f.readlines():
-				for mount_point, picon_path in mount_points:
-					if line.find(mount_point) != -1:
-						if not os.path.exists(picon_path):
-							os.system(f'mkdir -p {picon_path}')
-						mdevices.append(picon_path)
-	mdevices.append('/picon')
-	mdevices.append('/usr/share/enigma2/picon')
-	return mdevices
-
-
-piconpathss = mountipkpth()
-print('MDEVICES AS:\n', piconpathss)
-
-
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	config.usage.dns = ConfigSelection(default="dhcp-router", choices=[
-		("dhcp-router", _("DHCP Router")),
-		("staticip", _("Static IP Router")),
-		("google", _("Google DNS")),
-		("NordVPN", _("NordVPN")),
-		("quad9security", _("Quad9 Security")),
-		("quad9nosecurity", _("Quad9 No Security")),
-		("cloudflare", _("Cloudflare")),
-		("opendns", _("OpenDNS")),
-		("opendns-2", _("OpenDNS-2"))
-	])
-	# lulu
-
 	config.usage.subnetwork = ConfigYesNo(default=True)
 	config.usage.subnetwork_cable = ConfigYesNo(default=True)
 	config.usage.subnetwork_terrestrial = ConfigYesNo(default=True)
@@ -111,21 +56,12 @@ def InitUsageConfig():
 
 	config.usage.service_icon_enable = ConfigYesNo(default=False)
 	config.usage.service_icon_enable.addNotifier(redrawServiceList, initial_call=False)
-	# lulu
-	logpathss = [item.replace('picon', '') for item in piconpathss]
-	if '/usr/share/enigma2/' in logpathss:
-		logpathss.remove('/usr/share/enigma2/')
-		logpathss.append('/home/root/logs/')
-		logpathss.append('/tmp/')
-	config.usage.debug_path = ConfigSelection(default='/home/root/logs/', choices=logpathss)
-	config.usage.picon_dir = ConfigSelection(default="/usr/share/enigma2/picon", choices=piconpathss)
-	# lulu
 	config.usage.servicelist_cursor_behavior = ConfigSelection(default="keep", choices=[
 		("standard", _("Standard")),
 		("keep", _("Keep service")),
 		("reverseB", _("Reverse bouquet buttons")),
 		("keep reverseB", _("Keep service") + " + " + _("Reverse bouquet buttons"))])
-
+	
 	config.usage.servicenum_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
 	config.usage.servicenum_fontsize.addNotifier(redrawServiceList, initial_call=False)
 	config.usage.servicename_fontsize = ConfigSelectionNumber(default=0, stepwidth=1, min=-8, max=10, wraparound=True)
@@ -194,8 +130,8 @@ def InitUsageConfig():
 	config.usage.default_path = ConfigText(default="")
 	config.usage.timer_path = ConfigText(default="<default>")
 	config.usage.instantrec_path = ConfigText(default="<default>")
-	config.usage.timeshift_path = ConfigText(default="/media/usb/")
-	config.usage.allowed_timeshift_paths = ConfigLocations(default=["/media/usb/"])
+	config.usage.timeshift_path = ConfigText(default="/media/hdd/")
+	config.usage.allowed_timeshift_paths = ConfigLocations(default=["/media/hdd/"])
 	config.usage.timeshift_skipreturntolive = ConfigYesNo(default=False)
 	config.usage.movielist_trashcan = ConfigYesNo(default=True)
 	config.usage.movielist_trashcan_days = ConfigNumber(default=8)
@@ -215,7 +151,7 @@ def InitUsageConfig():
 	config.usage.leave_movieplayer_onExit = ConfigSelection(default="popup", choices=[
 		("no", _("no")), ("popup", _("With popup")), ("without popup", _("Without popup")), ("movielist", _("Return to movie list"))])
 
-	config.usage.setup_level = ConfigSelection(default="expert", choices=[
+	config.usage.setup_level = ConfigSelection(default="simple", choices=[
 		("simple", _("Normal")),
 		("intermediate", _("Advanced")),
 		("expert", _("Expert"))])
@@ -310,7 +246,7 @@ def InitUsageConfig():
 		choicelist.append((str(i), ngettext("%d minute", "%d minutes", m) % m))
 	config.usage.timeshift_start_delay = ConfigSelection(default="0", choices=choicelist)
 
-	config.usage.alternatives_priority = ConfigSelection(default="5", choices=[
+	config.usage.alternatives_priority = ConfigSelection(default="0", choices=[
 		("0", "DVB-S/-C/-T"),
 		("1", "DVB-S/-T/-C"),
 		("2", "DVB-C/-S/-T"),
@@ -560,7 +496,6 @@ def InitUsageConfig():
 		return _("0 minutes")
 	choices = [(0, _('None'))] + [(i, wdhm(i)) for i in [i * 15 for i in range(1, 4)] + [i * 60 for i in range(1, 9)] + [i * 120 for i in range(5, 12)] + [i * 24 * 60 for i in range(1, 8)]]
 	config.epg.histminutes = ConfigSelection(default=0, choices=choices)
-
 	def EpgHistorySecondsChanged(configElement):
 		from enigma import eEPGCache
 		eEPGCache.getInstance().setEpgHistorySeconds(int(configElement.value) * 60)
@@ -574,7 +509,6 @@ def InitUsageConfig():
 	config.epg.filter = ConfigYesNo(default=False)
 	config.epg.filter_start = ConfigClock(default=time.mktime((1970, 1, 1, 6, 0, 0, 0, 0, 0)))
 	config.epg.filter_end = ConfigClock(default=time.mktime((1970, 1, 1, 20, 0, 0, 0, 0, 0)))
-
 	def validateEPGFilterTimes(configElement):
 		def minutes(t):
 			return t[0] * 60 + t[1]
@@ -890,97 +824,102 @@ def InitUsageConfig():
 	config.misc.softcam_streamrelay_url = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
 	config.misc.softcam_streamrelay_port = ConfigInteger(default=17999, limits=(0, 65535))
 	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=100, wraparound=True)
-	# lulu
-	config.softcam = ConfigSubsection()
-	config.softcam.showInExtensions = ConfigYesNo(default=False)
-	config.softcam.hideServerName = ConfigYesNo(default=False)
 
-	config.oscaminfo = ConfigSubsection()
-	config.oscaminfo.showInExtensions = ConfigYesNo(default=False)
-	config.oscaminfo.userdatafromconf = ConfigYesNo(default=True)
-	config.oscaminfo.autoupdate = ConfigYesNo(default=False)
-	config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
-	config.oscaminfo.password = ConfigPassword(default="password", fixed_size=False)
-	config.oscaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
-	config.oscaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
-	config.oscaminfo.intervall = ConfigSelectionNumber(min=1, max=600, stepwidth=1, default=10, wraparound=True)
-	# config.oscaminfo = ConfigSubsection()
-	# config.oscaminfo.userDataFromConf = ConfigYesNo(default=True)
-	# config.oscaminfo.username = ConfigText(default="username", fixed_size=False, visible_width=12)
-	# config.oscaminfo.password = ConfigPassword(default="password", fixed_size=False)
-	# config.oscaminfo.ip = ConfigIP(default=[127, 0, 0, 1], auto_jump=True)
-	# config.oscaminfo.port = ConfigInteger(default=16002, limits=(0, 65536))
-	# choiceList = [
-	#   (0, _("Disabled"))
-	# ] + [(x, ngettext("%d Second", "%d Seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3)]
-	# config.oscaminfo.autoUpdate = ConfigSelection(default=10, choices=choiceList)
-	# choiceList = [
-	#   (0, _("Disabled"))
-	# ] + [(x, ngettext("%d Second", "%d Seconds", x) % x) for x in (2, 5, 10, 20, 30)] + [(x * 60, ngettext("%d Minute", "%d Minutes", x) % x) for x in (1, 2, 3)]
-	# config.oscaminfo.autoUpdateLog = ConfigSelection(default=0, choices=choiceList)
-	# BoxInfo.setItem("OScamInstalled", False)
-	config.cccaminfo = ConfigSubsection()
-	config.cccaminfo.serverNameLength = ConfigSelectionNumber(min=10, max=100, stepwidth=1, default=22, wraparound=True)
-	config.cccaminfo.name = ConfigText(default="Profile", fixed_size=False)
-	config.cccaminfo.ip = ConfigText(default="192.168.1.78", fixed_size=False)
-	config.cccaminfo.username = ConfigText(default="", fixed_size=False)
-	config.cccaminfo.password = ConfigText(default="", fixed_size=False)
-	config.cccaminfo.port = ConfigInteger(default=16001, limits=(1, 65535))
-	config.cccaminfo.profile = ConfigText(default="", fixed_size=False)
-	config.cccaminfo.ecmInfoEnabled = ConfigYesNo(default=True)
-	config.cccaminfo.ecmInfoTime = ConfigSelectionNumber(min=1, max=10, stepwidth=1, default=5, wraparound=True)
-	config.cccaminfo.ecmInfoForceHide = ConfigYesNo(default=True)
-	config.cccaminfo.ecmInfoPositionX = ConfigInteger(default=50)
-	config.cccaminfo.ecmInfoPositionY = ConfigInteger(default=50)
-	config.cccaminfo.blacklist = ConfigText(default="/etc/enigma2/CCcamInfo.blacklisted", fixed_size=False)
-	config.cccaminfo.profiles = ConfigText(default="/etc/enigma2/CCcamInfo.profiles", fixed_size=False)
-	# lulu
+	config.softcsa = ConfigSubsection()
+	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
+		(0, _("Quick")),
+		(1, _("Normal"))
+	])
+	config.softcsa.syncMode = ConfigSelection(default=0, choices=[
+		(0, _("Automatic")),
+		(1, _("Synchronous"))
+	])
+	config.softcsa.waitForDataTimeout = ConfigSelection(
+		default=0,
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+	config.softcsa.bufferTime = ConfigSelection(
+		default=0,
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+	config.softcsa.useStreamRelayWhitelist = ConfigYesNo(default=True)
+
 	config.ntp = ConfigSubsection()
 
-	def timesyncChanged(configElement):
-		if configElement.value == "ntp" or configElement.value == "auto":
-			if not os.path.isfile('/var/spool/cron/crontabs/root') or 'ntpdate-sync' not in open('/var/spool/cron/crontabs/root').read():
-				Console().ePopen("echo '30 * * * *    /usr/bin/ntpdate-sync silent' >> /var/spool/cron/crontabs/root")
-			if not os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
-				Console().ePopen("ln -s /usr/bin/ntpdate-sync /etc/network/if-up.d/ntpdate-sync")
-		else:
-			if os.path.isfile('/var/spool/cron/crontabs/root'):
-				Console().ePopen("sed -i '/ntpdate-sync/d' /var/spool/cron/crontabs/root;")
-			if os.path.islink('/etc/network/if-up.d/ntpdate-sync'):
-				Console().ePopen("unlink /etc/network/if-up.d/ntpdate-sync")
-
-		if configElement.value == "ntp":
-			print("[UsageConfig] NTP enabled, DVB time disabled")
-			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-		elif configElement.value == "auto":
-			res = os.system('grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
-			if res >> 8 == 0:
-				print("[UsageConfig] NTP auto and active, DVB time disabled")
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-			else:
-				res = os.system('/usr/bin/ntpdate-sync && sleep 5 && grep ntpdate /var/log/messages | tail -n 1 | grep -q "adjust time server"')
-				if res >> 8 == 0:
-					print("[UsageConfig] NTP auto and active, DVB time disabled")
-					eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+	def chronyStatusFinished(result, retval, action):
+		match action:
+			case 'disable':
+				if retval == 0:
+					Console().ePopen('/etc/init.d/chronyd stop')
+				Console().ePopen('update-rc.d chronyd disable 3')
+			case 'enable':
+				Console().ePopen('update-rc.d chronyd enable 3')
+				if retval == 3:
+					Console().ePopen('/etc/init.d/chronyd start')
+			case 'sync' if retval == 0:
+				if retval == 0:
+					Console().ePopen('/etc/init.d/chronyd reload')
 				else:
-					print("[UsageConfig] NTP auto but not active, DVB time enabled")
-					eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
-		else:
-			print("[UsageConfig] NTP disabled, DVB time enabled")
+					Console().ePopen('/etc/init.d/chronyd start')
+			case _:
+				print("[UsageConfig] Unsupported Chrony status action: %s" % action)
+
+	def timesyncChanged(configElement):
+		if configElement.value == "dvb":
+			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+			print("[UsageConfig] NTP disabled, DVB time enabled")
+		elif configElement.value == "auto":
+			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
+			try:
+				result = subprocess.check_output('chronyc tracking', shell=True, text=True)
+			except subprocess.CalledProcessError as e:
+				result = ""
+				print("[Usageconfig]", e)
+			if "Reference ID    : 00000000 ()" in result:
+				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+				print("[UsageConfig] NTP disabled, DVB time enabled")
+			else:
+				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
+				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+				print("[UsageConfig] NTP enabled, DVB time disabled")
+		elif configElement.value == "ntp":
+			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+			print("[UsageConfig] NTP enabled, DVB time disabled")
 
 		eEPGCache.getInstance().timeUpdated()
 
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
-	config.ntp.timesync.addNotifier(timesyncChanged)
-	config.ntp.server = ConfigText("pool.ntp.org", fixed_size=False)
-
+	config.ntp.timesync.addNotifier(timesyncChanged, initial_call=False)
+	config.ntp.server = ConfigText("", fixed_size=False)
+	config.ntp.server_old = ConfigText("")
+	def setNTPServer(configElement):
+		if configElement.value != config.ntp.server_old.value and " " not in configElement.value:
+			f = open("/etc/chrony.conf", "r")
+			lst = f.readlines()
+			f = open("/etc/chrony.conf", "w")
+			for x in lst:
+				x1 = x.split()
+				if len(x1) > 1 and (x1[0] == "server" or x1[0] == "#server"):
+					if configElement.value == "":
+						x1[0] = "#server"
+						x = " ".join(x1) +"\n"
+					else:
+						x = "server %s iburst minpoll 3 prefer\n" % configElement.value
+				f.write(x)
+			f.close()
+			config.ntp.server_old.value = configElement.value
+			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
+			print("[UsageConfig] NTP enabled, local server is set to: %s" % configElement.value)
+	config.ntp.server.addNotifier(setNTPServer, immediate_feedback=False)
 
 def updateChoices(sel, choices):
 	if choices:
 		defval = None
 		val = int(sel.value)
-		if val not in choices:
+		if not val in choices:
 			tmp = choices[:]
 			tmp.reverse()
 			for x in tmp:
@@ -992,7 +931,7 @@ def updateChoices(sel, choices):
 
 def preferredPath(path):
 	if config.usage.setup_level.index < 2 or path == "<default>" or not path:
-		return None   # config.usage.default_path.value, but delay lookup until usage
+		return None  # config.usage.default_path.value, but delay lookup until usage
 	elif path == "<current>":
 		return config.movielist.last_videodir.value
 	elif path == "<timer>":

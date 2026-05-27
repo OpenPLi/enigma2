@@ -2,6 +2,7 @@
 #define __dvb_idemux_h
 
 #include <lib/dvb/idvb.h>
+#include <lib/service/iservicescrambled.h>
 
 class iDVBSectionReader: public iObject
 {
@@ -47,6 +48,18 @@ public:
 	virtual RESULT getCurrentPCR(pts_t &pcr) = 0;
 	virtual RESULT getFirstPTS(pts_t &pts) = 0;
 
+	virtual RESULT setDescrambler(ePtr<iServiceScrambled>) = 0;
+
+	// Discard data on sync write timeout instead of retrying.
+	// Use for live soft decoding where stale data is worthless and
+	virtual void setDiscardOnTimeout(bool discard) = 0;
+
+	// Wait for first data to be written (for SoftDecoder sync)
+	virtual bool waitForFirstData(int timeout_ms) = 0;
+
+	// Set write accumulation threshold (0 = continuous writing)
+	virtual void setMinWrite(size_t size) = 0;
+
 	enum {
 		eventWriteError,
 				/* a write error has occurred. data won't get lost if fd is writable after return. */
@@ -55,6 +68,8 @@ public:
 		eventReachedBoundary,
 				/* the programmed boundary was reached. you might set a new target fd. you can close the */
 				/* old one. */
+		eventStreamCorrupt,
+				/* stream corruption was detected (e.g. broken startcode in TS parser) */
 	};
 	virtual RESULT connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnection> &conn)=0;
 };

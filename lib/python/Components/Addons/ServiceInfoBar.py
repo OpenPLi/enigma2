@@ -174,6 +174,9 @@ class ServiceInfoBar(GUIAddon):
 						idx += 1
 			elif key == "crypt" and not isRef:
 				if info.getInfo(iServiceInformation.sIsCrypted) == 1:
+					# Check if SoftCSA (software descrambling) is active
+					if hasattr(iServiceInformation, 'sIsSoftCSA') and info.getInfo(iServiceInformation.sIsSoftCSA) == 1:
+						return "IS_CRYPT_CSA"
 					return key
 			elif key == "audiotrack" and not isRef:
 				audio = service.audioTracks()

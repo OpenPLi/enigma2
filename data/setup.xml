@@ -6,20 +6,11 @@
 	<setup key="avsetup">
 		<!-- this is just a placeholder, the Videomode plugin implements this submenu -->
 	</setup>
-	<!-- add @lululla -->
-	<setup key="DNS" title="DNS Settings">
-		<item level="0" text="DNS data source" description="Select the source of the default DNS settings.">config.usage.dns</item>
-	</setup>
 	<setup key="usage" title="Customize">
 		<item level="1" text="Sort order for menu entries" description="This option allows you to hide and sort menu entries. When selecting user you can change order and hide menu items via the blue button. With the user defined hidden the blue button is not shown in the menus">config.usage.menu_sort_mode</item>
 		<item level="1" text="Sort order for setup entries" description="This option allows you to alphabetically sort setup menu entries.">config.usage.sort_settings</item>
 		<item level="1" text="Show setup default values" description="In Setup screens choose whether to show the default value of the selected item in the description field.">config.usage.setupShowDefault</item>
 		<item level="1" text="Show screen path" description="This option allows you to show the full screen path leading to the current screen.">config.usage.showScreenPath</item>
-		<!-- add @lululla -->
-		<item level="0" text="Plugin Browser Style (Need Restart GUI)" description="This option allows you to select the plugin browser style (Need Restart GUI).">config.misc.pluginstyle</item>
-		<item level="0" text="Choice picons folder" description="This option allows you to configure the path of the picons that will be displayed in the channel selection list. But also where they will be downloaded from the download.">config.usage.picon_dir</item>
-		<item level="0" text="Choice CrashLog folder" description="This option allows you to configure the path of the log crash debug.">config.usage.debug_path</item>
-		<!-- add end @lululla -->
 		<item level="0" text="Sort order for help screen" description="Choose the order in which items are displayed in Help windows">config.usage.help_sortorder</item>
 		<item level="0" text="Show menu or plugin numbers" description="This option allows you to show menu and/or plugin number quick links.">config.usage.menu_show_numbers</item>
 		<item level="2" text="Show softcam setup in extensions menu" description="This option allows you to add the softcam setup in the extensions menu." requires="HasSoftcamInstalled">config.misc.softcam_setup.extension_menu</item>
@@ -45,7 +36,8 @@
 		<item level="2" text="Descramble receiving http streams" requires="HasOfflineDecoding" description="When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off.">config.streaming.descramble_client</item>
 		<item level="2" text="Descramble service via streamrelay url" description="The IP address from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_url</item>
 		<item level="2" text="Descramble service via streamrelay port" description="The port from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_port</item>
-		<item level="2" text="Stream Relay delay" description="Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
+        <item level="2" text="Stream Relay delay" description="Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
+		<item level="0" text="Use streamrelay whitelist file" description="Choose whether to use the streamrelay_whitelist file. The whitelist file should be disabled if you are using softcsa.">config.softcsa.useStreamRelayWhitelist</item>
 		<item level="2" text="Require authentication for http streams" description="When enabled, authentication is required to watch http streams.">config.streaming.authentication</item>
 		<item level="2" text="Http(s) stream start delay" description="Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC.">config.usage.http_startdelay</item>
 		<item level="2" text="Fan operation" description="Configure how the fan should operate" requires="Fan">config.usage.fan</item>
@@ -59,7 +51,7 @@
 		<item level="2" text="Ignore DVB-T namespace sub network" description="On valid ONIDs, ignore frequency sub network part">config.usage.subnetwork_terrestrial</item>
 		<item level="2" text="Alternative URL for images listed on FlashImage" description="Enter an URL where alternative images could be listed for FlashImage." requires="canFlashWithOfgwrite">config.usage.alternative_imagefeed</item>
 		<item level="1" text="Time synchronization method" description="Select how you want your receiver to keep the correct time, either from the DVB transponder, or from the internet using NTP. Or use Auto, which will favour using NTP, but will fall back to transponder time when no internet connection is available.">config.ntp.timesync</item>
-		<item level="1" text="NTP Hostname" indent="    " conditional="config.ntp.timesync.value != 'dvb'" description="The hostname or the IP address of the NTP server to synchronise the time with.">config.ntp.server</item>
+		<item level="1" text="Optional local NTP server" indent="    " conditional="config.ntp.timesync.value != 'dvb'" description="The hostname or the IP address of a local NTP server to synchronise the time with.">config.ntp.server</item>
 	</setup>
 	<setup key="channelselection" title="Channel Selection">
 		<item level="2" text="Show channel numbers in channel selection" description="When enabled, show channel numbers in the channel selection screen.">config.usage.show_channel_numbers_in_servicelist</item>
@@ -79,10 +71,6 @@
 		<item level="2" text="Enable OK as preview in channel selection" description="When enabled then when you select a new channel in the channel selection the channel selection will not close. It will only close when you select the current playing service. This is a kind of preview mode">config.usage.channelselection_preview</item>
 	</setup>
 	<setup key="userinterface" title="User interface">
-		<!-- add @lululla -->
-		<item level="0" text="Choice picons folder" description="This option allows you to configure the path of the picons that will be displayed in the channel selection list. But also where they will be downloaded from the download.">config.usage.picon_dir</item>
-		<item level="0" text="Choice CrashLog folder" description="This option allows you to configure the path of the log crash debug.">config.usage.debug_path</item>
-		<!-- add end @lululla -->
 		<item level="1" text="Show animation while busy" description="Show busy indicator when the system is busy.">config.usage.show_spinner</item>
 		<item level="1" text="Show positioner movement" requires="isRotorTuner" description="Configure whether or not an icon should be shown when your motorized dish is moving.">config.usage.showdish</item>
 		<item level="1" text="Show positioner position" requires="isRotorTuner" description="Configure whether or not a rotor position will be displayed on the infobar">config.misc.showrotorposition</item>
@@ -122,40 +110,6 @@
 		<item level="2" text="Show True/False as graphical switch" description="Enable to display all true/false, yes/no, on/off and enable/disable set up options as a graphical switch.">config.usage.boolean_graphic</item>
 		<item level="2" text="Show simple second infobar" conditional="findSkinScreen('SecondInfoBarSimple')" description="When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK buttin when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode.">config.usage.show_simple_second_infobar</item>
 		<item level="2" text="Show additional information on infobar" conditional="findSkinScreen('InfoBarAdds')" description="When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible.">config.usage.show_infobar_adds</item>
-	</setup>
-	<setup key="CCcamLineEdit" title="CCcam Line Editor">
-		<item level="0" text="Protocol" description="Select the Softcam protocol.">config.cccamlineedit.protocol</item>
-		<item level="0" text="Domain" description="Edit the CCcam/NewCamd server hostname.">config.cccamlineedit.domain</item>
-		<item level="0" text="Port" description="Edit the CCcam/NewCamd server port.">config.cccamlineedit.port</item>
-		<item level="0" text="Username" description="Edit the username.">config.cccamlineedit.username</item>
-		<item level="0" text="Password" description="Edit the password.">config.cccamlineedit.password</item>
-		<item level="0" text="NewCamd DES Key" description="Edit the NewCamd DES Key." conditional="config.cccamlineedit.protocol.value == 'N:'">config.cccamlineedit.deskey</item>
-	</setup>
-	<setup key="CCcamProfile" title="CCcam Profile Settings">
-		<item level="0" text="Name" description="Edit the profile name.">config.cccaminfo.name</item>
-		<item level="0" text="IP" description="Edit the remote IP address.">config.cccaminfo.ip</item>
-		<item level="0" text="Username" description="Edit the username.">config.cccaminfo.username</item>
-		<item level="0" text="Password" description="Edit the password.">config.cccaminfo.password</item>
-		<item level="0" text="Port" description="Edit the remote CCCam port.">config.cccaminfo.port</item>
-		<item level="0" text="Blacklist" description="Folder file Blacklist.">config.cccaminfo.blacklist</item>
-		<item level="0" text="Profiles" description="Folder File Profiles.">config.cccaminfo.profiles</item>
-	</setup>
-	<setup key="Softcam" title="Softcam Settings" showOpenWebif="1">
-		<item level="0" text="Select Softcam" description="Select a Softcam from the available list.">config.misc.softcams</item>
-		<item level="2" text="Show OScam/CCcam in Extension Menu" description="Allows you to show/hide OScam/CCcam in the Extension Menu screen (BLUE button).">config.softcam.showInExtensions</item>
-	</setup>
-	<!-- add @lululla -->
-	<setup key="OSCamInfoSetup" title="OSCam Information Settings">
-		<item level="0" text="Read Userdata from oscam.conf" description="Read Userdata from oscam.conf">config.oscaminfo.userDataFromConf</item>
-		<if conditional="not config.oscaminfo.userDataFromConf.value">
-			<item level="0" text="Username (httpuser)" description="Username (httpuser)">config.oscaminfo.username</item>
-			<item level="0" text="Password (httpwd)" description="Password (httpuser)">config.oscaminfo.password</item>
-			<item level="0" text="IP address" description="IP address">config.oscaminfo.ip</item>
-			<item level="0" text="Port" description="Port">config.oscaminfo.port</item>
-		</if>
-		<item level="0" text="Automatically update Client/Server View" description="Automatically update Client/Server View">config.oscaminfo.autoupdate</item>
-		<item level="0" text="Update interval (in seconds)" description="Update interval (in seconds)">config.oscaminfo.intervall</item>
-		<!-- <item level="0" text="Automatically update Log-Fullscreen View" description="Automatically update Log-Fullscreen View">config.oscaminfo.autoUpdateLog</item> -->
 	</setup>
 	<setup key="epgsettings" title="EPG settings">
 		<item level="2" text="Show EIT now/next in infobar" description="When enabled, display the EIT now/next eventdata in infobar. When disabled, display now/next eventdata from the EPG cache instead.">config.usage.show_eit_nownext</item>
@@ -257,7 +211,7 @@
 	<setup key="accesslevel" title="User Mode">
 		<item level="0" text="Setup mode" description="Configure which access level to use for the configuration menu. Expert level gives access to all items.">config.usage.setup_level</item>
 	</setup>
-	<setup key="harddisk" title="Hard disk setup">
+	<setup key="harddisk" title="Hard disk setup" >
 		<item level="0" text="Hard disk standby after" description="Configure the hard disk drive to go to standby after the specified idle time.">config.usage.hdd_standby</item>
 	</setup>
 	<setup key="network" title="Network setup">
@@ -321,7 +275,12 @@
 		<item level="0" text="Alternative numbering mode" description="When enabled, channel numbering will start at '1' for each bouquet.">config.usage.alternative_number_mode</item>
 		<item level="0" text="Show picons in channel selection list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
 		<item level="0" text="Enable HDMI-CEC" description="When enabled, HDMI-CEC is enabled with standard configuration" requires="HasHDMI-CEC">config.hdmicec.enabled</item>
-		<item level="0" text="Use DHCP" description="When enabled, use DHCP for the IP configuration.">config.network.dhcp</item>
-		<item level="0" text="DNS data source" description="Select the source of the default DNS settings.">config.usage.dns</item>
+	</setup>
+	<setup key="SoftCSA" title="SoftCSA Settings">
+		<item level="0" text="Decoder release strategy" description="How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes).">config.softcsa.decoderRelease</item>
+		<item level="0" text="Sync mode" description="Select how the descrambled data stream is processed. 'Automatic' uses asynchronous writes (lower CPU usage) with automatic fallback to synchronous if kernel AIO is not supported. 'Synchronous' forces blocking writes (stable, most compatible).">config.softcsa.syncMode</item>
+		<item level="2" text="Decoder start timeout" description="Maximum time to wait for the first descrambling key (CW) before starting the decoder. 'Disabled' starts the decoder immediately without waiting.">config.softcsa.waitForDataTimeout</item>
+		<item level="2" text="Decoder start delay" description="Select the delay to buffer descrambled data before starting playback. This can reduce AC3 audio dropouts by ensuring enough data is available when the decoder starts. Higher values are more stable but increase channel switch time.">config.softcsa.bufferTime</item>
+		<item level="0" text="Use streamrelay whitelist file" description="Choose whether to use the streamrelay_whitelist file. The whitelist file should be disabled if you are using softcsa.">config.softcsa.useStreamRelayWhitelist</item>
 	</setup>
 </setupxml>

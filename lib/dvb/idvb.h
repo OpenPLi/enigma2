@@ -281,16 +281,20 @@ public:
 	{
 		cVPID, cMPEGAPID, cTPID, cPCRPID, cAC3PID,
 		cVTYPE, cACHANNEL, cAC3DELAY, cPCMDELAY,
-		cSUBTITLE, cAACHEAPID=12, cDDPPID, cAACAPID,
+		cSUBTITLE, cAACHEAPID=12, cDDPPID, cDTSPID, cAACAPID,
+		cLPCMPID, cDTSHDPID,
 		cDATAPID, cPMTPID, cDRAAPID, cAC4PID, cacheMax
 	};
 
+	static const cacheID audioCacheTags[];
+	static const int nAudioCacheTags;
 	std::string m_reference_str;
 	int getCacheEntry(cacheID);
 	void setCacheEntry(cacheID, int);
 	void setServiceRef(std::string sref) { m_reference_str = sref; }
 
 	bool cacheEmpty();
+	bool cacheAudioEmpty();
 
 	eDVBService();
 		/* m_service_name_sort is uppercase, with special chars removed, to increase sort performance. */
@@ -695,7 +699,7 @@ class iDVBDemux: public iObject
 public:
 	virtual RESULT createSectionReader(eMainloop *context, ePtr<iDVBSectionReader> &reader)=0;
 	virtual RESULT createPESReader(eMainloop *context, ePtr<iDVBPESReader> &reader)=0;
-	virtual RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, int packetsize = 188, bool streaming=false)=0;
+	virtual RESULT createTSRecorder(ePtr<iDVBTSRecorder> &recorder, int packetsize = 188, bool streaming=false, bool sync_mode=false, bool is_streaming_output=false)=0;
 	virtual RESULT getMPEGDecoder(ePtr<iTSMPEGDecoder> &reader, int index = 0)=0;
 	virtual RESULT getSTC(pts_t &pts, int num=0)=0;
 	virtual RESULT getCADemuxID(uint8_t &id)=0;

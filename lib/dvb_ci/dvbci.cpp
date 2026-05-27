@@ -797,6 +797,17 @@ void eDVBCIInterfaces::gotPMT(eDVBServicePMTHandler *pmthandler)
 	}
 }
 
+bool eDVBCIInterfaces::isCiConnected(eDVBServicePMTHandler *pmthandler)
+{
+	bool ret = false;
+	PMTHandlerList::iterator it=std::find(m_pmt_handlers.begin(), m_pmt_handlers.end(), pmthandler);
+	if (it != m_pmt_handlers.end() && it->cislot)
+	{
+		ret = true;
+	}
+	return ret;
+}
+
 int eDVBCIInterfaces::getMMIState(int slotid)
 {
 	eDVBCISlot *slot;
@@ -1571,8 +1582,8 @@ int eDVBCISlot::setCaParameter(eDVBServicePMTHandler *pmthandler)
 		m_audio_pids[i] = program.audioStreams[i].pid;
 	}
 
-	m_video_pid = program.videoStreams.empty()? 0 : program.videoStreams[0].pid;
-	m_audio_pid = program.audioStreams.empty()? 0 : program.audioStreams[program.defaultAudioStream].pid;
+	m_video_pid = program.videoStreams.empty() ? 0 : program.videoStreams[0].pid;
+	m_audio_pid = (program.audioStreams.empty() || program.defaultAudioStream < 0 || static_cast<size_t>(program.defaultAudioStream) >= program.audioStreams.size()) ? 0 : program.audioStreams[program.defaultAudioStream].pid;
 
 	m_tunernum = -1;
 	if (!pmthandler->getChannel(channel))

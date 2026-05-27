@@ -10,6 +10,7 @@ service_libenigma_service_a_SOURCES = \
 	service/servicedvb.cpp \
 	service/servicedvbrecord.cpp \
 	service/servicedvbfcc.cpp \
+	service/servicedvbsoftdecoder.cpp \
 	service/servicefs.cpp \
 	service/servicem2ts.cpp \
 	service/servicedvbstream.cpp \
@@ -22,11 +23,13 @@ serviceincludedir = $(pkgincludedir)/lib/service
 serviceinclude_HEADERS = \
 	service/event.h \
 	service/iservice.h \
+	service/iservicescrambled.h \
 	service/listboxservice.h \
 	service/service.h \
 	service/servicedvb.h \
 	service/servicedvbrecord.h \
 	service/servicedvbfcc.h \
+	service/servicedvbsoftdecoder.h \
 	service/servicefs.h \
 	service/servicem2ts.h \
 	service/servicedvbstream.h \

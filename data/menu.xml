@@ -1,5 +1,5 @@
 <menu key="mainmenu" text="Main menu">
-	<!--
+<!--
 	The following types are allowed:
 	<screen [module="mod"] [screen="classname"]>[arguments]</screen>
 		Executes Screen called "classname" from module "Screen.mod".
@@ -9,7 +9,7 @@
 			use stuff from module.
 		(Of course you must specify at least one of module, screen.)
 	<plugin [extensions/system="pluginname"] [screen="classname"]>[arguments]</plugin>
-		Either "extensions" or "system" must be used. "extensions" is for
+		Either "extensions" or "system" must be used. "extensions" is for 
 		Plugin.Extensions plugins and "system" is for Plugins.SystemPlugins.
 	<plugin [extensions="pluginname"] [screen="classname"]>[arguments]</plugin>
 		Executes Screen called "classname" from module "Plugins.Extensions.pluginname.plugin".
@@ -21,250 +21,79 @@
 	<code> .. code .. </code>
 		Python "exec"s code.
 -->
-	<!-- Menu /  by lululla-->
-	<menu key="menu_Menu" level="0" text="Corvoboys Menu">
-		<item key="LSAddon" weight="0" level="0" text="Addon Panel">
-			<code>
-from Plugins.Extensions.LinuxsatPanel.plugin import LinuxsatPanel
-self.session.open(LinuxsatPanel)
-</code>
-		</item>
-		<item weight="10" level="0" text="Softcam Manager" key="CamManager">
-			<code>
-from Plugins.Extensions.tvManager.plugin import tvManager
-self.session.open(tvManager)
-</code>
-		</item>
-		<item weight="12" level="0" text="EPGImport" key="EPGImport">
-			<code>
-from Plugins.Extensions.EPGImport.plugin import EPGImportConfig
-self.session.open(EPGImportConfig)
-</code>
-		</item>
-		<item weight="12" level="0" text="LCN" key="Terrestrial">
-			<code>
-from Screens.Terrestrial import PluginSetup
-self.session.open(PluginSetup)
-</code>
-		</item>
-		<!-- <item weight="13" level="0" text="Vavoo Stream Live" key="vavoo">
-			<code>
-from Screens.vavoo import VavooScreen
-self.session.open(VavooScreen)
-</code>
-		</item> -->
-		<item weight="13" level="0" text="Vavoo Stream Live" key="vavoo">
-			<code>
-from Screens.vavoo import PluginMain
-PluginMain(self.session)
-	</code>
-		</item>
-		<item weight="14" level="0" text="Radio Stream" key="radiom">
-			<code>
-from Screens.radio import radiom1
-self.session.open(radiom1)
-</code>
-		</item>
-		<item weight="15" level="0" text="Skin Setup" key="AglareSetup">
-			<code>
-from Plugins.Extensions.Aglare.plugin import AglareSetup
-self.session.open(AglareSetup)
-</code>
-		</item>
-		<item weight="20" level="0" text="Plugin Browser Style" key="BrowserStyle">
-			<setup id="usage"/>
-		</item>
-		<item weight="21" level="0" text="Picon Path" key="SetPiconPath">
-			<setup id="userinterface"/>
-		</item>
-		<item weight="22" level="0" text="AcheScript" key="OpenScript">
-			<code>
-from Screens.AcheScript import OpenScript
-self.session.open(OpenScript)
+		<item key="timer_edit" level="0" text="Timer"><screen module="TimerEdit" screen="TimerEditList"/></item>
+		<item key="scart_switch" level="1" text="VCR scart" conditional="config.usage.show_vcr_scart.value" requires="ScartSwitch"><code>self.session.scart.VCRSbChanged(3)</code></item>
 
-</code>
-		</item>
-		<item weight="22" level="0" text="CrashLog Viewer" key="CrashLog">
-			<code>
-from Screens.crashlog import CrashLogScreen
-self.session.open(CrashLogScreen)
-
-</code>
-		</item>
-	</menu>
-	<!-- Menu /  by lululla-->
-	<item key="timer_edit" level="0" text="Timer">
-		<screen module="TimerEdit" screen="TimerEditList"/>
-	</item>
-	<item key="scart_switch" level="1" text="VCR scart" conditional="config.usage.show_vcr_scart.value" requires="ScartSwitch">
-		<code>self.session.scart.VCRSbChanged(3)</code>
-	</item>
-	<menu key="information" level="0" text="Information">
-		<item key="service_info_screen" level="1" text="Service">
-			<screen module="ServiceInfo" screen="ServiceInfo"/>
-		</item>
-		<item key="about_screen" level="0" text="About">
-			<screen module="About"/>
-		</item>
-		<item key="streaming_clients_info_screen" level="2" text="Streaming clients info">
-			<screen module="StreamingClientsInfo"/>
-		</item>
-	</menu>
-	<item key="plugin_selection" level="0" text="Plugins">
-		<screen module="PluginBrowser" screen="PluginBrowser"/>
-	</item>
-	<menu key="setup" level="0" text="Setup" flushConfigOnClose="1">
-		<menu key="scan" weight="7" level="0" text="Tuners &amp; scanning">
-			<item key="tuner_setup" text="Tuner configuration" conditional="nimmanager.nim_slots">
-				<screen module="Satconfig" screen="NimSelection"/>
-			</item>
-			<item key="auto_scan" text="Automatic scan" conditional="nimmanager.somethingConnected()">
-				<screen module="ScanSetup" screen="ScanSimple"/>
-			</item>
-			<item key="manual_scan" text="Manual scan" conditional="nimmanager.somethingConnected()">
-				<screen module="ScanSetup"/>
-			</item>
-			<item key="fallbacktuner_settings" text="Fallback remote receiver setup">
-				<screen module="SetupFallbacktuner"/>
-			</item>
+		<menu key="information" level="0" text="Information">
+			<item key="service_info_screen" level="1" text="Service"><screen module="ServiceInfo" screen="ServiceInfo"/></item>
+			<item key="about_screen" level="0" text="About"><screen module="About"/></item>
+			<item key="streaming_clients_info_screen" level="2" text="Streaming clients info"><screen module="StreamingClientsInfo"/></item>
 		</menu>
-		<menu key="system" weight="5" level="0" text="System">
-			<menu key="video" level="0" text="Audio / Video">
-				<item key="av_setup" level="0" text="Video settings">
-					<setup id="avsetup"/>
-				</item>
-				<item key="subtitle_setup" level="2" text="Subtitles">
-					<setup id="subtitlesetup"/>
-				</item>
-				<item key="autolanguage_setup" level="0" text="Automatic Language">
-					<setup id="autolanguagesetup"/>
-				</item>
+
+		<item key="plugin_selection" level="0" text="Plugins"><screen module="PluginBrowser" screen="PluginBrowser"/></item>
+		<menu key="setup" level="0" text="Setup" flushConfigOnClose="1">
+			<menu key="scan" weight="7" level="0" text="Tuners &amp; scanning">
+				<item key="tuner_setup" text="Tuner configuration" conditional="nimmanager.nim_slots"><screen module="Satconfig" screen="NimSelection"/></item>
+				<item key="auto_scan" text="Automatic scan" conditional="nimmanager.somethingConnected()"><screen module="ScanSetup" screen="ScanSimple"/></item>
+				<item key="manual_scan" text="Manual scan" conditional="nimmanager.somethingConnected()"><screen module="ScanSetup"/></item>
+				<item key="fallbacktuner_settings" text="Fallback remote receiver setup"><screen module="SetupFallbacktuner"/></item>
 			</menu>
-			<item key="usage_setup" level="0" text="Customize">
-				<setup id="usage"/>
-			</item>
-			<menu key="gui" level="0" text="GUI Settings">
-				<item key="language_setup" level="0" text="Language">
-					<screen module="LanguageSelection"/>
-				</item>
-				<item key="timezone_setup" level="0" text="Timezone">
-					<setup id="timezone"/>
-				</item>
-				<item key="user_interface" level="0" text="User interface">
-					<setup id="userinterface"/>
-				</item>
-				<item key="primary_skin_selector" level="0" text="GUI Skin">
-					<screen module="SkinSelector" screen="SkinSelector"/>
-				</item>
-				<item key="display_skin_selector" level="0" requires="FrontpanelDisplay" text="Display Skin">
-					<screen module="SkinSelector" screen="LcdSkinSelector"/>
-				</item>
-			</menu>
-			<menu key="epg" level="0" text="EPG">
-				<item key="epg_setup" level="0" text="EPG settings">
-					<setup id="epgsettings"/>
-				</item>
-			</menu>
-			<item key="rfmod_setup" level="1" text="RF output" requires="RfModulator">
-				<setup id="RFmod"/>
-			</item>
-			<menu key="expert" level="0" text="Expert settings">
-				<item key="accesslevel_setup" level="0" text="User Mode">
-					<setup id="accesslevel"/>
-				</item>
-				<item key="recording_setup" level="0" text="Record">
-					<setup id="recording"/>
-				</item>
-				<menu key="harddisk" level="0" text="Harddisk" requires="Harddisk">
-					<item key="harddisk_setup" level="0" text="Hard disk setup">
-						<setup id="harddisk"/>
-					</item>
-					<item key="harddisk_init" level="0" text="Initialization">
-						<screen module="HarddiskSetup" screen="HarddiskSelection"/>
-					</item>
-					<item key="harddisk_check" level="0" text="Filesystem check">
-						<screen module="HarddiskSetup" screen="HarddiskFsckSelection"/>
-					</item>
+			<menu key="system" weight="5" level="0" text="System">
+				<menu key="video" level="0" text="Audio / Video">
+					<item key="av_setup" level="0" text="Video settings"><setup id="avsetup"/></item>
+					<item  key="subtitle_setup" level="2" text="Subtitles"><setup id="subtitlesetup"/></item>
+					<item key="autolanguage_setup" level="0" text="Automatic Language"><setup id="autolanguagesetup"/></item>
 				</menu>
-				<item key="network_setup" level="0" text="Network">
-					<screen module="NetworkSetup" screen="NetworkAdapterSelection"/>
-				</item>
-				<item key="input_device_setup" level="1" text="Input devices">
-					<screen module="InputDeviceSetup" screen="InputDeviceSelection"/>
-				</item>
-				<item key="lcd_setup" text="Display setup" requires="Display">
-					<setup level="1" id="lcd"/>
-				</item>
-				<item key="keyboard_setup" text="Keyboard">
-					<setup id="keyboard"/>
-				</item>
-				<item key="RecordPaths" level="2" text="Recording paths">
-					<screen module="RecordPaths" screen="RecordPathsSettings"/>
-				</item>
-				<item key="hotkey_setup" level="1" text="Hotkey">
-					<screen module="Hotkey" screen="HotkeySetup"/>
-				</item>
+				<item key="usage_setup" level="0" text="Customize"><setup id="usage"/></item>
+				<menu key="gui" level="0" text="GUI Settings">
+					<item key="language_setup" level="0" text="Language"><screen module="LanguageSelection"/></item>
+					<item key="timezone_setup" level="0" text="Timezone"><setup id="timezone"/></item>
+					<item key="user_interface" level="0" text="User interface"><setup id="userinterface"/></item>
+					<item key="primary_skin_selector" level="0" text="GUI Skin"><screen module="SkinSelector" screen="SkinSelector"/></item>
+					<item key="display_skin_selector" level="0" requires="FrontpanelDisplay" text="Display Skin"><screen module="SkinSelector" screen="LcdSkinSelector"/></item>
+				</menu>
+				<menu key="epg" level="0" text="EPG">
+					<item key="epg_setup" level="0" text="EPG settings"><setup id="epgsettings"/></item>
+				</menu>
+				<item key="rfmod_setup" level="1" text="RF output" requires="RfModulator"><setup id="RFmod"/></item>
+				<menu key="expert" level="0" text="Expert settings">
+					<item key="accesslevel_setup" level="0" text="User Mode"><setup id="accesslevel"/></item>
+					<item key="recording_setup" level="0" text="Record"><setup id="recording"/></item>
+					<menu key="harddisk" level="0" text="Harddisk" requires="Harddisk">
+						<item key="harddisk_setup" level="0" text="Hard disk setup"><setup id="harddisk"/></item>
+						<item key="harddisk_init" level="0" text="Initialization"><screen module="HarddiskSetup" screen="HarddiskSelection"/></item>
+						<item key="harddisk_check" level="0" text="Filesystem check"><screen module="HarddiskSetup" screen="HarddiskFsckSelection"/></item>
+					</menu>
+					<item key="network_setup" level="0" text="Network"><screen module="NetworkSetup" screen="NetworkAdapterSelection"/></item>
+					<item key="input_device_setup" level="1" text="Input devices"><screen module="InputDeviceSetup" screen="InputDeviceSelection"/></item>
+					<item key="lcd_setup" text="Display setup" requires="Display"><setup level="1" id="lcd"/></item>
+					<item key="keyboard_setup" text="Keyboard"><setup id="keyboard"/></item>
+					<item key="RecordPaths" level="2" text="Recording paths"><screen module="RecordPaths" screen="RecordPathsSettings"/></item>
+					<item key="hotkey_setup" level="1" text="Hotkey"><screen module="Hotkey" screen="HotkeySetup"/></item>
+				</menu>
+				<item key="change_password" level="0" text="Change Password"><screen module="ChangePassword" screen="ChangePasswordScreen"/></item>
 			</menu>
-
-			<item key="change_password" level="0" text="Change Password">
-				<screen module="ChangePassword" screen="ChangePasswordScreen"/>
-			</item>
+			<menu key="cam" weight="10" text="SoftCam / CI">
+				<item key="softcam_setup" weight="10" level="0" text="Softcam Setup"><screen module="SoftcamSetup" screen="SoftcamSetup"/></item>
+				<item key="ci_setup" weight="10" level="0" text="Common Interface" requires="CommonInterface"><screen module="Ci" screen="CiSelection"/></item>
+				<item key="softcsa_settings" weight="15" level="0" text="SoftCSA Settings" requires="HasSoftCSA"><setup id="SoftCSA"/></item>
+			</menu>
+			<item key="parental_setup" weight="15" level="0" text="Parental control"><screen module="ParentalControlSetup" screen="ParentalControlSetup"/></item>
+			<item key="factory_reset" weight="15" level="0" text="Factory reset"><screen module="FactoryReset" screen="FactoryReset"/></item>
+			<item key="flash_image" weight="15" level="0" text="Flash image" requires="canFlashWithOfgwrite" ><screen module="FlashImage" screen="SelectImage"/></item>
+			<item key="software_update" weight="15" level="0" text="Software update"><screen module="SoftwareUpdate" screen="UpdatePlugin"/></item>
 		</menu>
-		<menu key="cam" weight="10" text="SoftCam / CI">
-			<item key="softcam_setup" weight="10" level="0" text="Softcam Setup">
-				<screen module="SoftcamSetup" screen="SoftcamSetup"/>
-			</item>
-			<item key="ci_setup" weight="10" level="0" text="Common Interface" requires="CommonInterface">
-				<screen module="Ci" screen="CiSelection"/>
-			</item>
+		<menu key="shutdown" text="Standby / restart">
+			<item key="sleep" text="Sleep timer"><screen module="SleepTimerEdit" screen="SleepTimerEdit"/></item>
+			<item key="standby" text="Standby"><screen module="Standby" screen="Standby"/></item>
+			<item key="restart" text="Restart"><screen module="Standby" screen="TryQuitMainloop">2</screen></item>
+			<item key="dualboot" weight="24" level="0" text="Switch to Android" requires="canDualBoot"><screen module="Standby" screen="SwitchToAndroid" /></item>
+			<item key="restart_enigma_debug" text="Restart enigma" requires="InDebugMode"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
+			<item key="restart_enigma" text="Restart enigma" requires="!InDebugMode"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
+			<item key="restart_enigma" text="Restart enigma in standard mode" requires="InDebugMode"><screen module="Standby" screen="TryQuitMainloop">3</screen></item>
+			<item key="restart_enigma_debug" text="Restart enigma in debug mode" requires="!InDebugMode"><screen module="Standby" screen="TryQuitMainloop">6</screen></item>
+			<item key="multiboot" text="Multiboot image selector" requires="canMultiBoot"><screen module="FlashImage" screen="MultibootSelection">1</screen></item>
+			<item key="deep_standby" text="Deep standby" requires="DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
+			<item key="deep_standby" text="Shutdown" requires="!DeepstandbySupport"><screen module="Standby" screen="TryQuitMainloop">1</screen></item>
 		</menu>
-		<item key="parental_setup" weight="15" level="0" text="Parental control">
-			<screen module="ParentalControlSetup" screen="ParentalControlSetup"/>
-		</item>
-		<item key="factory_reset" weight="15" level="0" text="Factory reset">
-			<screen module="FactoryReset" screen="FactoryReset"/>
-		</item>
-		<item key="flash_image" weight="15" level="0" text="Flash image" requires="canFlashWithOfgwrite">
-			<screen module="FlashImage" screen="SelectImage"/>
-		</item>
-		<item key="software_update" weight="15" level="0" text="Software update">
-			<screen module="SoftwareUpdate" screen="UpdatePlugin"/>
-		</item>
-	</menu>
-	<menu key="shutdown" text="Standby / restart">
-		<item key="multiboot" text="Multiboot" requires="canMultiBoot">
-			<screen module="FlashImage" screen="MultibootSelection">1</screen>
-		</item>
-		<item key="sleep" text="Sleep timer">
-			<screen module="SleepTimerEdit" screen="SleepTimerEdit"/>
-		</item>
-		<item key="dualboot" weight="24" level="0" text="Switch to Android" requires="canDualBoot">
-			<screen module="Standby" screen="SwitchToAndroid"/>
-		</item>
-		<item key="restart_enigma_debug" text="Restart enigma" requires="InDebugMode">
-			<screen module="Standby" screen="TryQuitMainloop">6</screen>
-		</item>
-		<item key="restart_enigma" text="Restart enigma in standard mode" requires="InDebugMode">
-			<screen module="Standby" screen="TryQuitMainloop">3</screen>
-		</item>
-		<item key="restart_enigma_debug" text="Restart enigma in debug mode" requires="!InDebugMode">
-			<screen module="Standby" screen="TryQuitMainloop">6</screen>
-		</item>
-		<item key="deep_standby" text="Deep standby" requires="DeepstandbySupport">
-			<screen module="Standby" screen="TryQuitMainloop">1</screen>
-		</item>
-		<item key="standby" text="Standby">
-			<screen module="Standby" screen="Standby"/>
-		</item>
-		<item key="restart" text="Restart">
-			<screen module="Standby" screen="TryQuitMainloop">2</screen>
-		</item>
-		<item key="deep_standby" text="Shutdown" requires="!DeepstandbySupport">
-			<screen module="Standby" screen="TryQuitMainloop">1</screen>
-		</item>
-		<item key="restart_enigma" text="Restart enigma" requires="!InDebugMode">
-			<screen module="Standby" screen="TryQuitMainloop">3</screen>
-		</item>
-	</menu>
 </menu>
-

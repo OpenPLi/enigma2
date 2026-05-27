@@ -39,11 +39,11 @@ class ChangePasswordScreen(Setup):
 			self.container.dataAvail.append(self.dataAvail)
 			if self.newPassword.value:
 				if  self.container.execute("passwd root") == 0:
-					message = _("Sucessfully changed password for root user")
+					message = _("Successfully changed password for root user")
 				else:
 					message = _("Unable to change password for root user")
 			elif self.container.execute("passwd -d root") == 0:
-				message = _("Sucessfully cleared password for root user")
+				message = _("Successfully cleared password for root user")
 			else:
 				message = _("Unable to clear password for root user")
 		else:

@@ -9,6 +9,10 @@
 
 #include <lib/gdi/fb.h>
 
+#ifdef HAVE_HIFBLAYER
+#include "hifb.h"
+#endif
+
 #ifndef FBIO_WAITFORVSYNC
 #define FBIO_WAITFORVSYNC _IOW('F', 0x20, uint32_t)
 #endif
@@ -30,8 +34,15 @@ fbClass::fbClass(const char *fb)
 	m_manual_blit=-1;
 	instance=this;
 	locked=0;
-	lfb = 0;
+	lfb=0;
+	m_lfb_base=0;
+
 	available=0;
+	m_available_total=0;
+
+	m_phys_mem=0;
+	m_phys_mem_base=0;
+
 	cmap.start=0;
 	cmap.len=256;
 	cmap.red=red;
@@ -60,11 +71,14 @@ fbClass::fbClass(const char *fb)
 		goto nolfb;
 	}
 
-	available=fix.smem_len;
-	m_phys_mem = fix.smem_start;
-	eDebug("[fb] %s: %dk video mem", fb, available/1024);
-	lfb=(unsigned char*)mmap(0, available, PROT_WRITE|PROT_READ, MAP_SHARED, fbFd, 0);
-	if (!lfb)
+	m_available_total = fix.smem_len;
+	m_phys_mem_base = fix.smem_start;
+	available = m_available_total;
+	m_phys_mem = m_phys_mem_base;
+	eDebug("[fb] %s: %dk video mem", fb, m_available_total/1024);
+	m_lfb_base=(unsigned char*)mmap(0, m_available_total, PROT_WRITE|PROT_READ, MAP_SHARED, fbFd, 0);
+	lfb = m_lfb_base;
+	if (!m_lfb_base)
 	{
 		eDebug("[fb] mmap: %m");
 		goto nolfb;
@@ -166,8 +180,58 @@ int fbClass::SetMode(int nxRes, int nyRes, int nbpp)
 	{
 		eDebug("[fb] FBIOGET_FSCREENINFO: %m");
 	}
+
 	stride=fix.line_length;
 	memset(lfb, 0, stride*yRes);
+
+#ifdef HAVE_HIFBLAYER
+	if (access("/etc/hifblayer", F_OK) == 0 && m_available_total > (stride * yRes * 3))
+	{
+		HIFB_LAYER_INFO_S layerinfo;
+		if (ioctl(fbFd, FBIOGET_LAYER_INFO, &layerinfo) < 0)
+		{
+			eDebug("[fb] FBIOGET_LAYER_INFO: %m");
+		}
+		else
+		{
+			memset(&layerinfo, 0x00, sizeof(layerinfo));
+
+			layerinfo.eAntiflickerLevel = HIFB_LAYER_ANTIFLICKER_NONE;
+			layerinfo.BufMode = HIFB_LAYER_BUF_DOUBLE_IMMEDIATE;
+			layerinfo.u32CanvasWidth = xRes;
+			layerinfo.u32CanvasHeight = yRes;
+			layerinfo.u32Mask |= HIFB_LAYERMASK_BUFMODE;
+			layerinfo.u32Mask |= HIFB_LAYERMASK_ANTIFLICKER_MODE;
+			layerinfo.u32Mask |= HIFB_LAYERMASK_CANVASSIZE;
+			if (ioctl(fbFd, FBIOPUT_LAYER_INFO, &layerinfo) < 0)
+			{
+				eDebug("[fb] FBIOPUT_LAYER_INFO: %m");
+				return (-1);
+			}
+			else
+			{
+				// We must use framebuffer-mapped memory for the canvas because
+				// FBIOGET_CANVAS_BUFFER is not supported on the SF8008 platform.
+				//
+				// The first two framebuffer pages cannot be used, as they are reserved
+				// by the driver for hardware double buffering.
+				int frame_size = stride * yRes;
+				m_phys_mem = m_phys_mem_base  + frame_size * 2;
+				lfb        = m_lfb_base       + frame_size * 2;
+				available  = m_available_total - frame_size * 2;
+
+				// Double buffering is handled internally by the driver.
+				// We account for this by skipping the first two framebuffer pages above.
+				// See gdi/gfbdc.cpp for fb->getNumPages() usage.
+				m_number_of_pages = 1;
+
+				memset(lfb, 0, stride*yRes);
+				eDebug("[fb] Use HIFB_LAYER");
+			}
+		}
+	}
+#endif // HAVE_HIFBLAYER
+
 	blit();
 	return 0;
 }
@@ -191,24 +255,78 @@ int fbClass::waitVSync()
 {
 	int c = 0;
 	if (fbFd < 0) return -1;
-	return ioctl(fbFd, FBIO_WAITFORVSYNC, &c);
+	int ret = ioctl(fbFd, FBIO_WAITFORVSYNC, &c);
+	return ret;
 }
 
 void fbClass::blit()
 {
+
 	if (fbFd < 0) return;
-	if (m_manual_blit == 1) {
+	if (m_manual_blit == 0) {
+		return;
+	}
+
+	if (m_phys_mem == m_phys_mem_base)
+	{
 		if (ioctl(fbFd, FBIO_BLIT) < 0)
 			eDebug("[fb] FBIO_BLIT: %m");
 	}
+#ifdef HAVE_HIFBLAYER
+	else
+	{
+		// HI Buffer layer mode
+		HIFB_BUFFER_S CanvasBuf;
+		CanvasBuf.stCanvas.u32PhyAddr = m_phys_mem;
+		CanvasBuf.stCanvas.u32Height  = yRes;
+		CanvasBuf.stCanvas.u32Width   = xRes;
+
+		switch (bpp) {
+		case 16:
+			CanvasBuf.stCanvas.enFmt  = HIFB_FMT_ARGB1555;
+			break;
+		case 32:
+			CanvasBuf.stCanvas.enFmt  = HIFB_FMT_ARGB8888;
+			break;
+		default:
+			eDebug("[fb] WRONG BPP: %d", bpp);
+		}
+
+		CanvasBuf.stCanvas.u32Pitch   = xRes * (bpp/8);
+
+		// Ideally, only the dirty region modified by Enigma2 since the previous refresh
+		// should be updated instead of refreshing the full screen.
+		// However, the refresh is performed via DMA transfer, which is fast enough
+		// to sustain full FPS (60 Hz and 50 Hz), so a full-screen update is acceptable.
+		CanvasBuf.UpdateRect.x = 0;
+		CanvasBuf.UpdateRect.y = 0;
+		CanvasBuf.UpdateRect.w = CanvasBuf.stCanvas.u32Width;
+		CanvasBuf.UpdateRect.h = CanvasBuf.stCanvas.u32Height;
+
+		if (ioctl(fbFd, FBIO_REFRESH, &CanvasBuf) < 0)
+		{
+			eDebug("[fb] FBIO_REFRESH: %m");
+		}
+
+#if 0
+		// Not required when using HIFB_LAYER_BUF_DOUBLE_IMMEDIATE,
+		// as the refresh is applied immediately and does not need
+		// an explicit wait for completion.
+		if (ioctl(fbFd, FBIO_WAITFOR_FREFRESH_DONE, NULL) < 0)
+		{
+			eDebug("[fb] FBIO_WAITFOR_FREFRESH_DONE: %m");
+		}
+#endif
+	}
+#endif // HAVE_HIFBLAYER
 }
 
 fbClass::~fbClass()
 {
-	if (lfb)
+	if (m_lfb_base)
 	{
-		msync(lfb, available, MS_SYNC);
-		munmap(lfb, available);
+		msync(m_lfb_base, m_available_total, MS_SYNC);
+		munmap(m_lfb_base, m_available_total);
 	}
 	showConsole(1);
 	disableManualBlit();

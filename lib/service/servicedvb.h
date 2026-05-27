@@ -13,6 +13,10 @@
 class eStaticServiceDVBInformation;
 class eStaticServiceDVBBouquetInformation;
 
+// Forward declarations for software descrambling
+class eDVBCSASession;
+class eDVBSoftDecoder;
+
 class eServiceFactoryDVB: public iServiceHandler
 {
 	DECLARE_REF(eServiceFactoryDVB);
@@ -209,6 +213,12 @@ protected:
 	ePtr<eDVBService> m_dvb_service;
 
 	ePtr<iTSMPEGDecoder> m_decoder;
+
+	// Software descrambling
+	ePtr<eDVBCSASession> m_csa_session;
+	ePtr<eConnection> m_csa_activated_conn;
+	ePtr<eDVBSoftDecoder> m_soft_decoder;
+
 	int m_is_primary;
 	int m_decoder_index;
 	int m_have_video_pid;
@@ -219,6 +229,7 @@ protected:
 	eDVBServicePMTHandler m_service_handler_timeshift;
 	eDVBServiceEITHandler m_event_handler;
 	int m_current_audio_pid;
+	int m_current_video_pid_type;
 
 	eDVBServicePlay(const eServiceReference &ref, eDVBService *service, bool connect_event=true);
 
@@ -246,6 +257,7 @@ protected:
 
 		/* timeshift */
 	ePtr<iDVBTSRecorder> m_record;
+	ePtr<eDVBCSASession> m_timeshift_csa_session;
 	std::set<int> m_pids_active;
 
 	void updateTimeshiftPids();
@@ -310,6 +322,7 @@ protected:
 	void checkSubtitleTiming();
 
 	ePtr<eTimer> m_nownext_timer;
+	bool m_soft_decoder_video_info_valid;  // Track if video info is available from SoftDecoder
 	void updateEpgCacheNowNext();
 
 		/* radiotext */
@@ -321,6 +334,16 @@ protected:
 	void video_event(struct iTSMPEGDecoder::videoEvent);
 
 	virtual ePtr<iTsSource> createTsSource(eServiceReferenceDVB &ref, int packetsize = 188);
+
+	// Software descrambling
+	virtual void setupSpeculativeDescrambling();
+	void onSessionActivated(bool active);
+	void onSoftDecoderReady();
+	void onSoftDecoderAudioPidSelected(int pid);
+	void cleanupSoftwareDescrambling();
+
+	// Audio cache helper
+	void updateAudioCache(int apid, int apidtype);
 };
 
 class eStaticServiceDVBBouquetInformation: public iStaticServiceInformation

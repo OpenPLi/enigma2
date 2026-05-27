@@ -63,6 +63,16 @@ if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
 	AC_DEFINE(KEY_PLAY_ACTUALLY_IS_KEY_PLAYPAUSE, 1,[define when rc sends a KEY_PLAY event for its KEY_PLAYPAUSE key])
 fi
 
+AC_ARG_WITH(hifblayer,
+	AC_HELP_STRING([--with-hifblayer], [use HI FB layer, yes or no]),
+	[[withhifblayer=$withval]],
+	[[withhifblayer=no]]
+)
+if test x"$withhifblayer" != xno ; then
+	AC_DEFINE(HAVE_HIFBLAYER, 1,[Define when using a HI FB layer])
+fi
+AM_CONDITIONAL(HAVE_HIFBLAYER, test x"$withhifblayer" != xno)
+
 AC_ARG_WITH(textlcd,
 	AC_HELP_STRING([--with-textlcd], [use ascii based lcd, yes or no]),
 	[[withtextlcd=$withval]],
@@ -256,7 +266,7 @@ CXXFLAGS="$CXXFLAGS -Wall -Wextra -Werror \
 	-Wstringop-overflow=3 -Woverlength-strings \
 	-Wunsafe-loop-optimizations -Wpointer-arith \
 	-Wfloat-equal -Wlogical-op \
-	-Wno-error=maybe-uninitialized \
+	-Wno-error=maybe-uninitialized -Wno-error=sign-compare \
 	-Wno-error=cast-align=strict -Wno-error=ignored-qualifiers \
 	-Wno-error=cast-function-type -Wno-error=deprecated-declarations \
 	-Wno-error=stringop-truncation -Wno-error=shadow -Wno-error=cast-qual \

@@ -253,10 +253,11 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
-						if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
-							append_when_current_valid(current, menu, (_("Play service without streamrelay"), self.toggleStreamrelay), level=1)
-						else:
-							append_when_current_valid(current, menu, (_("Play service with streamrelay"), self.toggleStreamrelay), level=1)
+						if config.softcsa.useStreamRelayWhitelist.value:
+							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
+								append_when_current_valid(current, menu, (_("Play service without streamrelay"), self.toggleStreamrelay), level=1)
+							else:
+								append_when_current_valid(current, menu, (_("Play service with streamrelay"), self.toggleStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							#Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:
@@ -2117,10 +2118,10 @@ class ChannelSelection(ChannelSelectionBase, ChannelSelectionEdit, ChannelSelect
 		self.recallBouquetMode()
 
 	def __evServiceStart(self):
-		if self.dopipzap and hasattr(self.session, 'pip'):
-			self.servicelist.setPlayableIgnoreService(self.session.pip.getCurrentService() or eServiceReference())
+		if self.dopipzap and hasattr(self.session, "pip"):
+			self.servicelist.setPlayableIgnoreService(self.session.pip.getCurrentServiceReference() or eServiceReference())
 		else:
-			self.servicelist.setPlayableIgnoreService(self.session.nav.getCurrentServiceReferenceOriginal() or eServiceReference())
+			self.servicelist.setPlayableIgnoreService(self.session.nav.getCurrentlyPlayingServiceReference() or eServiceReference())
 
 	def __evServiceEnd(self):
 		self.servicelist.setPlayableIgnoreService(eServiceReference())

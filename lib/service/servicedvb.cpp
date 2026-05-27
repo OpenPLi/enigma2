@@ -22,6 +22,10 @@
 #include <lib/service/servicedvbfcc.h>
 #include "servicepeer.h"
 
+// Software descrambling
+#include <lib/dvb/csasession.h>
+#include <lib/service/servicedvbsoftdecoder.h>
+
 		/* for subtitles */
 #include <lib/gui/esubtitle.h>
 
@@ -1053,7 +1057,8 @@ eDVBServicePlay::eDVBServicePlay(const eServiceReference &ref, eDVBService *serv
 	m_cutlist_enabled(1),
 	m_subtitle_widget(0),
 	m_subtitle_sync_timer(eTimer::create(eApp)),
-	m_nownext_timer(eTimer::create(eApp))
+	m_nownext_timer(eTimer::create(eApp)),
+	m_soft_decoder_video_info_valid(false)
 {
 	if (connect_event)
 		CONNECT(m_service_handler.serviceEvent, eDVBServicePlay::serviceEvent);
@@ -1088,6 +1093,9 @@ eDVBServicePlay::~eDVBServicePlay()
 			meta.updateMeta(m_reference.path);
 		}
 	}
+
+	cleanupSoftwareDescrambling();
+
 	if (m_subtitle_widget) m_subtitle_widget->destroy();
 }
 
@@ -1221,8 +1229,62 @@ void eDVBServicePlay::serviceEvent(int event)
 		eDebug("[eDVBServicePlay] eventNewProgramInfo timeshift_enabled=%d timeshift_active=%d", m_timeshift_enabled, m_timeshift_active);
 		if (m_timeshift_enabled)
 			updateTimeshiftPids();
-		if (!m_timeshift_active)
+
+		if (m_csa_session && !m_csa_session->isEcmAnalyzed())
+		{
+			eDVBServicePMTHandler::program program;
+			if (m_service_handler.getProgramInfo(program) == 0 && !program.caids.empty())
+			{
+				uint16_t ecm_pid = program.caids.front().capid;
+				uint16_t caid = program.caids.front().caid;
+				ePtr<iDVBDemux> demux;
+				if (m_service_handler.getDataDemux(demux) == 0 && demux)
+				{
+					eDebug("[eDVBServicePlay] Requesting ECM monitor: PID=%d, CAID=0x%04X", ecm_pid, caid);
+					m_csa_session->startECMMonitor(demux, ecm_pid, caid);
+					// Note: If CSA-ALT was cached, session is now active and onSessionActivated() has already been called!
+				}
+			}
+		}
+
+		// Note: m_soft_decoder exists speculatively, but only blocks updateDecoder when session is active
+		if (!m_timeshift_active && !(m_csa_session && m_csa_session->isActive()))
 			updateDecoder();
+		else if (m_csa_session && m_csa_session->isActive())
+		{
+			eDebug("[eDVBServicePlay] Skipping updateDecoder() - software descrambling active");
+
+			// IMPORTANT: We still need to create teletext/subtitle parsers!
+			// They read UNENCRYPTED data directly from the frontend demux.
+			// Without this, enableSubtitles() will fail because m_teletext_parser is null.
+			if (!m_teletext_parser && m_decoder_index == 0)
+			{
+				eDVBServicePMTHandler::program program;
+				if (!m_service_handler.getProgramInfo(program))
+				{
+					ePtr<iDVBDemux> demux;
+					if (!m_service_handler.getDecodeDemux(demux) && demux)
+					{
+						eDebug("[eDVBServicePlay] Creating teletext/subtitle parsers for SoftCSA");
+						m_teletext_parser = new eDVBTeletextParser(demux);
+						m_teletext_parser->connectNewStream(sigc::mem_fun(*this, &eDVBServicePlay::newSubtitleStream), m_new_subtitle_stream_connection);
+						m_teletext_parser->connectNewPage(sigc::mem_fun(*this, &eDVBServicePlay::newSubtitlePage), m_new_subtitle_page_connection);
+						m_subtitle_parser = new eDVBSubtitleParser(demux);
+						m_subtitle_parser->connectNewPage(sigc::mem_fun(*this, &eDVBServicePlay::newDVBSubtitlePage), m_new_dvb_subtitle_page_connection);
+						m_teletext_parser->start(program.textPid);
+						eDebug("[eDVBServicePlay] Teletext parser started on PID %04x", program.textPid);
+					}
+				}
+			}
+
+			// Late-start case: session is active but SoftDecoder may not be running yet
+			// This happens when we switched to a channel where CSA-ALT was already cached
+			if (m_soft_decoder && !m_soft_decoder->isRunning())
+			{
+				eDebug("[eDVBServicePlay] Cache-hit: triggering SoftDecoder handover now");
+				onSessionActivated(true);
+			}
+		}
 		if (m_first_program_info & 1 && m_is_pvr)
 		{
 			m_first_program_info &= ~1;
@@ -1413,6 +1475,11 @@ RESULT eDVBServicePlay::start()
 		}
 		m_event(this, evStart);
 	}
+	else if (!m_is_stream && scrambled)
+	{
+		// Setup speculative software descrambling for encrypted Live-TV
+		setupSpeculativeDescrambling();
+	}
 	return ret;
 }
 
@@ -1454,6 +1521,8 @@ RESULT eDVBServicePlay::stop()
 	}
 
 	stopTimeshift(); /* in case timeshift was enabled, remove buffer etc. */
+
+	cleanupSoftwareDescrambling();
 
 	m_service_handler_timeshift.free();
 	m_service_handler.free();
@@ -1498,6 +1567,16 @@ RESULT eDVBServicePlay::setSlowMotion(int ratio)
 	ASSERT(ratio); /* The API changed: instead of calling setSlowMotion(0), call play! */
 	eDebug("[eDVBServicePlay] setSlowMotion %d", ratio);
 	setFastForward_internal(0);
+
+	// Check SoftDecoder first (only if session is active AND not in timeshift playback)
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+	{
+		ret = m_soft_decoder->setSlowMotion(ratio);
+		if (!ret)
+			m_slowmotion = ratio;
+		return ret;
+	}
+
 	if (m_decoder)
 	{
 		ret = m_decoder->setSlowMotion(ratio);
@@ -1556,6 +1635,24 @@ RESULT eDVBServicePlay::setFastForward_internal(int ratio, bool final_seek)
 
 	m_fastforward = ffratio;
 
+	// Check SoftDecoder first (only if session is active AND not in timeshift playback)
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+	{
+		if (ffratio == 0)
+			; /* return m_soft_decoder->play(); is done in caller*/
+		else if (ffratio != 1)
+			ret = m_soft_decoder->setFastForward(ffratio);
+		else
+			ret = m_soft_decoder->setTrickmode();
+
+		if (pos)
+		{
+			RESULT r = seekTo(pos);
+			eDebug("[eDVBServicePlay] setFastForward final seek after trickplay ret %d", r);
+		}
+		return ret;
+	}
+
 	if (!m_decoder)
 		return -1;
 
@@ -1602,6 +1699,15 @@ RESULT eDVBServicePlay::pause()
 {
 	eDebug("[eDVBServicePlay] pause");
 	setFastForward_internal(0, m_slowmotion || m_fastforward > 1);
+
+	// Check SoftDecoder first (only if session is active AND not in timeshift playback)
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+	{
+		m_slowmotion = 0;
+		m_is_paused = 1;
+		return m_soft_decoder->pause();
+	}
+
 	if (m_decoder)
 	{
 		m_slowmotion = 0;
@@ -1615,6 +1721,15 @@ RESULT eDVBServicePlay::unpause()
 {
 	eDebug("[eDVBServicePlay] unpause");
 	setFastForward_internal(0, m_slowmotion || m_fastforward > 1);
+
+	// Check SoftDecoder first (only if session is active AND not in timeshift playback)
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+	{
+		m_slowmotion = 0;
+		m_is_paused = 0;
+		return m_soft_decoder->play();
+	}
+
 	if (m_decoder)
 	{
 		m_slowmotion = 0;
@@ -1687,16 +1802,25 @@ RESULT eDVBServicePlay::getPlayPosition(pts_t &pos)
 
 	int r = 0;
 
-		/* if there is a decoder, use audio or video PTS */
-	if (m_decoder)
+	// Check SoftDecoder only if session is active AND not in timeshift playback
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+	{
+		r = m_soft_decoder->getPTS(0, pos);
+		if (r)
+			return r;
+	}
+	else if (m_decoder)
 	{
 		r = m_decoder->getPTS(0, pos);
 		if (r)
 			return r;
 	}
 
+	ePtr<iTSMPEGDecoder> decoder = (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_timeshift_active)
+		? m_soft_decoder->getDecoder() : m_decoder;
+
 		/* fixup */
-	return pvr_channel->getCurrentPosition(m_decode_demux, pos, m_decoder);
+	return pvr_channel->getCurrentPosition(m_decode_demux, pos, decoder);
 }
 
 RESULT eDVBServicePlay::setTrickmode(int trick)
@@ -1893,22 +2017,34 @@ int eDVBServicePlay::getInfo(int w)
 	switch (w)
 	{
 	case sVideoHeight:
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive()) return m_soft_decoder->getVideoHeight();
 		if (m_decoder) return m_decoder->getVideoHeight();
+		else if (m_soft_decoder) return m_soft_decoder->getVideoHeight();
 		break;
 	case sVideoWidth:
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive()) return m_soft_decoder->getVideoWidth();
 		if (m_decoder) return m_decoder->getVideoWidth();
+		else if (m_soft_decoder) return m_soft_decoder->getVideoWidth();
 		break;
 	case sFrameRate:
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive()) return m_soft_decoder->getVideoFrameRate();
 		if (m_decoder) return m_decoder->getVideoFrameRate();
+		else if (m_soft_decoder) return m_soft_decoder->getVideoFrameRate();
 		break;
 	case sProgressive:
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive()) return m_soft_decoder->getVideoProgressive();
 		if (m_decoder) return m_decoder->getVideoProgressive();
+		else if (m_soft_decoder) return m_soft_decoder->getVideoProgressive();
 		break;
 	case sAspect:
 	{
 		int aspect = -1;
-		if (m_decoder)
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
+			aspect = m_soft_decoder->getVideoAspect();
+		else if (m_decoder)
 			aspect = m_decoder->getVideoAspect();
+		else if (m_soft_decoder)
+			aspect = m_soft_decoder->getVideoAspect();
 		if (aspect == -1 && no_program_info)
 			break;
 		else if (aspect == -1 && !program.videoStreams.empty() && program.videoStreams[0].component_tag != -1)
@@ -1953,11 +2089,15 @@ int eDVBServicePlay::getInfo(int w)
 		break;
 	}
 	case sGamma:
+		if (m_soft_decoder && m_csa_session && m_csa_session->isActive()) return m_soft_decoder->getVideoGamma();
 		if (m_decoder) return m_decoder->getVideoGamma();
+		else if (m_soft_decoder) return m_soft_decoder->getVideoGamma();
 		break;
 	case sIsCrypted:
 		if (no_program_info) return false;
 		return program.isCrypted();
+	case sIsSoftCSA:
+		return (m_csa_session && m_csa_session->isActive());
 	case sIsDedicated3D:
 		if (m_dvb_service) return m_dvb_service->isDedicated3D();
 		return false;
@@ -2141,10 +2281,38 @@ int eDVBServicePlay::getCurrentTrack()
 
 RESULT eDVBServicePlay::selectTrack(unsigned int i)
 {
+	// When SoftDecoder is active, delegate audio track selection to it
+	if (m_soft_decoder && m_soft_decoder->isRunning())
+	{
+		eDebug("[eDVBServicePlay] selectTrack(%d): delegating to SoftDecoder", i);
+		eDVBServicePMTHandler::program program;
+		eDVBServicePMTHandler &h = m_timeshift_active ? m_service_handler_timeshift : m_service_handler;
+		if (h.getProgramInfo(program))
+			return -1;
+
+		if (i >= program.audioStreams.size())
+			return -2;
+
+		// Update m_current_audio_pid so getCurrentTrack() returns the correct index
+		m_current_audio_pid = program.audioStreams[i].pid;
+
+		// Update audio cache in eDVBService
+		updateAudioCache(program.audioStreams[i].pid, program.audioStreams[i].type);
+
+		return m_soft_decoder->selectAudioTrack(i);
+	}
+
 	int ret = selectAudioStream(i);
 
-	if (m_decoder->set())
-		return -5;
+	if (m_decoder)
+	{
+		if (m_decoder->set())
+			return -5;
+	}
+	else if (m_soft_decoder)
+	{
+		// SoftDecoder handles set() internally in selectAudioTrack
+	}
 
 	return ret;
 }
@@ -2215,7 +2383,7 @@ int eDVBServicePlay::selectAudioStream(int i)
 	if ((i != -1) && ((unsigned int)i >= program.audioStreams.size()))
 		return -2;
 
-	if (!m_decoder)
+	if (!m_decoder && !m_soft_decoder)
 		return -3;
 
 	int stream = i;
@@ -2238,10 +2406,24 @@ int eDVBServicePlay::selectAudioStream(int i)
 
 	m_current_audio_pid = apid;
 
-	if ((m_is_primary || !m_noaudio) && m_decoder->setAudioPID(apid, apidtype))
+	if (m_is_primary || !m_noaudio)
 	{
-		eDebug("[eDVBServicePlay] set audio pid %04x failed", apid);
-		return -4;
+		if (m_decoder)
+		{
+			if (m_decoder->setAudioPID(apid, apidtype))
+			{
+				eDebug("[eDVBServicePlay] set audio pid %04x failed", apid);
+				return -4;
+			}
+		}
+		else if (m_soft_decoder)
+		{
+			if (m_soft_decoder->setAudioPID(apid, apidtype))
+			{
+				eDebug("[eDVBServicePlay] SoftDecoder set audio pid %04x failed", apid);
+				return -4;
+			}
+		}
 	}
 
 	if (position != -1)
@@ -2306,7 +2488,11 @@ int eDVBServicePlay::selectAudioStream(int i)
 
 int eDVBServicePlay::getCurrentChannel()
 {
-	return m_decoder ? m_decoder->getAudioChannel() : STEREO;
+	if (m_decoder)
+		return m_decoder->getAudioChannel();
+	else if (m_soft_decoder)
+		return m_soft_decoder->getAudioChannel();
+	return STEREO;
 }
 
 RESULT eDVBServicePlay::selectChannel(int i)
@@ -2317,6 +2503,8 @@ RESULT eDVBServicePlay::selectChannel(int i)
 		m_dvb_service->setCacheEntry(eDVBService::cACHANNEL, i);
 	if (m_decoder)
 		m_decoder->setAudioChannel(i);
+	else if (m_soft_decoder)
+		m_soft_decoder->setAudioChannel(i);
 	return 0;
 }
 
@@ -2609,6 +2797,31 @@ RESULT eDVBServicePlay::startTimeshift()
 	m_record->setTargetFD(m_timeshift_fd);
 	m_record->setTargetFilename(m_timeshift_file);
 	m_record->enableAccessPoints(false); // no need for AP information during shift
+
+	// If software descrambling is active, create a SEPARATE CSA session for timeshift
+	if (m_csa_session && m_csa_session->isActive())
+	{
+		eDebug("[eDVBServicePlay] Creating CSA session for timeshift");
+
+		// Create independent session for timeshift
+		eServiceReferenceDVB ref = (eServiceReferenceDVB&)m_reference;
+		m_timeshift_csa_session = new eDVBCSASession(ref);
+		if (m_timeshift_csa_session && m_timeshift_csa_session->init())
+		{
+			// Copy ecm_mode from live session and activate immediately
+			// No need for ECM monitor - live session already did the analysis
+			m_timeshift_csa_session->forceActivate();
+
+			eDebug("[eDVBServicePlay] Attaching timeshift CSA session to recorder");
+			m_record->setDescrambler(static_cast<iServiceScrambled*>(m_timeshift_csa_session.operator->()));
+		}
+		else
+		{
+			eWarning("[eDVBServicePlay] Failed to create timeshift CSA session");
+			m_timeshift_csa_session = nullptr;
+		}
+	}
+
 	m_timeshift_enabled = 1;
 
 	updateTimeshiftPids();
@@ -2622,13 +2835,40 @@ RESULT eDVBServicePlay::stopTimeshift(bool swToLive)
 	if (!m_timeshift_enabled)
 		return -1;
 
-	if (swToLive)
-		switchToLive();
+	// IMPORTANT:
+	// When SoftDecoder is active during timeshift playback via CSA,
+	// the shutdown order is critical to avoid race conditions and
+	// demux PID filter interference.
+	//
+	// The correct order is:
+	// 1. Stop SoftDecoder (prevents CSA resource races).
+	// 2. Cleanup timeshift CSA session.
+	// 3. Stop recorder (prevents PID filters from being removed
+	//    from a newly created live pipeline).
+	// 4. Switch to live (SoftDecoder can safely allocate resources).
+
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && m_soft_decoder->isRunning())
+		m_soft_decoder->stop();
+
+	// Now safe to detach and cleanup timeshift's CSA session
+	if (m_timeshift_csa_session)
+	{
+		eDebug("[eDVBServicePlay] Detaching and destroying timeshift CSA session");
+		if (m_record)
+			m_record->setDescrambler(nullptr);
+		m_timeshift_csa_session = nullptr;
+	}
+
+	if (m_record)
+	{
+		m_record->stop();
+		m_record = 0;
+	}
 
 	m_timeshift_enabled = 0;
 
-	m_record->stop();
-	m_record = 0;
+	if (swToLive)
+		switchToLive();
 
 	if (m_timeshift_fd >= 0)
 	{
@@ -2731,7 +2971,9 @@ void eDVBServicePlay::stopTapToFD()
 {
 	if(m_tap_recorder != nullptr)
 	{
+		// Stop thread FIRST to prevent race condition with m_serviceDescrambler access
 		m_tap_recorder->stop();
+		m_tap_recorder->setDescrambler(nullptr);
 		m_tap_recorder = nullptr;
 	}
 }
@@ -2894,6 +3136,16 @@ void eDVBServicePlay::switchToLive()
 	/* free the timeshift service handler, we need the resources */
 	m_service_handler_timeshift.free();
 
+	// If we have a CSA session that is active (algo=3), restart the SoftDecoder
+	// This is needed because we stopped SoftDecoder when switching to timeshift
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && !m_soft_decoder->isRunning())
+	{
+		eDebug("[eDVBServicePlay] Restarting SoftDecoder after timeshift");
+		m_soft_decoder->start();
+		// Don't call updateDecoder - SoftDecoder handles its own decoder
+		return;
+	}
+
 	updateDecoder(true);
 }
 
@@ -2955,6 +3207,16 @@ void eDVBServicePlay::switchToTimeshift()
 {
 	if (m_timeshift_active)
 		return;
+
+	// When SoftDecoder is active (algo=3), we need to stop it to free the decoder
+	// for timeshift playback. Timeshift uses its own CSA session for descrambling.
+	// We'll restart SoftDecoder when returning to live
+	if (m_soft_decoder && m_csa_session && m_csa_session->isActive() && m_soft_decoder->isRunning())
+	{
+		eDebug("[eDVBServicePlay] switchToTimeshift: Stopping SoftDecoder to free decoder for timeshift playback");
+		m_soft_decoder->stop();
+		eDebug("[eDVBServicePlay] SoftDecoder stopped");
+	}
 
 	resetTimeshift(1);
 
@@ -3519,8 +3781,11 @@ void eDVBServicePlay::newSubtitlePage(const eDVBTeletextSubtitlePage &page)
 	if (m_subtitle_widget)
 	{
 		int subtitledelay = 0;
-		pts_t pts;
-		m_decoder->getPTS(0, pts);
+		pts_t pts = 0;
+		if (m_decoder)
+			m_decoder->getPTS(0, pts);
+		else if (m_soft_decoder)
+			m_soft_decoder->getPTS(0, pts);
 		if (m_is_pvr || m_timeshift_enabled)
 		{
 			eDebug("[eDVBServicePlay] Subtitle in recording/timeshift");
@@ -3557,9 +3822,9 @@ void eDVBServicePlay::checkSubtitleTiming()
 		return;
 	}
 	if (m_decoder)
-	{
 		m_decoder->getPTS(0, pos);
-	}
+	else if (m_soft_decoder)
+		m_soft_decoder->getPTS(0, pos);
 
 	while (1)
 	{
@@ -3615,6 +3880,8 @@ void eDVBServicePlay::newDVBSubtitlePage(const eDVBSubtitlePage &p)
 		pts_t pos = 0;
 		if (m_decoder)
 			m_decoder->getPTS(0, pos);
+		else if (m_soft_decoder)
+			m_soft_decoder->getPTS(0, pos);
 
 		// Where subtitles are delivered out of sync with video, only treat subtitles in the past as having bad timing.
 		// Those that are delivered too early are cached for displaying at the appropriate later time
@@ -3651,46 +3918,62 @@ int eDVBServicePlay::getAC3Delay()
 {
 	if (m_dvb_service)
 		return m_dvb_service->getCacheEntry(eDVBService::cAC3DELAY);
+	else if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
+		return m_soft_decoder->getAC3Delay();
 	else if (m_decoder)
 		return m_decoder->getAC3Delay();
-	else
-		return 0;
+	else if (m_soft_decoder)
+		return m_soft_decoder->getAC3Delay();
+	return 0;
 }
 
 int eDVBServicePlay::getPCMDelay()
 {
 	if (m_dvb_service)
 		return m_dvb_service->getCacheEntry(eDVBService::cPCMDELAY);
+	else if (m_soft_decoder && m_csa_session && m_csa_session->isActive())
+		return m_soft_decoder->getPCMDelay();
 	else if (m_decoder)
 		return m_decoder->getPCMDelay();
-	else
-		return 0;
+	else if (m_soft_decoder)
+		return m_soft_decoder->getPCMDelay();
+	return 0;
 }
 
 void eDVBServicePlay::setAC3Delay(int delay)
 {
+	int generalAC3delay = eConfigManager::getConfigIntValue("config.av.generalAC3delay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cAC3DELAY, delay ? delay : -1);
 	if (m_decoder)
-	{
-		m_decoder->setAC3Delay(delay + eConfigManager::getConfigIntValue("config.av.generalAC3delay"));
-	}
+		m_decoder->setAC3Delay(delay + generalAC3delay);
+	else if (m_soft_decoder)
+		m_soft_decoder->setAC3Delay(delay + generalAC3delay);
 }
 
 void eDVBServicePlay::setPCMDelay(int delay)
 {
+	int generalPCMdelay = eConfigManager::getConfigIntValue("config.av.generalPCMdelay");
 	if (m_dvb_service)
 		m_dvb_service->setCacheEntry(eDVBService::cPCMDELAY, delay ? delay : -1);
 	if (m_decoder)
-	{
-		m_decoder->setPCMDelay(delay + eConfigManager::getConfigIntValue("config.av.generalPCMdelay"));
-	}
+		m_decoder->setPCMDelay(delay + generalPCMdelay);
+	else if (m_soft_decoder)
+		m_soft_decoder->setPCMDelay(delay + generalPCMdelay);
 }
 
 void eDVBServicePlay::video_event(struct iTSMPEGDecoder::videoEvent event)
 {
 	switch(event.type) {
 		case iTSMPEGDecoder::videoEvent::eventSizeChanged:
+			// For SoftCSA: Send evUpdatedInfo on first video size event
+			// This is needed because some skins query video resolution only on evUpdatedInfo
+			if (m_csa_session && m_csa_session->isActive() && !m_soft_decoder_video_info_valid)
+			{
+				eDebug("[eDVBServicePlay] SoftCSA: First video size event, sending evUpdatedInfo to skin");
+				m_soft_decoder_video_info_valid = true;
+				m_event((iPlayableService*)this, evUpdatedInfo);
+			}
 			m_event((iPlayableService*)this, evVideoSizeChanged);
 			break;
 		case iTSMPEGDecoder::videoEvent::eventFrameRateChanged:
@@ -3739,6 +4022,248 @@ void eDVBServicePlay::setQpipMode(bool value, bool audio)
 		m_decoder->set();
 	}
 }
+
+// ==================== Software Descrambling ====================
+
+void eDVBServicePlay::setupSpeculativeDescrambling()
+{
+	// Only for Live-TV, not for PVR, streams, StreamRelay
+	if (m_is_pvr || m_is_stream)
+		return;
+
+	eDebug("[eDVBServicePlay] Encrypted channel, creating speculative CSA session");
+
+	// Create session (starts INACTIVE, will activate when CSA-ALT detected from ECM)
+	eServiceReferenceDVB ref = eServiceReferenceDVB(m_reference.toString());
+	m_csa_session = new eDVBCSASession(ref);
+	if (!m_csa_session->init())
+	{
+		eWarning("[eDVBServicePlay] Failed to initialize CSA session");
+		m_csa_session = nullptr;
+		return;
+	}
+
+	// Create SoftDecoder (will start when session activates)
+	m_soft_decoder = new eDVBSoftDecoder(m_service_handler, m_dvb_service, m_decoder_index);
+	m_soft_decoder->setNoAudio(m_noaudio);
+	m_soft_decoder->setSession(m_csa_session);
+
+	// Connect to SoftDecoder's audio PID selection signal
+	m_soft_decoder->m_audio_pid_selected.connect(
+		sigc::mem_fun(*this, &eDVBServicePlay::onSoftDecoderAudioPidSelected));
+
+	// Suppress SoftCSA activation when CI module handles decryption
+	m_csa_session->shouldSuppressActivation = [this]() {
+		return m_service_handler.isCiConnected();
+	};
+
+	// Connect to session's activated signal for decoder handover
+	m_csa_session->activated.connect(
+		sigc::mem_fun(*this, &eDVBServicePlay::onSessionActivated));
+
+	// The onSessionActivated callback will be triggered when ECM analysis
+	// detects CSA-ALT and activates the session.
+
+	eDebug("[eDVBServicePlay] Speculative CSA session created, waiting for ECM analysis");
+}
+
+void eDVBServicePlay::onSessionActivated(bool active)
+{
+	eDebug("[eDVBServicePlay] Session activated callback: active=%d", active);
+
+	if (active && m_soft_decoder)
+	{
+		// CSA-ALT detected from ECM - SoftDecoder takes over
+		eDebug("[eDVBServicePlay] SW-Descrambling activated, SoftDecoder takes over");
+
+		// Disconnect old video event connection first
+		m_video_event_connection = nullptr;
+
+		// Step 1: Release HW decoder resources
+		if (m_decoder)
+		{
+			// decoder_release is configurable via GUI:
+			// 0 - "Quick" (default): immediate release, fast channel switching
+			// 1 - "Normal": pause() before release, may be more stable on some boxes
+			int decoder_release = eConfigManager::getConfigIntValue("config.softcsa.decoderRelease", 0);
+			bool needsPause = (decoder_release == 1); // 1 = Normal
+
+			if (needsPause)
+			{
+				eDebug("[eDVBServicePlay] Normal decoder release - calling pause() for clean release");
+				m_decoder->pause();
+			}
+			else
+			{
+				eDebug("[eDVBServicePlay] Quick-releasing HW decoder (PIDs only, no pause)");
+			}
+
+			// Clear video/audio PIDs - this releases the hardware for SoftDecoder
+			// NOTE: We keep TextPID active! Teletext/subtitle data is NOT encrypted
+			// and continues to be read from the frontend demux by existing parsers.
+			m_decoder->setVideoPID(-1, -1);
+			m_decoder->setAudioPID(-1, -1);
+			m_decoder->setSyncPCR(-1);
+			m_decoder->set();
+			// Disconnect video event
+			m_video_event_connection = nullptr;
+			// Release the decoder reference so SoftDecoder can use video0/audio0
+			m_decoder = nullptr;
+			eDebug("[eDVBServicePlay] HW decoder released (fast path)");
+		}
+
+		// Step 2: Start the soft decoder (now has access to video0/audio0)
+		eDebug("[eDVBServicePlay] Starting SoftDecoder");
+		if (m_soft_decoder->start() != 0)
+		{
+			eWarning("[eDVBServicePlay] Failed to start SoftDecoder");
+			// Restore old decoder on failure
+			updateDecoder();
+			return;
+		}
+
+		// Step 3: Connect to SoftDecoder signals
+		// NOTE: We keep the existing m_teletext_parser and m_subtitle_parser!
+		// They were created in updateDecoder() on m_decode_demux which reads from FRONTEND.
+		// Teletext/subtitle data is NOT encrypted, so we can read it directly from the tuner.
+		// Only video/audio needs to go through the DVR loopback for descrambling.
+		if (m_soft_decoder)
+		{
+			// Connect video events from SoftDecoder's decoder
+			m_soft_decoder->connectVideoEvent(
+				sigc::mem_fun(*this, &eDVBServicePlay::video_event),
+				m_video_event_connection);
+			eDebug("[eDVBServicePlay] Connected video events from SoftDecoder");
+		}
+
+		eDebug("[eDVBServicePlay] SoftDecoder takeover complete");
+
+		// Connect decoder-ready signal: SoftDecoder fires this after decoder PLAY,
+		// when video info is actually queryable. We defer evUpdatedInfo until then
+		// to avoid the skin querying -1 values before the decoder exists.
+		m_soft_decoder->m_decoder_ready.connect(
+			sigc::mem_fun(*this, &eDVBServicePlay::onSoftDecoderReady));
+
+		// Reset video info flag - will be set on first video size event from decoder
+		m_soft_decoder_video_info_valid = false;
+	}
+	else if (!active && m_soft_decoder)
+	{
+		// Session deactivated - stop SW descrambling
+		eDebug("[eDVBServicePlay] SW-Descrambling deactivated");
+		m_soft_decoder->stop();
+		m_soft_decoder = nullptr;
+
+		// Re-setup hardware decoder
+		updateDecoder();
+	}
+}
+
+void eDVBServicePlay::onSoftDecoderReady()
+{
+	eDebug("[eDVBServicePlay] SoftDecoder decoder ready - notifying skin");
+	m_event((iPlayableService*)this, evUpdatedInfo);
+}
+
+void eDVBServicePlay::onSoftDecoderAudioPidSelected(int pid)
+{
+	// SoftDecoder selected an audio track - update our tracking variable
+	// so that getCurrentTrack() returns the correct index
+	if (pid > 0 && pid != m_current_audio_pid)
+	{
+		eDebug("[eDVBServicePlay] SoftDecoder selected audio PID %04x, updating m_current_audio_pid", pid);
+		m_current_audio_pid = pid;
+	}
+}
+
+void eDVBServicePlay::cleanupSoftwareDescrambling()
+{
+	if (m_decoder)
+	{
+		eDebug("[eDVBServicePlay] Cleaning up HW decoder for clean handover");
+
+		// decoder_release is configurable via GUI:
+		// 0 - "Quick" (default): immediate release, fast channel switching
+		// 1 - "Normal": pause() before release, may be more stable on some boxes
+		int decoder_release = eConfigManager::getConfigIntValue("config.softcsa.decoderRelease", 0);
+		bool needsPause = (decoder_release == 1); // 1 = Normal
+
+		if (needsPause)
+		{
+			eDebug("[eDVBServicePlay] Normal decoder release - calling pause() for clean handover");
+			m_decoder->pause();
+		}
+		else
+		{
+			eDebug("[eDVBServicePlay] Skipping pause() for faster channel switch");
+		}
+
+		// Clear PIDs - required on all platforms
+		m_decoder->setVideoPID(-1, -1);
+		m_decoder->setAudioPID(-1, -1);
+		m_decoder->setSyncPCR(-1);
+		m_decoder->setTextPID(-1);
+		m_decoder->set();
+	}
+
+	if (m_soft_decoder)
+	{
+		eDebug("[eDVBServicePlay] Cleaning up SoftDecoder");
+		m_soft_decoder->stop();
+		m_soft_decoder = nullptr;
+	}
+
+	if (m_csa_session)
+	{
+		eDebug("[eDVBServicePlay] Cleaning up CSA session");
+		m_csa_session = nullptr;
+	}
+
+	if (m_timeshift_csa_session)
+	{
+		eDebug("[eDVBServicePlay] Cleaning up timeshift CSA session");
+		m_timeshift_csa_session = nullptr;
+	}
+
+	m_csa_activated_conn = nullptr;
+	m_soft_decoder_video_info_valid = false;
+}
+
+void eDVBServicePlay::updateAudioCache(int apid, int apidtype)
+{
+	if (!m_dvb_service)
+		return;
+
+	// Update audio cache based on audio type
+	switch (apidtype)
+	{
+		case eDVBServicePMTHandler::audioStream::atMPEG:
+			m_dvb_service->setCacheEntry(eDVBService::cMPEGAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAC3:
+			m_dvb_service->setCacheEntry(eDVBService::cAC3PID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAC4:
+			m_dvb_service->setCacheEntry(eDVBService::cAC4PID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atDDP:
+			m_dvb_service->setCacheEntry(eDVBService::cDDPPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAAC:
+			m_dvb_service->setCacheEntry(eDVBService::cAACAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAACHE:
+			m_dvb_service->setCacheEntry(eDVBService::cAACHEAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atDRA:
+			m_dvb_service->setCacheEntry(eDVBService::cDRAAPID, apid);
+			break;
+		default:
+			break;
+	}
+}
+
+// ==================== End Software Descrambling ====================
 
 DEFINE_REF(eDVBServicePlay)
 
