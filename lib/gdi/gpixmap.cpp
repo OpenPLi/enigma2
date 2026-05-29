@@ -465,8 +465,6 @@ void gPixmap::drawRectangle(const gRegion &region, const eRect &area, const gRGB
 	}
 
 	const uint8_t GRADIENT_VERTICAL = 1;
-	uint32_t backColor = backgroundColor.argb();
-	backColor ^= 0xFF000000;
 	uint32_t borderCol = borderColor.argb();
 	borderCol ^= 0xFF000000;
 	uint32_t *gradientBuf = nullptr;
