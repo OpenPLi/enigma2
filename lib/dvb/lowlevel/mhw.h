@@ -41,7 +41,7 @@ struct day_hours {
 #endif
 };
 
-typedef struct {
+typedef struct mhw_title {
    u_char table_id                               :8;
 #if BYTE_ORDER == BIG_ENDIAN
    u_char section_syntax_indicator               :1;

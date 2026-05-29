@@ -32,7 +32,7 @@
 // Service Description Section
 #include <sys/types.h>
 
-typedef struct {
+typedef struct eit {
 	u_char	table_id			: 8;
 
 #if BYTE_ORDER == BIG_ENDIAN
