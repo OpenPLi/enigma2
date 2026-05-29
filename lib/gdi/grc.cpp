@@ -1107,11 +1107,10 @@ void gDC::incrementSpinner()
 {
 	ASSERT(m_spinner_saved);
 
-	static int blub;
-	blub++;
-
 #if 0
 	int i;
+	static int blub;
+	blub++;
 
 	for (i = 0; i < 5; ++i)
 	{
