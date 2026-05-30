@@ -61,7 +61,7 @@ print('MDEVICES AS:\n', piconpathss)
 
 def InitUsageConfig():
 	config.usage = ConfigSubsection()
-	config.usage.dns = ConfigSelection(default="google", choices=[
+	config.usage.dns = ConfigSelection(default="cloudflare", choices=[
 		("dhcp-router", _("DHCP Router")),
 		("staticip", _("Static IP Router")),
 		("google", _("Google DNS")),
