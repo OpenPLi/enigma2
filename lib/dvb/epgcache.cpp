@@ -607,8 +607,7 @@ void eEPGCache::sectionRead(const uint8_t *data, int source, eEPGChannelData *ch
 
 		if ((start_time != 3599) && // NVOD Service
 			((now - historySeconds) <= (start_time + duration)) && // skip old events
-			(start_time < (now + 28*24*60*60)) && // no more than 4 weeks in future
-			)
+			(start_time < (now + 28*24*60*60))) // no more than 4 weeks in future
 		{
 			uint16_t event_id = eit_event->getEventId();
 			eventData *evt = 0;
