@@ -650,7 +650,7 @@ class EPGSelection(Screen, HelpableScreen):
 			if event and service:
 				stime = event.getBeginTime()
 				if self["list"].detectCatchupAvailable(stime, service):
-				self.catchupPlayerFunc(event, service)
+					self.catchupPlayerFunc(event, service)
 
 	def onSelectionChanged(self):
 		cur = self["list"].getCurrent()
