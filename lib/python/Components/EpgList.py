@@ -294,7 +294,7 @@ class EPGList(GUIComponent):
 		sref = service.toString() if isinstance(service, eServiceReference) else service
 		now = time()
 		if stime and "catchupdays=" in sref and stime < now:
-			match = re.search(r"catchupdays=(\d*)", sref)
+			match = search(r"catchupdays=(\d*)", sref)
 			catchup_days = int(match.groups(1)[0])
 			if now - stime <= timedelta(days=catchup_days).total_seconds():
 				return True
