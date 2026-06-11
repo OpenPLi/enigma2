@@ -30,6 +30,7 @@ mepg_config_initialized = False
 
 
 class EPGSelection(Screen, HelpableScreen):
+	catchupPlayerFunc = None
 	EMPTY = 0
 	ADD_TIMER = 1
 	REMOVE_TIMER = 2
@@ -45,6 +46,7 @@ class EPGSelection(Screen, HelpableScreen):
 		self["key_red"] = StaticText("")
 		self["key_menu"] = StaticText(_("MENU"))
 		self["key_info"] = StaticText(_("INFO"))
+		self["key_play"] = StaticText("")
 		self.closeRecursive = False
 		self.saved_title = None
 		self["Service"] = ServiceEvent()
@@ -126,6 +128,10 @@ class EPGSelection(Screen, HelpableScreen):
 				"endUp": (self.filterEndUp, _("End time") + " +"),
 				"saveTimes": (self.saveFilterValues, _("Use current filter values as default")),
 			})
+		self["CatchUpActions"] = HelpableActionMap(self, "EPGCatchUpActions",
+			{
+			"play": (self.playCatchup, _("Play archive")),
+			}, prio=-2)
 		self["actions"].csel = self
 		if parent and hasattr(parent, "fallbackTimer"):
 			self.fallbackTimer = parent.fallbackTimer
@@ -633,6 +639,20 @@ class EPGSelection(Screen, HelpableScreen):
 				self["more_button"].show()
 				self["more_button_sel"].hide()
 
+	def setupKeyPlayButtonDisplay(self, stime, service):
+		self["key_play"].setText("")
+		if hasattr(self["list"], "detectCatchupAvailable") and callable(self.catchupPlayerFunc):
+			if self["list"].detectCatchupAvailable(stime, service):
+				self["key_play"].setText(_("PLAY"))
+
+	def playCatchup(self):
+		if hasattr(self["list"], "detectCatchupAvailable") and callable(self.catchupPlayerFunc):
+			event, service = self["list"].getCurrent()[:2]
+			if event and service:
+				stime = event.getBeginTime()
+				if self["list"].detectCatchupAvailable(stime, service):
+				self.catchupPlayerFunc(event, service)
+
 	def onSelectionChanged(self):
 		cur = self["list"].getCurrent()
 		if cur is None:
@@ -708,4 +728,6 @@ class EPGSelection(Screen, HelpableScreen):
 			self.key_green_choice = self.ADD_TIMER
 		if self.parent and eventid and hasattr(self.parent, "setEvent"):
 			self.parent.setEvent(serviceref, eventid)
+		if "key_play" in self:
+			self.setupKeyPlayButtonDisplay(begin, serviceref)
 		self["list"].l.invalidate()
