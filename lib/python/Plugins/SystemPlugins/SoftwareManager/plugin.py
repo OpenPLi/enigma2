@@ -1207,7 +1207,7 @@ class PluginDetails(Screen, PackageInfoHandler):
 			print("[PluginDetails] downloading screenshot " + thumbnailUrl + " to " + self.thumbnail)
 			if iSoftwareTools.NetworkConnectionAvailable:
 				f = open(self.thumbnail, "wb")
-				get(thumbnailUrl).addCallback(self.setThumbnail).addErrback(self.fetchFailed).addBoth(lambda _: f.close())
+				get(thumbnailUrl).addCallback(collect, f.write).addCallback(self.setThumbnail).addErrback(self.fetchFailed).addBoth(lambda _: f.close())
 			else:
 				self.setThumbnail(noScreenshot=True)
 		else:
