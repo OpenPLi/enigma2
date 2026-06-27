@@ -892,7 +892,7 @@ def InitUsageConfig():
 		eEPGCache.getInstance().timeUpdated()
 
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
-	config.ntp.timesync.addNotifier(timesyncChanged, initial_call=False)
+	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("", fixed_size=False)
 	config.ntp.server_old = ConfigText("")
 	def setNTPServer(configElement):
