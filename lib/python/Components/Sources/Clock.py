@@ -10,7 +10,7 @@ class Clock(Source):
 		Source.__init__(self)
 		self.clock_timer = eTimer()
 		self.clock_timer.callback.append(self.poll)
-		self.clock_timer.start(1000)
+		self.startTimer()
 
 	@cached
 	def getClock(self):
@@ -20,12 +20,16 @@ class Clock(Source):
 
 	def poll(self):
 		self.changed((self.CHANGED_POLL,))
+		self.startTimer()
+
+	def startTimer(self):
+		delay = int((1.0 - (getTime() % 1.0)) * 1000) + 20
+		self.clock_timer.start(delay, True)
 
 	def doSuspend(self, suspended):
 		if suspended:
 			self.clock_timer.stop()
 		else:
-			self.clock_timer.start(1000)
 			self.poll()
 
 	def destroy(self):
