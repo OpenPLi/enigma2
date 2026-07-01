@@ -2,7 +2,7 @@ from Components.Harddisk import harddiskmanager
 from Components.Console import Console
 from Components.config import ConfigSubsection, ConfigYesNo, config, ConfigSelection, ConfigText, ConfigNumber, ConfigSet, ConfigLocations, ConfigSelectionNumber, ConfigClock, ConfigSlider, ConfigEnableDisable, ConfigSubDict, ConfigDictionarySet, ConfigInteger, ConfigPassword, ConfigIP, NoSave
 from Tools.Directories import defaultRecordingLocation
-from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache
+from enigma import setTunerTypePriorityOrder, setPreferredTuner, setSpinnerOnOff, setEnableTtCachingOnOff, eEnv, eDVBDB, Misc_Options, eBackgroundFileEraser, eServiceEvent, eDVBLocalTimeHandler, eEPGCache, eTimer
 from Components.About import GetIPsFromNetworkInterfaces
 from Components.NimManager import nimmanager
 from Components.Renderer.FrontpanelLed import ledPatterns, PATTERN_ON, PATTERN_OFF, PATTERN_BLINK
@@ -827,46 +827,23 @@ def InitUsageConfig():
 
 	config.ntp = ConfigSubsection()
 
-	def chronyStatusFinished(result, retval, action):
-		match action:
-			case 'disable':
-				if retval == 0:
-					Console().ePopen('/etc/init.d/chronyd stop')
-				Console().ePopen('update-rc.d chronyd disable 3')
-			case 'enable':
-				Console().ePopen('update-rc.d chronyd enable 3')
-				if retval == 3:
-					Console().ePopen('/etc/init.d/chronyd start')
-			case 'sync' if retval == 0:
-				if retval == 0:
-					Console().ePopen('/etc/init.d/chronyd reload')
-				else:
-					Console().ePopen('/etc/init.d/chronyd start')
-			case _:
-				print("[UsageConfig] Unsupported Chrony status action: %s" % action)
-
 	def timesyncChanged(configElement):
 		if configElement.value == "dvb":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
+			ntpHandler.reset()
+			ntpHandler.console.ePopen('/etc/init.d/chronyd status', ntpHandler.chronyStatusFinished, 'disable')
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
 			print("[UsageConfig] NTP disabled, DVB time enabled")
+
 		elif configElement.value == "auto":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
-			try:
-				result = subprocess.check_output('chronyc tracking', shell=True, text=True)
-			except subprocess.CalledProcessError as e:
-				result = ""
-				print("[Usageconfig]", e)
-			if "Reference ID    : 00000000 ()" in result:
-				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'disable')
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
-				print("[UsageConfig] NTP disabled, DVB time enabled")
-			else:
-				Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
-				eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
-				print("[UsageConfig] NTP enabled, DVB time disabled")
+			ntpHandler.console.ePopen('/etc/init.d/chronyd status', ntpHandler.chronyStatusFinished, 'enable')
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(True)
+			print("[UsageConfig] AUTO: NTP enabled, DVB time enabled as fallback")
+			ntpHandler.reset()
+			ntpHandler.check()
+
 		elif configElement.value == "ntp":
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'enable')
+			ntpHandler.reset()
+			ntpHandler.console.ePopen('/etc/init.d/chronyd status', ntpHandler.chronyStatusFinished, 'enable')
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 			print("[UsageConfig] NTP enabled, DVB time disabled")
 
@@ -876,25 +853,8 @@ def InitUsageConfig():
 	config.ntp.timesync.addNotifier(timesyncChanged)
 	config.ntp.server = ConfigText("", fixed_size=False)
 	config.ntp.server_old = ConfigText("")
-	def setNTPServer(configElement):
-		if configElement.value != config.ntp.server_old.value and " " not in configElement.value:
-			f = open("/etc/chrony.conf", "r")
-			lst = f.readlines()
-			f = open("/etc/chrony.conf", "w")
-			for x in lst:
-				x1 = x.split()
-				if len(x1) > 1 and (x1[0] == "server" or x1[0] == "#server"):
-					if configElement.value == "":
-						x1[0] = "#server"
-						x = " ".join(x1) +"\n"
-					else:
-						x = "server %s iburst minpoll 3 prefer\n" % configElement.value
-				f.write(x)
-			f.close()
-			config.ntp.server_old.value = configElement.value
-			Console().ePopen('/etc/init.d/chronyd status', chronyStatusFinished, 'sync')
-			print("[UsageConfig] NTP enabled, local server is set to: %s" % configElement.value)
-	config.ntp.server.addNotifier(setNTPServer, immediate_feedback=False)
+	config.ntp.server.addNotifier(ntpHandler.setServer, immediate_feedback=False)
+
 
 def updateChoices(sel, choices):
 	if choices:
@@ -1030,3 +990,83 @@ def dropEPGNewLines(text):
 
 def replaceEPGSeparator(code):
 	return {"newline": "\n", "2newlines": "\n\n", "space": " ", "dash": " - ", "dot": " . ", "asterisk": " * ", "hashtag": " # ", "nothing": ""}.get(code)
+
+
+class NtpHandler:
+	NTP_RETRY_UNIT = 2000      # 2 s
+	NTP_RETRY_MAX = 150000     # 2.5 min
+
+	def __init__(self):
+		self.timer = eTimer()
+		self.console = Console()
+		self.retry = 0
+		self.timer.callback.append(self.check)
+
+	def isUsable(self):
+		try:
+			result = subprocess.check_output('chronyc tracking', shell=True, text=True)
+		except subprocess.CalledProcessError:
+			return False
+		return "Leap status     : Normal" in result
+
+	def reset(self):
+		self.retry = 0
+		self.timer.stop()
+
+	def check(self):
+		if config.ntp.timesync.value != "auto":
+			self.reset()
+			return
+
+		if self.isUsable():
+			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
+			eEPGCache.getInstance().timeUpdated()
+			print("[UsageConfig] AUTO: NTP usable, DVB time disabled")
+			self.reset()
+		else:
+			print("[UsageConfig] AUTO: NTP not usable yet, DVB time remains enabled")
+			delay = min(self.NTP_RETRY_UNIT * (1 << self.retry), self.NTP_RETRY_MAX)
+			print("[UsageConfig] AUTO: retry NTP check in %d s" % (delay // 1000))
+			self.retry += 1
+			self.timer.start(delay, True)
+
+	def chronyStatusFinished(self, result, retval, action):
+		match action:
+			case 'disable':
+				if retval == 0:
+					self.console.ePopen('/etc/init.d/chronyd stop')
+				self.console.ePopen('update-rc.d chronyd disable 3')
+			case 'enable':
+				self.console.ePopen('update-rc.d chronyd enable 3')
+				if retval != 0:
+					self.console.ePopen('/etc/init.d/chronyd start')
+			case 'sync':
+				if retval == 0:
+					self.console.ePopen('/etc/init.d/chronyd reload')
+				else:
+					self.console.ePopen('/etc/init.d/chronyd start')
+			case _:
+				print("[UsageConfig] Unsupported Chrony status action: %s" % action)
+
+	def setServer(self, configElement):
+		if configElement.value != config.ntp.server_old.value and " " not in configElement.value:
+			f = open("/etc/chrony.conf", "r")
+			lst = f.readlines()
+			f.close()
+
+			f = open("/etc/chrony.conf", "w")
+			for x in lst:
+				x1 = x.split()
+				if len(x1) > 1 and (x1[0] == "server" or x1[0] == "#server"):
+					if configElement.value == "":
+						x1[0] = "#server"
+						x = " ".join(x1) + "\n"
+					else:
+						x = "server %s iburst minpoll 3 prefer\n" % configElement.value
+				f.write(x)
+			f.close()
+			config.ntp.server_old.value = configElement.value
+			self.console.ePopen('/etc/init.d/chronyd status', self.chronyStatusFinished, 'sync')
+			print("[UsageConfig] NTP enabled, local server is set to: %s" % configElement.value)
+
+ntpHandler = NtpHandler()
