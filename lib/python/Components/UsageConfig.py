@@ -867,7 +867,8 @@ def InitUsageConfig():
 			eDVBLocalTimeHandler.getInstance().setUseDVBTime(False)
 			print("[UsageConfig] NTP enabled, DVB time disabled")
 
-		eEPGCache.getInstance().timeUpdated()
+		if configElement.value != "auto":
+			eEPGCache.getInstance().timeUpdated()
 
 	config.ntp.timesync = ConfigSelection(default="auto", choices=[("auto", _("auto")), ("dvb", _("Transponder Time")), ("ntp", _("Internet (ntp)"))])
 	config.ntp.timesync.addNotifier(timesyncChanged)
@@ -1023,7 +1024,7 @@ class NtpHandler:
 
 	def isUsable(self):
 		try:
-			result = subprocess.check_output('chronyc tracking', shell=True, text=True)
+			result = subprocess.check_output(["chronyc", "tracking"], text=True)
 		except subprocess.CalledProcessError:
 			return False
 		return "Leap status     : Normal" in result
