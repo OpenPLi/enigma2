@@ -98,6 +98,7 @@ public:
 #define GS_HYPHEN   32
 #define GS_COLORCHANGE 64
 #define GS_LF 128
+#define GS_COLORRESTORE 256
 #define GS_CANBREAK (GS_ISSPACE|GS_SOFTHYPHEN|GS_HYPHEN)
 
 struct pGlyph
@@ -148,7 +149,7 @@ class eTextPara: public iObject
 	bool m_blend;
 
 	int appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
-			bool activate_newcolor, unsigned long newcolor);
+			bool activate_newcolor, unsigned long newcolor, bool activate_colorrestore);
 	void newLine(int flags);
 	void setFont(Font *font, Font *replacement_font, Font *fallback_font);
 	void calc_bbox();

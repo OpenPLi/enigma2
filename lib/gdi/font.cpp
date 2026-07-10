@@ -338,7 +338,7 @@ inline FT_Error Font::getGlyphImage(GlyphIndex glyph_index, FT_Glyph *glyph, FT_
 
 DEFINE_REF(eTextPara);
 int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
-		bool activate_newcolor, unsigned long newcolor)
+		bool activate_newcolor, unsigned long newcolor, bool activate_colorrestore)
 {
 	int xadvance, top, left, height;
 	pGlyph ng;
@@ -503,6 +503,9 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 		ng.flags |= GS_COLORCHANGE;
 		ng.newcolor = newcolor;
 	}
+
+	if (activate_colorrestore)
+		ng.flags |= GS_COLORRESTORE;
 
 	glyphs.push_back(ng);
 	++charCount;
@@ -769,6 +772,7 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 
 	unsigned long newcolor = 0;
 	bool activate_newcolor = false;
+	bool activate_colorrestore = false;
 	int nextflags = 0;
 
 	for (std::vector<unsigned long>::const_iterator i(uc_visual.begin());
@@ -810,6 +814,11 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 						case 'r':
 							i++;
 							goto nprint;
+						case 'C':
+							activate_colorrestore = true;
+							isprintable = 0;
+							i++;
+							break;
 						case 'c':
 						{
 							char color[8];
@@ -888,14 +897,15 @@ nprint:				isprintable=0;
 					if (!index)
 						eDebug("[eTextPara] Unicode U+%4lx not present", chr);
 					else
-						appendGlyph(fallback_font, fallback_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+						appendGlyph(fallback_font, fallback_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor, activate_colorrestore);
 				}
 				else
-					appendGlyph(replacement_font, replacement_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+					appendGlyph(replacement_font, replacement_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor, activate_colorrestore);
 			} else
-				appendGlyph(current_font, current_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+				appendGlyph(current_font, current_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor, activate_colorrestore);
 
 			activate_newcolor = false;
+			activate_colorrestore = false;
 		}
 	}
 	bboxValid=false;
@@ -939,6 +949,7 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 	dc.getPixmap(target);
 	gUnmanagedSurface *surface = target->surface;
 	gRGB currentforeground = foreground;
+	std::vector<gRGB> colorStack;
 	const gRGB background = (m_blend && surface->bpp == 32) ? gRGB(currentforeground.r, currentforeground.g, currentforeground.b, 200) : cbackground;
 
 	int opcode = -1;
@@ -971,11 +982,21 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 			line_offs = *(line_offs_it++);
 			line_chars = *(line_chars_it++);
 		}
-		if (i->flags & GS_COLORCHANGE)
+		/* don't do color changes in borders */
+		if (!border)
 		{
-			/* don't do colorchanges in borders */
-			if (!border)
+			if (i->flags & GS_COLORRESTORE)
 			{
+				if (!colorStack.empty())
+				{
+					currentforeground = colorStack.back();
+					colorStack.pop_back();
+					setcolor = true;
+				}
+			}
+			if (i->flags & GS_COLORCHANGE)
+			{
+				colorStack.push_back(currentforeground);
 				currentforeground = i->newcolor;
 				setcolor = true;
 			}
