@@ -338,7 +338,7 @@ inline FT_Error Font::getGlyphImage(GlyphIndex glyph_index, FT_Glyph *glyph, FT_
 
 DEFINE_REF(eTextPara);
 int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt glyphIndex, int flags, int rflags, int border, bool last,
-		bool activate_newcolor, unsigned long newcolor)
+		bool activate_newcolor, bool activate_colorreset, unsigned long newcolor)
 {
 	int xadvance, top, left, height;
 	pGlyph ng;
@@ -503,6 +503,9 @@ int eTextPara::appendGlyph(Font *current_font, FT_Face current_face, FT_UInt gly
 		ng.flags |= GS_COLORCHANGE;
 		ng.newcolor = newcolor;
 	}
+
+	if (activate_colorreset)
+		ng.flags |= GS_COLORRESET;
 
 	glyphs.push_back(ng);
 	++charCount;
@@ -769,6 +772,7 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 
 	unsigned long newcolor = 0;
 	bool activate_newcolor = false;
+	bool activate_colorreset = false;
 	int nextflags = 0;
 
 	for (std::vector<unsigned long>::const_iterator i(uc_visual.begin());
@@ -818,13 +822,22 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 							{
 								if ((i + 2 + codeidx) == uc_visual.end()) break;
 								color[codeidx] = (char)((*(i + 2 + codeidx)) & 0xff);
+								if (!isxdigit((unsigned char)color[codeidx]))
+									break;
 							}
+
+							isprintable = 0;
+
 							if (codeidx == 8)
 							{
 								newcolor = gRGB(color).argb();
 								activate_newcolor = true;
-								isprintable = 0;
 								i += 1 + codeidx;
+							}
+							else
+							{
+								activate_colorreset = true;
+								i++;
 							}
 							break;
 						}
@@ -888,14 +901,15 @@ nprint:				isprintable=0;
 					if (!index)
 						eDebug("[eTextPara] Unicode U+%4lx not present", chr);
 					else
-						appendGlyph(fallback_font, fallback_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+						appendGlyph(fallback_font, fallback_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, activate_colorreset, newcolor);
 				}
 				else
-					appendGlyph(replacement_font, replacement_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+					appendGlyph(replacement_font, replacement_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, activate_colorreset, newcolor);
 			} else
-				appendGlyph(current_font, current_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, newcolor);
+				appendGlyph(current_font, current_face, index, flags, rflags, border, i == uc_visual.end() - 1, activate_newcolor, activate_colorreset, newcolor);
 
 			activate_newcolor = false;
+			activate_colorreset = false;
 		}
 	}
 	bboxValid=false;
@@ -971,10 +985,14 @@ void eTextPara::blit(gDC &dc, const ePoint &offset, const gRGB &cbackground, con
 			line_offs = *(line_offs_it++);
 			line_chars = *(line_chars_it++);
 		}
-		if (i->flags & GS_COLORCHANGE)
+		if (!border)
 		{
-			/* don't do colorchanges in borders */
-			if (!border)
+			if (i->flags & GS_COLORRESET)
+			{
+				currentforeground = foreground;
+				setcolor = true;
+			}
+			else if (i->flags & GS_COLORCHANGE)
 			{
 				currentforeground = i->newcolor;
 				setcolor = true;
