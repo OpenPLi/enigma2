@@ -814,11 +814,6 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 						case 'r':
 							i++;
 							goto nprint;
-						case 'C':
-							activate_colorrestore = true;
-							isprintable = 0;
-							i++;
-							break;
 						case 'c':
 						{
 							char color[8];
@@ -827,6 +822,8 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 							{
 								if ((i + 2 + codeidx) == uc_visual.end()) break;
 								color[codeidx] = (char)((*(i + 2 + codeidx)) & 0xff);
+								if (!isxdigit((unsigned char)color[codeidx]))
+									break;
 							}
 							if (codeidx == 8)
 							{
@@ -834,6 +831,12 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 								activate_newcolor = true;
 								isprintable = 0;
 								i += 1 + codeidx;
+							}
+							else
+							{
+								activate_colorrestore = true;
+								isprintable = 0;
+								i++;
 							}
 							break;
 						}
