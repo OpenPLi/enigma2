@@ -214,6 +214,9 @@ void eDVBScan::stateChange(iDVBChannel *ch)
 			SCAN_eDebug("[eDVBScan] blindscan channel completed");
 			m_ch_blindscan.pop_front();
 		}
+
+		m_ch_current_active = false;
+		m_event(evtUpdate);
 		nextChannel();
 	}
 			/* unavailable will timeout, anyway. */
@@ -1186,6 +1189,7 @@ void eDVBScan::channelDone()
 		++i;
 	}
 
+	m_event(evtUpdate);
 	nextChannel();
 }
 
