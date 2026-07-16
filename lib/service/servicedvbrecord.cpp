@@ -15,8 +15,10 @@ DEFINE_REF(eDVBServiceRecord);
 
 eDVBServiceRecord::eDVBServiceRecord(const eServiceReferenceDVB &ref, bool isstreamclient): m_ref(ref)
 {
+	m_eitRetryTimer = eTimer::create(eApp);
 	CONNECT(m_service_handler.serviceEvent, eDVBServiceRecord::serviceEvent);
 	CONNECT(m_event_handler.m_eit_changed, eDVBServiceRecord::gotNewEvent);
+	CONNECT(m_eitRetryTimer->timeout, eDVBServiceRecord::retrySaveEit);
 	m_state = stateIdle;
 	m_want_record = 0;
 	m_record_ecm = false;
@@ -145,12 +147,39 @@ RESULT eDVBServiceRecord::prepare(const char *filename, time_t begTime, time_t e
 				std::string fname = filename;
 				fname.erase(fname.length()-2, 2);
 				fname += "eit";
-				eEPGCache::getInstance()->saveEventToFile(fname.c_str(), ref, eit_event_id, begTime, endTime);
+				int eitret = eEPGCache::getInstance()->saveEventToFile(fname.c_str(), ref, eit_event_id, begTime, endTime);
+
+				if (eitret)
+				{
+					m_eitFilename = fname;
+					m_eitRef = ref;
+					m_eitEventId = eit_event_id;
+					m_eitBegTime = begTime;
+					m_eitEndTime = endTime;
+					m_eitRetryTimer->stop();
+					m_eitRetryTimer->startLongTimer(30);
+				}
 			}
 		}
 		return ret;
 	}
 	return -1;
+}
+
+void eDVBServiceRecord::retrySaveEit()
+{
+	m_eitRetryTimer->stop();
+
+	if (m_eitFilename.empty())
+		return;
+	if (!access(m_eitFilename.c_str(), F_OK))
+	{
+		m_eitFilename.clear();
+		return;
+	}
+	eEPGCache::getInstance()->saveEventToFile(m_eitFilename.c_str(), m_eitRef, m_eitEventId, m_eitBegTime, m_eitEndTime);
+
+	m_eitFilename.clear();
 }
 
 RESULT eDVBServiceRecord::prepareStreaming(bool descramble, bool includeecm)
@@ -175,6 +204,8 @@ RESULT eDVBServiceRecord::start(bool simulate)
 
 RESULT eDVBServiceRecord::stop()
 {
+	m_eitRetryTimer->stop();
+
 	if (!m_simulate)
 		eDebug("[eDVBServiceRecord] stop recording!");
 	if (m_state == stateRecording)

@@ -76,6 +76,15 @@ private:
 			/* eit updates */
 	void gotNewEvent(int error);
 	void saveCutlist();
+			/* eit retry */
+	ePtr<eTimer> m_eitRetryTimer;
+	std::string m_eitFilename;
+	eServiceReferenceDVB m_eitRef;
+	int m_eitEventId;
+	time_t m_eitBegTime;
+	time_t m_eitEndTime;
+
+	void retrySaveEit();
 };
 
 #endif
