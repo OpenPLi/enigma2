@@ -60,6 +60,7 @@ class EPGList(GUIComponent):
 		self.tw = applySkinFactor(90)
 		self.dy = 0
 		self.sidesMargin = 0
+		self.sorting = 0
 
 		if type == EPG_TYPE_SINGLE:
 			self.l.setBuildFunc(self.buildSingleEntry)
@@ -163,11 +164,22 @@ class EPGList(GUIComponent):
 				x += self.col[0]
 				self.datetime_rect = Rect(x, 0, self.gap(self.col[1]), height)
 				x += self.col[1]
-				self.descr_rect = Rect(x, 0, width - x, height)
+				if self.sorting == 2:
+					rating_w = 60
+					self.descr_rect = Rect(x, 0, width - x - rating_w, height)
+					self.rating_rect = Rect(width - rating_w, 0, rating_w, height)
+				else:
+					self.descr_rect = Rect(x, 0, width - x, height)
 			else:
 				self.weekday_rect = Rect(0, 0, width // 20 * 2 - 10, height)
 				self.datetime_rect = Rect(width // 20 * 2, 0, width // 20 * 5 - 15, height)
-				self.descr_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
+				if self.sorting == 2:
+					descr_x = width // 20 * 7
+					rating_w = 60
+					self.descr_rect = Rect(descr_x, 0, width - descr_x - rating_w, height)
+					self.rating_rect = Rect(width - rating_w, 0, rating_w, height)
+				else:
+					self.descr_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
 		elif self.type == EPG_TYPE_MULTI:
 			if self.skinColumns:
 				x = 0
@@ -227,6 +239,14 @@ class EPGList(GUIComponent):
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x + self.sidesMargin, r1.y, r1.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, self.days[t[6]]),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x + self.sidesMargin, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 		]
+		if self.sorting == 2:
+			r = self.getEventRating((service, eventId, beginTime, duration, EventName))
+			if r:
+				rating = str(r + 3)
+			else:
+				rating = "-"
+			r4 = self.rating_rect
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 0, RT_HALIGN_CENTER | RT_VALIGN_CENTER, rating))
 		if clock_types:
 			for i in range(len(clock_types)):
 				clockIcon = (clock_types[i] == 65 and self.catchUpIcon) or self.clocks[clock_types[i]]
@@ -360,6 +380,7 @@ class EPGList(GUIComponent):
 				return dailySpan(end, start)
 
 	def fillSingleEPG(self, service, sorting=0, filtering=0):
+		self.sorting = sorting
 		t = int(time())
 		epg_time = t - (int(config.epg.histminutes.value) * 60)
 		test = ['RIBDT', (service.ref.toString(), 0, epg_time, -1)]
@@ -378,15 +399,32 @@ class EPGList(GUIComponent):
 			self.instance.moveSelectionTo(idx - 1)
 		self.selectionChanged()
 
+	def getEventRating(self, event):
+		try:
+			ref = event[0]
+			if isinstance(ref, str):
+				ref = eServiceReference(ref)
+			ev = self.epgcache.lookupEventId(ref, int(event[1]))
+			if ev:
+				p = ev.getParentalData()
+				if p:
+					return p.getRating() or 0
+		except Exception as e:
+			print("[EPG rating error]", event[4], type(event[0]), event[0], event[1], e)
+		return 0
+
 	def sortSingleEPG(self, type):
+		self.sorting = type
 		list = self.list
 		if list:
 			event_id = self.getSelectedEventId()
 			if type == 1:
 				list.sort(key=lambda x: (x[4] and x[4].lower(), x[2]))
+			elif type == 2:
+				list.sort(key=lambda x: (self.getEventRating(x), x[2]))
 			else:
-				assert (type == 0)
 				list.sort(key=lambda x: x[2])
+			self.recalcEntrySize()
 			self.l.invalidate()
 			self.moveToEventId(event_id)
 
