@@ -129,6 +129,7 @@
 		<item level="1" text="End time" indents="4" conditional="config.epg.filter.value" description="End of the time interval during which events must begin to be displayed. If the filter is active, use keys 3 and 6 to adjust the end time, and key 0 to save.">config.epg.filter_end</item>
 		<item level="1" text="Toggle Filter Order" indents="4" conditional="config.epg.filter.value" description="Using the 'Stop' button will cyclically switch displaying events starting: 'outside the interval', 'within the interval', and 'without filtering', instead of 'within the interval', 'outside the interval', and 'without filtering'.">config.epg.filter_reversal</item>
 		<item level="1" text="Keep sorting" indents="4" conditional="config.epg.filter.value" description="When switching the filter, the selected EPG sorting is preserved.">config.epg.filter_keepsorting</item>
+		<item level="1" text="Rating sort in SingleEPG" description="Enable sorting by rating under the yellow button in SingleEPG.">config.epg.ratingsort</item>
 	</setup>
 	<setup key="subtitlesetup" title="Subtitle settings">
 		<item level="0" text="Teletext subtitle color" description="Configure the color of the teletext subtitles.">config.subtitles.ttx_subtitle_colors</item>
