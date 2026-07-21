@@ -829,6 +829,7 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 								color[8] = '\0';
 								newcolor = gRGB(color).argb();
 								activate_newcolor = true;
+								activate_colorreset = false;
 								isprintable = 0;
 								i += 1 + codeidx;
 							}
@@ -841,6 +842,7 @@ int eTextPara::renderString(const char *string, int rflags, int border)
 						case 'C':
 							isprintable = 0;
 							activate_colorreset = true;
+							activate_newcolor = false;
 							i++;
 							break;
 						default:
