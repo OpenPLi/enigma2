@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 from Components.GUIComponent import GUIComponent
 
-from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eServiceReference
 
 from Tools.Alternatives import CompareWithAlternatives
 from Tools.LoadPixmap import LoadPixmap
@@ -11,11 +10,9 @@ from Components.config import config
 from ServiceReference import ServiceReference
 from Tools.Directories import resolveFilename, SCOPE_CURRENT_SKIN
 from skin import applySkinFactor, parseFont, parseScale
-from gettext import gettext
 
-# Set up translation function
-_ = gettext
-
+from re import search
+from datetime import timedelta
 
 EPG_TYPE_SINGLE = 0
 EPG_TYPE_MULTI = 1
@@ -53,7 +50,7 @@ class EPGList(GUIComponent):
 			self.onSelChanged.append(selChangedCB)
 		GUIComponent.__init__(self)
 		self.type = type
-		self.listbox = eListboxPythonMultiContent()
+		self.l = eListboxPythonMultiContent()
 		self.eventItemFont = gFont("Regular", applySkinFactor(22))
 		self.eventTimeFont = gFont("Regular", applySkinFactor(16))
 		self.iconSize = applySkinFactor(21)
@@ -63,17 +60,17 @@ class EPGList(GUIComponent):
 		self.tw = applySkinFactor(90)
 		self.dy = 0
 		self.sidesMargin = 0
+		self.sorting = 0
 
 		if type == EPG_TYPE_SINGLE:
-			self.listbox.setBuildFunc(self.buildSingleEntry)
+			self.l.setBuildFunc(self.buildSingleEntry)
 		elif type == EPG_TYPE_MULTI:
-			self.listbox.setBuildFunc(self.buildMultiEntry)
+			self.l.setBuildFunc(self.buildMultiEntry)
 		else:
-			assert (type == EPG_TYPE_SIMILAR or type == EPG_TYPE_PARTIAL)
-			self.listbox.setBuildFunc(self.buildSimilarEntry)
-
+			assert type in (EPG_TYPE_SIMILAR, EPG_TYPE_PARTIAL)
+			self.l.setBuildFunc(self.buildSimilarEntry)
 		self.epgcache = eEPGCache.getInstance()
-
+		self.catchUpIcon = LoadPixmap(cached=True, path=resolveFilename(SCOPE_CURRENT_SKIN, "icons/catchup.png"))
 		main_icons = (
 			"epgclock",
 			"zapclock",
@@ -99,15 +96,15 @@ class EPGList(GUIComponent):
 		return event
 
 	def getCurrentChangeCount(self):
-		if self.type == EPG_TYPE_MULTI and self.listbox.getCurrentSelection() is not None:
-			return self.listbox.getCurrentSelection()[0]
+		if self.type == EPG_TYPE_MULTI and self.l.getCurrentSelection() is not None:
+			return self.l.getCurrentSelection()[0]
 		return 0
 
 	def getCurrent(self):
 		idx = 0
 		if self.type == EPG_TYPE_MULTI:
 			idx += 1
-		tmp = self.listbox.getCurrentSelection()
+		tmp = self.l.getCurrentSelection()
 		if tmp is None:
 			return (None, None)
 		eventid = tmp[idx + 1]
@@ -121,36 +118,36 @@ class EPGList(GUIComponent):
 	def moveDown(self):
 		self.instance.moveSelection(self.instance.moveDown)
 
-	def connectSelectionChanged(self, func):
+	def connectSelectionChanged(func):
 		if not self.onSelChanged.count(func):
 			self.onSelChanged.append(func)
 
-	def disconnectSelectionChanged(self, func):
+	def disconnectSelectionChanged(func):
 		self.onSelChanged.remove(func)
 
 	def selectionChanged(self):
 		for x in self.onSelChanged:
 			if x is not None:
 				x()
-#               try:
-#                   x()
-#               except: # FIXME!!!
-#                   print "FIXME in EPGList.selectionChanged"
-#                   pass
+#				try:
+#					x()
+#				except: # FIXME!!!
+#					print "FIXME in EPGList.selectionChanged"
+#					pass
 
 	GUI_WIDGET = eListbox
 
 	def postWidgetCreate(self, instance):
 		instance.setWrapAround(True)
 		instance.selectionChanged.get().append(self.selectionChanged)
-		instance.setContent(self.listbox)
+		instance.setContent(self.l)
 
 	def preWidgetRemove(self, instance):
 		instance.selectionChanged.get().remove(self.selectionChanged)
 		instance.setContent(None)
 
 	def recalcEntrySize(self):
-		esize = self.listbox.getItemSize()
+		esize = self.l.getItemSize()
 		width = esize.width()
 		height = esize.height()
 		try:
@@ -167,11 +164,22 @@ class EPGList(GUIComponent):
 				x += self.col[0]
 				self.datetime_rect = Rect(x, 0, self.gap(self.col[1]), height)
 				x += self.col[1]
-				self.descr_rect = Rect(x, 0, width - x, height)
+				if self.sorting == 2:
+					rating_w = 60
+					self.descr_rect = Rect(x, 0, width - x - rating_w, height)
+					self.rating_rect = Rect(width - rating_w, 0, rating_w, height)
+				else:
+					self.descr_rect = Rect(x, 0, width - x, height)
 			else:
 				self.weekday_rect = Rect(0, 0, width // 20 * 2 - 10, height)
 				self.datetime_rect = Rect(width // 20 * 2, 0, width // 20 * 5 - 15, height)
-				self.descr_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
+				if self.sorting == 2:
+					descr_x = width // 20 * 7
+					rating_w = 60
+					self.descr_rect = Rect(descr_x, 0, width - descr_x - rating_w, height)
+					self.rating_rect = Rect(width - rating_w, 0, rating_w, height)
+				else:
+					self.descr_rect = Rect(width // 20 * 7, 0, width // 20 * 13, height)
 		elif self.type == EPG_TYPE_MULTI:
 			if self.skinColumns:
 				x = 0
@@ -192,7 +200,7 @@ class EPGList(GUIComponent):
 				xpos += w
 				w = width // 10 * 5
 				self.descr_rect = Rect(xpos, 0, width, height)
-		else:  # EPG_TYPE_SIMILAR
+		else: # EPG_TYPE_SIMILAR
 			if self.skinColumns:
 				x = 0
 				self.weekday_rect = Rect(0, 0, self.gap(self.col[0]), height)
@@ -208,29 +216,40 @@ class EPGList(GUIComponent):
 	def gap(self, width):
 		return width - self.colGap
 
-	def getClockTypesForEntry(self, service, eventId, beginTime, duration):
+	def getClockTypesForEntry(self, service, eventId, beginTime, duration, catchUpIcon=None):
 		if not beginTime:
 			return None
+		type = []
 		rec = self.timer.isInTimer(eventId, beginTime, duration, service)
+		if catchUpIcon and self.detectCatchupAvailable(beginTime, service):
+			type = [65]
 		if rec is not None:
-			return rec[1]
+			return (type + rec[1])
 		else:
-			return None
+			return type
 
 	def buildSingleEntry(self, service, eventId, beginTime, duration, EventName):
-		clock_types = self.getClockTypesForEntry(service, eventId, beginTime, duration)
+		clock_types = self.getClockTypesForEntry(service, eventId, beginTime, duration, self.catchUpIcon)
 		r1 = self.weekday_rect
 		r2 = self.datetime_rect
 		r3 = self.descr_rect
 		t = localtime(beginTime)
 		res = [
-			None,  # no private data needed
+			None, # no private data needed
 			(eListboxPythonMultiContent.TYPE_TEXT, r1.x + self.sidesMargin, r1.y, r1.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, self.days[t[6]]),
 			(eListboxPythonMultiContent.TYPE_TEXT, r2.x + self.sidesMargin, r2.y, r2.w, r1.h, 0, RT_HALIGN_RIGHT | RT_VALIGN_CENTER, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4]))
 		]
+		if self.sorting == 2:
+			r = self.getEventRating((service, eventId, beginTime, duration, EventName))
+			if r:
+				rating = str(r + 3)
+			else:
+				rating = "-"
+			r4 = self.rating_rect
+			res.append((eListboxPythonMultiContent.TYPE_TEXT, r4.x, r4.y, r4.w, r4.h, 0, RT_HALIGN_CENTER | RT_VALIGN_CENTER, rating))
 		if clock_types:
 			for i in range(len(clock_types)):
-				clockIcon = self.clocks[clock_types[i]]
+				clockIcon = (clock_types[i] == 65 and self.catchUpIcon) or self.clocks[clock_types[i]]
 				pix_size = clockIcon.size()
 				pix_width = pix_size.width()
 				pix_height = pix_size.height()
@@ -265,7 +284,7 @@ class EPGList(GUIComponent):
 		r2 = self.progress_rect
 		r3 = self.descr_rect
 		r4 = self.start_end_rect
-		res = [None]  # no private data needed
+		res = [None] # no private data needed
 		if clock_types:
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, r1.x, r1.y, r1.w - self.space * len(clock_types), r1.h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, service_name))
 			for i in range(len(clock_types)):
@@ -294,6 +313,16 @@ class EPGList(GUIComponent):
 				))
 		return res
 
+	def detectCatchupAvailable(self, stime, service):
+		sref = service.toString() if isinstance(service, eServiceReference) else service
+		now = time()
+		if stime and "catchupdays=" in sref and stime < now:
+			match = search(r"catchupdays=(\d*)", sref)
+			catchup_days = int(match.groups(1)[0])
+			if now - stime <= timedelta(days=catchup_days).total_seconds():
+				return True
+		return False
+
 	def queryEPG(self, list, buildFunc=None):
 		if self.epgcache is not None:
 			if buildFunc is not None:
@@ -303,16 +332,16 @@ class EPGList(GUIComponent):
 		return []
 
 	def fillMultiEPG(self, services, stime=-1):
-		# t = int(time())
+		#t = int(time())
 		test = [(service.ref.toString(), 0, stime) for service in services]
 		test.insert(0, 'X0RIBDTCn')
 		self.list = self.queryEPG(test)
-		self.listbox.setList(self.list)
-		# print(int(time()) - t)
+		self.l.setList(self.list)
+		#print(int(time()) - t)
 		self.selectionChanged()
 
 	def updateMultiEPG(self, direction):
-		# t = int(time())
+		#t = int(time())
 		test = [x[3] and (x[1], direction, x[3]) or (x[1], direction, 0) for x in self.list]
 		test.insert(0, 'XRIBDTCn')
 		tmp = self.queryEPG(test)
@@ -323,18 +352,15 @@ class EPGList(GUIComponent):
 				if x[2] is not None:
 					self.list[cnt] = (changecount, x[0], x[1], x[2], x[3], x[4], x[5], x[6])
 			cnt += 1
-		self.listbox.setList(self.list)
-		# print((int(time()) - t)
+		self.l.setList(self.list)
+		#print((int(time()) - t)
 		self.selectionChanged()
 
 	def filtering_epg(self, epg_list, filtering):
-
 		def dailySpan(start, end):
 			return list(filter(lambda event: (start <= event_time(event) < end), epg_list))
-
 		def overnightSpan(start, end):
 			return list(filter(lambda event: (start <= event_time(event) < 1440 or 0 <= event_time(event) < end), epg_list))
-
 		def event_time(event):
 			return localtime(event[2]).tm_hour * 60 + localtime(event[2]).tm_min
 
@@ -354,6 +380,7 @@ class EPGList(GUIComponent):
 				return dailySpan(end, start)
 
 	def fillSingleEPG(self, service, sorting=0, filtering=0):
+		self.sorting = sorting
 		t = int(time())
 		epg_time = t - (int(config.epg.histminutes.value) * 60)
 		test = ['RIBDT', (service.ref.toString(), 0, epg_time, -1)]
@@ -362,7 +389,7 @@ class EPGList(GUIComponent):
 			self.list = self.filtering_epg(self.list, filtering)
 		if config.epg.filter_keepsorting.value and sorting:
 			self.sortSingleEPG(sorting)
-		self.listbox.setList(self.list)
+		self.l.setList(self.list)
 		if t != epg_time:
 			idx = 0
 			for x in self.list:
@@ -372,20 +399,37 @@ class EPGList(GUIComponent):
 			self.instance.moveSelectionTo(idx - 1)
 		self.selectionChanged()
 
+	def getEventRating(self, event):
+		try:
+			ref = event[0]
+			if isinstance(ref, str):
+				ref = eServiceReference(ref)
+			ev = self.epgcache.lookupEventId(ref, int(event[1]))
+			if ev:
+				p = ev.getParentalData()
+				if p:
+					return p.getRating() or 0
+		except Exception as e:
+			print("[EPG rating error]", event[4], type(event[0]), event[0], event[1], e)
+		return 0
+
 	def sortSingleEPG(self, type):
+		self.sorting = type
 		list = self.list
 		if list:
 			event_id = self.getSelectedEventId()
 			if type == 1:
 				list.sort(key=lambda x: (x[4] and x[4].lower(), x[2]))
+			elif type == 2:
+				list.sort(key=lambda x: (self.getEventRating(x), x[2]))
 			else:
-				assert (type == 0)
 				list.sort(key=lambda x: x[2])
-			self.listbox.invalidate()
+			self.recalcEntrySize()
+			self.l.invalidate()
 			self.moveToEventId(event_id)
 
 	def getSelectedEventId(self):
-		x = self.listbox.getCurrentSelection()
+		x = self.l.getCurrentSelection()
 		return x and x[1]
 
 	def moveToService(self, serviceref):
@@ -423,7 +467,7 @@ class EPGList(GUIComponent):
 	def fill_list(self, event_list):
 		if event_list and len(event_list):
 			event_list.sort(key=lambda x: x[2])
-		self.listbox.setList(event_list)
+		self.l.setList(event_list)
 		self.selectionChanged()
 
 	def applySkin(self, desktop, parent):
@@ -467,7 +511,6 @@ class EPGList(GUIComponent):
 			else:
 				self.skinAttributes.remove((attrib, value))
 
-		self.listbox.setFont(0, self.eventItemFont)
-		self.listbox.setFont(1, self.eventTimeFont)
+		self.l.setFont(0, self.eventItemFont)
+		self.l.setFont(1, self.eventTimeFont)
 		return GUIComponent.applySkin(self, desktop, parent)
-												

@@ -29,7 +29,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUG
 from Tools.LoadPixmap import LoadPixmap
 from Tools.NumericalTextInput import NumericalTextInput
 from enigma import ePicLoad, eRCInput, getPrevAsciiCode, eEnv
-from twisted.web import client
+from treq import collect, get
 from Plugins.SystemPlugins.SoftwareManager.BackupRestore import BackupSelection, RestoreMenu, BackupScreen, RestoreScreen, getBackupPath, getBackupFilename
 from Plugins.SystemPlugins.SoftwareManager.SoftwareTools import iSoftwareTools
 
@@ -1206,7 +1206,8 @@ class PluginDetails(Screen, PackageInfoHandler):
 			self.thumbnail = "/tmp/" + thumbnailUrl.split('/')[-1]
 			print("[PluginDetails] downloading screenshot " + thumbnailUrl + " to " + self.thumbnail)
 			if iSoftwareTools.NetworkConnectionAvailable:
-				client.downloadPage(thumbnailUrl, self.thumbnail).addCallback(self.setThumbnail).addErrback(self.fetchFailed)
+				f = open(self.thumbnail, "wb")
+				get(thumbnailUrl).addCallback(collect, f.write).addCallback(self.setThumbnail).addErrback(self.fetchFailed).addBoth(lambda _: f.close())
 			else:
 				self.setThumbnail(noScreenshot=True)
 		else:
