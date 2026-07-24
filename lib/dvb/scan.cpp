@@ -41,6 +41,7 @@ eDVBScan::eDVBScan(iDVBChannel *channel, bool usePAT, bool debug)
 	,m_channel_state(iDVBChannel::state_idle)
 	,m_ready(0)
 	,m_ready_all(usePAT ? (readySDT|readyPAT) : readySDT)
+	,m_ch_current_active(false)
 	,m_pmt_running(false)
 	,m_abort_current_pmt(false)
 	,m_flags(0)
@@ -215,6 +216,9 @@ void eDVBScan::stateChange(iDVBChannel *ch)
 			SCAN_eDebug("[eDVBScan] blindscan channel completed");
 			m_ch_blindscan.pop_front();
 		}
+
+		m_ch_current_active = false;
+		m_event(evtUpdate);
 		nextChannel();
 	}
 			/* unavailable will timeout, anyway. */
@@ -247,6 +251,7 @@ RESULT eDVBScan::nextChannel()
 		/* keep iterating with the same 'channel' till we get a tune failure */
 		SCAN_eDebug("[eDVBScan] blindscan channel iteration");
 		m_ch_current = m_ch_blindscan.front();
+		m_ch_current_active = true;
 	}
 	else
 	{
@@ -262,6 +267,7 @@ RESULT eDVBScan::nextChannel()
 		m_ch_current = m_ch_toScan.front();
 
 		m_ch_toScan.pop_front();
+		m_ch_current_active = true;
 	}
 
 	if (m_channel->getFrontend(fe))
@@ -275,7 +281,10 @@ RESULT eDVBScan::nextChannel()
 	m_channel_state = iDVBChannel::state_idle;
 
 	if (fe->tune(*m_ch_current, !m_ch_blindscan.empty()))
+	{
+		m_ch_current_active = false;
 		return nextChannel();
+	}
 
 	m_event(evtUpdate);
 	return 0;
@@ -1334,6 +1343,7 @@ void eDVBScan::channelDone()
 		}
 	}
 
+	m_ch_current_active = false;
 	m_ch_scanned.push_back(m_ch_current);
 
 	for (std::list<ePtr<iDVBFrontendParameters> >::iterator i(m_ch_toScan.begin()); i != m_ch_toScan.end();)
@@ -1347,6 +1357,7 @@ void eDVBScan::channelDone()
 		++i;
 	}
 
+	m_event(evtUpdate);
 	nextChannel();
 }
 
@@ -2055,7 +2066,7 @@ RESULT eDVBScan::connectEvent(const sigc::slot<void(int)> &event, ePtr<eConnecti
 void eDVBScan::getStats(int &transponders_done, int &transponders_total, int &services)
 {
 	transponders_done = m_ch_scanned.size() + m_ch_unavailable.size();
-	transponders_total = m_ch_toScan.size() + transponders_done;
+	transponders_total = m_ch_toScan.size() + transponders_done + (m_ch_current_active ? 1 : 0);
 	services = m_new_services.size();
 }
 

@@ -12,11 +12,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     strategy:
       matrix:
-        gcc: [13]
-        python: ['3.12']
+        gcc: [15]
+        python: ['3.14']
     env:
       CC: "gcc-${{ matrix.gcc }}"
       CXX: "g++-${{ matrix.gcc }}"
@@ -32,7 +32,7 @@ jobs:
     - name: install dev packages
       run: |
         sudo apt-get -q update
-        sudo apt install docbook-xsl gettext libunwind-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libfribidi-dev libavahi-client-dev libgif-dev mm-common
+        sudo apt install docbook-xsl gettext libcrypt-dev libunwind-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libfribidi-dev libavahi-client-dev libgif-dev mm-common
         sudo apt install libfreetype6-dev libjpeg-turbo8-dev
     - name: build enigma2 dependencies
       run: |
