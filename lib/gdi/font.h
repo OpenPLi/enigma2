@@ -62,8 +62,8 @@ class fontRenderClass
 
 	int getFaceProperties(const std::string &face, FTC_FaceID &id, int &renderflags);
 
-    FT_Error getGlyphBitmap(FTC_Image_Desc *font, GlyphIndex glyph_index, FTC_SBit *sbit);
-    FT_Error getGlyphImage(FTC_Image_Desc *font, GlyphIndex glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize);
+	FT_Error getGlyphBitmap(FTC_Image_Desc *font, GlyphIndex glyph_index, FTC_SBit *sbit);
+	FT_Error getGlyphImage(FTC_Image_Desc *font, GlyphIndex glyph_index, FT_Glyph *glyph, FT_Glyph *borderglyph, int bordersize);
 
 	static fontRenderClass *instance;
 #else
@@ -85,17 +85,17 @@ public:
 
 #ifndef SWIG
 
-#define RS_WRAP		1
-#define RS_DOT		2
-#define RS_DIRECT	4
-#define RS_FADE		8
+#define RS_WRAP 1
+#define RS_DOT 2
+#define RS_DIRECT 4
+#define RS_FADE 8
 
-#define GS_ISSPACE  1
-#define GS_ISFIRST  2
-#define GS_USED			4
-#define GS_INVERT   8
+#define GS_ISSPACE 1
+#define GS_ISFIRST 2
+#define GS_USED 4
+#define GS_INVERT 8
 #define GS_SOFTHYPHEN 16
-#define GS_HYPHEN   32
+#define GS_HYPHEN 32
 #define GS_COLORCHANGE 64
 #define GS_LF 128
 #define GS_COLORRESET 256
@@ -239,6 +239,6 @@ public:
 
 extern fontRenderClass *font;
 
-#endif  // !SWIG
+#endif // !SWIG
 
 #endif
