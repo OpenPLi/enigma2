@@ -88,6 +88,7 @@ class Network:
 			data['dhcp'] = True
 			data['ip'] = [0, 0, 0, 0]
 			data['netmask'] = [0, 0, 0, 0]
+			data['gateway'] = [0, 0, 0, 0]
 		if iface in self.ifaces:
 			self.ifaces[iface].update(data)
 		else:

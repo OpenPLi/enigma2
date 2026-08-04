@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import sys
 import os
 from Tools.Profile import profile, profile_final
 profile("PYTHON_START")
@@ -29,6 +28,11 @@ profile("SimpleSummary")
 from Screens import InfoBar
 from Screens.SimpleSummary import SimpleSummary
 from sys import stdout
+
+from gettext import gettext
+# Set up translation function
+_ = gettext
+
 
 profile("Bouquets")
 from Components.config import config, configfile, ConfigText, ConfigYesNo, ConfigInteger, ConfigSelection, NoSave, ConfigDirectory
@@ -111,8 +115,6 @@ config.misc.pluginstyle = ConfigSelection(default="New Style 2", choices=[
 	("newstyle8", _("New Style 8")),
 	("newstyle9", _("New Style 9")),
 ])
-
-
 # lulu
 
 
@@ -549,10 +551,12 @@ def runScreenTest():
 	# get currentTime
 	nowTime = time()
 	wakeupList = [
-		x for x in ((session.nav.RecordTimer.getNextRecordingTime(), 0),
-					(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
-					(plugins.getNextWakeupTime(), 2),
-					(isNextWakeupTime(), 3))
+		x for x in (
+			(session.nav.RecordTimer.getNextRecordingTime(), 0),
+			(session.nav.RecordTimer.getNextZapTime(isWakeup=True), 1),
+			(plugins.getNextWakeupTime(), 2),
+			(isNextWakeupTime(), 3)
+			)
 		if x[0] != -1
 	]
 	wakeupList.sort()
