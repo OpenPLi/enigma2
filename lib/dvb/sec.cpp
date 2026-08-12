@@ -906,7 +906,7 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			}
 
 			eDebugNoSimulate("[eDVBSatelliteEquipmentControl] RotorCmd %02x, lastRotorCmd %02lx", RotorCmd, lastRotorCmd);
-			if ( RotorCmd != -1 && RotorCmd != lastRotorCmd )
+			if (RotorCmd != -1 && ((RotorCmd != lastRotorCmd) || (lnb_param.old_orbital_position == -1 || (lnb_param.old_orbital_position != sat.orbital_position))))
 			{
 				int mrt = m_params[MOTOR_RUNNING_TIMEOUT]; // in seconds!
 				eSecCommand::pair compare;
@@ -1118,7 +1118,13 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			frontend.setSecSequence(sec_sequence);
 
 			if (!rotor)
+			{
 				frontend.setData(eDVBFrontend::SAT_POSITION, sat.orbital_position);
+			}
+			else if (m_not_linked_slot_mask & slot_id)
+			{
+				lnb_param.old_orbital_position = sat.orbital_position;
+			}
 
 			return 0;
 		}
@@ -1293,6 +1299,7 @@ RESULT eDVBSatelliteEquipmentControl::addLNB()
 	lnb.m_slot_mask = 0;
 	lnb.m_prio = -1; // auto
 	lnb.m_advanced_satposdepends = -1;
+	lnb.old_orbital_position = -1;
 	m_lnbidx++;
 	m_lnbs.push_back(lnb);
 	m_curSat = (m_lnbs.end() - 1)->m_satellites.end();
