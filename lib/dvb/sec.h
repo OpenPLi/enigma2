@@ -253,6 +253,7 @@ class eDVBSatelliteLNBParameters
 			m_increased_voltage = false;
 			m_prio = -1;
 			m_advanced_satposdepends = -1;
+			old_orbital_position = -1;
 #endif
 		}
 #ifdef SWIG
