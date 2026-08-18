@@ -21,7 +21,7 @@ PyObject *eDVBServicePMTHandler::getCaIds(bool pair)
 		}
 		else
 		{
-			PyList_SET_ITEM(ret, i, PyInt_FromLong(caids[i]));
+			PyList_SET_ITEM(ret, i, PyLong_FromLong(caids[i]));
 		}
 	}
 
