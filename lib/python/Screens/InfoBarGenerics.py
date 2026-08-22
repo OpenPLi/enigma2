@@ -2056,6 +2056,7 @@ class InfoBarTimeshift:
 
 		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
 				iPlayableService.evStart: self.__serviceStarted,
+				iPlayableService.evTunedIn: self.__serviceTunedIn,
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evEnd: self.__serviceEnd
 			})
@@ -2246,6 +2247,8 @@ class InfoBarTimeshift:
 		self.__seekableStatusChanged()
 		if self.ts_start_delay_timer.isActive():
 			self.ts_start_delay_timer.stop()
+
+	def __serviceTunedIn(self):
 		if int(config.usage.timeshift_start_delay.value):
 			self.ts_start_delay_timer.start(int(config.usage.timeshift_start_delay.value) * 1000, True)
 
