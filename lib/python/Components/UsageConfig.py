@@ -826,6 +826,13 @@ def InitUsageConfig():
 	config.misc.softcam_streamrelay_port = ConfigInteger(default=17999, limits=(0, 65535))
 	config.misc.softcam_streamrelay_delay = ConfigSelectionNumber(min=0, max=2000, stepwidth=50, default=100, wraparound=True)
 
+	config.misc.softcam_softcsa = ConfigSelection(default=0, choices=[
+		(0, _("Off")),
+		(1, _("Whitelist")),
+		(2, _("Auto"))
+	])
+	config.misc.softcam_use_softcsa = ConfigYesNo(default=False)
+
 	config.softcsa = ConfigSubsection()
 	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
 		(0, _("Quick")),

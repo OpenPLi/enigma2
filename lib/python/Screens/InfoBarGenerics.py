@@ -183,8 +183,9 @@ class InfoBarStreamRelay:
 
 	def streamrelayChecker(self, playref):
 		is_stream_relay = False
+		config.misc.softcam_use_softcsa.value = False
+		playrefstring, renamestring = self.splitref(playref.toString())
 		if config.softcsa.useStreamRelayWhitelist.value:
-			playrefstring, renamestring = self.splitref(playref.toString())
 			if '%3a//' not in playrefstring and playrefstring in self.__srefs:
 				url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
 				if "127.0.0.1" in url:
@@ -194,6 +195,10 @@ class InfoBarStreamRelay:
 				playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), renamestring or ServiceReference(playref).getServiceName()))
 				is_stream_relay = True
 				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
+		elif config.misc.softcam_softcsa.value == 1:
+			if playrefstring in self.__srefs:
+				config.misc.softcam_use_softcsa.value = True
+				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via softcsa")
 				playref.setCompareSref(playrefstring, True)
 		return playref, is_stream_relay
 

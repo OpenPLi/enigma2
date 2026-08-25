@@ -1,4 +1,5 @@
 #include <lib/base/eerror.h>
+#include <lib/base/nconfig.h>
 #include <lib/base/object.h>
 #include <string>
 #include <lib/service/servicedvb.h>
@@ -1230,7 +1231,7 @@ void eDVBServicePlay::serviceEvent(int event)
 		if (m_timeshift_enabled)
 			updateTimeshiftPids();
 
-		if (m_csa_session && !m_csa_session->isEcmAnalyzed())
+		if ((csa_is_auto() || csa_from_whitelist()) && m_csa_session && !m_csa_session->isEcmAnalyzed())
 		{
 			eDVBServicePMTHandler::program program;
 			if (m_service_handler.getProgramInfo(program) == 0 && !program.caids.empty())
@@ -1475,7 +1476,7 @@ RESULT eDVBServicePlay::start()
 		}
 		m_event(this, evStart);
 	}
-	else if (!m_is_stream && scrambled)
+	else if ((csa_is_auto() || csa_from_whitelist()) && !m_is_stream && scrambled)
 	{
 		// Setup speculative software descrambling for encrypted Live-TV
 		setupSpeculativeDescrambling();
