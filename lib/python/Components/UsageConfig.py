@@ -951,6 +951,34 @@ def InitUsageConfig():
 	# lulu
 	config.ntp = ConfigSubsection()
 
+	config.misc.softcam_softcsa = ConfigSelection(default=0, choices=[
+		(0, _("Off")),
+		(1, _("Whitelist")),
+		(2, _("Auto"))
+	])
+	config.misc.softcam_use_softcsa = ConfigYesNo(default=False)
+
+	config.softcsa = ConfigSubsection()
+	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
+		(0, _("Quick")),
+		(1, _("Normal"))
+	])
+	config.softcsa.syncMode = ConfigSelection(default=0, choices=[
+		(0, _("Automatic")),
+		(1, _("Synchronous"))
+	])
+	config.softcsa.waitForDataTimeout = ConfigSelection(
+		default=0,
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+	config.softcsa.bufferTime = ConfigSelection(
+		default=0,
+		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
+	)
+
+
+	config.ntp = ConfigSubsection()
+
 	def timesyncChanged(configElement):
 		if configElement.value == "dvb":
 			ntpHandler.reset()
