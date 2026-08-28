@@ -253,7 +253,7 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Uncover dashed flickering line for this service"), self.toggleVBI), level=1)
 						else:
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
-						if config.softcsa.softcam_softcsa.value == 1:
+						if config.misc.softcam_softcsa.value == 1:
 							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
 								append_when_current_valid(current, menu, (_("Deactivate NDS CSA descrambling"), self.toggleStreamrelay), level=1)
 							else:
