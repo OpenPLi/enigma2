@@ -94,7 +94,7 @@ void eDVBServiceFCCPlay::serviceEvent(int event)
 
 				// If session exists but ECM monitor not started yet, start it
 				// (Session was created by setupSpeculativeDescrambling() in eventTuned)
-				if (m_csa_session && !m_csa_session->isEcmAnalyzed())
+				if ((csa_is_auto() || csa_from_whitelist())  && m_csa_session && !m_csa_session->isEcmAnalyzed())
 				{
 					eDVBServicePMTHandler::program program;
 					if (m_service_handler.getProgramInfo(program) == 0 && !program.caids.empty())
