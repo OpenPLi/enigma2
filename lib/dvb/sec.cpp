@@ -1123,6 +1123,12 @@ RESULT eDVBSatelliteEquipmentControl::prepare(iDVBFrontend &frontend, const eDVB
 			}
 			else if (m_not_linked_slot_mask & slot_id)
 			{
+				for (int idx=0; idx <= m_lnbidx; ++idx)
+				{
+					eDVBSatelliteLNBParameters &lnb = m_lnbs[idx];
+					if (lnb.m_slot_mask & slot_id)
+						lnb.old_orbital_position = -1;
+				}
 				lnb_param.old_orbital_position = sat.orbital_position;
 			}
 
