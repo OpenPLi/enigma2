@@ -344,6 +344,8 @@ protected:
 
 	// Audio cache helper
 	void updateAudioCache(int apid, int apidtype);
+	bool csa_is_auto() { return eConfigManager::getConfigIntValue("config.misc.softcam_softcsa", 0) == 2; }
+	bool csa_from_whitelist() { return eConfigManager::getConfigBoolValue("config.misc.softcam_use_softcsa", false) == true; };
 };
 
 class eStaticServiceDVBBouquetInformation: public iStaticServiceInformation

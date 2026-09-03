@@ -54,6 +54,7 @@ protected:
 	void activateFCCCSASession();
 	void deactivateFCCCSASession();
 	void onFCCSessionActivated(bool active);
+	bool csa_from_whitelist() { return eConfigManager::getConfigBoolValue("config.misc.softcam_use_softcsa", false) == true; };
 };
 
 #endif /* __servicedvbfcc_h */
