@@ -255,9 +255,9 @@ class ChannelContextMenu(Screen):
 							append_when_current_valid(current, menu, (_("Cover dashed flickering line for this service"), self.toggleVBI), level=1)
 						if config.misc.softcam_softcsa.value == 1:
 							if Screens.InfoBar.InfoBar.instance.checkStreamrelay(current):
-								append_when_current_valid(current, menu, (_("Deactivate NDS CSA descrambling"), self.toggleStreamrelay), level=1)
+								append_when_current_valid(current, menu, (_("Deactivate iCAM descrambling"), self.toggleStreamrelay), level=1)
 							else:
-								append_when_current_valid(current, menu, (_("Activate NDS CSA descrambling"), self.toggleStreamrelay), level=1)
+								append_when_current_valid(current, menu, (_("Activate iCAM descrambling"), self.toggleStreamrelay), level=1)
 						if eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 9) >> 16 not in (-1, eDVBDB.getInstance().getCachedPid(eServiceReference(current.toString()), 2)):
 							#Only show when a DVB subtitle is cached on this service
 							if eDVBDB.getInstance().getFlag(eServiceReference(current.toString())) & FLAG_CENTER_DVB_SUBS:

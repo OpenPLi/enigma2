@@ -276,8 +276,8 @@
 		<item level="0" text="Show picons in channel selection list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
 		<item level="0" text="Enable HDMI-CEC" description="When enabled, HDMI-CEC is enabled with standard configuration" requires="HasHDMI-CEC">config.hdmicec.enabled</item>
 	</setup>
-	<setup key="SoftCSA" title="NDS CSA">
-		<item level="0" text="Activation of NDS CSA" description="Disable NDS CSA descrambling(Off), enable NDS CSA decryption by whitelist(Whitelist) or use automatic detection of NDS CSA descrambling(Auto).">config.misc.softcam_softcsa</item>
+	<setup key="SoftCSA" title="iCAM descrambing">
+		<item level="0" text="iCAM descrambling (SoftCSA)" description="Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto).">config.misc.softcam_softcsa</item>
 		<item level="0" conditional="config.misc.softcam_softcsa.value != 0" text="Decoder release strategy" description="How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes).">config.softcsa.decoderRelease</item>
 		<item level="0" conditional="config.misc.softcam_softcsa.value != 0" text="Sync mode" description="Select how the descrambled data stream is processed. 'Automatic' uses asynchronous writes (lower CPU usage) with automatic fallback to synchronous if kernel AIO is not supported. 'Synchronous' forces blocking writes (stable, most compatible).">config.softcsa.syncMode</item>
 		<item level="2" conditional="config.misc.softcam_softcsa.value != 0" text="Decoder start timeout" description="Maximum time to wait for the first descrambling key (CW) before starting the decoder. 'Disabled' starts the decoder immediately without waiting.">config.softcsa.waitForDataTimeout</item>

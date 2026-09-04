@@ -56,7 +56,7 @@ class About(Screen):
 			libName = eDVBCSAEngine.getLibraryName()
 			libVersion = eDVBCSAEngine.getLibraryVersion()
 			if libName and libVersion:
-				AboutText += _("CSA descrambling: ") + libName + " " + libVersion + "\n"
+				AboutText += _("iCAM descrambling: ") + libName + " " + libVersion + "\n"
 
 		GStreamerVersion = about.getGStreamerVersionString().replace("GStreamer", "")
 		self["GStreamerVersion"] = StaticText(GStreamerVersion)
