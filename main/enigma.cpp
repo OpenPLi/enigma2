@@ -98,6 +98,7 @@ void keyEvent(const eRCKey &key)
 #include <lib/dvb/dvbtime.h>
 #include <lib/dvb/epgcache.h>
 #include <lib/dvb/epgtransponderdatareader.h>
+#include <lib/dvb/softcsa_diag.h>
 
 /* Defined in eerror.cpp */
 void setDebugTime(bool enable);
@@ -126,6 +127,17 @@ public:
 		m_epgcache = new eEPGCache();
 		m_epgtransponderdatareader = new eEPGTransponderDataReader();
 		m_mgr->setChannelList(m_dvbdb);
+		e2avahi_init(this);
+		init_servicepeer();
+		init.setRunlevel(eAutoInitNumbers::main);
+		m_dvbdb = new eDVBDB();
+		m_mgr = new eDVBResourceManager();
+		m_locale_time_handler = new eDVBLocalTimeHandler();
+		m_epgcache = new eEPGCache();
+		m_epgtransponderdatareader = new eEPGTransponderDataReader();
+		m_mgr->setChannelList(m_dvbdb);
+
+		softcsaMemDiagStart();   // <-- neu
 	}
 
 	~eMain()

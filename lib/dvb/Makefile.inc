@@ -6,6 +6,7 @@ dvb_libenigma_dvb_a_SOURCES = \
 	dvb/crc32.cpp \
 	dvb/csaengine.cpp \
 	dvb/csasession.cpp \
+	dvb/softcsa_diag.cpp \
 	dvb/cwhandler.cpp \
 	dvb/db.cpp \
 	dvb/decoder.cpp \

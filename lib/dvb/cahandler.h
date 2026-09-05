@@ -209,6 +209,7 @@ public:
 	int getServiceReference(eServiceReferenceDVB &service, uint32_t serviceId);
 
 	static eDVBCAHandler *getInstance() { return instance; }
+	size_t getPmtCacheSize() const { return pmtCache.size(); }
 #endif
 	static SWIG_VOID(RESULT) getCryptoInfo(ePtr<iCryptoInfo> &SWIG_NAMED_OUTPUT(ptr)) { ptr = instance; return 0; }
 };
