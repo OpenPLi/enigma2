@@ -14,7 +14,7 @@ import NavigationInstance
 from ServiceReference import ServiceReference, isPlayableForCur
 from Screens.InfoBar import InfoBar
 from Components.Sources.StreamService import StreamServiceList
-from Screens.InfoBarGenerics import streamrelay
+from Screens.InfoBarGenerics import streamrelay, softcsa
 
 # TODO: remove pNavgation, eNavigation and rewrite this stuff in python.
 
@@ -197,6 +197,7 @@ class Navigation:
 
 				self.currentlyPlayingServiceReference = playref
 				playref, is_stream_relay = streamrelay.streamrelayChecker(playref)
+				softcsa.softCSAChecker(playref)
 
 				if BoxInfo.getItem("FCCactive") and "%3a//" in ref.toString() and not is_stream_relay:
 					self.pnav.stopService()
