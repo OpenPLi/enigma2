@@ -182,7 +182,7 @@ class InfoBarWhitelists:
 
 	def streamrelayChecker(self, playref):
 		is_stream_relay = False
-		if config.softcsa.useStreamRelayWhitelist.value:
+		if config.streamrelay.useWhitelist.value:
 			playrefstring, renamestring = self.splitref(playref.toString())
 			if '%3a//' not in playrefstring and playrefstring in self.__srefs:
 				url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
@@ -586,6 +586,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 
 	def checkStreamrelay(self, service):
 		return streamrelay.checkService(service)
+
+	def checkSoftcsa(self, service):
+		return softcsa.checkService(service)
 
 	def showHideVBI(self):
 		if self.checkHideVBI():

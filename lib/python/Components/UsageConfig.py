@@ -851,7 +851,8 @@ def InitUsageConfig():
 		choices=[(0, _("Disabled"))] + [(x, _("%d ms") % x) for x in range(100, 2001, 100)]
 	)
 
-	config.softcsa.useStreamRelayWhitelist = ConfigYesNo(default=True)
+	config.streamrelay = ConfigSubsection()
+	config.streamrelay.useWhitelist = ConfigYesNo(default=False)
 
 	config.ntp = ConfigSubsection()
 

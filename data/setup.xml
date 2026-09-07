@@ -34,9 +34,6 @@
 		<item level="2" text="Include ECM in http streams" description="When enabled, ECM data will be included in http streams. This allows a client receiver to do the descrambling.">config.streaming.stream_ecm</item>
 		<item level="2" text="Descramble sending http streams" description="When enabled, http streams are descrambled on the server side. The (remote) client receiver does not have to do descrambling. Default on.">config.streaming.descramble</item>
 		<item level="2" text="Descramble receiving http streams" requires="HasOfflineDecoding" description="When enabled, always descramble receiving http streams. This takes up more resources (descrambling demuxers), only enable if necessary. Individual streams are always descrambled if 0x100 is added to the service type, regardless of this setting. Default off.">config.streaming.descramble_client</item>
-		<item level="2" text="Descramble service via streamrelay url" description="The IP address from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_url</item>
-		<item level="2" text="Descramble service via streamrelay port" description="The port from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_port</item>
-        <item level="2" text="Stream Relay delay" description="Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
 		<item level="2" text="Require authentication for http streams" description="When enabled, authentication is required to watch http streams.">config.streaming.authentication</item>
 		<item level="2" text="Http(s) stream start delay" description="Define additional delay in milliseconds before start of http(s) streams, e.g. to connect a remote tuner, you use a complex system of DiSEqC.">config.usage.http_startdelay</item>
 		<item level="2" text="Fan operation" description="Configure how the fan should operate" requires="Fan">config.usage.fan</item>
@@ -276,8 +273,13 @@
 		<item level="0" text="Show picons in channel selection list" description="Configure if service picons will be shown in the channel selection list.">config.usage.service_icon_enable</item>
 		<item level="0" text="Enable HDMI-CEC" description="When enabled, HDMI-CEC is enabled with standard configuration" requires="HasHDMI-CEC">config.hdmicec.enabled</item>
 	</setup>
+	<setup key="StreamRelay" title="Oscam Streamrelay">
+		<item level="0" text="Use streamrelay whitelist file" description="Choose whether to use the streamrelay_whitelist file. The whitelist file should be disabled if you are using softcsa.">config.streamrelay.useWhitelist</item>
+		<item level="2" text="Descramble service via streamrelay url" description="The IP address from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_url</item>
+		<item level="2" text="Descramble service via streamrelay port" description="The port from the streamrelay server that is used to descramble services that can only be encrypted via streamrelay">config.misc.softcam_streamrelay_port</item>
+		<item level="2" text="Stream Relay delay" description="Delay when closing a stream relay service before reallocating the tuner for another service. Using '0' is only recommended for boxes with multiple satellite tuners.">config.misc.softcam_streamrelay_delay</item>
+	</setup>
 	<setup key="SoftCSA" title="iCAM descrambing">
-		<item level="0" text="Use streamrelay whitelist file" description="Choose whether to use the streamrelay_whitelist file. The whitelist file should be disabled if you are using softcsa.">config.softcsa.useStreamRelayWhitelist</item>
 		<item level="0" text="iCAM descrambling (SoftCSA)" description="Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto).">config.misc.softcam_softcsa</item>
 		<item level="0" conditional="config.misc.softcam_softcsa.value != 0" text="Decoder release strategy" description="How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes).">config.softcsa.decoderRelease</item>
 		<item level="0" conditional="config.misc.softcam_softcsa.value != 0" text="Sync mode" description="Select how the descrambled data stream is processed. 'Automatic' uses asynchronous writes (lower CPU usage) with automatic fallback to synchronous if kernel AIO is not supported. 'Synchronous' forces blocking writes (stable, most compatible).">config.softcsa.syncMode</item>
