@@ -196,9 +196,10 @@ class PictureInPicture(Screen):
 			self.session.nav.pnav.clearPiPService()
 			return 0
 
-		from Screens.InfoBarGenerics import streamrelay
+		from Screens.InfoBarGenerics import streamrelay, softcsa
 		orig_ref = self.resolveAlternatePipService(service)
 		ref = orig_ref and streamrelay.streamrelayChecker(orig_ref)[0]
+		softcsa.softCSAChecker(orig_ref)
 		for f in PictureInPicture.playServiceExtensions:
 			ref = f(self, ref)
 		if ref:

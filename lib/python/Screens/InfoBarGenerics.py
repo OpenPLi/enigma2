@@ -144,19 +144,18 @@ def reload_whitelist_bouquets():
 reload_whitelist_vbi()
 reload_whitelist_bouquets()
 
-class InfoBarStreamRelay:
+class InfoBarWhitelists:
 
-	FILENAME = "/etc/enigma2/whitelist_streamrelay"
-
-	def __init__(self):
-		self.__srefs = self.__sanitizeData(open(self.FILENAME, 'r').readlines()) if os.path.isfile(self.FILENAME) else []
+	def __init__(self, filename):
+		self.filename = filename
+		self.__srefs = self.__sanitizeData(open(self.filename, 'r').readlines()) if os.path.isfile(self.filename) else []
 
 	def __sanitizeData(self, data):
 		return list(set([line.strip() for line in data if line and isinstance(line, str) and match("^(?:[0-9A-F]+[:]){10}$", line.strip())])) if isinstance(data, list) else []
 
 	def __saveToFile(self):
 		self.__srefs.sort(key=lambda ref: (int((x := ref.split(":"))[6], 16), int(x[5], 16), int(x[4], 16), int(x[3], 16)))
-		open(self.FILENAME, 'w').write('\n'.join(self.__srefs))
+		open(self.filename, 'w').write('\n'.join(self.__srefs))
 
 	def splitref(self, ref):
 		ref = ref.split(":")
@@ -183,20 +182,39 @@ class InfoBarStreamRelay:
 
 	def streamrelayChecker(self, playref):
 		is_stream_relay = False
-		config.misc.softcam_use_softcsa.value = False
-		playrefstring, renamestring = self.splitref(playref.toString())
-		if config.misc.softcam_softcsa.value == 1:
-			if playrefstring in self.__srefs:
-				config.misc.softcam_use_softcsa.value = True
-				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via softcsa")
+		if config.softcsa.useStreamRelayWhitelist.value:
+			playrefstring, renamestring = self.splitref(playref.toString())
+			if '%3a//' not in playrefstring and playrefstring in self.__srefs:
+				url = "http://%s:%s/" % (config.misc.softcam_streamrelay_url.getHTML(), config.misc.softcam_streamrelay_port.value)
+				if "127.0.0.1" in url:
+					playrefmod = ":".join([("%x" % (int(x[1], 16) + 1)).upper() if x[0] == 6 else x[1] for x in enumerate(playrefstring.split(':'))])
+				else:
+					playrefmod = playrefstring
+				playref = eServiceReference("%s%s%s:%s" % (playrefmod, url.replace(":", "%3a"), playrefstring.replace(":", "%3a"), renamestring or ServiceReference(playref).getServiceName()))
+				is_stream_relay = True
+				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via streamrelay")
 				playref.setCompareSref(playrefstring, True)
 		return playref, is_stream_relay
+
+	def softCSAChecker(self, playref):
+		config.misc.softcam_use_softcsa.value = False
+		if config.misc.softcam_softcsa.value == 1:
+			playrefstring, renamestring = self.splitref(playref.toString())
+			playref = eServiceReference("%s:%s" % (playrefstring.replace(":", "%3a"), renamestring or ServiceReference(playref).getServiceName()))
+			if playrefstring in self.__srefs:
+				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via softcsa")
+				config.misc.softcam_use_softcsa.value = True
+			else:
+				print(f"[{self.__class__.__name__}] Play service {playref.toString()} via hw descrambling")
+		return
 
 	def checkService(self, service):
 		return service and self.splitref(service.toString())[0] in self.__srefs
 
 
-streamrelay = InfoBarStreamRelay()
+streamrelay = InfoBarWhitelists("/etc/enigma2/whitelist_streamrelay")
+softcsa = InfoBarWhitelists("/etc/enigma2/whitelist_softcsa")
+
 
 class subservice:
 	groupslist = None
