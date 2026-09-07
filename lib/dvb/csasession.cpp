@@ -3,7 +3,6 @@
 #include <lib/dvb/cahandler.h>
 #include <lib/dvb/cwhandler.h>
 #include <lib/base/eerror.h>
-#include <lib/base/esimpleconfig.h>
 
 #ifdef DREAMNEXTGEN
 #include <lib/dvb/alsa.h>
@@ -134,42 +133,36 @@ void eDVBCSASession::startECMMonitor(iDVBDemux *demux, uint16_t ecm_pid, uint16_
 	m_ecm_pid = ecm_pid;
 	m_caid = caid;
 
-	// Cache-driven early activation: skip ECM section reader if CSA-ALT for
-	// this service is already known. Disabled in Aggressive mode (audio race on dm900).
-	const bool cache_early_activate_disabled =
-		(eSimpleConfig::getInt("config.softcsa.decoderRelease", 0) == 2);
-
-	if (!cache_early_activate_disabled)
+	// Check cache first for faster channel switching
+	uint64_t svc_key = makeServiceKey(m_service_ref);
+	auto cache_it = s_csa_cache.find(svc_key);
+	if (cache_it != s_csa_cache.end() && cache_it->second.valid)
 	{
-		uint64_t svc_key = makeServiceKey(m_service_ref);
-		if (auto cache_it = s_csa_cache.find(svc_key); cache_it != s_csa_cache.end() && cache_it->second.valid)
+		const ServiceCsaInfo& info = cache_it->second;
+		eDebug("[eDVBCSASession] ECM Monitor: Found cached info - CSA-ALT=%d, ecm_mode=0x%02X",
+			info.is_csa_alt, info.ecm_mode);
+
+		// Pre-load ecm_mode from cache
+		m_ecm_mode = info.ecm_mode;
+		m_ecm_mode_detected = true;
+
+		m_ecm_analyzed = true;
+		m_csa_alt = info.is_csa_alt;
+
+		if (info.is_csa_alt && !m_active)
 		{
-			const ServiceCsaInfo& info = cache_it->second;
-			eDebug("[eDVBCSASession] ECM Monitor: Found cached info - CSA-ALT=%d, ecm_mode=0x%02X",
-				info.is_csa_alt, info.ecm_mode);
-
-			// Pre-load ecm_mode from cache
-			m_ecm_mode = info.ecm_mode;
-			m_ecm_mode_detected = true;
-
-			m_ecm_analyzed = true;
-			m_csa_alt = info.is_csa_alt;
-
-			if (info.is_csa_alt && !m_active)
+			if (shouldSuppressActivation && shouldSuppressActivation())
 			{
-				if (shouldSuppressActivation && shouldSuppressActivation())
-				{
-					eDebug("[eDVBCSASession] ECM Monitor: CSA-ALT cached but activation suppressed (CI module)");
-				}
-				else
-				{
-					eDebug("[eDVBCSASession] ECM Monitor: Activating from cache (CSA-ALT)");
-					setActive(true);
-				}
+				eDebug("[eDVBCSASession] ECM Monitor: CSA-ALT cached but activation suppressed (CI module)");
 			}
-
-			return;
+			else
+			{
+				eDebug("[eDVBCSASession] ECM Monitor: Activating from cache (CSA-ALT)");
+				setActive(true);
+			}
 		}
+
+		return;
 	}
 
 	// Create section reader
