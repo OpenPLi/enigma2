@@ -60,18 +60,23 @@ class Navigation:
 			config.misc.RestartUI.value = False
 			config.misc.RestartUI.save()
 			configfile.save()
+			if startup_to_standby == "restart" and not Screens.Standby.inTryQuitMainloop:
+				self.startStandbyTimer()
 		else:
 			if config.usage.remote_fallback_import.value and not config.usage.remote_fallback_import_restart.value:
 				ImportChannels()
-			if startup_to_standby == "yes" or (self.__wasTimerWakeup and self.__prevWakeupTime and (wakeup_time_type in (0, 1) or (wakeup_time_type == 3 and startup_to_standby == "except"))):
+			if startup_to_standby in ("yes", "restart") or (self.__wasTimerWakeup and self.__prevWakeupTime and (wakeup_time_type in (0, 1) or (wakeup_time_type == 3 and startup_to_standby == "except"))):
 				if not Screens.Standby.inTryQuitMainloop:
-					self.standbytimer = eTimer()
-					self.standbytimer.callback.append(self.gotostandby)
-					self.standbytimer.start(15000, True) # Time increse 15 second for standby.
+					self.startStandbyTimer()
 		if self.__prevWakeupTime:
 			config.misc.prev_wakeup_time.value = 0
 			config.misc.prev_wakeup_time.save()
 			configfile.save()
+
+	def startStandbyTimer(self):
+		self.standbytimer = eTimer()
+		self.standbytimer.callback.append(self.gotostandby)
+		self.standbytimer.start(15000, True)  # Time increse 15 second for standby.
 
 	def gotostandby(self):
 		if not Screens.Standby.inStandby and not Screens.Standby.inTryQuitMainloop:
