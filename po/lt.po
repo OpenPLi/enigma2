@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PLi enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2022-10-23 15:37+0300\n"
 "Last-Translator: Audronis <adga45@gmail.com>\n"
 "Language-Team: Adga (C) <adga45@gmail.com>\n"
@@ -27,13 +27,6 @@ msgid ""
 msgstr ""
 "\n"
 "Paspaudę OK, palaukite!"
-
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Spauskite OK savo valdymo pulte ir tęskite."
 
 msgid ""
 "\n"
@@ -633,9 +626,6 @@ msgstr "Pasikartojantis įvykis šiuo metu įrašomas. Ką norėtumėte daryti?"
 msgid "A required tool (%s) was not found."
 msgstr "Reikalingo įrankio (%s) nėra."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Šiuo metu ieškoma galimų atnaujinimų."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -732,6 +722,10 @@ msgstr "Aktyvuoti HbbTV (raudonas mygtukas)"
 
 msgid "Activate Picture in Picture"
 msgstr "Įjungti vaizdą vaizde"
+
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Nustatymai"
 
 msgid "Activate network settings"
 msgstr "Aktyvuoti tinklo nustatymus"
@@ -849,18 +843,6 @@ msgstr "Išplėstinis"
 
 msgid "Advanced options"
 msgstr "Išplėstinės parinktys"
-
-msgid "Advanced options and settings."
-msgstr "Papildomos funkcijos ir nustatymai."
-
-msgid "Advanced restore"
-msgstr "Išplėstinis atkūrimas"
-
-msgid "Advanced software"
-msgstr "Patobulinta programinė įranga"
-
-msgid "Advanced software plugin"
-msgstr "Išplėstinis programinės įrangos priedas"
 
 msgid "Advanced video enhancement setup"
 msgstr "Išplėstinis vaizdo įrašo patobulinimų nustatymas"
@@ -986,9 +968,6 @@ msgstr "Alternatyvus numeravimo būdas"
 msgid "Alternative services tuner priority"
 msgstr "Imtuvų tarpusavio pirmenybė"
 
-msgid "Always ask"
-msgstr "Visada klausti"
-
 msgid "Always hide infobar"
 msgstr "Visada slėpti info juostą"
 
@@ -1070,13 +1049,6 @@ msgstr ""
 "Ar tikrai norite aktyvuoti šią tinklo konfigūraciją?\n"
 "\n"
 
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Ar tikrai norite ištrinti\n"
-"šią atsarginę kopiją:\n"
-
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Ar tikrai norite užverti šį vedlį?"
 
@@ -1086,25 +1058,6 @@ msgid ""
 msgstr ""
 "Ar tikrai norite savo tinklo sąsajas paleisti iš naujo?\n"
 "\n"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ar tikrai Jūs norite atkurti\n"
-"šią atsarginę kopiją:\n"
-"%s \n"
-"Po atkūrimo, imtuvas pats pasileis iš naujo!"
-
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ar tikrai norite atkurti atsarginę kopiją? \n"
-"Po atkūrimo, Jūsų imtuvas pats pasileis iš naujo!"
 
 msgid "Argentina"
 msgstr "Argentina"
@@ -1347,23 +1300,8 @@ msgstr "Trynimo fone sparta"
 msgid "Backing up to: %s"
 msgstr "Atsargines kopijas į: %s"
 
-msgid "Backup completed."
-msgstr "Atsarginė kopija sukurta."
-
-msgid "Backup failed."
-msgstr "Atsarginis kopijavimas nepavyko."
-
-msgid "Backup is running..."
-msgstr "Kuriama atsarginė kopija..."
-
 msgid "Backup settings"
 msgstr "Atsarginio kopijavimo nustatymai"
-
-msgid "Backup system settings"
-msgstr "Atsarginė sistemos nustatymų kopija"
-
-msgid "Backup your receiver settings."
-msgstr "Sukurkite atsarginę imtuvo nustatymų kopiją."
 
 msgid "Bahamas"
 msgstr "Bahamai"
@@ -2385,6 +2323,9 @@ msgstr "Nustatykite būdą, kaip imtuvas rodys vaizdą, perjungiant kanalus."
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Konfigūruokite šį imtuvą naudodamiesi paprastomis ar išplėstinėmis parinktimis arba perjunkite jį į kitą imtuvą arba nukopijuokite konfigūraciją iš kito imtuvo arba išjunkite."
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Nustatykite, kur laikmačių sąraše turi būti rodomi baigti laikmačiai."
 
@@ -2774,6 +2715,10 @@ msgstr "Data"
 msgid "Date/time input"
 msgstr "Datos / laiko įvestis"
 
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Nustatymai"
+
 msgid "Debug"
 msgstr ""
 
@@ -2973,9 +2918,6 @@ msgstr "Dekoduoti gaunamus http srautus"
 msgid "Description"
 msgstr "Aprašymas"
 
-msgid "Deselect"
-msgstr "Atšaukti pasirinkimą"
-
 msgid "Destination of fallback remote receiver"
 msgstr "Atsarginio nuotolinio imtuvo paskirtis"
 
@@ -3080,6 +3022,9 @@ msgstr "Išjungti foninį skenavimą"
 
 msgid "Disable current event but not coming events"
 msgstr "Išjungti dabartinį įvykį, bet ne po jo einančius"
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
+msgstr ""
 
 msgid "Disable move mode"
 msgstr "Išjungti perkėlimą"
@@ -3277,9 +3222,6 @@ msgstr "Ar norite pratęsti šio įrašo peržiūrą?"
 msgid "Do you want to select a different skin?"
 msgstr "Ar norite pasirinkti kitą temą?"
 
-msgid "Do you want to update the package:\n"
-msgstr "Ar norite atnaujinti paketą:\n"
-
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Ar norite atnaujinti įrangą į %s?"
@@ -3346,9 +3288,6 @@ msgstr "Parsisiunčiama"
 msgid "Downloading Image"
 msgstr "Parsiunčiamas atvaizdas"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Atsisiunčiamas naujas paketų sąrašas. Prašome laukti..."
-
 msgid "Downloading plugin information. Please wait..."
 msgstr "Parsiunčiama informacija apie priedus. Prašome laukti..."
 
@@ -3412,6 +3351,10 @@ msgid "EPG:"
 msgstr "Elektroninis programų vadovas:"
 
 #, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "Pasirinkite veiksmą"
+
+#, fuzzy
 msgid "EPGFilter Actions"
 msgstr "Pasirinkite veiksmą"
 
@@ -3458,17 +3401,11 @@ msgstr "Redaguoti imtuvo vardų serverių konfigūraciją.\n"
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Redaguoti imtuvo tinklo konfigūraciją.\n"
 
-msgid "Edit the update source address."
-msgstr "Redaguokite naujinimo šaltinio adresą."
-
 msgid "Edit timer"
 msgstr "Redaguoti laikmatį"
 
 msgid "Edit title"
 msgstr "Redaguoti pavadinimą"
-
-msgid "Edit update source url"
-msgstr "Redaguoti naujinimo šaltinio url"
 
 msgid "Egypt"
 msgstr "Egiptas"
@@ -3582,6 +3519,9 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Įjungti nuotolinį enigma2 imtuvą, kad būtų galima žiūrėti kanalus, kurie negali būti priimti lokaliai (pvz., imtuvas užimtas, arba kanalas nepasiekiamas vietiniam imtuvui. Nurodykite pilną internetinį adresą, įskaitant http://ir prievado numerį (paprastai ...:8001), pvz., http://antrasis_aparatas:8001."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr ""
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
 msgid "Enable teletext caching"
@@ -3907,12 +3847,6 @@ msgstr "Išplėstas"
 
 msgid "Extended PID info"
 msgstr "Išplėstinė PID info"
-
-msgid "Extended Software"
-msgstr "Išplėstinė programinė įranga"
-
-msgid "Extended Software Plugin"
-msgstr "Išplėstinis programinės įrangos priedas"
 
 #, fuzzy
 msgid "Extended info"
@@ -5108,9 +5042,6 @@ msgstr "Įdiegti kanalų sąrašą"
 msgid "Install extensions"
 msgstr "Įdiekite išplėtimus"
 
-msgid "Install local extension"
-msgstr "Įdiekite vietinį išplėtimą"
-
 #, fuzzy
 msgid "Install picons on"
 msgstr "Diegiama"
@@ -5649,12 +5580,6 @@ msgstr "Malis"
 
 msgid "Malta"
 msgstr "Malta"
-
-msgid "Manage extensions"
-msgstr "Plėtinių valdymas"
-
-msgid "Manage extensions or plugins for your receiver."
-msgstr "Valdykite savo imtuvo priedus ir išplėtimus."
 
 msgid "Manage your receiver's software"
 msgstr "Valdykite savo imtuvo programinę įrangą"
@@ -6346,12 +6271,6 @@ msgstr "Ne, bet vėl pradėti nuo pradžių"
 msgid "No, do not flash image"
 msgstr "Ne, atvaizdo neįdiegti"
 
-msgid "No, except Wakeup timer"
-msgstr "Ne, išskyrus pažadinimo laikmatį"
-
-msgid "No, never"
-msgstr "Ne, niekada"
-
 msgid "No, only download"
 msgstr ""
 
@@ -6409,7 +6328,8 @@ msgstr "Diske nepakanka vietos. Atlaisvinkite vietos diske ir bandykite dar kart
 msgid "Not tested:"
 msgstr "Netikrinta:"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+#, fuzzy
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr "Pastaba: kai čia įjungta ir po imtuvo pažadinimo, norite pervesti į  budėjimo būseną, pasirinkite 'Startuoti imtuvą į budėjimo būseną', kaip 'Ne, išskyrus pažadinimo laikmatį'."
 
 msgid ""
@@ -6537,9 +6457,6 @@ msgstr "Esant galiojantiems ONID, ignoruokite dažnio sub tinklo dalį"
 msgid "One"
 msgstr "Vienas"
 
-msgid "Online update of your receiver software."
-msgstr "Internetinis jūsų imtuvo programinės įrangos atnaujinimas."
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Pakeiskite tik šį parametrą, jei naudojate SCR įrenginį, kuris buvo perprogramuotas su pasirinktu programuotoju. Dėl išsamesnės informacijos susisiekite su asmeniu, kad perprogramuoti įrenginį."
 
@@ -6619,6 +6536,9 @@ msgstr "Originalus"
 msgid "Original audio"
 msgstr "Originalus garsas"
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr "Kiti"
 
@@ -6640,12 +6560,6 @@ msgstr "Bendra eiga:"
 
 msgid "Overscan wizard"
 msgstr "Ekrano formato vedlys"
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Ar atnaujinimo metu perrašyti konfigūracijos failus naujais?"
-
-msgid "Overwrite configuration files?"
-msgstr "Perrašyti konfigūracijos failus?"
 
 msgid "PAGEDOWN"
 msgstr ""
@@ -6728,12 +6642,6 @@ msgstr "Paketo sąrašo atnaujinimas"
 
 msgid "Packages to update"
 msgstr "Atnaujintini paketai"
-
-msgid "Packet management"
-msgstr "Paketų valdymas"
-
-msgid "Packet manager"
-msgstr "Paketų valdymas"
 
 #, fuzzy
 msgid "Page down"
@@ -6881,6 +6789,9 @@ msgstr "Žiūrėti DVD"
 msgid "Play DVDs"
 msgstr "Žiūrėti DVD"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr "Žiūrėti kaip paveikslėlį paveikslėlyje"
 
@@ -7017,9 +6928,6 @@ msgstr "Prašome išsirinkti subkanalą..."
 
 msgid "Please select medium to be scanned"
 msgstr "Pasirinkite laikmeną, kurioje ieškosite"
-
-msgid "Please select medium to use as backup location"
-msgstr "Prašome pasirinkti laikmeną atsarginėms kopijoms saugoti"
 
 msgid "Please select tag to filter..."
 msgstr "Prašome išsirinkti kortelę filtravimui..."
@@ -7323,12 +7231,6 @@ msgid ""
 "Restoring eMMC slots can take from 1 -> 5 minutes per slot."
 msgstr ""
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Spauskite INFO ant savo distancinio valdymo pulto dėl papildomos informacijos."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Papildomų galimybių pasirinkimui, spauskite 'MENU'."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Spauskite OK savo valdymo pulte ir tęskite."
 
@@ -7567,6 +7469,10 @@ msgstr "Interaktyvi Rass peržiūra..."
 msgid "Rating defined by broadcaster - %d"
 msgstr "Transliuotojo vertinimas - %d"
 
+#, fuzzy
+msgid "Rating sort in SingleEPG"
+msgstr "Įjungti Virgin EPG"
+
 msgid "Rating undefined"
 msgstr "Vertinimas nenurodytas"
 
@@ -7701,9 +7607,6 @@ msgstr "Regionas"
 msgid "Relative"
 msgstr "Santykinis"
 
-msgid "Reload"
-msgstr "Užkrauti iš naujo"
-
 msgid "Reload blacklists"
 msgstr "Atnaujinti juoduosius sąrašus"
 
@@ -7728,9 +7631,6 @@ msgstr "Nuotolinio valdymo tipas"
 
 msgid "Remote control type setup"
 msgstr "Nuotolinio valdymo tipo sąranka"
-
-msgid "Removal has completed."
-msgstr "Pašalinimas baigtas."
 
 msgid "Remove"
 msgstr "Pašalinti"
@@ -7925,12 +7825,6 @@ msgstr "Paleisti iš naujo testą"
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Paleisti iš naujo tinklą ir sąsajas.\n"
 
-msgid "Restore"
-msgstr "Atkurti"
-
-msgid "Restore backups"
-msgstr "Atkurti atsargines kopijas"
-
 msgid "Restore defaults"
 msgstr "Atkurti numatytąsias reikšmes"
 
@@ -7939,18 +7833,6 @@ msgstr "Atkurti ištrintus atvaizdus"
 
 msgid "Restore deleted user bouquets"
 msgstr "Atkurti ištrintus vartotojo paketus"
-
-msgid "Restore system settings"
-msgstr "Atkurti sistemos nustatymus"
-
-msgid "Restore your backups by date."
-msgstr "Atkurti jūsų atsarginę kopiją pagal datą."
-
-msgid "Restore your receiver settings."
-msgstr "Atkurkite imtuvo nustatymus."
-
-msgid "Restoring..."
-msgstr "Atkuriama..."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -8264,9 +8146,6 @@ msgstr "Paieška nepavyko!"
 msgid "Scan files..."
 msgstr "Failų paieška..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Skenuokite vietinius paketus ir įdiekite juos."
-
 msgid "Scan options"
 msgstr "Paieškos parinktys"
 
@@ -8477,12 +8356,6 @@ msgstr "Pasirinkite atvaizdą"
 msgid "Select audio track"
 msgstr "Pasirinkite garso takelį"
 
-msgid "Select backup files"
-msgstr "Pasirinkite atsarginės kopijos failus"
-
-msgid "Select backup location"
-msgstr "Pasirinkite atsarginės kopijos vietą"
-
 msgid "Select channel"
 msgstr "Pasirinkite kanalą"
 
@@ -8500,12 +8373,6 @@ msgstr "Pasirinkite vietą:"
 
 msgid "Select directory for logfile"
 msgstr "Pasirinkite žurnalo failą kataloge"
-
-msgid "Select files for backup."
-msgstr "Pasirinkite failus atsarginei kopijai."
-
-msgid "Select files/folders to backup"
-msgstr "Pasirinkite failus ir katalogus atsarginei kopijai"
 
 msgid "Select function"
 msgstr "Pasirinkite funkciją"
@@ -8676,12 +8543,6 @@ msgstr "Pasirinkite naudojamo LNB/įrenginio tipą (paprastai 'Universal'). Jei 
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Pasirinkite vieno kabelio priėmimo įrenginio tipą, kurį jūs naudojate."
 
-msgid "Select update source"
-msgstr "Pasirinkite atnaujinimo šaltinį"
-
-msgid "Select update source to edit"
-msgstr "Pasirinkite naujinimo šaltinį, kurį norite redaguoti"
-
 msgid "Select video input with up/down buttons"
 msgstr "Pasirinkite vaizdo įvestį su mygtukais aukštyn/žemyn"
 
@@ -8705,13 +8566,6 @@ msgstr "Pasirinkite belaidį tinklą"
 
 msgid "Select your ATSC provider."
 msgstr "Pasirinkite savo ATSC paslaugų teikėją."
-
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Pasirinkite jūsų atsarginės kopijos įrenginį.\n"
-"Dabartinis įrenginys: "
 
 msgid "Select your country. If not available select 'all'."
 msgstr "Pasirinkite savo šalį. Jei nėra pasirinkti 'visos'."
@@ -9478,10 +9332,6 @@ msgstr "Tolygumas"
 msgid "SocketMMI"
 msgstr "Lizdas MMI"
 
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Nustatymai"
-
 msgid "SoftCam / CI"
 msgstr "Įstatomi moduliai / Emuliatoriai"
 
@@ -9494,20 +9344,11 @@ msgstr "Emuliatoriaus tvarkyklė"
 msgid "Software"
 msgstr "Programinė įranga"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 msgid "Software management"
 msgstr "Programinės įrangos valdymas"
 
-msgid "Software manager setup"
-msgstr "Programinės įrangos tvarkyklės sąranka"
-
 msgid "Software update"
 msgstr "Programinės įrangos atnaujinimas"
-
-msgid "Softwaremanager information"
-msgstr "Programinės įrangos valdymo informacija"
 
 msgid "Solomon Islands"
 msgstr "Saliamono Salos"
@@ -9521,15 +9362,8 @@ msgstr "Kai kurie televizoriai nepabunda iš budėjimo režimo, kai gauna komand
 msgid "Some plugins are not available:\n"
 msgstr "Kai kurių priedų nėra:\n"
 
-#, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Atleiskite, %s neįdiegtas!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Atleiskite, bet pašalinti katalogus dabar galima tik per šiukšlinę."
-
-msgid "Sorry, no backups found!"
-msgstr "Atleiskite, atsarginių kopijų nerasta!"
 
 msgid "Sorry, no details available!"
 msgstr "Atleiskite, smulkesnės informacijos nėra!"
@@ -9537,17 +9371,9 @@ msgstr "Atleiskite, smulkesnės informacijos nėra!"
 msgid "Sorry, this tuner is in use."
 msgstr "Atleiskite, šis imtuvas užimtas."
 
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Atleiskite, atsarginei kopijai pasirinkta vieta neskirta rašymui.\n"
-"Pasirinkite kitą vietą."
-
 msgid "Sort"
 msgstr "Rūšiuoti"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Rūšiuoti A-Z"
 
@@ -9573,7 +9399,10 @@ msgstr "Meniu rūšiavimo tvarka"
 msgid "Sort plugins list to default?"
 msgstr "Rūšiuoti priedų sąrašą numatytąja tvarka?"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "Rūšiuoti pagal laiką"
+
 msgid "Sort time"
 msgstr "Rūšiuoti pagal laiką"
 
@@ -9749,9 +9578,6 @@ msgstr "Pradėti, atveriant sąrašo langą"
 
 msgid "Starting on"
 msgstr "Pradedama"
-
-msgid "Startup the set top box in standby"
-msgstr "Paleisti imtuvą laukimo režime"
 
 msgid "Startup to Standby"
 msgstr "Paleisti į budėjimo režimą"
@@ -11226,9 +11052,6 @@ msgstr "Atnaujinimo klaida. Jūsų imtuvas neturi interneto ryšio."
 msgid "Update feed not available."
 msgstr "Naujinimo informacijos santrauka nepasiekiama."
 
-msgid "Update has completed."
-msgstr "Atnaujinimas baigtas."
-
 msgid "Updating"
 msgstr "Atnaujinama"
 
@@ -11356,9 +11179,6 @@ msgstr "Naudoti vedlį pagrindiniams nustatymams"
 
 msgid "Use these input device settings?"
 msgstr "Naudoti šiuos įvesties įrenginio nustatymus?"
-
-msgid "Use these settings?"
-msgstr "Naudoti šiuos nustatymus?"
 
 msgid "Use this video enhancement settings?"
 msgstr "Naudoti šiuos vaizdo gerinimo nustatymus?"
@@ -11571,9 +11391,6 @@ msgstr "Žiūrėti teletekstą..."
 
 msgid "View video CD..."
 msgstr "Žiūrėti vaizdo CD..."
-
-msgid "View, install and remove available or installed packages."
-msgstr "Peržiūrėkite, įdiekite ir pašalinkite esamus arba įdiegtus paketus."
 
 msgid "Virgin Islands (British)"
 msgstr "Mergelių salos (J.K.)"
@@ -12017,6 +11834,10 @@ msgid "Where to save temporary timeshift recordings?"
 msgstr "Kur saugoti laikinus laiko poslinkio įrašus?"
 
 #, fuzzy
+msgid "Whitelist"
+msgstr "DVD pavadinimų sąrašas"
+
+#, fuzzy
 msgid "Window Actions"
 msgstr "Temos pasirinkimo veiksmai"
 
@@ -12122,6 +11943,9 @@ msgstr "Taip, viskam"
 msgid "Yes, I do want to install plugins"
 msgstr "Taip, aš noriu įdiegti priedus"
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Taip, visada"
 
@@ -12136,6 +11960,10 @@ msgstr "Taip, tik iš gilaus budėjimo režimo"
 
 msgid "Yes, only from standby"
 msgstr "Taip, tik iš budėjimo režimo"
+
+#, fuzzy
+msgid "Yes, only wake-up timers"
+msgstr "Įjungti pažadinimo laikmatį"
 
 msgid "Yes, returning to movie list"
 msgstr "Taip, grįžti į filmų sąrašą"
@@ -12512,9 +12340,6 @@ msgstr "atgal"
 msgid "background image"
 msgstr "fono paveikslėlis"
 
-msgid "backup EPG cache"
-msgstr "atsarginė EPG talpyklos kopija"
-
 msgid "ballet"
 msgstr "baletas"
 
@@ -12793,6 +12618,21 @@ msgstr ""
 
 msgid "horizontal"
 msgstr "horizontali"
+
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Nustatymai"
+
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Nustatymai"
+
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Nustatymai"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 msgid "in menu and plugins"
 msgstr "meniu ir prieduose"
@@ -13176,12 +13016,6 @@ msgstr "rodyti visas žymas"
 
 msgid "show event details"
 msgstr "rodyti įvykio detales"
-
-msgid "show softwaremanager in setup menu"
-msgstr "programinės įrangos tvarkyklę rodyti tarp nustatymų meniu"
-
-msgid "show softwaremanager on blue button"
-msgstr "rodyti programinės įrangos tvarkyklę mėlynu mygtuku"
 
 msgid "show/game show (general)"
 msgstr "šou, žaidimų šou (bendrai)"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2022-03-28 16:33+0200\n"
 "Last-Translator: Željko <zdezmar2@gmail.com>\n"
 "Language-Team: Željko\n"
@@ -26,13 +26,6 @@ msgid ""
 msgstr ""
 "\n"
 "Nakon pritiska na OK, molim pričekajte!"
-
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Pritisnite OK na daljinskom upravljaču za nastavak."
 
 msgid ""
 "\n"
@@ -633,9 +626,6 @@ msgstr "Ponavljajući događaj trenutno se snima. Što želite učiniti?"
 msgid "A required tool (%s) was not found."
 msgstr "Potrebni alat (%s) nije pronađen."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Trenutno je u tijeku traženje dostupnih ažuriranja."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -735,6 +725,10 @@ msgstr "Aktivirajte HbbTV (crvenu tipku)"
 
 msgid "Activate Picture in Picture"
 msgstr "Aktivirajte sliku u slici"
+
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Postavke"
 
 msgid "Activate network settings"
 msgstr "Aktivirajte mrežne postavke"
@@ -852,18 +846,6 @@ msgstr "Napredno"
 
 msgid "Advanced options"
 msgstr "Napredne opcije"
-
-msgid "Advanced options and settings."
-msgstr "Napredne opcije i postavke."
-
-msgid "Advanced restore"
-msgstr "Napredno vraćanje"
-
-msgid "Advanced software"
-msgstr "Napredni softver"
-
-msgid "Advanced software plugin"
-msgstr "Napredni softverski dodatak"
 
 msgid "Advanced video enhancement setup"
 msgstr "Napredne postavke podešavanja videa"
@@ -991,9 +973,6 @@ msgstr "Alternativni način numeriranja"
 msgid "Alternative services tuner priority"
 msgstr "Prioritet tunera za alternativne usluge"
 
-msgid "Always ask"
-msgstr "Uvijek pitaj"
-
 msgid "Always hide infobar"
 msgstr "Uvijek sakrijte info traku"
 
@@ -1075,13 +1054,6 @@ msgstr ""
 "Želite li zaista aktivirati ovu konfiguraciju mreže?\n"
 "\n"
 
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Jeste li sigurni da želite izbrisati\n"
-"ovaj backup:\n"
-
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Jeste li sigurni da želite izaći iz vodiča?"
 
@@ -1091,25 +1063,6 @@ msgid ""
 msgstr ""
 "Želite li zaista ponovno pokrenuti mrežna sučelja?\n"
 "\n"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Jeste li sigurni da želite vratiti\n"
-"ovu sigurnosnu kopiju:\n"
-"%s\n"
-"Vaš će se prijemnik ponovno pokrenuti nakon oporavka!"
-
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Jeste li sigurni da želite vratiti sigurnosnu kopiju?\n"
-"Vaš će se prijemnik ponovno pokrenuti nakon oporavka!"
 
 msgid "Argentina"
 msgstr "Argentina"
@@ -1352,23 +1305,8 @@ msgstr "Brzina pozadinskog brisanja"
 msgid "Backing up to: %s"
 msgstr "Pokretanje sigurnosne kopije na: %s"
 
-msgid "Backup completed."
-msgstr "Sigurnosna kopija je dovršena."
-
-msgid "Backup failed."
-msgstr "Rezervna kopija nije uspjela."
-
-msgid "Backup is running..."
-msgstr "Izrađuje se sigurnosna kopija..."
-
 msgid "Backup settings"
 msgstr "Sigurnosna kopija postavki"
-
-msgid "Backup system settings"
-msgstr "Sigurnosna kopija postavki sustava"
-
-msgid "Backup your receiver settings."
-msgstr "Sigurnosna kopija postavki resivera."
 
 msgid "Bahamas"
 msgstr "Bahami"
@@ -2396,6 +2334,9 @@ msgstr "Konfigurirajte način na koji prijemnik mijenja kanale."
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Konfigurirajte ovaj tjuner jednostavnim ili naprednim mogućnostima, preusmjerite ga na drugi tjuner, kopirajte konfiguraciju s drugog tjunera ili ga onemogućite."
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Konfigurirajte gdje se na popisu tajmera prikazuju dovršeni tajmeri."
 
@@ -2788,6 +2729,10 @@ msgstr "Datum"
 msgid "Date/time input"
 msgstr "Unesite datum/vrijeme"
 
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Postavke"
+
 msgid "Debug"
 msgstr ""
 
@@ -2987,9 +2932,6 @@ msgstr "Dekodiranje primljenih web prijenosa"
 msgid "Description"
 msgstr "Opis"
 
-msgid "Deselect"
-msgstr "Poništavanje odabira"
-
 msgid "Destination of fallback remote receiver"
 msgstr "Odredište rezervnog daljinskog prijemnika"
 
@@ -3095,6 +3037,9 @@ msgstr "Onemogućite pozadinsko skeniranje"
 
 msgid "Disable current event but not coming events"
 msgstr "Onemogućite trenutni događaj, ali ne i događaje koji dolaze"
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
+msgstr ""
 
 msgid "Disable move mode"
 msgstr "Onemogućite način kretanja"
@@ -3290,9 +3235,6 @@ msgstr "Želite li nastaviti s reprodukcijom?"
 msgid "Do you want to select a different skin?"
 msgstr "Želite li odabrati drugi skin?"
 
-msgid "Do you want to update the package:\n"
-msgstr "Želite li nadograditi paket:\n"
-
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Želite li ažurirati svoj prijemnik na %s?"
@@ -3361,9 +3303,6 @@ msgstr "Preuzimanje"
 msgid "Downloading Image"
 msgstr "Preuzimanje imagea"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Pokušavate preuzeti novi popis paketa. Molim pričekajte..."
-
 msgid "Downloading plugin information. Please wait..."
 msgstr "Preuzimanje informacija o dodacima. Molim pričekajte..."
 
@@ -3428,6 +3367,10 @@ msgid "EPG:"
 msgstr "EPG:"
 
 #, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "Odaberite radnju"
+
+#, fuzzy
 msgid "EPGFilter Actions"
 msgstr "Odaberite radnju"
 
@@ -3474,17 +3417,11 @@ msgstr "Uredite konfiguraciju poslužitelja vašeg prijemnika.\n"
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Uredite mrežnu konfiguraciju vašeg prijemnika.\n"
 
-msgid "Edit the update source address."
-msgstr "Uredite adresu za ažuriranje."
-
 msgid "Edit timer"
 msgstr "Uredite tajmer"
 
 msgid "Edit title"
 msgstr "Uredite titlove"
-
-msgid "Edit update source url"
-msgstr "Uredite ažuriranje izvornog url-a"
 
 msgid "Egypt"
 msgstr "Egipat"
@@ -3600,6 +3537,9 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Omogućavanje pokušaja podešavanja udaljenog enigma2 prijamnika u usluge koje se ne mogu lokalno ugađati (npr. tjuner je zauzet ili vrsta usluge nije dostupna na lokalnom tjuneru. Navedite potpuni URL uključujući http:// i broj porta (normalno ...:8001), primjer: http://ip_udaljeni_resiver:8001."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr ""
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
 msgid "Enable teletext caching"
@@ -3928,12 +3868,6 @@ msgstr "Prošireno"
 
 msgid "Extended PID info"
 msgstr "Prošireni info o PID-u"
-
-msgid "Extended Software"
-msgstr "Prošireni softver"
-
-msgid "Extended Software Plugin"
-msgstr "Prošireni softverski dodatak"
 
 #, fuzzy
 msgid "Extended info"
@@ -5136,9 +5070,6 @@ msgstr "Instaliranje popisa kanala"
 msgid "Install extensions"
 msgstr "Instaliranje proširenja"
 
-msgid "Install local extension"
-msgstr "Instaliranje lokalnih ipk proširenja"
-
 #, fuzzy
 msgid "Install picons on"
 msgstr "Instalacija"
@@ -5679,12 +5610,6 @@ msgstr "Mali"
 
 msgid "Malta"
 msgstr "Malta"
-
-msgid "Manage extensions"
-msgstr "Upravljanje proširenjima"
-
-msgid "Manage extensions or plugins for your receiver."
-msgstr "Omogućiti proširenja ili dodatke za vaš prijemnik."
 
 msgid "Manage your receiver's software"
 msgstr "Upravljanje proširenjima"
@@ -6378,12 +6303,6 @@ msgstr "Ne, ali ponovno pokreni od početka"
 msgid "No, do not flash image"
 msgstr "Ne, nemojte flešati image"
 
-msgid "No, except Wakeup timer"
-msgstr "Ne, osim tajmera za buđenje"
-
-msgid "No, never"
-msgstr "Ne, nikada"
-
 msgid "No, only download"
 msgstr ""
 
@@ -6441,7 +6360,8 @@ msgstr "Nedovoljno prostora na disku. Oslobodite prostor na disku i pokušajte p
 msgid "Not tested:"
 msgstr "Nije testirano:"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+#, fuzzy
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr "Napomena: kada je omogućeno, a želite da se nakon aktiviranja pojavi stanje čekanja, postavite opciju 'Pokretanje u stanje čekanja' kao 'Ne', osim 'Tajmer za buđenje'."
 
 msgid ""
@@ -6569,9 +6489,6 @@ msgstr "Na važećim ONID-ovima, zanemarite dio mrežne frekvencije."
 msgid "One"
 msgstr "Jedan"
 
-msgid "Online update of your receiver software."
-msgstr "Online ažuriranje softvera vašeg prijemnika."
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Promijenite ovu postavku samo ako koristite SCR uređaj koji je reprogramiran pomoću prilagođenog programatora. Za daljnje informacije provjerite kod osobe koja je reprogramirala uređaj."
 
@@ -6653,6 +6570,9 @@ msgstr "Original"
 msgid "Original audio"
 msgstr "Original audio"
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr "Ostalo"
 
@@ -6674,12 +6594,6 @@ msgstr "Opći napredak:"
 
 msgid "Overscan wizard"
 msgstr "Vodič za postavljanje skaliranja"
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Prebrisati konfiguracijske datoteke tijekom ažuriranja softvera?"
-
-msgid "Overwrite configuration files?"
-msgstr "prebrisati konfiguracijske datoteke?"
 
 msgid "PAGEDOWN"
 msgstr ""
@@ -6762,12 +6676,6 @@ msgstr "Ažuriranje popisa paketa."
 
 msgid "Packages to update"
 msgstr "Paketi za ažuriranje"
-
-msgid "Packet management"
-msgstr "Upravljanje paketima"
-
-msgid "Packet manager"
-msgstr "Upravitelj paketa"
 
 #, fuzzy
 msgid "Page down"
@@ -6915,6 +6823,9 @@ msgstr "Reproducirajte DVD"
 msgid "Play DVDs"
 msgstr "Reproducirajte DVD-e"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr "Reproduciraj kao sliku u slici"
 
@@ -7051,9 +6962,6 @@ msgstr "Odaberite poduslugu..."
 
 msgid "Please select medium to be scanned"
 msgstr "Odaberite medij za skeniranje"
-
-msgid "Please select medium to use as backup location"
-msgstr "Odaberite medij za upotrebu kao rezervnu lokaciju"
 
 msgid "Please select tag to filter..."
 msgstr "Odaberite oznaku za filtriranje..."
@@ -7358,12 +7266,6 @@ msgid ""
 "Restoring eMMC slots can take from 1 -> 5 minutes per slot."
 msgstr ""
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Pritisnite INFO na daljinskom upravljaču za dodatne informacije."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Pritisnite MENU na daljinskom upravljaču za dodatne opcije."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Pritisnite OK na daljinskom upravljaču za nastavak."
 
@@ -7602,6 +7504,10 @@ msgstr "Pogledajte interaktivni Rass..."
 msgid "Rating defined by broadcaster - %d"
 msgstr "Ocjena koju je odredio nakladnik - %d"
 
+#, fuzzy
+msgid "Rating sort in SingleEPG"
+msgstr "Omogućite Virgin EPG"
+
 msgid "Rating undefined"
 msgstr "Ocjena nedefinirana"
 
@@ -7736,9 +7642,6 @@ msgstr "Regija"
 msgid "Relative"
 msgstr "Relativno"
 
-msgid "Reload"
-msgstr "Ponovno učitati"
-
 msgid "Reload blacklists"
 msgstr "Ponovno učitati crnu listu"
 
@@ -7763,9 +7666,6 @@ msgstr "Tip daljinskog upravljača"
 
 msgid "Remote control type setup"
 msgstr "Podešavanje tipa daljinskog upravljača"
-
-msgid "Removal has completed."
-msgstr "Uklanjanje je završeno."
 
 msgid "Remove"
 msgstr "Ukloniti"
@@ -7960,12 +7860,6 @@ msgstr "Ponovno pokretanje testa"
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Ponovno pokrenite mrežnu vezu i sučelja.\n"
 
-msgid "Restore"
-msgstr "Vraćanje"
-
-msgid "Restore backups"
-msgstr "Vraćanje sigurnosnih kopija"
-
 msgid "Restore defaults"
 msgstr "Vratiti zadano"
 
@@ -7974,18 +7868,6 @@ msgstr "Vrati izbrisane image"
 
 msgid "Restore deleted user bouquets"
 msgstr "Vrati izbrisane korisničke pakete"
-
-msgid "Restore system settings"
-msgstr "Vraćanje sistemskih postavki"
-
-msgid "Restore your backups by date."
-msgstr "Vratite rezervnu kopiju po datumu."
-
-msgid "Restore your receiver settings."
-msgstr "Vratite postavke prijemnika."
-
-msgid "Restoring..."
-msgstr "Obnavljanje..."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -8299,9 +8181,6 @@ msgstr "Pretraživanje nije uspjelo!"
 msgid "Scan files..."
 msgstr "Pretraživanje datoteka..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Tražite lokalna proširenja i instalirajte ih."
-
 msgid "Scan options"
 msgstr "Opcije pretraživanja"
 
@@ -8512,12 +8391,6 @@ msgstr "Odaberite image"
 msgid "Select audio track"
 msgstr "Odaberite audio zapis"
 
-msgid "Select backup files"
-msgstr "Odaberite datoteke sigurnosne kopije"
-
-msgid "Select backup location"
-msgstr "Odaberite lokaciju sigurnosne kopije"
-
 msgid "Select channel"
 msgstr "Odaberite kanal"
 
@@ -8535,12 +8408,6 @@ msgstr "Odabir lokacije za:"
 
 msgid "Select directory for logfile"
 msgstr "Odaberite direktorij za log datoteku"
-
-msgid "Select files for backup."
-msgstr "Odaberite datoteke za izradu sigurnosne kopije."
-
-msgid "Select files/folders to backup"
-msgstr "Odaberite datoteke/mape za izradu sigurnosne kopije"
 
 msgid "Select function"
 msgstr "Odaberite funkciju"
@@ -8711,12 +8578,6 @@ msgstr "Odaberite vrstu LNB/uređaja koji se koristi (uobičajeno 'univerzalan')
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Odaberite tjuner na koji je priključen signalni kabel SCR uređaja."
 
-msgid "Select update source"
-msgstr "Odaberite izvor ažuriranja"
-
-msgid "Select update source to edit"
-msgstr "Odaberite izvor ažuriranja za uređivanje"
-
 msgid "Select video input with up/down buttons"
 msgstr "Odaberite video ulaz pomoću tipki gore/dolje"
 
@@ -8740,13 +8601,6 @@ msgstr "Odaberite bežičnu mrežu"
 
 msgid "Select your ATSC provider."
 msgstr "Odaberite svog ATSC pružatelja usluga."
-
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Odaberite uređaj za spremanje kopija.\n"
-"Aktualni uređaj: "
 
 msgid "Select your country. If not available select 'all'."
 msgstr "Izaberite svoju zemlju. Ako nije dostupno, odaberite 'sve'."
@@ -9511,10 +9365,6 @@ msgstr "Glatko"
 msgid "SocketMMI"
 msgstr "UtičnicaMMI"
 
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Postavke"
-
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
 
@@ -9527,20 +9377,11 @@ msgstr "SoftCam postavke"
 msgid "Software"
 msgstr "Softver"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 msgid "Software management"
 msgstr "Upravljanje softverom"
 
-msgid "Software manager setup"
-msgstr "Postavke upravljanja softverom"
-
 msgid "Software update"
 msgstr "Ažuriranje softvera"
-
-msgid "Softwaremanager information"
-msgstr "Informacije o softverskom upravitelju"
 
 msgid "Solomon Islands"
 msgstr "Solomonski otoci"
@@ -9554,15 +9395,8 @@ msgstr "Neki se televizori ne probude iz stanja pripravnosti kad prime naredbu '
 msgid "Some plugins are not available:\n"
 msgstr "Neki dodaci nisu dostupni:\n"
 
-#, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Žao nam je, %s nije instaliran!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Nažalost, brisanje direktorija može (za sada) biti izvršeno samo preko kante za smeće."
-
-msgid "Sorry, no backups found!"
-msgstr "Nažalost, nisu pronađene sigurnosne kopije!"
 
 msgid "Sorry, no details available!"
 msgstr "Nažalost, nema dostupnih podataka!"
@@ -9570,17 +9404,9 @@ msgstr "Nažalost, nema dostupnih podataka!"
 msgid "Sorry, this tuner is in use."
 msgstr "Žao nam je, ovaj tjuner je u uporabi."
 
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Nažalost, na vašu lokaciju za sigurnosno kopiranje nije moguće upisivati.\n"
-"Odaberite drugu lokaciju za spremanje."
-
 msgid "Sort"
 msgstr "Sortirati"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Sortirati А-Z"
 
@@ -9606,7 +9432,10 @@ msgstr "Sortiranje redoslijeda za unos postavki"
 msgid "Sort plugins list to default?"
 msgstr "Sortiranje popisa dodataka prema zadanim postavkama?"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "Sortiranje po vremenu"
+
 msgid "Sort time"
 msgstr "Sortiranje po vremenu"
 
@@ -9782,9 +9611,6 @@ msgstr "Počnite s prikazom popisa"
 
 msgid "Starting on"
 msgstr "Počevši od"
-
-msgid "Startup the set top box in standby"
-msgstr "Pokrenite set top box u stanje čekanja"
 
 msgid "Startup to Standby"
 msgstr "Pokretanje u stanje čekanja"
@@ -11261,9 +11087,6 @@ msgstr "Ažuriranje nije uspjelo. Vaš prijemnik nema aktivnu internetsku vezu."
 msgid "Update feed not available."
 msgstr "Ažuriranje feeda nije dostupno."
 
-msgid "Update has completed."
-msgstr "Ažuriranje je dovršeno."
-
 msgid "Updating"
 msgstr "Ažuriranje"
 
@@ -11391,9 +11214,6 @@ msgstr "Pomoću vodiča postavite osnovne značajke"
 
 msgid "Use these input device settings?"
 msgstr "Koristite li ove postavke ulaznih uređaja?"
-
-msgid "Use these settings?"
-msgstr "Koristite li te postavke?"
 
 msgid "Use this video enhancement settings?"
 msgstr "Koristite li ove postavke poboljšanja videozapisa?"
@@ -11606,9 +11426,6 @@ msgstr "Prikažite teletekst..."
 
 msgid "View video CD..."
 msgstr "Prikažite video CD..."
-
-msgid "View, install and remove available or installed packages."
-msgstr "Pregledajte, instalirajte i uklonite dostupne ili instalirane pakete."
 
 msgid "Virgin Islands (British)"
 msgstr "Britanski Djevičanski Otoci"
@@ -12053,6 +11870,10 @@ msgid "Where to save temporary timeshift recordings?"
 msgstr "Gdje želite spremiti privremene datoteke vremenskog pomaka?"
 
 #, fuzzy
+msgid "Whitelist"
+msgstr "DVD popis naslova"
+
+#, fuzzy
 msgid "Window Actions"
 msgstr "Radnje za odabir skina"
 
@@ -12158,6 +11979,9 @@ msgstr "Da za sve"
 msgid "Yes, I do want to install plugins"
 msgstr "Da, želim instalirati dodatke"
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Da, uvijek"
 
@@ -12172,6 +11996,10 @@ msgstr "Da, samo iz dubokog stanja čekanja"
 
 msgid "Yes, only from standby"
 msgstr "Da, samo iz stanja čekanja"
+
+#, fuzzy
+msgid "Yes, only wake-up timers"
+msgstr "Omogućite odbrojavanje vremena"
 
 msgid "Yes, returning to movie list"
 msgstr "Da, povratak na popis filmova"
@@ -12547,9 +12375,6 @@ msgstr "nazad"
 msgid "background image"
 msgstr "pozadinska slika"
 
-msgid "backup EPG cache"
-msgstr "sigurnosna kopija EPG-a"
-
 msgid "ballet"
 msgstr "balet"
 
@@ -12829,6 +12654,21 @@ msgstr ""
 
 msgid "horizontal"
 msgstr "horizontalno"
+
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Postavke"
+
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Postavke"
+
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Postavke"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 msgid "in menu and plugins"
 msgstr "u izborniku i dodacima"
@@ -13214,12 +13054,6 @@ msgstr "prikaži sve oznake"
 
 msgid "show event details"
 msgstr "prikaži pojedinosti o događaju"
-
-msgid "show softwaremanager in setup menu"
-msgstr "prikaži upravitelja softvera u izborniku postavki"
-
-msgid "show softwaremanager on blue button"
-msgstr "prikaži upravitelja softvera na plavoj tipki"
 
 msgid "show/game show (general)"
 msgstr "prikaži predstave/igre (općenito)"
