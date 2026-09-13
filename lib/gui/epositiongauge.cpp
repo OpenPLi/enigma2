@@ -13,6 +13,7 @@ ePositionGauge::ePositionGauge(eWidget *parent)
 	m_length = 0;
 	m_have_foreground_color = 0;
 	m_seek_position = 0;
+	m_hidePointerOnZeroLength = 0;
 }
 
 ePositionGauge::~ePositionGauge()
@@ -26,6 +27,15 @@ void ePositionGauge::setLength(const pts_t &len)
 	if (m_length == len)
 		return;
 	m_length = len;
+
+	if (m_hidePointerOnZeroLength)
+	{
+		if (m_length)
+			m_point_widget->show();
+		else
+			m_point_widget->hide();
+	}
+
 	updatePosition();
 	invalidate();
 }
@@ -188,6 +198,16 @@ int ePositionGauge::event(int event, void *data, void *data2)
 	default:
 		return eWidget::event(event, data, data2);
 	}
+}
+
+void ePositionGauge::setHidePointerOnZeroLength(int hide)
+{
+	m_hidePointerOnZeroLength = hide;
+
+	if (m_hidePointerOnZeroLength && !m_length)
+		m_point_widget->hide();
+	else
+		m_point_widget->show();
 }
 
 void ePositionGauge::updatePosition()
