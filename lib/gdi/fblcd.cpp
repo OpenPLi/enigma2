@@ -310,7 +310,7 @@ void eFbLCD::dumpLCD(bool png=true)
 void eFbLCD::save2png(unsigned char* output, int xRes, int yRes)
 {
 	int output_bytes=4; //osd only
-	const char* filename = "/tmp/lcdshot.png";
+	const char* filename = "/tmp/lcd.png";
 
 	FILE *fd2;
 	fd2 = fopen(filename, "wr");

@@ -1,4 +1,5 @@
 #include <lib/gdi/lcd.h>
+#include <lib/gdi/epng.h>
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -308,7 +309,34 @@ void eDBoxLCD::update()
 #endif
 }
 
+void eLCD::setDump(bool onoff)
+{
+	if (onoff)
+		dumpLCD(true);
+}
+
 void eDBoxLCD::dumpLCD(bool png)
 {
-	return;
+	int bpp = (_stride * 8) / res.width();
+
+	if (bpp != 32)
+	{
+		eDebug("[eDboxLCD] dumpLCD: %d bpp not supported", bpp);
+		return;
+	}
+
+	ePtr<gPixmap> pixmap32;
+	pixmap32 = new gPixmap(res, 32, gPixmap::accelNever);
+
+	const uint8_t *srcptr = (const uint8_t *)_buffer;
+	uint8_t *dstptr = (uint8_t *)pixmap32->surface->data;
+
+	for (int y = 0; y < res.height(); y++)
+	{
+		memcpy(dstptr, srcptr, res.width() * 4);
+		srcptr += _stride;
+		dstptr += pixmap32->surface->stride;
+	}
+
+	savePNG("/tmp/lcd.png", pixmap32);
 }
