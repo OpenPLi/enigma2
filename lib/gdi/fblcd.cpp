@@ -291,10 +291,14 @@ void eFbLCD::dumpLCD(bool png=true)
 	int mallocsize = m_xRes * m_yRes;
 	output = (unsigned char *)malloc(mallocsize*4);
 
+	if (!output)
+		return;
+
 	buffer=(unsigned char*)mmap(0, m_available, PROT_WRITE|PROT_READ, MAP_SHARED, lcdfd, 0);
-	if (!buffer)
+	if (buffer == MAP_FAILED)
 	{
 		eDebug("[eFbLCD] mmap: %m");
+		free(output);
 		return;
 	}
 	memcpy(output, buffer, _stride * m_yRes);
@@ -304,13 +308,13 @@ void eFbLCD::dumpLCD(bool png=true)
 		save2bmp(output, m_xRes, m_yRes);
 
 	munmap(buffer, m_available);
-	buffer = 0;
+	free(output);
 }
 
 void eFbLCD::save2png(unsigned char* output, int xRes, int yRes)
 {
 	int output_bytes=4; //osd only
-	const char* filename = "/tmp/lcdshot.png";
+	const char* filename = "/tmp/lcd.png";
 
 	FILE *fd2;
 	fd2 = fopen(filename, "wr");

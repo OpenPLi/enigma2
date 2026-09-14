@@ -37,6 +37,7 @@ public:
 	virtual int setLCDBrightness(int brightness)=0;
 	virtual void setInverted( unsigned char )=0;
 	virtual void setFlipped(bool)=0;
+	void setDump(bool); // OpenWebif compatibility
 	virtual void dumpLCD(bool png=true)=0;
 	virtual int waitVSync()=0;
 	virtual bool isOled() const=0;
