@@ -1,5 +1,7 @@
 #include <lib/gdi/lcd.h>
 #include <lib/gdi/epng.h>
+#include <byteswap.h>
+#include <endian.h>
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -318,25 +320,88 @@ void eLCD::setDump(bool onoff)
 void eDBoxLCD::dumpLCD(bool png)
 {
 	int bpp = (_stride * 8) / res.width();
-
-	if (bpp != 32)
-	{
-		eDebug("[eDboxLCD] dumpLCD: %d bpp not supported", bpp);
-		return;
-	}
+	int lcd_width = res.width();
+	int lcd_height = res.height();
 
 	ePtr<gPixmap> pixmap32;
-	pixmap32 = new gPixmap(res, 32, gPixmap::accelNever);
+	pixmap32 = new gPixmap(eSize(lcd_width, lcd_height), 32, gPixmap::accelNever);
 
-	const uint8_t *srcptr = (const uint8_t *)_buffer;
+	const uint8_t *srcptr = (uint8_t *)_buffer;
 	uint8_t *dstptr = (uint8_t *)pixmap32->surface->data;
 
-	for (int y = 0; y < res.height(); y++)
+	switch (bpp)
 	{
-		memcpy(dstptr, srcptr, res.width() * 4);
-		srcptr += _stride;
-		dstptr += pixmap32->surface->stride;
+	case 8:
+	{
+		for (int y = lcd_height; y != 0; --y)
+		{
+			gRGB pixel32;
+			uint8_t pixval;
+			int x = lcd_width;
+			gRGB *dst = (gRGB *)dstptr;
+			const uint8_t *src = (const uint8_t *)srcptr;
+
+			while (x--)
+			{
+				pixval = *src++;
+				pixel32.a = 0xFF;
+				pixel32.r = pixval;
+				pixel32.g = pixval;
+				pixel32.b = pixval;
+				*dst++ = pixel32;
+			}
+
+			srcptr += _stride;
+			dstptr += pixmap32->surface->stride;
+		}
+		savePNG("/tmp/lcd.png", pixmap32);
+		break;
 	}
 
-	savePNG("/tmp/lcd.png", pixmap32);
+	case 16:
+	{
+		for (int y = lcd_height; y != 0; --y)
+		{
+			gRGB pixel32;
+			uint16_t pixel16;
+			int x = lcd_width;
+			gRGB *dst = (gRGB *)dstptr;
+			const uint16_t *src = (const uint16_t *)srcptr;
+
+			while (x--)
+			{
+#if BYTE_ORDER == LITTLE_ENDIAN
+				pixel16 = bswap_16(*src++);
+#else
+				pixel16 = *src++;
+#endif
+				pixel32.a = 0xFF;
+				pixel32.r = (pixel16 << 3) & 0xF8;
+				pixel32.g = (pixel16 >> 3) & 0xFC;
+				pixel32.b = (pixel16 >> 8) & 0xF8;
+				*dst++ = pixel32;
+			}
+
+			srcptr += _stride;
+			dstptr += pixmap32->surface->stride;
+		}
+		savePNG("/tmp/lcd.png", pixmap32);
+		break;
+	}
+
+	case 32:
+	{
+		for (int y = lcd_height; y != 0; --y)
+		{
+			memcpy(dstptr, srcptr, lcd_width * pixmap32->surface->bypp);
+			srcptr += _stride;
+			dstptr += pixmap32->surface->stride;
+		}
+		savePNG("/tmp/lcd.png", pixmap32);
+		break;
+	}
+
+	default:
+		eDebug("[eDboxLCD] %d bpp not supported", bpp);
+	}
 }
