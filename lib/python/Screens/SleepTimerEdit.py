@@ -88,7 +88,7 @@ class SleepTimerEdit(Setup):
 					_("Specify the end time to ignore the shutdown timer when the receiver is in standby mode")))
 		conflist.append((_("Enable wakeup timer"),
 			config.usage.wakeup_enabled,
-			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'.")))
+			_("Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'.")))
 		if config.usage.wakeup_enabled.value != "no":
 			for i in range(7):
 				conflist.append(([_("Monday"), _("Tuesday"), _("Wednesday"), _("Thursday"), _("Friday"), _("Saturday"), _("Sunday")][i],

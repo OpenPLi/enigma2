@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2022-09-27 16:12+0200\n"
 "Last-Translator: kvinto\n"
 "Language-Team: kvinto\n"
@@ -26,13 +26,6 @@ msgid ""
 msgstr ""
 "\n"
 "Після натиснення OK, зачекайте!"
-
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Натисніть OK для продовження."
 
 msgid ""
 "\n"
@@ -629,9 +622,6 @@ msgstr "Повторення завдання, яке вже записуєть�
 msgid "A required tool (%s) was not found."
 msgstr "Потрібний інструмент (%s) не знайдено."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Виконується пошук доступних оновлень."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -728,6 +718,10 @@ msgstr "Запуск HbbTV (червона кнопка)"
 
 msgid "Activate Picture in Picture"
 msgstr "Ввімкнути Картинка в Картинці"
+
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Налаштування"
 
 msgid "Activate network settings"
 msgstr "Активувати налаштування мережі"
@@ -845,18 +839,6 @@ msgstr "Розширений"
 
 msgid "Advanced options"
 msgstr "Розширені Параметри"
-
-msgid "Advanced options and settings."
-msgstr "Розширені параметри і налаштування."
-
-msgid "Advanced restore"
-msgstr "Розширене відновлення"
-
-msgid "Advanced software"
-msgstr "Додаткове ПЗ"
-
-msgid "Advanced software plugin"
-msgstr "Розширений плагін програм"
 
 msgid "Advanced video enhancement setup"
 msgstr "Розширене налаштування покращення відео"
@@ -982,9 +964,6 @@ msgstr "Альтернативний режим нумерації"
 msgid "Alternative services tuner priority"
 msgstr "Пріоритет використання тюнерів"
 
-msgid "Always ask"
-msgstr "Завжди запитувати"
-
 msgid "Always hide infobar"
 msgstr "Завжди приховувати Інфобар"
 
@@ -1066,13 +1045,6 @@ msgstr ""
 "Ви дійсно бажаєте активувати цю конфігурацію мережі?\n"
 "\n"
 
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Ви впевнені, що хочете видалити\n"
-"наступну резервну копію:\n"
-
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Ви дійсно бажаєте вийти з помічника?"
 
@@ -1082,25 +1054,6 @@ msgid ""
 msgstr ""
 "Ви дійсно бажаєте перезавантажити мережеві інтерфейси?\n"
 "\n"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ви дійсно бажаєте відновити\n"
-"дану резервну копію:\n"
-"%s\n"
-"Ваш приймач перезавантажиться після виконання відновлення!"
-
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ви впевнені, що хочете відновити резервну копію?\n"
-"Ваш приймач перезавантажиться після відновлення!"
 
 msgid "Argentina"
 msgstr "Аргентина"
@@ -1343,23 +1296,8 @@ msgstr "Швидкість видалення у фоновому режимі"
 msgid "Backing up to: %s"
 msgstr "Резервне копіювання до: %s"
 
-msgid "Backup completed."
-msgstr "Бекап успішно створений."
-
-msgid "Backup failed."
-msgstr "Збереження невдале."
-
-msgid "Backup is running..."
-msgstr "Виконується резервне копіювання..."
-
 msgid "Backup settings"
 msgstr "Налаштування резервних копій"
-
-msgid "Backup system settings"
-msgstr "Резервна копія системних налаштувань"
-
-msgid "Backup your receiver settings."
-msgstr "Налаштування бекапу Вашого приймача."
 
 msgid "Bahamas"
 msgstr "Багами"
@@ -2360,6 +2298,9 @@ msgstr "Налаштування поведінки приймача при пе
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Налаштуйте тюнер, використовуючи прості або розширені параметри, використайте параметри іншого тюнер, або скопіюйте їх на другий тюнер, або вимкніть його."
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Вкажіть, в якому місці списку таймерів повинні знаходитися завершені завдання."
 
@@ -2745,6 +2686,10 @@ msgstr "Дата"
 msgid "Date/time input"
 msgstr "Ввести дата/час"
 
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Налаштування"
+
 msgid "Debug"
 msgstr "Налагодження"
 
@@ -2940,9 +2885,6 @@ msgstr "Послуга розкодування через URL-адресу stre
 msgid "Description"
 msgstr "Опис"
 
-msgid "Deselect"
-msgstr "Зняти виділення"
-
 msgid "Destination of fallback remote receiver"
 msgstr "Призначення віддаленого резервного приймача"
 
@@ -3045,6 +2987,9 @@ msgstr "Вимкнути сканування у фоні"
 
 msgid "Disable current event but not coming events"
 msgstr "Вимкнути поточні події, але не майбутні події"
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
+msgstr ""
 
 msgid "Disable move mode"
 msgstr "Вимкнути режим переміщення"
@@ -3238,9 +3183,6 @@ msgstr "Ви хочете продовжити відтворення?"
 msgid "Do you want to select a different skin?"
 msgstr "Бажаєте вибрати інший скін?"
 
-msgid "Do you want to update the package:\n"
-msgstr "Бажаєте оновити пакет::\n"
-
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Бажаєте оновити приймач від %s?"
@@ -3308,9 +3250,6 @@ msgstr "Завантажується"
 msgid "Downloading Image"
 msgstr "Завантаження Іміджа"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Спроба завантажити новий список пакетів. Зачекайте..."
-
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про додатки. Зачекайте..."
 
@@ -3373,6 +3312,10 @@ msgid "EPG:"
 msgstr "ЕПГ:"
 
 #, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "Дії кнопок у меню Вибору ЕПГ"
+
+#, fuzzy
 msgid "EPGFilter Actions"
 msgstr "Дії кнопок у меню Вибору ЕПГ"
 
@@ -3419,17 +3362,11 @@ msgstr "Редагувати конфігурацію DNS Вашого прий�
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Редагувати конфігурацію мережі Вашого приймача.\n"
 
-msgid "Edit the update source address."
-msgstr "Редагувати адресу джерела оновлення."
-
 msgid "Edit timer"
 msgstr "Редагувати таймер"
 
 msgid "Edit title"
 msgstr "Змінити назву"
-
-msgid "Edit update source url"
-msgstr "Змінити адресу джерела оновлення"
 
 msgid "Egypt"
 msgstr "Єгипт"
@@ -3543,6 +3480,9 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Включити віддалений приймач enigma2, щоб спробувати настроїтись на канали, які неможливо настроїти на місцевому рівні (наприклад, приймач зайнятий або тип каналу недоступний на локальному тюнері. Вкажіть повну URL-адресу, включаючи http: // та номер порту (зазвичай: 8001), наприклад http: //second_box: 8001."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr ""
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
 msgid "Enable teletext caching"
@@ -3865,12 +3805,6 @@ msgstr "Розширений"
 
 msgid "Extended PID info"
 msgstr "Розширена PID інформація"
-
-msgid "Extended Software"
-msgstr "Розширене ПЗ"
-
-msgid "Extended Software Plugin"
-msgstr "Плагін Розширеного ПЗ"
 
 msgid "Extended info"
 msgstr "Розширена інформація"
@@ -5043,9 +4977,6 @@ msgstr "Інсталювати список каналів"
 msgid "Install extensions"
 msgstr "Встановити розширення"
 
-msgid "Install local extension"
-msgstr "Встановлення локальних розширень"
-
 #, fuzzy
 msgid "Install picons on"
 msgstr "Встановлення Плагіну"
@@ -5582,12 +5513,6 @@ msgstr "Малі"
 
 msgid "Malta"
 msgstr "Мальта"
-
-msgid "Manage extensions"
-msgstr "Управління розширеннями"
-
-msgid "Manage extensions or plugins for your receiver."
-msgstr "Управління розширеннями, або плагінами Вашого приймача."
 
 msgid "Manage your receiver's software"
 msgstr "Менеджер ПЗ приймача"
@@ -6276,12 +6201,6 @@ msgstr "Ні, але відтворити фільм з початку"
 msgid "No, do not flash image"
 msgstr "Ні, я не хочу встановлювати імідж"
 
-msgid "No, except Wakeup timer"
-msgstr "Ні, крім таймера пробудження"
-
-msgid "No, never"
-msgstr "Ні, ніколи"
-
 msgid "No, only download"
 msgstr "Ні, тільки завантажити"
 
@@ -6339,7 +6258,8 @@ msgstr "Недостатньо місця на диску. Будь ласка, 
 msgid "Not tested:"
 msgstr "Не протестовано:"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+#, fuzzy
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr "Примітка: якщо цей параметр увімкнено, і Вам потрібен режим очікування після пробудження, встановіть опцію `Запуск в режим очікування' як `Ні, крім таймера пробудження'."
 
 msgid ""
@@ -6466,9 +6386,6 @@ msgstr "На дійсних ONID, ігноруйте частину частот
 msgid "One"
 msgstr "Один"
 
-msgid "Online update of your receiver software."
-msgstr "Онлайн оновлення ПЗ Вашого приймача."
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Змінюйте це налаштування лише у тому випадку, якщо ви використовуєте пристрій SCR, який було перепрограмовано за допомогою спеціального програміста. Для отримання додаткової інформації зверніться до особи, яка перепрограмувала пристрій."
 
@@ -6547,6 +6464,9 @@ msgstr "Оригінал"
 msgid "Original audio"
 msgstr "Оригінальна доріжка"
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr "Інший"
 
@@ -6567,12 +6487,6 @@ msgstr "Загальний прогрес:"
 
 msgid "Overscan wizard"
 msgstr "Налаштування Екрану"
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Замінити файли конфігурації під час оновлення ПЗ?"
-
-msgid "Overwrite configuration files?"
-msgstr "Перезаписати файли конфігурації?"
 
 msgid "PAGEDOWN"
 msgstr "PAGEDOWN"
@@ -6654,12 +6568,6 @@ msgstr "Оновлення списку пакетів"
 
 msgid "Packages to update"
 msgstr "Пакети для оновлення"
-
-msgid "Packet management"
-msgstr "Управління пакетами"
-
-msgid "Packet manager"
-msgstr "Управління пакетами"
 
 #, fuzzy
 msgid "Page down"
@@ -6805,6 +6713,9 @@ msgstr "Відтворити ДВД"
 msgid "Play DVDs"
 msgstr "Відтворити ДВД-диски"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr "Відтворити як Картинка в Картинці"
 
@@ -6941,9 +6852,6 @@ msgstr "Будь ласка, виберіть підканал..."
 
 msgid "Please select medium to be scanned"
 msgstr "Будь ласка, виберіть носій для сканування"
-
-msgid "Please select medium to use as backup location"
-msgstr "Будь-ласка, виберіть носій для розташування копії"
 
 msgid "Please select tag to filter..."
 msgstr "Будь-ласка, виберіть тег для фільтру..."
@@ -7252,12 +7160,6 @@ msgstr ""
 "якщо у вас немає слотів eMMC для відновлення.\n"
 "Відновлення слотів eMMC може тривати від 1 до 5 хвилин на слот."
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Натисніть INFO на пульті ду для отримання додаткової інформації."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Натисніть MENU на пульті ду для отримання додаткових опцій."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Натисніть ОК для продовження."
 
@@ -7493,6 +7395,10 @@ msgstr "Показати інтерактивний Rass..."
 msgid "Rating defined by broadcaster - %d"
 msgstr "Рейтинг визначається мовником - %d"
 
+#, fuzzy
+msgid "Rating sort in SingleEPG"
+msgstr "Включити Virgin ЕПГ"
+
 msgid "Rating undefined"
 msgstr "Рейтинг не визначений"
 
@@ -7630,9 +7536,6 @@ msgstr "Регіон"
 msgid "Relative"
 msgstr "Відносний"
 
-msgid "Reload"
-msgstr "Оновити"
-
 msgid "Reload blacklists"
 msgstr "Перезавантажити чорні списки"
 
@@ -7656,9 +7559,6 @@ msgstr "Тип пульта управління"
 
 msgid "Remote control type setup"
 msgstr "Вибір пульта управління"
-
-msgid "Removal has completed."
-msgstr "Оновлення завершено."
 
 msgid "Remove"
 msgstr "Видалити"
@@ -7850,12 +7750,6 @@ msgstr "Повторити тест"
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Перезавантаження мережевого з'єднання.\n"
 
-msgid "Restore"
-msgstr "Відновлення"
-
-msgid "Restore backups"
-msgstr "Відновлення резервних копій"
-
 msgid "Restore defaults"
 msgstr "Відновлення за замовчуванням"
 
@@ -7864,18 +7758,6 @@ msgstr "Відновити видалений імідж"
 
 msgid "Restore deleted user bouquets"
 msgstr "Відновити видалені фаворити користувача"
-
-msgid "Restore system settings"
-msgstr "Відновлення системних налаштувань"
-
-msgid "Restore your backups by date."
-msgstr "Відновити резервні копії за датою."
-
-msgid "Restore your receiver settings."
-msgstr "Відновити налаштування Вашого ресивера."
-
-msgid "Restoring..."
-msgstr "Відновлення..."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -8188,9 +8070,6 @@ msgstr "Помилка сканування!"
 msgid "Scan files..."
 msgstr "Сканування файлів..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Пошук і встановлення локальних розширень."
-
 msgid "Scan options"
 msgstr "Параметри пошуку"
 
@@ -8399,12 +8278,6 @@ msgstr "Вибір типу іміджу"
 msgid "Select audio track"
 msgstr "Вибір Аудіо доріжки"
 
-msgid "Select backup files"
-msgstr "Вибрати файли бекапу"
-
-msgid "Select backup location"
-msgstr "Вибір розташування бекапу"
-
 msgid "Select channel"
 msgstr "Вибір каналу"
 
@@ -8422,12 +8295,6 @@ msgstr "Виберіть призначення для:"
 
 msgid "Select directory for logfile"
 msgstr "Виберіть каталог для файлу логів"
-
-msgid "Select files for backup."
-msgstr "Виберіть файли для резервного копіювання."
-
-msgid "Select files/folders to backup"
-msgstr "Виберіть файли/папки для бекапу"
 
 msgid "Select function"
 msgstr "Виберіть дію"
@@ -8592,12 +8459,6 @@ msgstr "Виберіть тип LNB/пристрій (зазвичай 'Universa
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Виберіть тип пристрою прийому, який ви використовуєте."
 
-msgid "Select update source"
-msgstr "Виберіть джерело оновлення"
-
-msgid "Select update source to edit"
-msgstr "Виберіть джерело оновлення для редагування"
-
 msgid "Select video input with up/down buttons"
 msgstr "Виберіть відеовхід кнопками вгору/вниз"
 
@@ -8621,13 +8482,6 @@ msgstr "Виберіть бездротову мережу"
 
 msgid "Select your ATSC provider."
 msgstr "Виберіть Ваш ATSC провайдер."
-
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Виберіть пристрій для резервного копіювання.\n"
-"Поточний пристрій: "
 
 msgid "Select your country. If not available select 'all'."
 msgstr "Виберіть свою країну. Якщо недомступно, виберіть 'всі'."
@@ -9379,10 +9233,6 @@ msgstr "Плавність"
 msgid "SocketMMI"
 msgstr "Роз’єм MMI"
 
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Налаштування"
-
 msgid "SoftCam / CI"
 msgstr "Емулятор/CI"
 
@@ -9395,20 +9245,11 @@ msgstr "Налаштування емулятора"
 msgid "Software"
 msgstr "Програмне забезпечення"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 msgid "Software management"
 msgstr "Менеджер управіння ПЗ"
 
-msgid "Software manager setup"
-msgstr "Налаштування Менеджера ПЗ"
-
 msgid "Software update"
 msgstr "Оновлення ПЗ"
-
-msgid "Softwaremanager information"
-msgstr "Інформація менеджера ПЗ"
 
 msgid "Solomon Islands"
 msgstr "Соломонові острови"
@@ -9422,15 +9263,8 @@ msgstr "Деякі ТВ не вмикаються в режимі очікува
 msgid "Some plugins are not available:\n"
 msgstr "Деякі додатки не доступні:\n"
 
-#, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Вибачте, %s не встановлено!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Вибачте, видалення директорій може (зараз) бути зроблено тільки через кошик."
-
-msgid "Sorry, no backups found!"
-msgstr "Вибачте, не знайдено жодного бекапу!"
 
 msgid "Sorry, no details available!"
 msgstr "Вибачте, немає детального опису!"
@@ -9438,17 +9272,9 @@ msgstr "Вибачте, немає детального опису!"
 msgid "Sorry, this tuner is in use."
 msgstr "На жаль цей тюнер використовується."
 
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Вибачте, Ваше місце призначення для резервного копіювання не доступно для запису.\n"
-"Будь ласка, виберіть інше."
-
 msgid "Sort"
 msgstr "Сортувати"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Сортування А-Я"
 
@@ -9473,7 +9299,10 @@ msgstr "Налаштування порядок сортування для за
 msgid "Sort plugins list to default?"
 msgstr "Сортувати список плагінів по замовчунню?"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "Сортувати за часом"
+
 msgid "Sort time"
 msgstr "Сортувати за часом"
 
@@ -9644,9 +9473,6 @@ msgstr "Почати зі списку"
 
 msgid "Starting on"
 msgstr "Почати з"
-
-msgid "Startup the set top box in standby"
-msgstr "Ініціювання тюнера в режимі очікування"
 
 msgid "Startup to Standby"
 msgstr "Запуск з режиму очікування"
@@ -11111,9 +10937,6 @@ msgstr "Оновлення не вдалося. У Вашому приймачі
 msgid "Update feed not available."
 msgstr "Канал Оновленя не доступний."
 
-msgid "Update has completed."
-msgstr "Оновлення завершено."
-
 msgid "Updating"
 msgstr "Оновлення"
 
@@ -11237,9 +11060,6 @@ msgstr "Використати Майстра для налаштування о
 
 msgid "Use these input device settings?"
 msgstr "Використовувати ці налаштування пристрою вводу?"
-
-msgid "Use these settings?"
-msgstr "Використовувати ці налаштування?"
 
 msgid "Use this video enhancement settings?"
 msgstr "Використати ці налаштування для покращення відео?"
@@ -11451,9 +11271,6 @@ msgstr "Перегляд телетексту..."
 
 msgid "View video CD..."
 msgstr "Перегляд відео СД..."
-
-msgid "View, install and remove available or installed packages."
-msgstr "Перегляд, встановлення і видалення доступних, або встановлених пакетів."
 
 msgid "Virgin Islands (British)"
 msgstr "Віргінські острови (Великобританія)"
@@ -11895,6 +11712,10 @@ msgid "Where to save temporary timeshift recordings?"
 msgstr "Де зберігати тимчасові записи timeshift?"
 
 #, fuzzy
+msgid "Whitelist"
+msgstr "DVD титульний лист"
+
+#, fuzzy
 msgid "Window Actions"
 msgstr "Дії при виборі скіну"
 
@@ -11999,6 +11820,9 @@ msgstr "Так, для всіх"
 msgid "Yes, I do want to install plugins"
 msgstr "Так, я хочу встановити плагіни"
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Так, завжди"
 
@@ -12013,6 +11837,10 @@ msgstr "Так, лише з глибокого режиму очікування
 
 msgid "Yes, only from standby"
 msgstr "Так, тільки в режимі очікування"
+
+#, fuzzy
+msgid "Yes, only wake-up timers"
+msgstr "Включити таймер пробудження"
 
 msgid "Yes, returning to movie list"
 msgstr "Так, але повернутись до списку фільмів"
@@ -12388,9 +12216,6 @@ msgstr "назад"
 msgid "background image"
 msgstr "фонове зображення"
 
-msgid "backup EPG cache"
-msgstr "резервне копіювання кешу EPG"
-
 msgid "ballet"
 msgstr "балет"
 
@@ -12668,6 +12493,21 @@ msgstr ""
 
 msgid "horizontal"
 msgstr "горизонталь"
+
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Налаштування"
+
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Налаштування"
+
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Налаштування"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 msgid "in menu and plugins"
 msgstr "в меню та плагінах"
@@ -13049,12 +12889,6 @@ msgstr "показати всі теги"
 
 msgid "show event details"
 msgstr "показати деталі передачі"
-
-msgid "show softwaremanager in setup menu"
-msgstr "показати менеджер ПЗ в меню налаштувань"
-
-msgid "show softwaremanager on blue button"
-msgstr "показати менеджер ПЗ по синій кнопці"
 
 msgid "show/game show (general)"
 msgstr "шоу/ігрове шоу (загальне)"

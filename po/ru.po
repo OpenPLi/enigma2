@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2024-12-12 17:09+0200\n"
 "Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
 "Language-Team: openPLi Dimitrij\n"
@@ -26,13 +26,6 @@ msgid ""
 msgstr ""
 "\n"
 "После нажатия кнопки ОК, пожалуйста, подождите!"
-
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Нажмите ОК на Вашем пульте Д/У для продолжения."
 
 msgid ""
 "\n"
@@ -631,9 +624,6 @@ msgstr ""
 msgid "A required tool (%s) was not found."
 msgstr "Нужный инструмент (%s), не найден."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Поиск доступных обновлений сейчас в процессе."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -730,6 +720,10 @@ msgstr "Активировать HbbTV (функция 'красная кноп�
 
 msgid "Activate Picture in Picture"
 msgstr "Активировать PiP (картинку в картинке)"
+
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Установки"
 
 msgid "Activate network settings"
 msgstr "Активировать сетевые установки"
@@ -847,18 +841,6 @@ msgstr "Расширенный"
 
 msgid "Advanced options"
 msgstr "Расширенные опции"
-
-msgid "Advanced options and settings."
-msgstr "Дополнительные опции и настройки."
-
-msgid "Advanced restore"
-msgstr "Расширенное восстановление"
-
-msgid "Advanced software"
-msgstr "Расширенное программное обеспечение"
-
-msgid "Advanced software plugin"
-msgstr "Расширенный плагин программного обеспечения"
 
 msgid "Advanced video enhancement setup"
 msgstr "Расширенная настройка улучшения видео"
@@ -984,9 +966,6 @@ msgstr "Альтернативный режим нумерации канало�
 msgid "Alternative services tuner priority"
 msgstr "Приоритет тюнера в альтернативных сервисах"
 
-msgid "Always ask"
-msgstr "Всегда спрашивать"
-
 msgid "Always hide infobar"
 msgstr "Всегда скрывать инфобар"
 
@@ -1068,13 +1047,6 @@ msgstr ""
 "Вы действительно хотите активировать эту конфигурацию сети?\n"
 "\n"
 
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Вы уверены, что хотите удалить\n"
-"этот бэкап:\n"
-
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Вы уверены, что хотите выйти из этого мастера настройки?"
 
@@ -1084,24 +1056,6 @@ msgid ""
 msgstr ""
 "Вы действительно хотите перезапустить ваши сетевые интерфейсы?\n"
 "\n"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Вы уверены, что хотите восстановить этот бэкап:\n"
-"%s\n"
-"Ваш ресивер будет перезагружен после восстановления!"
-
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Вы уверены, что хотите восстановить бэкап?\n"
-"Ваш ресивер будет перезагружен после восстановления!"
 
 msgid "Argentina"
 msgstr "Argentina"
@@ -1344,23 +1298,8 @@ msgstr "Скорость удаления в фоновом режиме"
 msgid "Backing up to: %s"
 msgstr "Выполняется бекап на: %s"
 
-msgid "Backup completed."
-msgstr "Бэкап завершен."
-
-msgid "Backup failed."
-msgstr "Ошибка создания бэкапа."
-
-msgid "Backup is running..."
-msgstr "Выполняется сохранение бэкапа..."
-
 msgid "Backup settings"
 msgstr "Настройки бекапа"
-
-msgid "Backup system settings"
-msgstr "Бэкап системных настроек"
-
-msgid "Backup your receiver settings."
-msgstr "Бэкап настроек Вашего ресивера."
 
 msgid "Bahamas"
 msgstr "Bahamas"
@@ -2361,6 +2300,9 @@ msgstr "Настройка поведения ресивера при перек
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Варианты настроек тюнера."
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Настройка - в каком месте списка таймеров должны быть показаны завершенные таймеры."
 
@@ -2746,6 +2688,10 @@ msgstr "Дата"
 msgid "Date/time input"
 msgstr "Ввод времени/даты"
 
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Установки"
+
 msgid "Debug"
 msgstr "отладка"
 
@@ -2941,9 +2887,6 @@ msgstr "URL декодирования сервиса через ретранс�
 msgid "Description"
 msgstr "Описание"
 
-msgid "Deselect"
-msgstr "Не выбирать"
-
 msgid "Destination of fallback remote receiver"
 msgstr "Назначение запасного удаленного ресивера"
 
@@ -3046,6 +2989,9 @@ msgstr "Отключить фоновое сканирование"
 
 msgid "Disable current event but not coming events"
 msgstr "Отключить текущее событие, но не отключать таймер"
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
+msgstr ""
 
 msgid "Disable move mode"
 msgstr "Выключить режим перемещения"
@@ -3239,9 +3185,6 @@ msgstr "Вы хотите продолжить это воспроизведен
 msgid "Do you want to select a different skin?"
 msgstr "Вы действительно хотите выбрать другой скин?"
 
-msgid "Do you want to update the package:\n"
-msgstr "Вы хотите обновить пакеты:\n"
-
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Вы хотите обновить Ваш ресивер от %s?"
@@ -3309,9 +3252,6 @@ msgstr "Загрузка"
 msgid "Downloading Image"
 msgstr "Загрузка имиджа"
 
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Пытаемся загрузить новый список пакетов. Пожалуйста, подождите..."
-
 msgid "Downloading plugin information. Please wait..."
 msgstr "Загрузка информации о плагинах. Пожалуйста, подождите..."
 
@@ -3374,6 +3314,10 @@ msgid "EPG:"
 msgstr "EPG:"
 
 #, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "Действия выбора EPG"
+
+#, fuzzy
 msgid "EPGFilter Actions"
 msgstr "Действия выбора EPG"
 
@@ -3420,17 +3364,11 @@ msgstr "Редактировать конфигурацию сервера им�
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Редактировать конфигурацию сети Вашего ресивера.\n"
 
-msgid "Edit the update source address."
-msgstr "Редактировать адрес источника обновления."
-
 msgid "Edit timer"
 msgstr "Редактировать таймер"
 
 msgid "Edit title"
 msgstr "Редактировать название"
-
-msgid "Edit update source url"
-msgstr "Редактировать URL-адрес источника обновления"
 
 msgid "Egypt"
 msgstr "Egypt"
@@ -3544,6 +3482,9 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr "Разрешить удаленный ресивер на enigma2, который попытается запустить стрим этого сервиса, если локальный тюнер занят.Укажите полный URL, включая http:// и номер порта (обычно ...:8001), пример: http://айпи_удаленного_ресивера:8001."
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr ""
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
 msgid "Enable teletext caching"
@@ -3866,12 +3807,6 @@ msgstr "Расширенное"
 
 msgid "Extended PID info"
 msgstr "Расширенная информация PID"
-
-msgid "Extended Software"
-msgstr "Расширенное программное обеспечение"
-
-msgid "Extended Software Plugin"
-msgstr "Расширенный плагин программного обеспечения"
 
 msgid "Extended info"
 msgstr "Расширенные данные"
@@ -5041,9 +4976,6 @@ msgstr "Инсталлировать список каналов"
 msgid "Install extensions"
 msgstr "Инсталлировать дополнения"
 
-msgid "Install local extension"
-msgstr "Инсталляция локальных пакетов"
-
 #, fuzzy
 msgid "Install picons on"
 msgstr "Установка плагинов"
@@ -5576,12 +5508,6 @@ msgstr "Mali"
 
 msgid "Malta"
 msgstr "Malta"
-
-msgid "Manage extensions"
-msgstr "Менеджер дополнений"
-
-msgid "Manage extensions or plugins for your receiver."
-msgstr "Управление дополнениями или плагинами Вашего ресивера."
 
 msgid "Manage your receiver's software"
 msgstr "Менеджер ПО Вашего ресивера"
@@ -6258,12 +6184,6 @@ msgstr "Нет, но сделать рестарт и начать сначал�
 msgid "No, do not flash image"
 msgstr "Нет, не прошивать имидж"
 
-msgid "No, except Wakeup timer"
-msgstr "Нет, исключение таймер включения"
-
-msgid "No, never"
-msgstr "Нет, никогда"
-
 msgid "No, only download"
 msgstr "Нет, только загрузить"
 
@@ -6321,7 +6241,8 @@ msgstr "Нет места на диске. Пожалуйста, освобод�
 msgid "Not tested:"
 msgstr "Без теста:"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+#, fuzzy
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr "Заметка: если активировано и вы хотите перейти в режим ожидания после включения, установите опцию 'Режим ожидания при старте' как 'Нет, исключение таймер включения'."
 
 msgid ""
@@ -6448,9 +6369,6 @@ msgstr "При валидных ONID, игнорировать частотну�
 msgid "One"
 msgstr "Один"
 
-msgid "Online update of your receiver software."
-msgstr "Онлайн обновление ПО Вашего ресивера."
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Измените этот параметр только в том случае, если Вы используете устройство SCR, которое было перепрограммировано с помощью специального программиста. Для получения дополнительной информации обратитесь к человеку, который перепрограммировал устройство."
 
@@ -6529,6 +6447,9 @@ msgstr "Оригинал"
 msgid "Original audio"
 msgstr "Оригинальное аудио"
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr "Другая"
 
@@ -6549,12 +6470,6 @@ msgstr "Общий прогресс:"
 
 msgid "Overscan wizard"
 msgstr "Мастер настройки переразвертки"
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Переписывать файлы конфигурации во время обновления ПО?"
-
-msgid "Overwrite configuration files?"
-msgstr "Переписать файлы конфигурации?"
 
 msgid "PAGEDOWN"
 msgstr "PAGEDOWN"
@@ -6636,12 +6551,6 @@ msgstr "Список пакетов обновления"
 
 msgid "Packages to update"
 msgstr "Пакеты для обновления"
-
-msgid "Packet management"
-msgstr "Управление пакетами"
-
-msgid "Packet manager"
-msgstr "Менеджер пакетов"
 
 #, fuzzy
 msgid "Page down"
@@ -6786,6 +6695,9 @@ msgstr "Воспроизвести DVD"
 msgid "Play DVDs"
 msgstr "Воспроизвести DVD"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr "Включить как картинку в картинке"
 
@@ -6922,9 +6834,6 @@ msgstr "Пожалуйста, выберите подсервис..."
 
 msgid "Please select medium to be scanned"
 msgstr "Пожалуйста, выберите носитель для сканирования "
-
-msgid "Please select medium to use as backup location"
-msgstr "Пожалуйста, выберите носитель для расположения бэкапа"
 
 msgid "Please select tag to filter..."
 msgstr "Пожалуйста, выберите тэг для фильтра..."
@@ -7232,12 +7141,6 @@ msgstr ""
 "Перезагрузка начнется после восстановления любых слотов eMMC.\n"
 "Это может занять от 1 до 5 минут на каждый слот."
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Нажмите кнопку INFO на Вашем пульте Д/У для дополнительной информации."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Нажмите кнопку MENU на Вашем пульте Д/У для дополнительной информации."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Нажмите ОК на Вашем пульте Д/У для продолжения."
 
@@ -7472,6 +7375,10 @@ msgstr "Действия интерактивного Rass"
 msgid "Rating defined by broadcaster - %d"
 msgstr "Рейтинг определен вещателем - %d"
 
+#, fuzzy
+msgid "Rating sort in SingleEPG"
+msgstr "Включить Virgin EPG"
+
 msgid "Rating undefined"
 msgstr "Рейтинг неопределен"
 
@@ -7609,9 +7516,6 @@ msgstr "Регион"
 msgid "Relative"
 msgstr "относительная"
 
-msgid "Reload"
-msgstr "Обновить"
-
 msgid "Reload blacklists"
 msgstr "Обновить черный список"
 
@@ -7635,9 +7539,6 @@ msgstr "Тип пульта Д/У"
 
 msgid "Remote control type setup"
 msgstr "Настройки типа пульта Д/У"
-
-msgid "Removal has completed."
-msgstr "Удаление завершено."
 
 msgid "Remove"
 msgstr "Удаление"
@@ -7829,12 +7730,6 @@ msgstr "Рестарт теста"
 msgid "Restart your network connection and interfaces.\n"
 msgstr "Перезагрузка Ваших сетевых подключений и интерфейсов.\n"
 
-msgid "Restore"
-msgstr "Восстановить"
-
-msgid "Restore backups"
-msgstr "Востановление бэкапов"
-
 msgid "Restore defaults"
 msgstr "Установить по дефолту"
 
@@ -7843,18 +7738,6 @@ msgstr "Восстановить удаленные имиджы?"
 
 msgid "Restore deleted user bouquets"
 msgstr "Восстановить удаленные пользовательские букеты"
-
-msgid "Restore system settings"
-msgstr "Восстановить системные настройки"
-
-msgid "Restore your backups by date."
-msgstr "Восстановить Ваши бэкапы по дате."
-
-msgid "Restore your receiver settings."
-msgstr "Восстановить настройки Вашего ресивера."
-
-msgid "Restoring..."
-msgstr "Востановление..."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -8166,9 +8049,6 @@ msgstr "Ошибка сканирования!"
 msgid "Scan files..."
 msgstr "Сканировать файлы..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Сканирование для локальных дополнений и установка их."
-
 msgid "Scan options"
 msgstr "Параметры сканирования"
 
@@ -8377,12 +8257,6 @@ msgstr "Выбор имиджа"
 msgid "Select audio track"
 msgstr "Выбор аудио дорожки"
 
-msgid "Select backup files"
-msgstr "Выбрать файлы бэкапа"
-
-msgid "Select backup location"
-msgstr "Выбрать расположение бэкапа"
-
 msgid "Select channel"
 msgstr "Выбор канала"
 
@@ -8400,12 +8274,6 @@ msgstr "Выбор расположения для:"
 
 msgid "Select directory for logfile"
 msgstr "Выбор место хранения для файла лога"
-
-msgid "Select files for backup."
-msgstr "Выбор файлов для бэкапа."
-
-msgid "Select files/folders to backup"
-msgstr "Выбор файлов/папок для бэкапа"
 
 msgid "Select function"
 msgstr "Выбор функции"
@@ -8570,12 +8438,6 @@ msgstr "Выберите тип используемого LNB/устройст�
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Выберите тип используемого устройства."
 
-msgid "Select update source"
-msgstr "Выбор источника обновления"
-
-msgid "Select update source to edit"
-msgstr "Выбор источника обновления для редактирования"
-
 msgid "Select video input with up/down buttons"
 msgstr "Выберите видеовход кнопками вверх/вниз"
 
@@ -8599,13 +8461,6 @@ msgstr "Выберите беспроводную сеть"
 
 msgid "Select your ATSC provider."
 msgstr "Выбор Вашего ATSC провайдера."
-
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Выберите устройство для Вашего бэкапа.\n"
-"Текущее устройство: "
 
 msgid "Select your country. If not available select 'all'."
 msgstr "Выбор Вашего региона. Если Ваша страна не доступна, то измените на 'все'."
@@ -9354,10 +9209,6 @@ msgstr "Плавность"
 msgid "SocketMMI"
 msgstr "SocketMMI"
 
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Установки"
-
 msgid "SoftCam / CI"
 msgstr "Эмуляторы / CI"
 
@@ -9370,20 +9221,11 @@ msgstr "Настройки эмулятора"
 msgid "Software"
 msgstr "ПО"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 msgid "Software management"
 msgstr "Менеджер управления ПО"
 
-msgid "Software manager setup"
-msgstr "Настройки менеджера ПО"
-
 msgid "Software update"
 msgstr "Обновление ПО"
-
-msgid "Softwaremanager information"
-msgstr "Информация менеджера ПО"
 
 msgid "Solomon Islands"
 msgstr "Solomon Islands"
@@ -9397,15 +9239,8 @@ msgstr "Некоторые телевизоры не выходят из реж�
 msgid "Some plugins are not available:\n"
 msgstr "Некоторые плагины недоступны:\n"
 
-#, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Извините, %s не установлен!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Извините, удаление директорий может (пока) быть сделано только через корзину,"
-
-msgid "Sorry, no backups found!"
-msgstr "Не найдены бэкапы!"
 
 msgid "Sorry, no details available!"
 msgstr "Извините, нет доступного описания!"
@@ -9413,17 +9248,9 @@ msgstr "Извините, нет доступного описания!"
 msgid "Sorry, this tuner is in use."
 msgstr "Извините, но этот тюнер в данный момент занят."
 
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Извините, место сохранения Вашего бэкапа не доступно для записи.\n"
-"Пожалуйста, выберите другое место сохранения."
-
 msgid "Sort"
 msgstr "Сортировка"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Сортировка А-Я"
 
@@ -9448,7 +9275,10 @@ msgstr "Сортировка пунктов настроек"
 msgid "Sort plugins list to default?"
 msgstr "Сортировать список плагинов по умолчанию?"
 
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "По времени"
+
 msgid "Sort time"
 msgstr "По времени"
 
@@ -9618,9 +9448,6 @@ msgstr "Начинать с режима списка"
 
 msgid "Starting on"
 msgstr "Начиная с"
-
-msgid "Startup the set top box in standby"
-msgstr "Переход в режим ожидания при включении ресивера."
 
 msgid "Startup to Standby"
 msgstr "Режим ожидания при старте"
@@ -11078,9 +10905,6 @@ msgstr "Обновление не удалось. В Вашем ресивере
 msgid "Update feed not available."
 msgstr "Обновления с фида не доступны."
 
-msgid "Update has completed."
-msgstr "Обновление завершено."
-
 msgid "Updating"
 msgstr "Обновление"
 
@@ -11204,9 +11028,6 @@ msgstr "Пользуйтесь мастером для настройки осн
 
 msgid "Use these input device settings?"
 msgstr "Использовать эти параметры устройства ввода?"
-
-msgid "Use these settings?"
-msgstr "Использовать эти настройки?"
 
 msgid "Use this video enhancement settings?"
 msgstr "Использовать эти видео настройки улучшения?"
@@ -11418,9 +11239,6 @@ msgstr "Просмотр телетекста..."
 
 msgid "View video CD..."
 msgstr "Просмотр CD видео..."
-
-msgid "View, install and remove available or installed packages."
-msgstr "Просмотр, установка и удаление доступных или установленных пакетов."
 
 msgid "Virgin Islands (British)"
 msgstr "Virgin Islands (British)"
@@ -11859,6 +11677,10 @@ msgstr "Когда ресивер выходит из режима ожидан�
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Куда Вы хотите сохранять временные файлы таймшифта?"
 
+#, fuzzy
+msgid "Whitelist"
+msgstr "DVD список названий"
+
 msgid "Window Actions"
 msgstr "Действия скинов"
 
@@ -11962,6 +11784,9 @@ msgstr "Да, для всех"
 msgid "Yes, I do want to install plugins"
 msgstr "Да, я хочу установить плагины"
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Да, всегда"
 
@@ -11976,6 +11801,10 @@ msgstr "Да, только из режима глубокого ожидания
 
 msgid "Yes, only from standby"
 msgstr "Да, только из режима ожидания"
+
+#, fuzzy
+msgid "Yes, only wake-up timers"
+msgstr "Активировать таймер включения"
 
 msgid "Yes, returning to movie list"
 msgstr "Да, вернуться к списку записей"
@@ -12350,9 +12179,6 @@ msgstr "назад"
 msgid "background image"
 msgstr "фоновое изображение"
 
-msgid "backup EPG cache"
-msgstr "бэкап кеша EPG"
-
 msgid "ballet"
 msgstr "балет"
 
@@ -12630,6 +12456,21 @@ msgstr "широкий"
 
 msgid "horizontal"
 msgstr "горизонтальная"
+
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Установки"
+
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Установки"
+
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Установки"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 msgid "in menu and plugins"
 msgstr "меню и плагины"
@@ -13011,12 +12852,6 @@ msgstr "показать все теги"
 
 msgid "show event details"
 msgstr "показать детали события"
-
-msgid "show softwaremanager in setup menu"
-msgstr "показать менеджер ПО в меню настроек"
-
-msgid "show softwaremanager on blue button"
-msgstr "показать менеджер ПО в меню дополнений"
 
 msgid "show/game show (general)"
 msgstr "показ/игровых шоу (общее)"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2026-01-26 20:02+0100\n"
 "Last-Translator: GeirJ <dummy@dummy.com>\n"
 "Language-Team: GeirJ\n"
@@ -32,14 +32,6 @@ msgid ""
 msgstr ""
 "\n"
 "Etter å ha trykket OK, vennligst vent!"
-
-#
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Trykk OK på din fjernkontroll for å fortsette."
 
 msgid ""
 "\n"
@@ -666,9 +658,6 @@ msgstr "En innspilling uten stopptid pågår. Hva vil du gjøre?"
 msgid "A required tool (%s) was not found."
 msgstr "Et nødvendig verktøy (%s) ble ikke funnet."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Ser etter nye oppdateringer."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -774,6 +763,10 @@ msgstr "Aktiver HbbTV (Rød tast)"
 #
 msgid "Activate Picture in Picture"
 msgstr "Aktiver bilde i bilde"
+
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Innstillinger"
 
 #
 msgid "Activate network settings"
@@ -915,18 +908,6 @@ msgstr "Ekspert"
 msgid "Advanced options"
 msgstr "Ekspert valg"
 
-msgid "Advanced options and settings."
-msgstr "Ekspert innstillinger."
-
-msgid "Advanced restore"
-msgstr "Ekspert gjenoppretting"
-
-msgid "Advanced software"
-msgstr "Ekspert programvare"
-
-msgid "Advanced software plugin"
-msgstr "Ekspert utvidelser"
-
 msgid "Advanced video enhancement setup"
 msgstr "Ekspert bildeforbedrings innstilling"
 
@@ -1061,9 +1042,6 @@ msgstr "Alternativt nummervalg"
 msgid "Alternative services tuner priority"
 msgstr "Alternativt tunervalg for kanaler"
 
-msgid "Always ask"
-msgstr "Spør først"
-
 msgid "Always hide infobar"
 msgstr "Skjul infobar"
 
@@ -1156,14 +1134,6 @@ msgstr ""
 "\n"
 
 #
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Er du sikker på at du vil slette\n"
-"følgende sikkerhetskopi:\n"
-
-#
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Er du sikker på at du vil avslutte denne veiviseren?"
 
@@ -1173,25 +1143,6 @@ msgid ""
 msgstr ""
 "Er du sikker på at du vil starte nettverket på nytt?\n"
 "\n"
-
-#, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Er du sikker på at du vil gjenopprette\n"
-"følgende sikkerhetskopi: \n"
-"%s\n"
-"Mottakeren vil starte på nytt etter at sikkerhetskopieringen er gjenopprettet!"
-
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Er du sikker på at du vil gjenopprette sikkerhetskopien?\n"
-"Din mottaker vil starte på nytt når sikkerhetskopien er gjenopprettet!"
 
 msgid "Argentina"
 msgstr "Argentina"
@@ -1460,27 +1411,8 @@ msgid "Backing up to: %s"
 msgstr "Sikkerhetskopierer opp til: %s"
 
 #
-msgid "Backup completed."
-msgstr "Sikkerhetskopiering fullført."
-
-#
-msgid "Backup failed."
-msgstr "Sikkerhetskopiering mislyktes."
-
-#
-msgid "Backup is running..."
-msgstr "Sikkerhetskopi kjører..."
-
-#
 msgid "Backup settings"
 msgstr "Innstillinger for sikkerhetskopier"
-
-#
-msgid "Backup system settings"
-msgstr "Sikkerhetskopier system innstillinger"
-
-msgid "Backup your receiver settings."
-msgstr "Sikkerhetskopier dine mottaker innstillinger."
 
 msgid "Bahamas"
 msgstr "Bahamas"
@@ -2568,6 +2500,9 @@ msgstr "Still inn alternativer for hvordan mottakeren bytter kanaler."
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr "Innstill denne tuneren med enkle eller avanserte alternativer, gjennomgang til en annen tuner, eller kopiere en konfigurasjon fra en annen mottaker, eller deaktivere den."
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Still inn hvor fullførte timere skal vises i timer listen."
 
@@ -2992,6 +2927,10 @@ msgstr "Dato"
 msgid "Date/time input"
 msgstr "Still inn dato/tid"
 
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Innstillinger"
+
 msgid "Debug"
 msgstr "Debug"
 
@@ -3205,10 +3144,6 @@ msgstr "Dekrypteringstjeneste via streamrelay-url"
 msgid "Description"
 msgstr "Beskrivelse"
 
-#
-msgid "Deselect"
-msgstr "Angre"
-
 msgid "Destination of fallback remote receiver"
 msgstr "Destinasjon for ekstern reserve mottaker"
 
@@ -3319,6 +3254,9 @@ msgstr "Deaktiver bakgrunnssøk"
 #
 msgid "Disable current event but not coming events"
 msgstr "Fjern nåværende program men ikke kommende program"
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
+msgstr ""
 
 msgid "Disable move mode"
 msgstr "Slå av flytte modus"
@@ -3548,10 +3486,6 @@ msgid "Do you want to select a different skin?"
 msgstr "Vil du velge et annet grafisk utseende?"
 
 #
-msgid "Do you want to update the package:\n"
-msgstr "Vil du oppdatere pakken:\n"
-
-#
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Vil du oppdatere mottakeren til %s?"
@@ -3629,10 +3563,6 @@ msgid "Downloading Image"
 msgstr "Laster ned operativsystem"
 
 #
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Laster ned en ny pakkeliste. Vennligst vent..."
-
-#
 msgid "Downloading plugin information. Please wait..."
 msgstr "Laster ned informasjon om utvidelser. Vennligst vent litt..."
 
@@ -3699,6 +3629,11 @@ msgid "EPG:"
 msgstr "EPG:"
 
 #
+#, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "EPG Filter-handlinger"
+
+#
 msgid "EPGFilter Actions"
 msgstr "EPG Filter-handlinger"
 
@@ -3747,17 +3682,11 @@ msgstr "Rediger navneserver konfigurasjon av mottakeren.\n"
 msgid "Edit the network configuration of your receiver.\n"
 msgstr "Rediger mottakerens nettverksinnstilling.\n"
 
-msgid "Edit the update source address."
-msgstr "Rediger kildeadressen for oppdateringen."
-
 msgid "Edit timer"
 msgstr "Rediger timer"
 
 msgid "Edit title"
 msgstr "Rediger overskrift"
-
-msgid "Edit update source url"
-msgstr "Rediger URL-adresse for oppdaterings kilde"
 
 msgid "Egypt"
 msgstr "Egypt"
@@ -3883,6 +3812,9 @@ msgstr "Aktiver ekstern enigma2 mottaker som kan brukes til å søke opp kanaler
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
 msgstr "Aktiver angivelse av et tidsintervall for filtrering av hendelser i SingleEPG ved hjelp av 'Stopp'-knappen."
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
+msgstr ""
 
 msgid "Enable teletext caching"
 msgstr "Aktiver tekst-TV mellomlagring"
@@ -4246,14 +4178,6 @@ msgstr "Ekstra"
 #
 msgid "Extended PID info"
 msgstr "Utvidet PID-informasjon"
-
-#
-msgid "Extended Software"
-msgstr "Utvidet programvare"
-
-#
-msgid "Extended Software Plugin"
-msgstr "Utvidet programvare plugin"
 
 #
 msgid "Extended info"
@@ -5538,10 +5462,6 @@ msgid "Install extensions"
 msgstr "Installer utvidelser"
 
 #
-msgid "Install local extension"
-msgstr "Installer lokal utvidelse"
-
-#
 #, fuzzy
 msgid "Install picons on"
 msgstr "Installer plugin"
@@ -6147,13 +6067,6 @@ msgstr "Mali"
 
 msgid "Malta"
 msgstr "Malta"
-
-#
-msgid "Manage extensions"
-msgstr "Administrer utvidelser"
-
-msgid "Manage extensions or plugins for your receiver."
-msgstr "Administrer utvidelser og tilleggsprogrammer for mottakeren din."
 
 #
 msgid "Manage your receiver's software"
@@ -6918,12 +6831,6 @@ msgstr "Nei, men start på nytt"
 msgid "No, do not flash image"
 msgstr "Nei, ikke installer systemet"
 
-msgid "No, except Wakeup timer"
-msgstr "Nei, unntatt vekke timer"
-
-msgid "No, never"
-msgstr "Nei, aldri"
-
 msgid "No, only download"
 msgstr "Nei, bare nedlasting"
 
@@ -6987,7 +6894,8 @@ msgstr "Ikke nok lagringsplass. Frigjør litt diskplass og prøv igjen. (%(req)d
 msgid "Not tested:"
 msgstr "Ikke testet:"
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+#, fuzzy
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr "NB: Hvis aktivert og du ønsker standby modus etter vekking, brukes valget 'Oppstart til Standby' som 'Nei, unntatt tidsur tid'."
 
 msgid ""
@@ -7117,9 +7025,6 @@ msgstr "Ved gyldige ONIDs, ignorer frequency sub network part"
 msgid "One"
 msgstr "En"
 
-msgid "Online update of your receiver software."
-msgstr "Oppdaterer din mottaker."
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Bare endre denne innstillingen hvis du bruker en SCR enhet som har blitt omprogrammert med egendefinert programmerer. For mer informasjon sjekk med personen som omprogrammerte enheten."
 
@@ -7203,6 +7108,9 @@ msgstr "Original"
 msgid "Original audio"
 msgstr "Original lyd"
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr "Annen"
 
@@ -7226,13 +7134,6 @@ msgstr "Liten framdriftsbar:"
 #
 msgid "Overscan wizard"
 msgstr "Veiviser for ekte bildestørrelse"
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Overskriv konfigurerte filer under programvareoppdatering?"
-
-#
-msgid "Overwrite configuration files?"
-msgstr "Overskrive innstilte filer?"
 
 msgid "PAGEDOWN"
 msgstr "PAGEDOWN"
@@ -7320,12 +7221,6 @@ msgstr "Ser etter ny programvare"
 #
 msgid "Packages to update"
 msgstr "Tilgjengelige oppdateringer"
-
-msgid "Packet management"
-msgstr "Velg programpakker"
-
-msgid "Packet manager"
-msgstr "Pakkeforvalter"
 
 msgid "Page down"
 msgstr "Side ned"
@@ -7483,6 +7378,9 @@ msgstr "Spill av DVD"
 msgid "Play DVDs"
 msgstr "Spill av DVDer"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr "Bruk bilde i bilde visning"
 
@@ -7637,10 +7535,6 @@ msgstr "Velg en underleverandør..."
 
 msgid "Please select medium to be scanned"
 msgstr "Velg medium som skal gjennomsøkes"
-
-#
-msgid "Please select medium to use as backup location"
-msgstr "Velg medium for lagring av sikkerhetskopi"
 
 #
 msgid "Please select tag to filter..."
@@ -7992,12 +7886,6 @@ msgstr ""
 "med mindre du har eMMC-spor å gjenopprette.\n"
 "Gjenopprette eMMC-spor kan ta fra 1 til 5 minutter pr spor."
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Trykk INFO på fjernkontrollen for ytterligere informasjon."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Trykk MENU på fjernkontrollen for flere alternativer."
-
 msgid "Press OK on your remote control to continue."
 msgstr "Trykk OK for å fortsette."
 
@@ -8261,6 +8149,10 @@ msgstr "'Rass' interaktive handlinger"
 msgid "Rating defined by broadcaster - %d"
 msgstr "Rangering definert av kringkasteren -%d"
 
+#, fuzzy
+msgid "Rating sort in SingleEPG"
+msgstr "Aktiver filtrering i SingleEPG"
+
 msgid "Rating undefined"
 msgstr "Rangering udefinert"
 
@@ -8410,9 +8302,6 @@ msgstr "Region"
 msgid "Relative"
 msgstr "Parallell"
 
-msgid "Reload"
-msgstr "Restart"
-
 msgid "Reload blacklists"
 msgstr "Last om svartelister"
 
@@ -8438,9 +8327,6 @@ msgstr "Fjernkontroll type"
 #
 msgid "Remote control type setup"
 msgstr "Fjernkontroll type og innstilling"
-
-msgid "Removal has completed."
-msgstr "Slettingen er fullført."
 
 #
 msgid "Remove"
@@ -8655,14 +8541,6 @@ msgid "Restart your network connection and interfaces.\n"
 msgstr "Start nettverksforbindelse på nytt.\n"
 
 #
-msgid "Restore"
-msgstr "Gjenopprett"
-
-#
-msgid "Restore backups"
-msgstr "Gjenopprett sikkerhetskopier"
-
-#
 msgid "Restore defaults"
 msgstr "Bruk standardinnstillinger"
 
@@ -8671,20 +8549,6 @@ msgstr "Gjenopprett slettede operativsystem"
 
 msgid "Restore deleted user bouquets"
 msgstr "Gjenopprett slettede kanallister"
-
-#
-msgid "Restore system settings"
-msgstr "Gjenopprett systeminnstillingene"
-
-msgid "Restore your backups by date."
-msgstr "Gjenopprett dine sikkerhetskopier etter dato."
-
-msgid "Restore your receiver settings."
-msgstr "Tilbakestill dine mottaker innstillinger."
-
-#
-msgid "Restoring..."
-msgstr "Gjenoppretter..."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -9025,9 +8889,6 @@ msgstr "Søket mislyktes!"
 msgid "Scan files..."
 msgstr "Søker filer..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Søk etter lokale utvidelser og installer de."
-
 #
 msgid "Scan options"
 msgstr "Søke valg"
@@ -9257,13 +9118,6 @@ msgid "Select audio track"
 msgstr "Velg lydspor"
 
 #
-msgid "Select backup files"
-msgstr "Velg sikkerhetskopifiler"
-
-msgid "Select backup location"
-msgstr "Velg sikkerhetskopi"
-
-#
 msgid "Select channel"
 msgstr "Velg kanal"
 
@@ -9281,12 +9135,6 @@ msgstr "Velg målet for:"
 
 msgid "Select directory for logfile"
 msgstr "Velg mappe for loggfil"
-
-msgid "Select files for backup."
-msgstr "Velg filer for sikkerhetskopiering."
-
-msgid "Select files/folders to backup"
-msgstr "Velg filer/mapper for sikkerhetskopiering"
 
 #
 msgid "Select function"
@@ -9466,12 +9314,6 @@ msgstr "Velg LNB type/enhet som blir brukt (normalt 'Universal'). Hvis din LNB t
 msgid "Select the type of Single Cable Reception device you are using."
 msgstr "Velg typen av enkeltkablet mottaksenhet du bruker."
 
-msgid "Select update source"
-msgstr "Velg oppdaterings kilde"
-
-msgid "Select update source to edit"
-msgstr "Velg oppdaterings kilde å redigere"
-
 msgid "Select video input with up/down buttons"
 msgstr "Velg video inngang med opp/ned-knappene"
 
@@ -9498,14 +9340,6 @@ msgstr "Velg trådløst nettverk"
 #
 msgid "Select your ATSC provider."
 msgstr "Velg din ATSC leverandør."
-
-#
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Velg din enhet for sikkerhetskopi.\n"
-"Gjeldende enhet: "
 
 msgid "Select your country. If not available select 'all'."
 msgstr "Velg ditt land. Hvis ikke tilgjengelig velg 'alle'."
@@ -10342,10 +10176,6 @@ msgstr "Jevn"
 msgid "SocketMMI"
 msgstr "SocketMMI"
 
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Innstillinger"
-
 msgid "SoftCam / CI"
 msgstr "SoftCam / CI"
 
@@ -10359,21 +10189,12 @@ msgstr "Softcam innstilling"
 msgid "Software"
 msgstr "Programvare"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 #
 msgid "Software management"
 msgstr "Programvareadministrasjon"
 
-msgid "Software manager setup"
-msgstr "Programvare oppsett"
-
 msgid "Software update"
 msgstr "Programvareoppdatering"
-
-msgid "Softwaremanager information"
-msgstr "Programvareadministrasjon"
 
 msgid "Solomon Islands"
 msgstr "Solomonøyene"
@@ -10388,15 +10209,8 @@ msgstr "Noen TV-er aktiverer ikke slå på fra standby når de mottar kommandoen
 msgid "Some plugins are not available:\n"
 msgstr "Noen utvidelser er ikke tilgjengelig:\n"
 
-#, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Beklager, %s har ikke blitt installert!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Beklager, mapper kan (fra nå av) kun slettes via papirkurven."
-
-msgid "Sorry, no backups found!"
-msgstr "Beklager, fant ingen sikkerhetskopi!"
 
 msgid "Sorry, no details available!"
 msgstr "Beklager, ingen detaljer er tilgjengelig!"
@@ -10404,19 +10218,10 @@ msgstr "Beklager, ingen detaljer er tilgjengelig!"
 msgid "Sorry, this tuner is in use."
 msgstr "Beklager, denne tuner er i bruk."
 
-#
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Beklager, sikkerhetskopien er ikke skrivbar.\n"
-"Vennligst velg en annen."
-
 msgid "Sort"
 msgstr "Sorter"
 
 #
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Sorter A-Å"
 
@@ -10443,7 +10248,11 @@ msgid "Sort plugins list to default?"
 msgstr "Sortere utvidelsesliste til standard?"
 
 #
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "Sorter tid"
+
+#
 msgid "Sort time"
 msgstr "Sorter tid"
 
@@ -10630,9 +10439,6 @@ msgstr "Start med listevisning"
 #
 msgid "Starting on"
 msgstr "Starter på"
-
-msgid "Startup the set top box in standby"
-msgstr "Slå på mottakeren i standby"
 
 msgid "Startup to Standby"
 msgstr "Slå på til standby"
@@ -12236,9 +12042,6 @@ msgstr "Oppdateringen mislyktes. Internett forbindelsen til mottakeren fungerer 
 msgid "Update feed not available."
 msgstr "Oppdatering ikke tilgjengelig."
 
-msgid "Update has completed."
-msgstr "Oppdateringen er ferdig."
-
 msgid "Updating"
 msgstr "Oppdaterer"
 
@@ -12373,10 +12176,6 @@ msgstr "Bruk veiviseren til å konfigurere grunnleggende funksjoner"
 #
 msgid "Use these input device settings?"
 msgstr "Bruk disse innstillinger for inndataenheter?"
-
-#
-msgid "Use these settings?"
-msgstr "Bruk disse innstillinger?"
 
 #
 msgid "Use this video enhancement settings?"
@@ -12608,9 +12407,6 @@ msgstr "Se tekst-TV..."
 
 msgid "View video CD..."
 msgstr "Se video CD..."
-
-msgid "View, install and remove available or installed packages."
-msgstr "Se gjennom, installer/avinstaller programpakker."
 
 msgid "Virgin Islands (British)"
 msgstr "Jomfruøyene (Engelsk)"
@@ -13061,6 +12857,11 @@ msgid "Where to save temporary timeshift recordings?"
 msgstr "Hvor skal midlertidige timeskift opptak lagres?"
 
 #
+#, fuzzy
+msgid "Whitelist"
+msgstr "DVD navneliste"
+
+#
 msgid "Window Actions"
 msgstr "Handlinger i vindu"
 
@@ -13178,6 +12979,9 @@ msgstr "Ja til alt"
 msgid "Yes, I do want to install plugins"
 msgstr "Ja, jeg vil installere utvidelser"
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Ja, alltid"
 
@@ -13193,6 +12997,10 @@ msgstr "Ja, bare fra dvalemodus"
 
 msgid "Yes, only from standby"
 msgstr "Ja, bare fra avslått modus"
+
+#, fuzzy
+msgid "Yes, only wake-up timers"
+msgstr "Bruk våkne timer"
 
 msgid "Yes, returning to movie list"
 msgstr "Ja, returnerer til opptaksliste"
@@ -13595,9 +13403,6 @@ msgstr "tilbake"
 msgid "background image"
 msgstr "bakgrunns bilde"
 
-msgid "backup EPG cache"
-msgstr "sikkerhetskopi av EPG-hurtigbuffer"
-
 msgid "ballet"
 msgstr "ballett"
 
@@ -13913,6 +13718,21 @@ msgstr "hoy"
 #
 msgid "horizontal"
 msgstr "horisontal"
+
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Innstillinger"
+
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Innstillinger"
+
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Innstillinger"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 #
 msgid "in menu and plugins"
@@ -14357,12 +14177,6 @@ msgstr "vis alle merker"
 #
 msgid "show event details"
 msgstr "vis hendelsesdetaljene"
-
-msgid "show softwaremanager in setup menu"
-msgstr "vis programvareoppsett"
-
-msgid "show softwaremanager on blue button"
-msgstr "vis programvareoppsett på blå tast"
 
 msgid "show/game show (general)"
 msgstr "underholdning/spørreprogram (generelt)"

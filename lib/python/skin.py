@@ -776,6 +776,9 @@ class AttributeParser:
 		ptr = loadPixmap(name, self.desktop)
 		self.guiObject.setPointer(1, ptr, pos)
 
+	def hidePointerOnZeroLength(self, value):
+		self.guiObject.setHidePointerOnZeroLength(int(parseBoolean("hidePointerOnZeroLength", value)))
+
 	def shadowOffset(self, value):
 		self.guiObject.setShadowOffset(parsePosition(value, self.scaleTuple))
 

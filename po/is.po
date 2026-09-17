@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 07:29+0100\n"
+"POT-Creation-Date: 2026-09-11 14:52+0100\n"
 "PO-Revision-Date: 2020-05-16 18:44+0200\n"
 "Last-Translator: Baldur <bsveinsson@gmail.com>\n"
 "Language-Team: Polar Team/LT Team <baddi@oreind.is>\n"
@@ -29,14 +29,6 @@ msgid ""
 msgstr ""
 "\n"
 "Bíðið eftir að hafa ýtt á OK!"
-
-#
-msgid ""
-"\n"
-"Press OK on your remote control to continue."
-msgstr ""
-"\n"
-"Ýtið á OK á fjarstýringunni til að halda áfram."
 
 #
 #, fuzzy
@@ -676,9 +668,6 @@ msgstr "Endurtaka atriði sem er í upptöku. hvað viltu gera núna?"
 msgid "A required tool (%s) was not found."
 msgstr "Nauðsynlegt tól (%s) fannst ekki."
 
-msgid "A search for available updates is currently in progress."
-msgstr "Leit að tiltækum uppfærslum í gangi."
-
 msgid ""
 "A second configured interface has been found.\n"
 "\n"
@@ -783,6 +772,11 @@ msgstr ""
 #
 msgid "Activate Picture in Picture"
 msgstr "Virkja Mynd í Mynd"
+
+#
+#, fuzzy
+msgid "Activate iCAM descrambling"
+msgstr "Stillingar"
 
 #
 msgid "Activate network settings"
@@ -936,20 +930,6 @@ msgstr ""
 msgid "Advanced options"
 msgstr "Sérfræði stillingar"
 
-msgid "Advanced options and settings."
-msgstr "Auka sérfræði stillingar."
-
-msgid "Advanced restore"
-msgstr "Sérfræði innsetning afrita"
-
-#, fuzzy
-msgid "Advanced software"
-msgstr "Hugbúnaður sérfræðinga"
-
-#, fuzzy
-msgid "Advanced software plugin"
-msgstr "Sérfræði íforrit"
-
 #, fuzzy
 msgid "Advanced video enhancement setup"
 msgstr "Myndstillingar fyrir lengra komna"
@@ -1079,9 +1059,6 @@ msgstr "Möguleika útvarps stilling"
 msgid "Alternative services tuner priority"
 msgstr "Móttakara forgangur við rásaval"
 
-msgid "Always ask"
-msgstr "Spyrja alltaf"
-
 msgid "Always hide infobar"
 msgstr ""
 
@@ -1170,14 +1147,6 @@ msgstr ""
 "Ertu viss um að þú viljir virkja þessa net stillingu?\n"
 "\n"
 
-#, fuzzy
-msgid ""
-"Are you sure you want to delete\n"
-"the following backup:\n"
-msgstr ""
-"Ertu viss um að þú viljir eyða\n"
-"eftirfarandi afriti:\n"
-
 msgid "Are you sure you want to exit this wizard?"
 msgstr "Ertu viss um að þú viljir hætta í ráðgjafanum?"
 
@@ -1187,24 +1156,6 @@ msgid ""
 msgstr ""
 "Ertu viss um að þú viljir endurræsa netkortið?\n"
 "\n"
-
-#, fuzzy, python-format
-msgid ""
-"Are you sure you want to restore\n"
-"the following backup:\n"
-"%s\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ertu viss um að þú viljir setja inn þetta Enigma2 afrit?\n"
-"Enigma2 mun endurræsa eftir innsetningu"
-
-#, fuzzy
-msgid ""
-"Are you sure you want to restore the backup?\n"
-"Your receiver will restart after the backup has been restored!"
-msgstr ""
-"Ertu viss um að þú viljir setja inn þetta Enigma2 afrit?\n"
-"Enigma2 mun endurræsa eftir innsetningu"
 
 msgid "Argentina"
 msgstr ""
@@ -1470,24 +1421,8 @@ msgid "Backing up to: %s"
 msgstr ""
 
 #, fuzzy
-msgid "Backup completed."
-msgstr "Afritun tókst ekki."
-
-msgid "Backup failed."
-msgstr "Afritun tókst ekki."
-
-msgid "Backup is running..."
-msgstr "Afritun í vinnslu..."
-
-#, fuzzy
 msgid "Backup settings"
 msgstr "Afrita kerfis stillingar"
-
-msgid "Backup system settings"
-msgstr "Afrita kerfis stillingar"
-
-msgid "Backup your receiver settings."
-msgstr ""
 
 msgid "Bahamas"
 msgstr ""
@@ -2543,6 +2478,9 @@ msgstr ""
 msgid "Configure this tuner using simple or advanced options, or loop it through to another tuner, or copy a configuration from another tuner, or disable it."
 msgstr ""
 
+msgid "Configure when the set-top box should enter standby after startup or restart."
+msgstr ""
+
 msgid "Configure where completed timers show up in the timer list."
 msgstr ""
 
@@ -2961,6 +2899,11 @@ msgstr "Dags"
 msgid "Date/time input"
 msgstr "Tíma/Dags Innsláttur"
 
+#
+#, fuzzy
+msgid "Deactivate iCAM descrambling"
+msgstr "Stillingar"
+
 msgid "Debug"
 msgstr ""
 
@@ -3189,10 +3132,6 @@ msgstr ""
 msgid "Description"
 msgstr "Lýsing"
 
-#
-msgid "Deselect"
-msgstr "Ekki velja"
-
 msgid "Destination of fallback remote receiver"
 msgstr ""
 
@@ -3314,6 +3253,9 @@ msgid "Disable background scanning"
 msgstr ""
 
 msgid "Disable current event but not coming events"
+msgstr ""
+
+msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
 msgstr ""
 
 #
@@ -3554,10 +3496,6 @@ msgstr "Viltu halda áfram að spila þetta?"
 msgid "Do you want to select a different skin?"
 msgstr ""
 
-#
-msgid "Do you want to update the package:\n"
-msgstr "Viltu uppfæra pakkann:\n"
-
 #, fuzzy, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Viltu hlaða niður stýrikerfinu á %s ?"
@@ -3628,10 +3566,6 @@ msgstr "Hleð niður"
 #, fuzzy
 msgid "Downloading Image"
 msgstr "Hleð niður"
-
-#
-msgid "Downloading a new packet list. Please wait..."
-msgstr "Reyni að hlaða niður nýjum pakka lista. Vinsamlega bíðið..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Hala niður íforrits upplýsingum. Vinsamlega bíðið..."
@@ -3706,6 +3640,11 @@ msgstr ""
 
 #
 #, fuzzy
+msgid "EPGCatch Up Actions"
+msgstr "EPG val"
+
+#
+#, fuzzy
 msgid "EPGFilter Actions"
 msgstr "EPG val"
 
@@ -3762,18 +3701,12 @@ msgstr "fara úr nafnaþjóns stillingum"
 msgid "Edit the network configuration of your receiver.\n"
 msgstr ""
 
-msgid "Edit the update source address."
-msgstr "Breyta veffangi uppfærslu uppruna."
-
 msgid "Edit timer"
 msgstr ""
 
 #
 msgid "Edit title"
 msgstr "Breyta titili"
-
-msgid "Edit update source url"
-msgstr "Breyta uppfærslu uppruna slóð"
 
 msgid "Egypt"
 msgstr ""
@@ -3899,6 +3832,9 @@ msgid "Enable remote enigma2 receiver to be tried to tune into services that can
 msgstr ""
 
 msgid "Enable setting a time interval for filtering events in SingleEPG using the 'Stop' button."
+msgstr ""
+
+msgid "Enable sorting by rating under the yellow button in SingleEPG."
 msgstr ""
 
 msgid "Enable teletext caching"
@@ -4255,12 +4191,6 @@ msgstr ""
 
 msgid "Extended PID info"
 msgstr ""
-
-msgid "Extended Software"
-msgstr "Viðbótar forrit"
-
-msgid "Extended Software Plugin"
-msgstr "Viðbótar hugbúnaðar íforrit"
 
 #, fuzzy
 msgid "Extended info"
@@ -5589,9 +5519,6 @@ msgstr "næsta rás í sögu"
 msgid "Install extensions"
 msgstr ""
 
-msgid "Install local extension"
-msgstr "Setja inn viðbót af boxi"
-
 #
 #, fuzzy
 msgid "Install picons on"
@@ -6233,12 +6160,6 @@ msgid "Mali"
 msgstr ""
 
 msgid "Malta"
-msgstr ""
-
-msgid "Manage extensions"
-msgstr "Sýsla með íforrit"
-
-msgid "Manage extensions or plugins for your receiver."
 msgstr ""
 
 #
@@ -7063,12 +6984,6 @@ msgstr "Nei, en byrja frá byrjun"
 msgid "No, do not flash image"
 msgstr "Nei, ekki gera neitt."
 
-msgid "No, except Wakeup timer"
-msgstr ""
-
-msgid "No, never"
-msgstr "Nei, aldrei"
-
 msgid "No, only download"
 msgstr ""
 
@@ -7138,7 +7053,7 @@ msgstr "Ekki nóg diskpláss. Taktu til á diskinum og reyndu aftur. (%(req)d MB
 msgid "Not tested:"
 msgstr ""
 
-msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'No, except Wakeup timer'."
+msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
 msgstr ""
 
 #
@@ -7282,9 +7197,6 @@ msgstr ""
 msgid "One"
 msgstr "Einn"
 
-msgid "Online update of your receiver software."
-msgstr ""
-
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr ""
 
@@ -7371,6 +7283,9 @@ msgstr ""
 msgid "Original audio"
 msgstr ""
 
+msgid "Oscam Streamrelay"
+msgstr ""
+
 msgid "Other"
 msgstr ""
 
@@ -7393,13 +7308,6 @@ msgstr ""
 
 msgid "Overscan wizard"
 msgstr ""
-
-msgid "Overwrite configuration files during software update?"
-msgstr "Skrifa yfir stillinga skrár við hugbúnaðar uppfærslu?"
-
-#, fuzzy
-msgid "Overwrite configuration files?"
-msgstr "Skrifa yfir stillinga skrár ?"
 
 msgid "PAGEDOWN"
 msgstr ""
@@ -7487,14 +7395,6 @@ msgstr "Listi uppfærðra pakka"
 
 msgid "Packages to update"
 msgstr ""
-
-#
-msgid "Packet management"
-msgstr "Pakka meðhöndlun"
-
-#
-msgid "Packet manager"
-msgstr "Hugbúnaðarpakka stjóri"
 
 msgid "Page down"
 msgstr ""
@@ -7669,6 +7569,9 @@ msgstr "Spila DVD"
 msgid "Play DVDs"
 msgstr "Spila DVD"
 
+msgid "Play archive"
+msgstr ""
+
 msgid "Play as Picture in Picture"
 msgstr ""
 
@@ -7832,10 +7735,6 @@ msgstr "Vinsamlega veldu undirrás..."
 #, fuzzy
 msgid "Please select medium to be scanned"
 msgstr "Vinsamlega veljið tæki sem á að leita"
-
-#
-msgid "Please select medium to use as backup location"
-msgstr "Vinsamlega veljið tæki til að nota sem afritunar stað"
 
 #
 msgid "Please select tag to filter..."
@@ -8191,12 +8090,6 @@ msgid ""
 "Restoring eMMC slots can take from 1 -> 5 minutes per slot."
 msgstr ""
 
-msgid "Press INFO on your remote control for additional information."
-msgstr "Ýttu á INFO á fjarstýringunni fyrir nánari upplýsingar."
-
-msgid "Press MENU on your remote control for additional options."
-msgstr "Ýttu á MENU á fjarstýringunni til að sjá meiri möguleika."
-
 #
 msgid "Press OK on your remote control to continue."
 msgstr "Ýttu á OK á fjarstýringunni til að halda áfram."
@@ -8466,6 +8359,9 @@ msgstr "Skoða gagnvirkt Útvarp"
 msgid "Rating defined by broadcaster - %d"
 msgstr ""
 
+msgid "Rating sort in SingleEPG"
+msgstr ""
+
 msgid "Rating undefined"
 msgstr ""
 
@@ -8624,10 +8520,6 @@ msgstr ""
 msgid "Relative"
 msgstr ""
 
-#
-msgid "Reload"
-msgstr "Endurlesa"
-
 msgid "Reload blacklists"
 msgstr ""
 
@@ -8657,11 +8549,6 @@ msgstr "Gerð foreldrastýringar"
 #, fuzzy
 msgid "Remote control type setup"
 msgstr "Gerð foreldrastýringar"
-
-#
-#, fuzzy
-msgid "Removal has completed."
-msgstr "Tókst ekki að taka út."
 
 #
 msgid "Remove"
@@ -8896,14 +8783,6 @@ msgid "Restart your network connection and interfaces.\n"
 msgstr "Endurræsa nettengingu og netkort.\n"
 
 #
-msgid "Restore"
-msgstr "Setja inn"
-
-#
-msgid "Restore backups"
-msgstr "Setja inn afrit"
-
-#
 #, fuzzy
 msgid "Restore defaults"
 msgstr "Setja inn afrit"
@@ -8915,22 +8794,6 @@ msgstr "Setja inn afrit"
 
 msgid "Restore deleted user bouquets"
 msgstr ""
-
-#
-msgid "Restore system settings"
-msgstr "Setja inn kerfis stillingar"
-
-#
-msgid "Restore your backups by date."
-msgstr "Setja inn stilligar eftir dagsetningu."
-
-msgid "Restore your receiver settings."
-msgstr ""
-
-#
-#, fuzzy
-msgid "Restoring..."
-msgstr "tek upp...."
 
 msgid "Restricted 18+"
 msgstr ""
@@ -9283,9 +9146,6 @@ msgstr "Tókst ekki að stilla inn!"
 msgid "Scan files..."
 msgstr "Leita að skrám..."
 
-msgid "Scan for local extensions and install them."
-msgstr "Leita að viðbótum á móttakara og setja þær upp."
-
 msgid "Scan options"
 msgstr ""
 
@@ -9535,14 +9395,6 @@ msgstr "eyða skrá"
 msgid "Select audio track"
 msgstr "Veldu hljóð rás"
 
-#, fuzzy
-msgid "Select backup files"
-msgstr "Veldu afrits skrár"
-
-#, fuzzy
-msgid "Select backup location"
-msgstr "Veldu stað fyrir afrit"
-
 msgid "Select channel"
 msgstr ""
 
@@ -9562,13 +9414,6 @@ msgstr ""
 #, fuzzy
 msgid "Select directory for logfile"
 msgstr "Tókst ekki að búa möppuna %s."
-
-msgid "Select files for backup."
-msgstr "Veldu skrár fyrir afrit."
-
-#
-msgid "Select files/folders to backup"
-msgstr "Veldu skrár/möppur til afritunar"
 
 #, fuzzy
 msgid "Select function"
@@ -9763,15 +9608,6 @@ msgid "Select the type of Single Cable Reception device you are using."
 msgstr ""
 
 #
-#, fuzzy
-msgid "Select update source"
-msgstr "Veldu upphafs slóð til að breyta."
-
-#
-msgid "Select update source to edit"
-msgstr "Veldu upphafs slóð til að breyta"
-
-#
 msgid "Select video input with up/down buttons"
 msgstr "Veldu mynd inngang með up/niður tökkum"
 
@@ -9803,14 +9639,6 @@ msgstr "Veldu þráðlaust net"
 #, fuzzy
 msgid "Select your ATSC provider."
 msgstr "Veldu sendanda til að bæta við..."
-
-#
-msgid ""
-"Select your backup device.\n"
-"Current device: "
-msgstr ""
-"Veldu afritunar tæki.\n"
-"Núverandi tæki:"
 
 msgid "Select your country. If not available select 'all'."
 msgstr ""
@@ -10701,11 +10529,6 @@ msgstr ""
 msgid "SocketMMI"
 msgstr ""
 
-#
-#, fuzzy
-msgid "iCAM descrambling"
-msgstr "Stillingar"
-
 msgid "SoftCam / CI"
 msgstr ""
 
@@ -10723,21 +10546,12 @@ msgstr "Hugbúnaður"
 msgid "Software"
 msgstr "Hugbúnaður"
 
-msgid "iCAM descrambling: "
-msgstr ""
-
 msgid "Software management"
 msgstr "Hugbúnaðar umsýsla"
-
-msgid "Software manager setup"
-msgstr "Uppsetning hugbúnaðar umsýslu"
 
 #
 msgid "Software update"
 msgstr "Hugbúnaðar uppfærsla"
-
-msgid "Softwaremanager information"
-msgstr "Upplýsingar hugbúnaðar umsýslu"
 
 msgid "Solomon Islands"
 msgstr ""
@@ -10751,18 +10565,8 @@ msgstr ""
 msgid "Some plugins are not available:\n"
 msgstr "Sum íforrit eru ekki til:\n"
 
-#
-#, fuzzy, python-format
-msgid "Sorry, %s has not been installed!"
-msgstr "Þvímiður er Margmiðlunarleitari ekki innsettur!"
-
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr ""
-
-#
-#, fuzzy
-msgid "Sorry, no backups found!"
-msgstr "Þvímiður fannst ekkert afrit!"
 
 #
 #, fuzzy
@@ -10772,20 +10576,10 @@ msgstr "Því miður, engar nánari upplýsingar til!"
 msgid "Sorry, this tuner is in use."
 msgstr ""
 
-#
-#, fuzzy
-msgid ""
-"Sorry, your backup destination is not writeable.\n"
-"Please select a different one."
-msgstr ""
-"Því miður er ekki hægt að skrifa á valinn afritunar stað.\n"
-"Vinsamlega veldu annan stað fyrir afritið."
-
 msgid "Sort"
 msgstr ""
 
 #
-#. TRANSLATORS: This must fit into the header button in the EPG-List
 msgid "Sort A-Z"
 msgstr "Raða A-Ö"
 
@@ -10811,7 +10605,11 @@ msgid "Sort plugins list to default?"
 msgstr ""
 
 #
-#. TRANSLATORS: This must fit into the header button in the EPG-List
+#, fuzzy
+msgid "Sort rating"
+msgstr "Raða Tíma"
+
+#
 #, fuzzy
 msgid "Sort time"
 msgstr "Raða Tíma"
@@ -11018,9 +10816,6 @@ msgstr ""
 #
 msgid "Starting on"
 msgstr "Byrja á"
-
-msgid "Startup the set top box in standby"
-msgstr ""
 
 msgid "Startup to Standby"
 msgstr ""
@@ -12684,9 +12479,6 @@ msgstr ""
 msgid "Update feed not available."
 msgstr "Uppfærslur á fæðirásum ekki tiltækar."
 
-msgid "Update has completed."
-msgstr ""
-
 #
 msgid "Updating"
 msgstr "Uppfæri"
@@ -12833,10 +12625,6 @@ msgstr "Nota álfinn til að setja upp grunnstillingar"
 #, fuzzy
 msgid "Use these input device settings?"
 msgstr "Nota þessar stillingar fyrir inntaks tæki?"
-
-#, fuzzy
-msgid "Use these settings?"
-msgstr "Nota þessar stillingar?"
 
 #
 msgid "Use this video enhancement settings?"
@@ -13098,10 +12886,6 @@ msgstr "Skoða textavarp..."
 #, fuzzy
 msgid "View video CD..."
 msgstr "Skoða Video CD..."
-
-#
-msgid "View, install and remove available or installed packages."
-msgstr "Skoða, setja inn og taka út hugbúnaðar pakka."
 
 msgid "Virgin Islands (British)"
 msgstr ""
@@ -13560,6 +13344,11 @@ msgstr ""
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Hvar á að vista tímabundnar tímafærslu upptökur?"
 
+#
+#, fuzzy
+msgid "Whitelist"
+msgstr "DVD titlaskrá"
+
 #, fuzzy
 msgid "Window Actions"
 msgstr "Veldu stað fyrir afrit"
@@ -13680,6 +13469,9 @@ msgstr "Já við allt"
 msgid "Yes, I do want to install plugins"
 msgstr "Þú getur sett inn þetta íforrit."
 
+msgid "Yes, after cold start only"
+msgstr ""
+
 msgid "Yes, always"
 msgstr "Já, alltaf"
 
@@ -13694,6 +13486,9 @@ msgid "Yes, only from deep standby"
 msgstr ""
 
 msgid "Yes, only from standby"
+msgstr ""
+
+msgid "Yes, only wake-up timers"
 msgstr ""
 
 #
@@ -14075,9 +13870,6 @@ msgstr "til baka"
 msgid "background image"
 msgstr "bakgrunns mynd"
 
-msgid "backup EPG cache"
-msgstr ""
-
 msgid "ballet"
 msgstr ""
 
@@ -14400,6 +14192,24 @@ msgstr ""
 #
 msgid "horizontal"
 msgstr "lárétt"
+
+#
+#, fuzzy
+msgid "iCAM descrambing"
+msgstr "Stillingar"
+
+#
+#, fuzzy
+msgid "iCAM descrambling"
+msgstr "Stillingar"
+
+#
+#, fuzzy
+msgid "iCAM descrambling (SoftCSA)"
+msgstr "Stillingar"
+
+msgid "iCAM descrambling: "
+msgstr ""
 
 #, fuzzy
 msgid "in menu and plugins"
@@ -14855,12 +14665,6 @@ msgstr ""
 #
 msgid "show event details"
 msgstr "sýna atriði nánar"
-
-msgid "show softwaremanager in setup menu"
-msgstr ""
-
-msgid "show softwaremanager on blue button"
-msgstr ""
 
 msgid "show/game show (general)"
 msgstr ""
