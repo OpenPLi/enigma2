@@ -259,10 +259,7 @@ class HdmiCec:
 			cmd = 0x8f
 
 		if cmd:
-			try:
-				data = data.decode("UTF-8")
-			except:
-				data = data.decode("ISO-8859-1")
+			data = data.decode("ISO-8859-1")
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queue.append((address, cmd, data))
 				if not self.wait.isActive():
@@ -536,10 +533,7 @@ class HdmiCec:
 			if keyCode == 115 or keyCode == 114 or keyCode == 113:
 				cmd = 0x45
 		if cmd:
-			try:
-				data = data.decode("UTF-8")
-			except:
-				data = data.decode("ISO-8859-1")
+			data = data.decode("ISO-8859-1")
 			if config.hdmicec.minimum_send_interval.value != "0":
 				self.queueKeyEvent.append((self.volumeForwardingDestination, cmd, data))
 				repeat = int(config.hdmicec.volume_forwarding_repeat.value)
