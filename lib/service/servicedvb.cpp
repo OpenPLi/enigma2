@@ -4239,6 +4239,40 @@ void eDVBServicePlay::cleanupSoftwareDescrambling()
 	m_soft_decoder_video_info_valid = false;
 }
 
+void eDVBServicePlay::updateAudioCache(int apid, int apidtype)
+{
+	if (!m_dvb_service)
+		return;
+
+	// Update audio cache based on audio type
+	switch (apidtype)
+	{
+		case eDVBServicePMTHandler::audioStream::atMPEG:
+			m_dvb_service->setCacheEntry(eDVBService::cMPEGAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAC3:
+			m_dvb_service->setCacheEntry(eDVBService::cAC3PID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAC4:
+			m_dvb_service->setCacheEntry(eDVBService::cAC4PID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atDDP:
+			m_dvb_service->setCacheEntry(eDVBService::cDDPPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAAC:
+			m_dvb_service->setCacheEntry(eDVBService::cAACAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atAACHE:
+			m_dvb_service->setCacheEntry(eDVBService::cAACHEAPID, apid);
+			break;
+		case eDVBServicePMTHandler::audioStream::atDRA:
+			m_dvb_service->setCacheEntry(eDVBService::cDRAAPID, apid);
+			break;
+		default:
+			break;
+	}
+}
+
 void eDVBServicePlay::resetHwDescramblerSlot()
 {
 	// Works around drivers (dm900) where CA_SET_PID(pid, -1) returns ok but
