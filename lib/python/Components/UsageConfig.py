@@ -836,8 +836,9 @@ def InitUsageConfig():
 
 	config.softcsa = ConfigSubsection()
 	config.softcsa.decoderRelease = ConfigSelection(default=0, choices=[
-		(0, _("Quick")),
-		(1, _("Normal"))
+			(0, _("Quick")),
+			(1, _("Normal")),
+			(2, _("Aggressive"))
 	])
 	config.softcsa.syncMode = ConfigSelection(default=0, choices=[
 		(0, _("Automatic")),
