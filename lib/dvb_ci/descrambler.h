@@ -17,7 +17,7 @@ struct ca_pid
 #define CA_SET_PID _IOW('o', 135, struct ca_pid)
 #endif
 
-int descrambler_init(eDVBCISlot *slot, uint8_t ca_demux_id);
+int descrambler_init(int slot, uint8_t ca_demux_id);
 void descrambler_deinit(int desc_fd);
 int descrambler_set_key(int& desc_fd, eDVBCISlot *slot, int parity, unsigned char *data);
 int descrambler_set_pid(int desc_fd, eDVBCISlot *slot, int enable, int pid);
