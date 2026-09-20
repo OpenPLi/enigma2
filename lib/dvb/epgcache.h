@@ -181,6 +181,7 @@ public:
 	void save();
 	void load();
 	void timeUpdated();
+	void flushEPG(int sid, int onid, int tsid);
 	void flushEPG(const uniqueEPGKey & s=uniqueEPGKey(), bool lock = true);
 #ifndef SWIG
 	eEPGCache();
