@@ -800,6 +800,11 @@ void eEPGCache::clearCompleteEPGCache()
 	eEPGTransponderDataReader::getInstance()->restartReader();
 }
 
+void eEPGCache::flushEPG(int sid, int onid, int tsid)
+{
+	flushEPG(uniqueEPGKey(sid, onid, tsid));
+}
+
 void eEPGCache::flushEPG(const uniqueEPGKey & s, bool lock) // lock only affects complete flush
 {
 	eDebug("[eEPGCache] flushEPG %d", (int)(bool)s);
