@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-11 14:52+0100\n"
-"PO-Revision-Date: 2026-05-21 13:52+0200\n"
+"POT-Creation-Date: 2026-09-20 14:29+0200\n"
+"PO-Revision-Date: 2026-09-20 14:40+0200\n"
 "Last-Translator: Pr2\n"
 "Language-Team: french\n"
 "Language: fr\n"
@@ -704,9 +704,8 @@ msgstr "Activer HbbTV (bouton rouge)"
 msgid "Activate Picture in Picture"
 msgstr "Activer l'incrustation d'image"
 
-#, fuzzy
 msgid "Activate iCAM descrambling"
-msgstr "iCAM descrambling"
+msgstr "Activer le décryptage iCAM"
 
 msgid "Activate network settings"
 msgstr "Activer les paramètres réseau"
@@ -836,6 +835,9 @@ msgstr "Afghanistant"
 
 msgid "After event"
 msgstr "Après l'émission"
+
+msgid "Aggressive"
+msgstr "Agressif"
 
 msgid "Aland Islands"
 msgstr "Iles Aland"
@@ -2277,7 +2279,7 @@ msgid "Configure this tuner using simple or advanced options, or loop it through
 msgstr "Configurer ce tuner en utilisant les options simple ou avancé, ou reboucler via un autre tuner, ou copier la configuration d’un autre tuner, ou le désactiver."
 
 msgid "Configure when the set-top box should enter standby after startup or restart."
-msgstr ""
+msgstr "Configurez le moment où le décodeur doit passer en mode veille après son démarrage ou son redémarrage."
 
 msgid "Configure where completed timers show up in the timer list."
 msgstr "Configure comment les programmations terminées apparaissent dans la liste des programmations."
@@ -2659,9 +2661,8 @@ msgstr "Date"
 msgid "Date/time input"
 msgstr "Saisie Date/Heure"
 
-#, fuzzy
 msgid "Deactivate iCAM descrambling"
-msgstr "iCAM descrambling"
+msgstr "Désactiver le décryptage iCAM"
 
 msgid "Debug"
 msgstr "Débogage"
@@ -2961,7 +2962,7 @@ msgid "Disable current event but not coming events"
 msgstr "Désactiver l'événement courant mais pas les prochains"
 
 msgid "Disable iCAM descrambling(Off), enable iCAM decryption by whitelist(Whitelist) or use automatic detection of iCAM descrambling(Auto)."
-msgstr ""
+msgstr "Désactiver le décodage iCAM (Désactivé), activer le décryptage iCAM via une liste blanche (Whitelist) ou utiliser la détection automatique du décodage iCAM (Auto)."
 
 msgid "Disable move mode"
 msgstr "Désactiver le mode déplacement"
@@ -3281,9 +3282,8 @@ msgstr "Paramètres EPG"
 msgid "EPG:"
 msgstr "EPG:"
 
-#, fuzzy
 msgid "EPGCatch Up Actions"
-msgstr "Actions de filtre EPG"
+msgstr "Actions du EPGCatch Up"
 
 msgid "EPGFilter Actions"
 msgstr "Actions de filtre EPG"
@@ -3450,7 +3450,7 @@ msgid "Enable setting a time interval for filtering events in SingleEPG using th
 msgstr "Permet de définir un intervalle de temps pour le filtrage des événements dans SingleEPG à l'aide du bouton « Stop »."
 
 msgid "Enable sorting by rating under the yellow button in SingleEPG."
-msgstr ""
+msgstr "Activez le tri par note sous le bouton jaune dans SingleEPG."
 
 msgid "Enable teletext caching"
 msgstr "Activer la mise en cache du télétexte"
@@ -4575,8 +4575,8 @@ msgstr "Combien de minutes voulez-vous ajouter à l'enregistrement?"
 msgid "How many minutes do you want to record?"
 msgstr "Combien de minutes voulez-vous enregistrer?"
 
-msgid "How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes)."
-msgstr "Comment libérer le décodeur matériel lors du passage au décryptage logiciel. « Rapide » libère immédiatement (zapping plus rapide). « Normal » effectue d'abord un arrêt propre (plus stable sur certains boîtiers)."
+msgid "How to release the hardware decoder when switching to software descrambling. 'Quick' releases immediately (faster zapping). 'Normal' performs clean shutdown first (more stable on some boxes). 'Aggressive' resets the HW-descrambler slots and also bypasses the in-process CSA-ALT cache."
+msgstr "Comment libérer le décodeur matériel lors du passage au décryptage logiciel. L'option « Rapide » le libère immédiatement (zapping plus rapide). L'option « Normal » effectue d'abord un arrêt propre (plus stable sur certains décodeurs). L'option « Agressif » réinitialise les emplacements du décodeur matériel et contourne également le cache CSA-ALT en cours d'exécution."
 
 msgid "Http(s) stream start delay"
 msgstr "Délai de démarrage du flux http(s)"
@@ -6193,9 +6193,8 @@ msgstr "Espace disque insuffisant. Veuillez libérer de l'espace disque et rées
 msgid "Not tested:"
 msgstr "Pas testé:"
 
-#, fuzzy
 msgid "Note: when enabled, and you do want standby mode after wake up, set option 'Startup to Standby' as 'Yes, only wake-up timers'."
-msgstr "Note: lorsqu’activé, et que vous voulez mettre votre récepteur en veille après un réveil, mettre l’option ‘Démarrer en mode veille ‘ sur ‘Non, excepté la minuterie de réveil’."
+msgstr "Remarque : lorsque cette option est activée et que vous souhaitez que l'appareil passe en mode veille après sa sortie de veille, définissez l'option « Démarrage en mode veille » sur « Oui, uniquement les minuteries de sortie de veille »."
 
 msgid ""
 "Nothing to scan!\n"
@@ -6395,7 +6394,7 @@ msgid "Original audio"
 msgstr "Audio original"
 
 msgid "Oscam Streamrelay"
-msgstr ""
+msgstr "Oscam Streamrelay"
 
 msgid "Other"
 msgstr "Autre"
@@ -6640,7 +6639,7 @@ msgid "Play DVDs"
 msgstr "Lire DVDs"
 
 msgid "Play archive"
-msgstr ""
+msgstr "Jouer archive"
 
 msgid "Play as Picture in Picture"
 msgstr "Lire en incrustation d'image"
@@ -7318,9 +7317,8 @@ msgstr "Rass interactif actions"
 msgid "Rating defined by broadcaster - %d"
 msgstr "Classification définie par le diffuseur - %d"
 
-#, fuzzy
 msgid "Rating sort in SingleEPG"
-msgstr "Activer le filtrage dans SingleEPG"
+msgstr "Tri par note dans SingleEPG"
 
 msgid "Rating undefined"
 msgstr "Classification indéfini"
@@ -9205,9 +9203,8 @@ msgstr "Définir l’ordre des entrées du menu de configuration"
 msgid "Sort plugins list to default?"
 msgstr "Trier la liste des extensions par défaut?"
 
-#, fuzzy
 msgid "Sort rating"
-msgstr "Tri heures"
+msgstr "Trier par note"
 
 msgid "Sort time"
 msgstr "Tri heures"
@@ -11607,9 +11604,8 @@ msgstr "Lorsque le récepteur se réveille de veille ou de veille profonde, il e
 msgid "Where to save temporary timeshift recordings?"
 msgstr "Où sauver les enregistrements temporaires PauseDirect?"
 
-#, fuzzy
 msgid "Whitelist"
-msgstr "Liste titres DVD"
+msgstr "Whitelist"
 
 msgid "Window Actions"
 msgstr "Fenêtre actions"
@@ -11715,7 +11711,7 @@ msgid "Yes, I do want to install plugins"
 msgstr "Oui, je désire installer les plugins"
 
 msgid "Yes, after cold start only"
-msgstr ""
+msgstr "Oui, uniquement après un démarrage à froid"
 
 msgid "Yes, always"
 msgstr "Oui, toujours"
@@ -11732,9 +11728,8 @@ msgstr "Oui, seulement depuis la veille profonde"
 msgid "Yes, only from standby"
 msgstr "Oui, seulement depuis la veille"
 
-#, fuzzy
 msgid "Yes, only wake-up timers"
-msgstr "Activer la minuterie de réveil"
+msgstr "Oui, uniquement les minuteries de réveil"
 
 msgid "Yes, returning to movie list"
 msgstr "Oui, retour vers liste de films"
@@ -12387,16 +12382,14 @@ msgstr "élevé"
 msgid "horizontal"
 msgstr "Horizontale"
 
-#, fuzzy
 msgid "iCAM descrambing"
-msgstr "iCAM descrambling"
+msgstr "Décryptage iCAM"
 
 msgid "iCAM descrambling"
 msgstr "iCAM descrambling"
 
-#, fuzzy
 msgid "iCAM descrambling (SoftCSA)"
-msgstr "Décryptage logiciel: "
+msgstr "Décryptage iCAM (SoftCSA)"
 
 msgid "iCAM descrambling: "
 msgstr "Décryptage logiciel: "
