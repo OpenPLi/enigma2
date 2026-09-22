@@ -1335,7 +1335,7 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 			ret = snr / 10;
 		else if (strstr(m_description, "Si2169D")) // DVB-S2X H7S
 		{
-			ret = snr / 33.3;
+			ret = snr / 33.34;
 			sat_max = 2000;
 		}
 	}
