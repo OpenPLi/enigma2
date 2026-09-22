@@ -758,7 +758,17 @@ void eDVBCAHandler::serviceGone()
 {
 	if (!services.size())
 	{
-		eDebug("[DVBCAHandler] no more services (keeping %zu client connections)", clients.size());
+		// A standby cycle removes the last service and later starts the same one
+		// again. Drop Protocol 3 clients here so the softcam cannot retain the old
+		// demux/descrambler association across that cycle. The client reconnects
+		// and receives a fresh CAPMT when playback resumes.
+		eDebug("[DVBCAHandler] no more services, closing %zu client connections", clients.size());
+		for (ePtrList<ePMTClient>::iterator it = clients.begin(); it != clients.end(); )
+		{
+			delete *it;
+			it = clients.erase(it);
+		}
+		m_protocol3_established = false;
 		if (pmtCache.size() > 500)
 		{
 			pmtCache.clear();
