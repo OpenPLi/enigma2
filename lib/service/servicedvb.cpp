@@ -4186,10 +4186,15 @@ void eDVBServicePlay::cleanupSoftwareDescrambling()
 		m_service_handler.getProgramInfo(prog) == 0
 		&& prog.isCrypted()
 		&& m_csa_session
+		&& m_csa_session->isActive()
+		&& (csa_is_auto() || csa_from_whitelist())
 		&& eConfigManager::getConfigIntValue("config.softcsa.decoderRelease", 0) == 2)
 		resetHwDescramblerSlot();
 
-	if (m_decoder)
+	// Leave a decoder which was never handed over to SoftCSA to its normal
+	// service lifecycle. An active session can still own a restored HW decoder
+	// here when the SoftDecoder takeover failed.
+	if (m_decoder && m_csa_session && m_csa_session->isActive())
 	{
 		eDebug("[eDVBServicePlay] Cleaning up HW decoder for clean handover");
 
