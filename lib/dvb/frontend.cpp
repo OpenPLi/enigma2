@@ -1333,6 +1333,11 @@ void eDVBFrontend::calculateSignalQuality(int snr, int &signalquality, int &sign
 		ret = snr;
 		if (!strcmp(m_description, "Si2169")) // DVB-T/C Xtrend
 			ret = snr / 10;
+		else if (strstr(m_description, "Si2169D")) // DVB-S2X H7S
+		{
+			ret = snr / 33.3;
+			sat_max = 2000;
+		}
 	}
 	else if (!strcmp(m_description, "M1502A(external)")) // DVB-S2X Dual 4K
 	{
