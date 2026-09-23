@@ -53,7 +53,7 @@ class NimSetup(Setup, ServiceStopScreen):
 		if self.autodiseqc_ports:
 			list.append((self.indent % _("Set auto DiSEqC search order"), nim.autoDiSEqC_order_single if mode == "single" else nim.autoDiSEqC_order, _("Finetune the auto DiSEqC order to in your situation the satellites could be found faster.")))
 		if mode in ("diseqc_a_b", "diseqc_a_b_c_d"):
-			list.append((self.indent % _("Set voltage and 22KHz"), nim.simpleDiSEqCSetVoltageTone, _("For universal LNBs, leave set to 'yes'. Controls whether the tuner sets voltage for polarization and 22 kHz for band switching.")))
+			list.append((self.indent % _("Set voltage and 22KHz"), nim.simpleDiSEqCSetVoltageTone, _("For universal LNBs, leave set to 'yes'. Select 'no' only for special setups requiring a fixed 14 V supply without the 22 kHz tone.")))
 			list.append((self.indent % _("Send DiSEqC only on satellite change"), nim.simpleDiSEqCOnlyOnSatChange, _("Select 'yes' to only send the DiSEqC command when changing from one satellite to another, or select 'no' for the DiSEqC command to be resent on every zap.")))
 		elif mode == "single":
 			if nim.diseqcA.value in ("360", "560"):
