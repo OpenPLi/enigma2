@@ -151,9 +151,9 @@ class FastScanStatus(Screen):
 
 class FastScanScreen(Setup):
 	skin = """
-	<screen position="100,115" size="520,290" title="FastScan">
+	<screen position="100,115" size="520,390" title="FastScan">
 		<widget name="config" position="10,10" size="500,250" scrollbarMode="showOnDemand" />
-		<widget name="introduction" position="10,265" size="500,25" font="Regular;20" halign="center" />
+		<widget name="description" position="10,270" size="500,110" font="Regular;18" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -163,7 +163,7 @@ class FastScanScreen(Setup):
 			if configEntry.value:
 				nimList = [(str(x), nimmanager.nim_slots[x].friendly_full_description) for x in nimmanager.getNimListForSat(transponders[[x[1][0] for x in providers if x[0] == configEntry.value][0]][3])]
 				self.scan_nims = ConfigSelection(default=lastConfiguration[0] if lastConfiguration and lastConfiguration[0] in [x[0] for x in nimList] else nimList[0][0], choices=nimList)
-				self.tunerEntry = (_("Tuner"), self.scan_nims)
+				self.tunerEntry = (_("Tuner"), self.scan_nims, _("Select the tuner to use for FastScan."))
 
 		providerList = getProviderList()
 		if lastConfiguration and lastConfiguration[1] in providerList:
@@ -180,8 +180,8 @@ class FastScanScreen(Setup):
 			self.scan_keepnumbering = ConfigYesNo(default=True)
 			self.scan_keepsettings = ConfigYesNo(default=False)
 			self.scan_create_radio_bouquet = ConfigYesNo(default=False)
-		self.scanProvider = (_("Provider"), self.scan_provider)
-		self.scanHD = (_("HD list"), self.scan_hd)
+		self.scanProvider = (_("Provider"), self.scan_provider, _("Select the FastScan provider."))
+		self.scanHD = (_("HD list"), self.scan_hd, _("Use the HD channel list provided by FastScan."))
 		self.config_autoproviders = {}
 		auto_providers = config.misc.fastscan.autoproviders.value.split(",")
 		for provider in providers:
@@ -199,11 +199,11 @@ class FastScanScreen(Setup):
 				if index[0] == self.scan_provider.value and index[1][2]:
 					self.list.append(self.scanHD)
 					break
-			self.list.append((_("Use fastscan channel numbering"), self.scan_keepnumbering))
-			self.list.append((_("Use fastscan channel names"), self.scan_keepsettings))
-			self.list.append((_("Create separate radio userbouquet"), self.scan_create_radio_bouquet))
-			self.list.append((_("Drop unconfigured satellites"), config.misc.fastscan.drop))
-			self.list.append((_("Enable auto fastscan"), config.misc.fastscan.auto))
+			self.list.append((_("Use fastscan channel numbering"), self.scan_keepnumbering, _("Use the channel numbering provided by FastScan, including gaps. When disabled, channels are numbered consecutively without gaps.")))
+			self.list.append((_("Use fastscan channel names"), self.scan_keepsettings, _("FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'.")))
+			self.list.append((_("Create separate radio userbouquet"), self.scan_create_radio_bouquet, _("Create a separate bouquet for radio services. When disabled, radio services are included in the TV bouquet.")))
+			self.list.append((_("Drop unconfigured satellites"), config.misc.fastscan.drop, _("Ignore services on satellites that are not configured in the tuner settings.")))
+			self.list.append((_("Enable auto fastscan"), config.misc.fastscan.auto, _("Automatically run FastScan 90 seconds after each entry into standby and every 24 hours while remaining in standby. If a recording is in progress, retry after one hour. Select 'multi' to scan multiple providers.")))
 			if config.misc.fastscan.auto.value == "multi":
 				for provider in providers:
 					if nimmanager.getNimListForSat(transponders[provider[1][0]][3]):
