@@ -676,6 +676,8 @@ class EPGSelection(Screen, HelpableScreen):
 			return
 		event = cur[0]
 		self["Event"].newEvent(event)
+		if self.type in (EPG_TYPE_PARTIAL, EPG_TYPE_SIMILAR):
+			self["Service"].newService(cur[1].ref if cur[1] else None)
 		if self.type == EPG_TYPE_MULTI:
 			count = self["list"].getCurrentChangeCount()
 			if self.ask_time != -1:
