@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 14:29+0200\n"
+"POT-Creation-Date: 2026-10-01 13:27+0200\n"
 "PO-Revision-Date: 2025-01-20 11:41+0800\n"
 "Last-Translator: Mark Stone <Mark@kram.com>\n"
 "Language-Team: \n"
@@ -1226,6 +1226,9 @@ msgstr "自动关闭机顶盒并进入深度待机模式。"
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "当接收机进入待机或深度待机时，自动将电视置于待机状态。"
+
+msgid "Automatically run FastScan 90 seconds after each entry into standby and every 24 hours while remaining in standby. If a recording is in progress, retry after one hour. Select 'multi' to scan multiple providers."
+msgstr ""
 
 msgid "Automatically start timeshift after"
 msgstr "自动开始时移"
@@ -2456,6 +2459,9 @@ msgstr "为该频道覆盖虚线闪烁线"
 
 msgid "Create DVD-ISO"
 msgstr "创建 DVD-ISO"
+
+msgid "Create a separate bouquet for radio services. When disabled, radio services are included in the TV bouquet."
+msgstr ""
 
 msgid "Create directory"
 msgstr "创建目录"
@@ -4014,6 +4020,9 @@ msgstr "快进速度"
 msgid "FastScan"
 msgstr "快速扫描"
 
+msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
+msgstr ""
+
 msgid "Fastscan"
 msgstr "快速扫描"
 
@@ -4105,6 +4114,9 @@ msgstr "按下 OK 后，将执行以下任务！"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr "对于此设备，网络连接也可用于检测。"
+
+msgid "For universal LNBs, leave set to 'yes'. Select 'no' only for special setups requiring a fixed 14V supply without the 22kHz tone."
+msgstr ""
 
 msgid "Force legacy signal stats"
 msgstr "强制传统信号统计"
@@ -4727,6 +4739,9 @@ msgstr "忽略 DVB-T 命名空间子网络"
 msgid "Ignore conflict"
 msgstr "忽略冲突"
 
+msgid "Ignore services on satellites that are not configured in the tuner settings."
+msgstr ""
+
 msgid "Image View On"
 msgstr "开启图像视图"
 
@@ -5260,9 +5275,6 @@ msgstr "拉脱维亚语"
 
 msgid "Leave DVD player?"
 msgstr "是否退出 DVD 播放器?"
-
-msgid "Leave this set to 'yes' unless you fully understand why you are adjusting it."
-msgstr "除非您完全理解为什么要调整它，否则请将其保留为“是”。"
 
 msgid "Lebanon"
 msgstr "黎巴嫩"
@@ -8340,6 +8352,10 @@ msgstr "选择串流类型"
 msgid "Select target folder"
 msgstr "选择目标文件夹"
 
+#, fuzzy
+msgid "Select the FastScan provider."
+msgstr "选择 ATSC 供应商。"
+
 msgid "Select the User Band channel to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "选择要分配给此调谐器的用户频段频道。这是 SCR 开关或 SCR 高频头用于将请求的转发器传递给调谐器的频率表中的索引。"
 
@@ -8411,6 +8427,10 @@ msgstr "选择控制电动天线的调谐器。"
 
 msgid "Select the tuner that this loopthrough depends on."
 msgstr "选择此环路输出所依赖的调谐器。"
+
+#, fuzzy
+msgid "Select the tuner to use for FastScan."
+msgstr "选择用于扫描的调谐器。"
 
 msgid "Select the tuner to which the signal cable of the SCR device is connected."
 msgstr "选择 SCR 设备信号线所连接的调谐器。"
@@ -10995,8 +11015,14 @@ msgstr "使用皮肤默认设置"
 msgid "Use streamrelay whitelist file"
 msgstr ""
 
+msgid "Use the HD channel list provided by FastScan."
+msgstr ""
+
 msgid "Use the alternative screen"
 msgstr "使用备用屏幕"
+
+msgid "Use the channel numbering provided by FastScan, including gaps. When disabled, channels are numbered consecutively without gaps."
+msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "使用网络向导配置所选网络适配器"

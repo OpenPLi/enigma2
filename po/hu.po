@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-20 14:29+0200\n"
+"POT-Creation-Date: 2026-10-01 13:27+0200\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -1231,6 +1231,9 @@ msgstr ""
 
 msgid "Automatically put the TV in standby whenever the receiver goes into standby or deep standby."
 msgstr "Automatikusan készenléti módba helyezi a TV-készüléket, amikor a beltéri egységet készenlétbe vagy mély-készenlétbe kapcsolja."
+
+msgid "Automatically run FastScan 90 seconds after each entry into standby and every 24 hours while remaining in standby. If a recording is in progress, retry after one hour. Select 'multi' to scan multiple providers."
+msgstr ""
 
 msgid "Automatically start timeshift after"
 msgstr "Időcsúszatás automatikus bekapcsolása ennyi idő múlva"
@@ -2489,6 +2492,9 @@ msgstr "A kép tetején lévő villogó csík eltakarása ezen csatornánál"
 
 msgid "Create DVD-ISO"
 msgstr "DVD képfájl készítés"
+
+msgid "Create a separate bouquet for radio services. When disabled, radio services are included in the TV bouquet."
+msgstr ""
 
 msgid "Create directory"
 msgstr "Mappa létrehozása"
@@ -4071,6 +4077,9 @@ msgstr "Előretekerési sebességek"
 msgid "FastScan"
 msgstr "Gyorskeresés"
 
+msgid "FastScan may rename existing services and prevent them from being updated by a regular scan. FastScan updates still work. Disabling this option will not restore the original names or regular scan updates. To restore them, scan the services again with 'Clear before scan' set to 'Yes'."
+msgstr ""
+
 msgid "Fastscan"
 msgstr "Gyorskeresés"
 
@@ -4163,6 +4172,9 @@ msgid "Following tasks will be done after you press OK!"
 msgstr "A műveletek az OK gomb lenyomása után lesznek végrehajtva!"
 
 msgid "For this box, the network connection can also be used for detection."
+msgstr ""
+
+msgid "For universal LNBs, leave set to 'yes'. Select 'no' only for special setups requiring a fixed 14V supply without the 22kHz tone."
 msgstr ""
 
 msgid "Force legacy signal stats"
@@ -4801,6 +4813,9 @@ msgstr "DVB-T alhálózati azonosító figyelmen kívül hagyása"
 msgid "Ignore conflict"
 msgstr "Hagyja figyelmen kívül az ütközést"
 
+msgid "Ignore services on satellites that are not configured in the tuner settings."
+msgstr ""
+
 msgid "Image View On"
 msgstr "Image View On"
 
@@ -5355,9 +5370,6 @@ msgstr "Lett"
 
 msgid "Leave DVD player?"
 msgstr "Kilépés a DVD lejátszóból?"
-
-msgid "Leave this set to 'yes' unless you fully understand why you are adjusting it."
-msgstr "Ha nem biztos az alábbi beállításban, hagyja \"igen\"-en."
 
 msgid "Lebanon"
 msgstr "Libanon"
@@ -8479,6 +8491,10 @@ msgstr "Tuner kiválasztása"
 msgid "Select target folder"
 msgstr "Válassza ki a célmappát"
 
+#, fuzzy
+msgid "Select the FastScan provider."
+msgstr "Válassza ki az ATSC szolgáltatóját."
+
 msgid "Select the User Band channel to be assigned to this tuner. This is an index into the table of frequencies the SCR switch or SCR LNB uses to pass the requested transponder to the tuner."
 msgstr "Válassza ki a tunerhez rendelt felhasználói sáv csatornáját. Ez egy olyan index a frekvenciatáblázatban, amelyet az Unicable switch vagy az Unicable LNB használ a tuner és a kívánt transzponder között."
 
@@ -8552,6 +8568,10 @@ msgstr "Válassza ki azt a tunert, amely vezérli a forgatómotort."
 
 msgid "Select the tuner that this loopthrough depends on."
 msgstr "Válassza ki a tunert, amely fel van fűzve."
+
+#, fuzzy
+msgid "Select the tuner to use for FastScan."
+msgstr "Válasszon hozzáadandó szolgáltatót..."
 
 msgid "Select the tuner to which the signal cable of the SCR device is connected."
 msgstr "Válassza ki a tunert, amelyhez az Unicable eszköz jelkábele csatlakozik."
@@ -11192,9 +11212,15 @@ msgstr "Alapértelmezett"
 msgid "Use streamrelay whitelist file"
 msgstr ""
 
+msgid "Use the HD channel list provided by FastScan."
+msgstr ""
+
 #, fuzzy
 msgid "Use the alternative screen"
 msgstr "Alternatívák módosítása"
+
+msgid "Use the channel numbering provided by FastScan, including gaps. When disabled, channels are numbered consecutively without gaps."
+msgstr ""
 
 msgid "Use the network wizard to configure selected network adapter"
 msgstr "A hálózati Varázsló használata a kijelölt hálózati interfész konfigurálásához"
