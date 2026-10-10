@@ -15,7 +15,7 @@ class SetupFallbacktuner(Setup):
 	def createConfig(self):
 
 		def set_avahiselect_seperate(configElement):
-			self.seperateBoxes = self.peerStreamingBoxes
+			self.seperateBoxes = self.peerStreamingBoxes[:]
 			if configElement.value not in ("url", "ip") and configElement.value in self.seperateBoxes:
 				self.seperateBoxes.remove(configElement.value)
 			self.seperateBoxes = [("same", _("Same as stream"))] + self.seperateBoxes
