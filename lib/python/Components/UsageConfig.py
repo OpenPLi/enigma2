@@ -545,6 +545,11 @@ def InitUsageConfig():
 	config.usage.keytrans = ConfigText(default=keytranslation)
 	config.usage.alternative_imagefeed = ConfigText(default="", fixed_size=False)
 
+	choicelist = []
+	for i in range(1, 7):
+		choicelist.append(("%d" % i, "%d" % i))
+	config.misc.longkey_threshold = ConfigSelection(default="4", choices=choicelist)
+
 	config.seek = ConfigSubsection()
 	config.seek.selfdefined_13 = ConfigNumber(default=15)
 	config.seek.selfdefined_46 = ConfigNumber(default=60)
