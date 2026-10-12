@@ -71,7 +71,7 @@ class HddState(Converter):
 				if (hdd[1].max_idle_time or force) and not hdd[1].isSleeping():
 					state = True
 				if not self.notDiskLetterName:
-					string += "\c%08x" % (state and self.colors[1] or self.colors[0])
+					string += "\\c%08x" % (state and self.colors[1] or self.colors[0])
 					name = "I"
 					if not hdd[1].internal:
 						name = "E"
@@ -81,13 +81,13 @@ class HddState(Converter):
 			if not state:
 				if self.allVisible:
 					if self.notDiskLetterName:
-						string = "\c%08x" % self.colors[0]
+						string = "\\c%08x" % self.colors[0]
 						string += _("standby ")
 				self.isActive = False
 				idle = self.standby_time
 			else:
 				if self.notDiskLetterName:
-					string = "\c%08x" % self.colors[1]
+					string = "\\c%08x" % self.colors[1]
 					string += _("active ")
 				self.isActive = True
 				idle = self.idle_time

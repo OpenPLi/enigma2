@@ -69,11 +69,11 @@ class FrontendInfo(Converter):
 			for n in nimmanager.nim_slots:
 				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = "\c%08x" % colors[0]
+						color = "\\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = "\c%08x" % colors[1]
+						color = "\\c%08x" % colors[1]
 					elif len(nimmanager.nim_slots) <= self.space_for_tuners or n.isFBCRoot() or self.show_all_non_link_tuners and not (n.isFBCLink() or n.config_mode == "loopthrough"):
-						color = "\c%08x" % colors[2]
+						color = "\\c%08x" % colors[2]
 					else:
 						continue
 					if string and len(nimmanager.nim_slots) <= self.space_for_tuners_with_spaces:
@@ -85,9 +85,9 @@ class FrontendInfo(Converter):
 			for n in nimmanager.nim_slots:
 				if n.type and n.enabled:
 					if n.slot == self.source.slot_number:
-						color = "\c%08x" % colors[0]
+						color = "\\c%08x" % colors[0]
 					elif self.source.tuner_mask & 1 << n.slot:
-						color = "\c%08x" % colors[1]
+						color = "\\c%08x" % colors[1]
 					else:
 						continue
 					if string:

@@ -14,7 +14,7 @@ class NextEpgInfo(Renderer, VariableText):
 		self.hideLabel = 0
 		self.timecolor = ""
 		self.labelcolor = ""
-		self.foregroundColor = "\c00f0f0f0"
+		self.foregroundColor = "\\c00f0f0f0"
 		self.numOfSpaces = 1
 
 	GUI_WIDGET = eLabel
@@ -55,13 +55,13 @@ class NextEpgInfo(Renderer, VariableText):
 				self.numOfSpaces = int(value)
 				attribs.append((attrib, value))
 			if attrib == "timeColor":
-				self.timecolor = "\c%08x" % parseColor(value).argb()
+				self.timecolor = "\\c%08x" % parseColor(value).argb()
 				attribs.append((attrib, value))
 			if attrib == "labelColor":
-				self.labelcolor = "\c%08x" % parseColor(value).argb()
+				self.labelcolor = "\\c%08x" % parseColor(value).argb()
 				attribs.append((attrib, value))
 			if attrib == "foregroundColor":
-				self.foregroundColor = "\c%08x" % parseColor(value).argb()
+				self.foregroundColor = "\\c%08x" % parseColor(value).argb()
 				attribs.append((attrib, value))
 		for (attrib, value) in attribs:
 			self.skinAttributes.remove((attrib, value))

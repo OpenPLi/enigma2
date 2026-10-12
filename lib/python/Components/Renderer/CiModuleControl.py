@@ -51,17 +51,17 @@ class CiModuleControl(Renderer, VariableText):
 									string += ""
 									add_num = False
 								else:
-									string += "\c%08x" % self.colors[0] # no module
+									string += "\\c%08x" % self.colors[0] # no module
 							elif state == 1:
-								string += "\c%08x" % self.colors[1] # init module
+								string += "\\c%08x" % self.colors[1] # init module
 							elif state == 2:
-								string += "\c%08x" % self.colors[2] # module ready
+								string += "\\c%08x" % self.colors[2] # module ready
 						else:
 							if not self.allVisible:
 								string += ""
 								add_num = False
 							else:
-								string += "\c%08x" % self.colors[3] # error
+								string += "\\c%08x" % self.colors[3] # error
 						if add_num:
 							string += "%d" % (slot + 1)
 					if string:
