@@ -245,7 +245,7 @@ class RemoteControlType(ConfigListScreen, Screen):
 			("5", "et9000/et9100"),
 			("6", _("DMM advanced")),
 			("7", "et5000/et6000"),
-			("8", "VU+"),
+			("8", "VU+ vuduo/vusolo/vuuno"),
 			("9", "et8000/et10000"),
 			("11", "et9200/et9500/et6500"),
 			("13", "et4000"),
@@ -259,7 +259,8 @@ class RemoteControlType(ConfigListScreen, Screen):
 			("25", ("Zgemma I55Plus/H8/H9" + _("(old model)"))),
 			("27", "HD60/HD66SE/Multibox(SE/PRO)"),
 			("28", "I55SE/H7/H9(SE)/H9COMBO(SE)/H9TWIN(SE)/H10/H11/H17"),
-			("30", "PULSe 4K(mini)")
+			("30", "PULSe 4K(mini)"),
+			("31", "VU+ vuduo4k/vuduo4kse/vuuno4kse/vuzero4k")
 		]
 
 	defaultRcList = [
@@ -301,6 +302,7 @@ class RemoteControlType(ConfigListScreen, Screen):
 			("h5", 21),
 			("e4hd", 24),
 			("h8", 25),
+			("h8se", 28),
 			("h9se", 28),
 			("h9combo", 28),
 			("h9combose", 28),
