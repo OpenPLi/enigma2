@@ -68,6 +68,10 @@ class PluginDescriptor:
 	WHERE_INFOBAR_SCREEN = 16
 	WHERE_SECONDINFOBAR_SCREEN = 17
 
+	# allow plugin to assign to hotkey only.
+	# This is for compatibility with OE-A based images, who have renamed our HotKey functionality to Buttonsetup
+	WHERE_BUTTONSETUP = 22
+
 	def __init__(self, name="Plugin", where=[], description="", icon=None, fnc=None, wakeupfnc=None, needsRestart=None, internal=False, weight=0):
 		self.name = name
 		self.internal = internal
