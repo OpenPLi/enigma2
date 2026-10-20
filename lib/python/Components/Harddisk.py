@@ -571,6 +571,7 @@ class HarddiskManager:
 		blacklisted = False
 		is_cdrom = False
 		is_mmc = False
+		medium_found = False
 		partitions = []
 		try:
 			if os.path.exists(devpath + "/removable"):
@@ -606,15 +607,20 @@ class HarddiskManager:
 					partitions.append(partition)
 			else:
 				self.cd = blockdev
+			# check if there is a medium
+			line = readFile(devpath + '/size')
+			if line and int(line) > 0:
+				medium_found = True
 		except IOError:
 			error = True
-		# check for medium
-		medium_found = True
-		try:
-			open("/dev/" + blockdev).close()
-		except IOError as err:
-			if err.errno == 159: # no medium present
-				medium_found = False
+
+		# check if it can be accessed
+		if medium_found:
+			try:
+				open("/dev/" + blockdev).close()
+			except IOError as err:
+				if err.errno == 159: # no medium present
+					medium_found = False
 
 		return error, blacklisted, removable, is_cdrom, partitions, medium_found
 
