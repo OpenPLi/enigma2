@@ -85,7 +85,7 @@ class PacketManager(Screen, NumericalTextInput):
 	def __init__(self, session, plugin_path, args=None):
 		Screen.__init__(self, session)
 		NumericalTextInput.__init__(self)
-		self.setTitle(_("Packet manager"))
+		self.setTitle(_("Package manager"))
 		self.skin_path = plugin_path
 
 		self.setUseableChars('1234567890abcdefghijklmnopqrstuvwxyz')
@@ -384,7 +384,7 @@ def UpgradeMain(session, **kwargs):
 
 def startSetup(menuid):
 	if menuid == "setup" and config.plugins.softwaremanager.onSetupMenu.value:
-		return [(_("Software management"), UpgradeMain, "software_manager", 50)]
+		return [(_("Pakcage manager"), UpgradeMain, "software_manager", 50)]
 	return []
 
 
@@ -392,10 +392,10 @@ def Plugins(path, **kwargs):
 	global plugin_path
 	plugin_path = path
 	list = [
-		PluginDescriptor(name=_("Software management"), description=_("Manage your receiver's software"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startSetup)
+		PluginDescriptor(name=_("Package manager"), description=_("Manage optional software packages"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=startSetup)
 	]
 	if not config.plugins.softwaremanager.onSetupMenu.value and not config.plugins.softwaremanager.onBlueButton.value:
-		list.append(PluginDescriptor(name=_("Software management"), description=_("Manage your receiver's software"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=UpgradeMain))
+		list.append(PluginDescriptor(name=_("Package manager"), description=_("Manage optional software packages"), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=UpgradeMain))
 	if config.plugins.softwaremanager.onBlueButton.value:
-		list.append(PluginDescriptor(name=_("Software management"), description=_("Manage your receiver's software"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=UpgradeMain))
+		list.append(PluginDescriptor(name=_("Package manager"), description=_("Manage optional software packages"), where=PluginDescriptor.WHERE_EXTENSIONSMENU, needsRestart=False, fnc=UpgradeMain))
 	return list
