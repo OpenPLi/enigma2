@@ -15,6 +15,7 @@ from ServiceReference import ServiceReference
 from Components.Sources.List import List
 from Components.Console import Console
 from Screens.ChoiceBox import ChoiceBox
+from Tools.Hex2strColor import Hex2strColor
 from time import gmtime, strftime
 
 import bisect
@@ -28,6 +29,7 @@ config.plugins.CutListEditor = ConfigSubsection()
 config.plugins.CutListEditor.showIntro = ConfigYesNo(default=True)
 config.plugins.CutListEditor.keep_bookmarks = ConfigYesNo(default=False)
 
+GRAY = 0x00808080
 
 def CutListEntry(where, what):
 	w = where / 90
@@ -62,28 +64,29 @@ class CutListContextMenu(FixedMenu):
 	RET_TOGGLEINTRO = 8
 	RET_MOVIECUT = 9
 	RET_KEEPBOOKMARKS = 10
+	RET_REMOVEALL = 11
 
 	SHOW_STARTCUT = 0
 	SHOW_ENDCUT = 1
 	SHOW_DELETECUT = 2
 
-	def __init__(self, session, state, nearmark):
+	def __init__(self, session, state, nearmark, removeall=1):
 		menu = [(_("back"), self.close)] #, (None, )]
 
 		if state == self.SHOW_STARTCUT:
 			menu.append((_("start cut here"), self.startCut))
 		else:
-			menu.append((_("start cut here"), ))
+			menu.append(((Hex2strColor(GRAY) +_("start cut here")), ))
 
 		if state == self.SHOW_ENDCUT:
 			menu.append((_("end cut here"), self.endCut))
 		else:
-			menu.append((_("end cut here"), ))
+			menu.append((Hex2strColor(GRAY) + _("end cut here"), ))
 
 		if state == self.SHOW_DELETECUT:
 			menu.append((_("delete cut"), self.deleteCut))
 		else:
-			menu.append((_("delete cut"), ))
+			menu.append((Hex2strColor(GRAY) + _("delete cut"), ))
 
 		menu.append((_("remove before this position"), self.removeBefore))
 		menu.append((_("remove after this position"), self.removeAfter))
@@ -97,6 +100,11 @@ class CutListContextMenu(FixedMenu):
 			menu.append((_("insert mark here"), self.insertMark))
 		else:
 			menu.append((_("remove this mark"), self.removeMark))
+
+		if removeall:
+			menu.append((_("remove all cuts and marks"), self.removeAll))
+		else:
+			menu.append((Hex2strColor(GRAY) + _("remove all cuts and marks"), ))
 
 		menu.append((_("grab this frame as bitmap"), self.grabFrame))
 
@@ -134,6 +142,9 @@ class CutListContextMenu(FixedMenu):
 
 	def removeAfter(self):
 		self.close(self.RET_REMOVEAFTER)
+
+	def removeAll(self):
+		self.close(self.RET_REMOVEALL)
 
 	def grabFrame(self):
 		self.close(self.RET_GRABFRAME)
@@ -277,6 +288,15 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 		m = m and m[0]
 		if m is not None:
 			self.removeMark(m)
+
+	def __removeAll(self):
+		if len(self.cut_list):
+			self.session.openWithCallback(self.__removeAllCallback, MessageBox, _("Are you sure to delete all cuts and marks?"), default=False)
+
+	def __removeAllCallback(self, ret):
+		if ret:
+			self.cut_list = []
+			self.uploadCuesheet()
 
 	def exit(self):
 		self.close()
@@ -423,6 +443,8 @@ class CutListEditor(Screen, InfoBarBase, InfoBarSeek, InfoBarCueSheetSupport, He
 			self.inhibit_seek = True
 			self.uploadCuesheet()
 			self.inhibit_seek = False
+		elif result == CutListContextMenu.RET_REMOVEALL:
+			self.__removeAll()
 		elif result == CutListContextMenu.RET_KEEPBOOKMARKS:
 			config.plugins.CutListEditor.keep_bookmarks.value = not config.plugins.CutListEditor.keep_bookmarks.value
 			config.plugins.CutListEditor.keep_bookmarks.save()
