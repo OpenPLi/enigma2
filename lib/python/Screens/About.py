@@ -490,7 +490,7 @@ class Troubleshoot(Screen):
 
 	def updateOptions(self):
 		self.titles = ["dmesg", "ifconfig", "df", "top", "ps", "messages", "enigma info", "BoxInfo"]
-		self.commands = ["dmesg", "ifconfig", "df -h", "top -n 1", "ps -l", "cat /var/volatile/log/messages", "cat /usr/lib/enigma.info", "boxinfo"]
+		self.commands = ["dmesg", "ifconfig", "df -h", "top -b -n 1 | head -n 26", "ps -l", "cat /var/volatile/log/messages", "cat /usr/lib/enigma.info", "boxinfo"]
 		install_log = "/home/root/autoinstall.log"
 		if os.path.isfile(install_log):
 				self.titles.append("%s" % install_log)
