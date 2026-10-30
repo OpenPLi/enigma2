@@ -414,8 +414,11 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		for PluginScreen in self.InfobarPluginScreens:
 			PluginScreen.show()
 		self.startHideTimer()
-		if self.InfoBarAdds and config.usage.show_infobar_adds.value:
-			self.InfoBarAdds.show()
+		if self.InfoBarAdds:
+			if config.usage.show_infobar_adds.value:
+				self.InfoBarAdds.show()
+			else:
+				self.InfoBarAdds.hide()
 
 	def __onHide(self):
 		self.__state = self.STATE_HIDDEN
@@ -453,6 +456,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.toggleSecondInfoBar()
 
 	def toggleSecondInfoBar(self):
+		if config.usage.show_simple_second_infobar.value is None:
+			return
+
 		if self.actualSecondInfoBarScreen and not self.actualSecondInfoBarScreen.shown and self.secondInfoBarScreenSimple.skinAttributes and self.secondInfoBarScreen.skinAttributes:
 			self.actualSecondInfoBarScreen.hide()
 			config.usage.show_simple_second_infobar.value = not config.usage.show_simple_second_infobar.value
@@ -461,6 +467,9 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.showSecondInfoBar()
 
 	def toggleInfoBarAddon(self):
+		if config.usage.show_infobar_adds.value is None:
+			return
+
 		if self.InfoBarAdds and (self.actualSecondInfoBarScreen and not self.actualSecondInfoBarScreen.shown or not self.actualSecondInfoBarScreen):
 			config.usage.show_infobar_adds.value = not config.usage.show_infobar_adds.value
 			config.usage.show_infobar_adds.save()
