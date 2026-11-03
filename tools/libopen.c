@@ -5,6 +5,7 @@
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 #undef DEBUG
 
@@ -13,6 +14,8 @@ int open64(const char *pathname, int flags, ...)
 	typedef int (*FUNC_PTR) (const char* pathname, int flags, ...);
 	static FUNC_PTR libc_open64;
 	int fd=-1;
+	int needs_mode;
+	va_list ap;
 	if (!libc_open64)
 	{
 		void *handle;
@@ -29,7 +32,18 @@ int open64(const char *pathname, int flags, ...)
 			exit(1);
 		}
 	}
-	fd = libc_open64(pathname, flags);
+	needs_mode = flags & O_CREAT;
+#ifdef O_TMPFILE
+	if ((flags & O_TMPFILE) == O_TMPFILE)
+		needs_mode = 1;
+#endif
+	if (needs_mode)
+	{
+		va_start(ap, flags);
+		mode = va_arg(ap, int);
+		va_end(ap);
+	}
+	fd = libc_open64(pathname, flags, mode);
 	if (fd >= 0)
 	{
 		int fd_flags = fcntl(fd, F_GETFD, 0);
@@ -39,7 +53,7 @@ int open64(const char *pathname, int flags, ...)
 			fcntl(fd, F_SETFD, fd_flags);
 		}
 #ifdef DEBUG
-		fprintf(stdout, "open64 %s, flags %d returned fd %d\n", pathname, flags, fd);
+		fprintf(stdout, "open64 %s, flags %d, mode %04o returned fd %d\n", pathname, flags, (unsigned int)mode, fd);
 #endif
 	}
 	return fd;
@@ -51,6 +65,9 @@ int open(const char *pathname, int flags, ...)
 	typedef int (*FUNC_PTR) (const char* pathname, int flags, ...);
 	static FUNC_PTR libc_open;
 	int fd=-1;
+	int mode = 0;
+	int needs_mode;
+	va_list ap;
 	if (!libc_open)
 	{
 		void *handle;
@@ -67,7 +84,18 @@ int open(const char *pathname, int flags, ...)
 			exit(1);
 		}
 	}
-	fd = libc_open(pathname, flags);
+	needs_mode = flags & O_CREAT;
+#ifdef O_TMPFILE
+	if ((flags & O_TMPFILE) == O_TMPFILE)
+		needs_mode = 1;
+#endif
+	if (needs_mode)
+	{
+		va_start(ap, flags);
+		mode = va_arg(ap, int);
+		va_end(ap);
+	}
+	fd = libc_open(pathname, flags, mode);
 	if (fd >= 0)
 	{
 		int fd_flags = fcntl(fd, F_GETFD, 0);
@@ -77,7 +105,7 @@ int open(const char *pathname, int flags, ...)
 			fcntl(fd, F_SETFD, fd_flags);
 		}
 #ifdef DEBUG
-		fprintf(stdout, "open %s, flags %d returned fd %d\n", pathname, flags, fd);
+		fprintf(stdout, "open %s, flags %d, mode %04o returned fd %d\n", pathname, flags, (unsigned int)mode, fd);
 #endif
 	}
 	return fd;
