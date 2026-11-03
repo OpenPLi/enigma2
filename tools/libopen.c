@@ -14,6 +14,7 @@ int open64(const char *pathname, int flags, ...)
 	typedef int (*FUNC_PTR) (const char* pathname, int flags, ...);
 	static FUNC_PTR libc_open64;
 	int fd=-1;
+	int mode = 0;
 	int needs_mode;
 	va_list ap;
 	if (!libc_open64)
