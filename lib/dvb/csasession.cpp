@@ -133,8 +133,11 @@ void eDVBCSASession::startECMMonitor(iDVBDemux *demux, uint16_t ecm_pid, uint16_
 	m_ecm_pid = ecm_pid;
 	m_caid = caid;
 
-	// Cache-driven early activation: skip ECM section reader if CSA-ALT for
-	// this service is already known. Disabled in Aggressive mode (audio race on dm900).
+	// Cache-driven early activation: skip ECM section reader only if CSA-ALT
+	// for this service is already known. A cache hit with non-CSA-ALT must
+	// still fall through and create the ECM section reader, otherwise a later
+	// CSA-ALT transition can never be detected. Disabled in Aggressive mode
+	// (audio race on dm900).
 	const bool cache_early_activate_disabled =
 		(eConfigManager::getConfigIntValue("config.softcsa.decoderRelease", 0) == 2);
 
@@ -154,20 +157,24 @@ void eDVBCSASession::startECMMonitor(iDVBDemux *demux, uint16_t ecm_pid, uint16_
 			m_ecm_analyzed = true;
 			m_csa_alt = info.is_csa_alt;
 
-			if (info.is_csa_alt && !m_active)
+			if (info.is_csa_alt)
 			{
-				if (shouldSuppressActivation && shouldSuppressActivation())
+				if (!m_active)
 				{
-					eDebug("[eDVBCSASession] ECM Monitor: CSA-ALT cached but activation suppressed (CI module)");
+					if (shouldSuppressActivation && shouldSuppressActivation())
+					{
+						eDebug("[eDVBCSASession] ECM Monitor: CSA-ALT cached but activation suppressed (CI module)");
+					}
+					else
+					{
+						eDebug("[eDVBCSASession] ECM Monitor: Activating from cache (CSA-ALT)");
+						setActive(true);
+					}
 				}
-				else
-				{
-					eDebug("[eDVBCSASession] ECM Monitor: Activating from cache (CSA-ALT)");
-					setActive(true);
-				}
+				return;
 			}
-
-			return;
+			// non-CSA-ALT cache hit: keep cached ecm_mode, fall through and
+			// create the section reader so a later CSA-ALT transition is seen.
 		}
 	}
 
