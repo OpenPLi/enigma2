@@ -201,8 +201,8 @@ class Navigation:
 					self.skipServiceReferenceReset = True
 
 				self.currentlyPlayingServiceReference = playref
-				playref, is_stream_relay = streamrelay.streamrelayChecker(playref)
 				softcsa.softCSAChecker(playref)
+				playref, is_stream_relay = streamrelay.streamrelayChecker(playref)
 
 				if BoxInfo.getItem("FCCactive") and "%3a//" in ref.toString() and not is_stream_relay:
 					self.pnav.stopService()
