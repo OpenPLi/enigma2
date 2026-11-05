@@ -69,6 +69,7 @@ class eEncoder
 		void navigation_event_0(int);
 		void navigation_event_1(int);
 		void navigation_event(int, int);
+		void abortAllocation(int encoder_index);
 
 	public:
 
