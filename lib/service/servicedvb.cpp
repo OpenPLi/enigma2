@@ -4191,14 +4191,10 @@ void eDVBServicePlay::cleanupSoftwareDescrambling()
 		&& eConfigManager::getConfigIntValue("config.softcsa.decoderRelease", 0) == 2)
 		resetHwDescramblerSlot();
 
-	// Release HW decoder PIDs when SoftCSA was active for this service.
-	// Fall back to unconditional cleanup if the session was already torn down
-	// but the decoder reference is still held, to avoid leaking the decoder
-	// slot (regression from the previous commit).
-	bool softcsa_was_active =
-		(m_csa_session && m_csa_session->isActive())
-		|| (csa_is_auto() || csa_from_whitelist());
-	if (m_decoder && softcsa_was_active)
+	// Leave a decoder which was never handed over to SoftCSA to its normal
+	// service lifecycle. An active session can still own a restored HW decoder
+	// here when the SoftDecoder takeover failed.
+	if (m_decoder && m_csa_session && m_csa_session->isActive())
 	{
 		eDebug("[eDVBServicePlay] Cleaning up HW decoder for clean handover");
 
