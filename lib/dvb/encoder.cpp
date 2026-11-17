@@ -203,6 +203,7 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 		if((encoder[encoder_index].file_fd = open(source_file.c_str(), O_RDONLY, 0)) < 0)
 		{
 			eWarning("[eEncoder] open source file failed");
+			abortAllocation(encoder_index);
 			return(-1);
 		}
 	}
@@ -212,6 +213,7 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 	if((encoder[encoder_index].encoder_fd = open(filename, bcm_encoder ? O_RDWR : O_RDONLY)) < 0)
 	{
 		eWarning("[eEncoder] open encoder failed");
+		abortAllocation(encoder_index);
 		return(-1);
 	}
 
@@ -237,8 +239,7 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 			default:
 			{
 				eWarning("[eEncoder] only encoder 0 and encoder 1 implemented");
-				close(encoder[encoder_index].encoder_fd);
-				encoder[encoder_index].encoder_fd = -1;
+				abortAllocation(encoder_index);
 				return(-1);
 				break;
 			}
@@ -252,7 +253,9 @@ int eEncoder::allocateEncoder(const std::string &serviceref, int &buffersize,
 
 	if(encoder[encoder_index].navigation_instance->playService(serviceref) < 0)
 	{
+		/* e.g. no free tuner: without this the encoder would stay allocated until enigma2 restarts */
 		eWarning("[eEncoder] navigation->playservice failed");
+		abortAllocation(encoder_index);
 		return(-1);
 	}
 
@@ -322,6 +325,7 @@ int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize
 	if(encoder[0].navigation_instance->playService(serviceref) < 0)
 	{
 		eWarning("[eEncoder] navigation->playservice failed");
+		abortAllocation(0);
 		return(-1);
 	}
 
@@ -330,12 +334,35 @@ int eEncoder::allocateHDMIEncoder(const std::string &serviceref, int &buffersize
 	if((encoder[0].encoder_fd = open(filename, O_RDONLY)) < 0)
 	{
 		eWarning("[eEncoder] open encoder failed");
+		abortAllocation(0);
 		return(-1);
 	}
 
 	encoder[0].state = EncoderContext::state_running;
 
 	return(encoder[0].encoder_fd);
+}
+
+void eEncoder::abortAllocation(int encoder_index)
+{
+	/* undo a partial allocateEncoder/allocateHDMIEncoder, so the encoder can be allocated again */
+
+	/* like freeEncoder: not wait_pmt anymore, so the stop event below cannot start the encoder */
+	encoder[encoder_index].state = EncoderContext::state_finishing;
+
+	if(encoder[encoder_index].navigation_instance != nullptr)
+		encoder[encoder_index].navigation_instance->stopService();
+
+	if(encoder[encoder_index].encoder_fd >= 0)
+		close(encoder[encoder_index].encoder_fd);
+
+	if(encoder[encoder_index].file_fd >= 0)
+		close(encoder[encoder_index].file_fd);
+
+	encoder[encoder_index].encoder_fd = -1;
+	encoder[encoder_index].file_fd = -1;
+	encoder[encoder_index].navigation_instance = nullptr;
+	encoder[encoder_index].state = EncoderContext::state_idle;
 }
 
 void eEncoder::freeEncoder(int encoderfd)
