@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:27+0200\n"
+"POT-Creation-Date: 2026-11-17 21:53+0100\n"
 "PO-Revision-Date: 2024-03-09 11:25+0100\n"
 "Last-Translator: Oriol Pellicer <oriol@elsud.org>\n"
 "Language-Team: angelodos angelo2807@hotmail.com\n"
@@ -252,13 +252,6 @@ msgstr "%d minuts"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
-
-#
-#, python-format
-msgid "%d package selected."
-msgid_plural "%d packages selected."
-msgstr[0] "%d paquet seleccionat."
-msgstr[1] "%d paquets seleccionats."
 
 #, python-format
 msgid "%d pixel wide"
@@ -685,10 +678,6 @@ msgid "A sleep timer is about to shut down your receiver. Would you like to proc
 msgstr "Un programador està a punt d'apagar el teu receptor. Vols continuar?"
 
 #
-msgid "A small overview of the available icon states and actions."
-msgstr "Una petita visió general de les icones d'estat i accions."
-
-#
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
@@ -1008,6 +997,9 @@ msgstr "Permetre 10 bits"
 msgid "Allow 12bit"
 msgstr "Permetre 12 bits"
 
+msgid "Allow instantly toggle alternative infobars"
+msgstr ""
+
 msgid "Allow quitting movie player with exit"
 msgstr "Permetre sortir del reproductor de pel·lícules amb Exit"
 
@@ -1110,6 +1102,10 @@ msgstr "Qualsevol activitat"
 #
 msgid "Arabic"
 msgstr "Àrab"
+
+#, fuzzy
+msgid "Are you sure to delete all cuts and marks?"
+msgstr "Segur que vols restablir totes les imatges eliminades?"
 
 msgid "Are you sure to delete image:"
 msgstr "Segur que vols eliminar la imatge:"
@@ -1275,10 +1271,6 @@ msgstr "Australià"
 
 msgid "Austria"
 msgstr "Austria"
-
-#
-msgid "Author: "
-msgstr "Autor: "
 
 #
 msgid "Authoring mode"
@@ -2201,10 +2193,6 @@ msgstr "Common Interface"
 msgid "Common Interface assignment"
 msgstr "Assignació d’interfície comuna"
 
-#
-msgid "Communication"
-msgstr "Comunicació"
-
 msgid "Comoros"
 msgstr "Comores"
 
@@ -2644,9 +2632,6 @@ msgstr "El contingut no cap en DVD!"
 msgid "Context Menu"
 msgstr "Menú contextual de canal"
 
-msgid "Continue"
-msgstr "Continuar"
-
 msgid "Continue playback"
 msgstr "Continuar reproducció"
 
@@ -3017,10 +3002,6 @@ msgid "Default movie location"
 msgstr "Ubicació predeterminada de pel·lícula"
 
 #
-msgid "Default settings"
-msgstr "Configuració per defecte"
-
-#
 msgid "Default timer type"
 msgstr "Tipus de progr. per defecte"
 
@@ -3205,9 +3186,6 @@ msgstr "Destinació del receptor remot de reserva per DVB-C"
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Destinació del receptor remot de reserva per DVB-T"
 
-msgid "Details for plugin: "
-msgstr "Detalls del plugin: "
-
 #
 #, fuzzy, python-format
 msgid "Detect box%s via network"
@@ -3362,9 +3340,6 @@ msgstr "Mostrar la llista de EPG per al canal actual"
 #
 msgid "Display Skin"
 msgstr "Visualitzar la skin"
-
-msgid "Display and userinterface"
-msgstr "Pantalla i interfície d’usuari"
 
 msgid "Display message before playing next movie"
 msgstr "Mostrar missatge abans de reproduir la següent pel·lícula"
@@ -3546,6 +3521,11 @@ msgid "Do you want to select a different skin?"
 msgstr "Vols seleccionar una skin diferent?"
 
 #
+#, fuzzy
+msgid "Do you want to update the package:\n"
+msgstr "Vols eliminar el paquet:\n"
+
+#
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Vols actualitzar el receptor a %s?"
@@ -3620,6 +3600,11 @@ msgstr "Descarregant"
 #
 msgid "Downloading Image"
 msgstr "Descarregant imatge"
+
+#
+#, fuzzy
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Descarregant informació de plugins. Espera, si us plau..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -4253,10 +4238,6 @@ msgstr "Configuració ampliada …"
 msgid "Extensions"
 msgstr "Extensions"
 
-#
-msgid "Extensions management"
-msgstr "Gestió d’extensions"
-
 msgid "Extensions menu"
 msgstr "Menú d’extensions"
 
@@ -4569,10 +4550,6 @@ msgstr ""
 #, fuzzy
 msgid "Flat by position on remote"
 msgstr "Posició final a"
-
-#
-msgid "Following tasks will be done after you press OK!"
-msgstr "Les següents tasques es realitzaran després de prémer OK!"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr ""
@@ -5562,12 +5539,6 @@ msgstr "Instal·lant"
 msgid "Install plugin"
 msgstr "Instal·lant"
 
-msgid "Installation has completed."
-msgstr "La instal·lació s’ha completat."
-
-msgid "Installation or removal has completed."
-msgstr "La instal·lació o eliminació s’ha completat."
-
 #
 msgid "Installing"
 msgstr "Instal·lant"
@@ -6056,6 +6027,9 @@ msgstr "Noms de fitxer llargs"
 msgid "Long key press"
 msgstr "Pulsació llarga de botó"
 
+msgid "Long press delay threshold"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Long press: "
@@ -6155,9 +6129,8 @@ msgstr "Mali"
 msgid "Malta"
 msgstr "Malta"
 
-#
-msgid "Manage your receiver's software"
-msgstr "Gestionar el software del teu receptor"
+msgid "Manage optional software packages"
+msgstr ""
 
 msgid "Manual"
 msgstr "Manual"
@@ -6576,10 +6549,6 @@ msgid "Multichannel PCM"
 msgstr "PCM multicanal"
 
 #
-msgid "Multimedia"
-msgstr "Multimèdia"
-
-#
 msgid "Multiple service support"
 msgstr "Suport per a serveis múltiples"
 
@@ -6816,10 +6785,6 @@ msgid "No delay"
 msgstr "Sense retard"
 
 #
-msgid "No description available."
-msgstr "No hi ha descripció disponible."
-
-#
 msgid "No displayable files on this medium found!"
 msgstr "No s’han trobat fitxers que es mostrin en aquest mitjà!"
 
@@ -6844,10 +6809,6 @@ msgstr "No hi ha cap sintonitzador lliure!"
 #
 msgid "No images found"
 msgstr "No s'han trobat imatges"
-
-#
-msgid "No network connection available."
-msgstr "No hi ha connexió de xarxa disponible."
 
 #
 msgid "No networks found"
@@ -7152,10 +7113,6 @@ msgid "Only change this setting if you are using a SCR device that has been repr
 msgstr "Canvia aquesta configuració només si utilitzes un dispositiu SCR que ha estat reprogramat amb un programador personalitzat. Per a més informació, consulta amb la persona que ha reprogramat el dispositiu."
 
 #
-msgid "Only extensions."
-msgstr "Només extensions."
-
-#
 msgid "Only free scan"
 msgstr "Només escaneig lliure"
 
@@ -7338,6 +7295,10 @@ msgstr "OVR"
 #
 msgid "Package list update"
 msgstr "Actualització de la llista de paquets"
+
+#, fuzzy
+msgid "Package manager"
+msgstr "Paquets per actualitzar"
 
 msgid "Packages to update"
 msgstr "Paquets per actualitzar"
@@ -7818,14 +7779,6 @@ msgid "Plugin browser"
 msgstr "Navegador de plugins"
 
 #
-msgid "Plugin manager activity information"
-msgstr "Informació sobre l’activitat del gestor de plugins"
-
-#
-msgid "Plugin manager help"
-msgstr "Ajuda del gestor de plugins"
-
-#
 msgid "Plugins"
 msgstr "Plugins"
 
@@ -8126,10 +8079,6 @@ msgstr "Prime time"
 msgid "Priority"
 msgstr "Prioritat"
 
-#
-msgid "Process"
-msgstr "Procés"
-
 msgid "Progress"
 msgstr "Progrés"
 
@@ -8398,10 +8347,6 @@ msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Els enregistraments estan en curs o es produiran en pocs segons!"
 
 #
-msgid "Recordings"
-msgstr "Enregistraments"
-
-#
 msgid "Recordings always have priority"
 msgstr "Els enregistraments sempre tenen prioritat"
 
@@ -8442,6 +8387,9 @@ msgstr "Regió"
 msgid "Relative"
 msgstr "Relatiu"
 
+msgid "Reload"
+msgstr ""
+
 msgid "Reload blacklists"
 msgstr "Recarregar llistes negres"
 
@@ -8468,6 +8416,10 @@ msgstr "Tipus de comandament remot"
 #
 msgid "Remote control type setup"
 msgstr "Configuració del tipus de comandament remot"
+
+#, fuzzy
+msgid "Removal has completed."
+msgstr "La instal·lació o eliminació s’ha completat."
 
 #
 msgid "Remove"
@@ -8917,10 +8869,6 @@ msgid "Satellite dish setup"
 msgstr "Configuració de la antena parabòlica"
 
 #
-msgid "Satellite equipment"
-msgstr "Equipament per satèl·lit"
-
-#
 msgid "Satellite equipment setup"
 msgstr "Configuració de l'equipament per satèl·lit"
 
@@ -9123,14 +9071,6 @@ msgstr "Cercant"
 
 msgid "Searching east..."
 msgstr "Cercant a l’est …"
-
-#
-msgid "Searching for available updates. Please wait..."
-msgstr "Cercant actualitzacions disponibles. Espera, si us plau…"
-
-#
-msgid "Searching for new installed or removed packages. Please wait..."
-msgstr "Cercant paquets nous instal·lats o eliminats. Espera, si us plau…"
 
 msgid "Searching west..."
 msgstr "Cercant a l’oest …"
@@ -10278,10 +10218,6 @@ msgid "SkinSelector: Restart GUI"
 msgstr "Selector de skin: reiniciar interfície"
 
 #
-msgid "Skins"
-msgstr "Skins"
-
-#
 msgid "Skip empty services"
 msgstr "Ometre serveis buits"
 
@@ -10373,14 +10309,6 @@ msgid "Softcam setup"
 msgstr "Configuració de softcam"
 
 #
-msgid "Software"
-msgstr "Programari"
-
-#
-msgid "Software management"
-msgstr "Gestió de software"
-
-#
 msgid "Software update"
 msgstr "Actualització de software"
 
@@ -10399,9 +10327,6 @@ msgstr "Alguns plugins no estan disponibles:\n"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Ho sentim, l'eliminació directoris només es pot fer (per ara) a través de la paperera."
-
-msgid "Sorry, no details available!"
-msgstr "Ho sentim, no hi ha detalls disponibles!"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Ho sentim, aquest sintonitzador està en ús."
@@ -11371,14 +11296,6 @@ msgstr ""
 "El plugin de xarxa sense fils no està instal·lat!\n"
 "Si us plau, procedeix a la seva instal·lació."
 
-#, python-format
-msgid "There are at least %d updates available."
-msgstr "Hi ha almenys %d actualitzacions disponibles."
-
-#
-msgid "There are currently no outstanding actions."
-msgstr "Actualment no hi ha accions destacades."
-
 #
 msgid "There are no saved playlists to delete!"
 msgstr "No hi han llistes de reproducció desades per eliminar!"
@@ -11386,10 +11303,6 @@ msgstr "No hi han llistes de reproducció desades per eliminar!"
 #
 msgid "There are no saved playlists to load!"
 msgstr "No hi han llistes de reproducció desades per reproduir!"
-
-#
-msgid "There are no updates available."
-msgstr "No hi han actualitzacions disponibles."
 
 msgid "There is no signal to lock on !"
 msgstr "No hi ha cap senyal per bloquejar-lo!"
@@ -11554,22 +11467,6 @@ msgstr "Aquesta opció estableix la supressió de falsos contorns digitals, que 
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr "Aquesta opció configura la nitidesa de la imatge, que s'utilitza quan la imatge s'està augmentant."
 
-#
-msgid "This plugin is installed."
-msgstr "Aquest plugin està instal·lat."
-
-#
-msgid "This plugin is not installed."
-msgstr "Aquest plugin no està instal·lat."
-
-#
-msgid "This plugin will be installed."
-msgstr "Aquest plugin s’instal·larà."
-
-#
-msgid "This plugin will be removed."
-msgstr "Aquest plugin es suprimirà."
-
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Aquest receptor no pot descodificar fluxos %s!"
@@ -11580,6 +11477,9 @@ msgstr "Aquest servei està protegit per un PIN de control parental"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Aquesta configuració permet que la configuració del sintonitzador sigui una duplicació de la configuració d’un altre sintonitzador."
+
+msgid "This setting allows you to increase or decrease the number of key repeats required to trigger a long press on the remote control or keyboard."
+msgstr ""
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
 msgstr "Aquesta configuració depèn del teu proveïdor de cable i de la ubicació. Si no saps la configuració correcta, consulta el menú del receptor de cable oficial, obtén-la al teu proveïdor de cable o cerca ajuda a través del fòrum d'Internet."
@@ -12141,14 +12041,6 @@ msgstr "Descobrir la línia discontinua intermitent per a aquest servei"
 msgid "Undefined"
 msgstr "Sense definir"
 
-#
-msgid "Undo install"
-msgstr "Desfer la instal·lació"
-
-#
-msgid "Undo uninstall"
-msgstr "Desfer la desinstal·lació"
-
 msgid "Unencrypted"
 msgstr "Sense xifrar"
 
@@ -12170,10 +12062,6 @@ msgstr "Retard d'Unicable després de l'activació de tensió abans de l'ordre d
 
 msgid "Unicable delay after last diseqc command"
 msgstr "Retard d'Unicable després de l'activació de la darrera ordre de diseqc"
-
-#
-msgid "Uninstall"
-msgstr "Desinstal·lar"
 
 msgid "United Arab Emirates"
 msgstr "Emirats Àrabs Units"
@@ -12251,17 +12139,13 @@ msgstr "L’actualització ha finalitzat. Vols reiniciar el receptor?"
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "No s’ha pogut actualitzar. El receptor no té connexió a Internet."
 
-#
-msgid "Update feed not available."
-msgstr "El feed d'actualització no està disponible."
+#, fuzzy
+msgid "Update has completed."
+msgstr "La instal·lació s’ha completat."
 
 #
 msgid "Updating"
 msgstr "Actualitzant"
-
-#
-msgid "Updating software catalog"
-msgstr "Actualitzant catàleg de software"
 
 msgid "Upper case"
 msgstr "Majúscula"
@@ -12581,62 +12465,6 @@ msgid "View Rass interactive..."
 msgstr "Veure Rass interactiu…"
 
 #
-msgid "View details"
-msgstr "Veure detalls"
-
-#
-#, python-format
-msgid "View list of available %s extensions."
-msgstr "Veure llista de %s extensions disponibles."
-
-#
-msgid "View list of available CommonInterface extensions"
-msgstr "Veure llista d’extensions d'Common Interface disponibles"
-
-#
-msgid "View list of available EPG extensions."
-msgstr "Veure llista d’extensions d'EPG disponibles."
-
-#
-msgid "View list of available Satellite equipment extensions."
-msgstr "Veure llista d’extensions d’equips de satèl·lit disponibles."
-
-#
-msgid "View list of available communication extensions."
-msgstr "Veure llista d’extensions de comunicació disponibles."
-
-#
-msgid "View list of available default settings"
-msgstr "Veure llista de configuració predeterminada disponible"
-
-msgid "View list of available display and userinterface extensions."
-msgstr "Veure llista d’extensions de visualització i d’interfície d’usuari disponibles."
-
-#
-msgid "View list of available multimedia extensions."
-msgstr "Veure llista d’extensions multimèdia disponibles."
-
-#
-msgid "View list of available networking extensions"
-msgstr "Veure llista d’extensions de xarxa disponibles"
-
-#
-msgid "View list of available recording extensions"
-msgstr "Veure llista d’extensions d’enregistrament disponibles"
-
-#
-msgid "View list of available skins"
-msgstr "Veure llista de skins disponibles"
-
-#
-msgid "View list of available software extensions"
-msgstr "Veure llista d’extensions de software disponibles"
-
-#
-msgid "View list of available system extensions"
-msgstr "Veure llista d’extensions del sistema disponibles"
-
-#
 msgid "View photos..."
 msgstr "Veure fotos..."
 
@@ -12858,13 +12686,13 @@ msgstr "Sàhara Occidental"
 msgid "What type of service scan do you want?"
 msgstr "Quin tipus d'escaneig de serveis vols?"
 
-msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. When we have on the OK button the channellist that it will be long exit. The infobar will shortly disappear and then shown in the other mode."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Quan estigui activat, enigma2 carregarà llistes de bouquets d'usuari no enllaçats. Això vol dir que es continuaran carregant els bucs d’usuari disponibles, però que no s'incloguin als fitxers boquets.tv o bouquets.radio. Això et permet, per exemple, mantenir el teu propi bouquet d’usuari mentre s’actualitza la configuració instal·lada"
 
-msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible. When we have on the OK button the channellist that it will be long exit."
 msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -12900,6 +12728,9 @@ msgstr "Quan estigui activat, podràs controlar el volum amb els botons de fletx
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Quan estigui activat, podràs personalitzar la configuració d’OpenWebIf per al sintonitzador de reserva"
+
+msgid "When enabled you can instantly toggle with long OK or when the channellist appears with long OK it will be long exit list via the OK button, the infobar toggle is then transfered to exit button between two different second infobars and two different standard infobars when the skin does support this feature"
+msgstr ""
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Quan estigui activat, podràs especificar un període de temps per ignorar el programador d’apagada quan el receptor estigui en mode standby"
@@ -13270,30 +13101,14 @@ msgstr ""
 "Vols eliminar\n"
 "“%s”?"
 
-#
-msgid "You can cancel the installation."
-msgstr "Pots anul·lar la instal·lació."
-
-#
-msgid "You can cancel the removal."
-msgstr "Pots anul·lar l’eliminació."
-
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Pots continuar veient la televisió, etc. mentre això s’està executant."
 
 msgid "You can enable if will be displayed extended EPG description for item."
 msgstr "Pots activar si es mostrarà la descripció d'EPG ampliada per a l’element."
 
-#
-msgid "You can install this plugin."
-msgstr "Pots instal·lar aquest plugin."
-
 msgid "You can only burn receiver recordings!"
 msgstr "Només pots gravar enregistraments del receptor!"
-
-#
-msgid "You can remove this plugin."
-msgstr "Pots eliminar aquest plugin."
 
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Pots definir el directori seleccionat com a directori “arrel” per al reproductor de pel·lícules."
@@ -14314,9 +14129,6 @@ msgstr "conservar els preferits en els talls"
 msgid "priority"
 msgstr "prioritat"
 
-msgid "receiver software because updates are available."
-msgstr "software del receptor perquè hi ha actualitzacions disponibles."
-
 #
 msgid "record"
 msgstr "enregistrar"
@@ -14338,6 +14150,11 @@ msgstr "gent notable"
 #
 msgid "remove after this position"
 msgstr "eliminar després d'aquesta posició"
+
+#
+#, fuzzy
+msgid "remove all cuts and marks"
+msgstr "eliminar aquesta marca"
 
 #
 msgid "remove before this position"

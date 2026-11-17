@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:27+0200\n"
+"POT-Creation-Date: 2026-11-17 21:53+0100\n"
 "PO-Revision-Date: 2020-05-16 18:41+0200\n"
 "Last-Translator: jamu\n"
 "Language-Team: BoxFreak/jamu\n"
@@ -254,12 +254,6 @@ msgstr "%d minuuttia"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
-
-#, fuzzy, python-format
-msgid "%d package selected."
-msgid_plural "%d packages selected."
-msgstr[0] " pakettia valittu."
-msgstr[1] " pakettia valittu."
 
 #, python-format
 msgid "%d pixel wide"
@@ -674,9 +668,6 @@ msgstr "Uniajastin haluaa asettaa vastaanottimesi valmiustilaan. Tehdäänkö ni
 msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Uniajastin haluaan sammuttaa vastaanottimesi. Sammutetaanko nyt?"
 
-msgid "A small overview of the available icon states and actions."
-msgstr "Kuvaus kuvakkeiden tiloista ja toiminnoista."
-
 #
 msgid ""
 "A timer failed to record!\n"
@@ -1011,6 +1002,9 @@ msgstr ""
 msgid "Allow 12bit"
 msgstr ""
 
+msgid "Allow instantly toggle alternative infobars"
+msgstr ""
+
 msgid "Allow quitting movie player with exit"
 msgstr "Salli tallenteista poistuminen exit-napilla"
 
@@ -1114,6 +1108,10 @@ msgstr "Mikä tahansa toiminta"
 #
 msgid "Arabic"
 msgstr "Arabia"
+
+#, fuzzy
+msgid "Are you sure to delete all cuts and marks?"
+msgstr "Poista poistetut pysyvästi"
 
 #, fuzzy
 msgid "Are you sure to delete image:"
@@ -1281,10 +1279,6 @@ msgstr "Australian"
 #
 msgid "Austria"
 msgstr "Itävalta"
-
-#
-msgid "Author: "
-msgstr "Tekijä: "
 
 #
 msgid "Authoring mode"
@@ -2209,9 +2203,6 @@ msgstr "CI-liitäntä/CAM"
 msgid "Common Interface assignment"
 msgstr "CI-määritykset"
 
-msgid "Communication"
-msgstr "Kommunikointi"
-
 msgid "Comoros"
 msgstr "Comoros"
 
@@ -2647,9 +2638,6 @@ msgstr "Sisältö ei mahdu DVD:lle!"
 msgid "Context Menu"
 msgstr "Kanavan valikko"
 
-msgid "Continue"
-msgstr "Jatka"
-
 msgid "Continue playback"
 msgstr "Jatka toistoa"
 
@@ -3025,10 +3013,6 @@ msgid "Default movie location"
 msgstr "Oletushakemisto tallennuksille"
 
 #
-msgid "Default settings"
-msgstr "Oletusasetukset"
-
-#
 #, fuzzy
 msgid "Default timer type"
 msgstr "Poista ajastus"
@@ -3222,9 +3206,6 @@ msgstr "Etävastaanottimen kohde"
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Etävastaanottimen kohde"
 
-msgid "Details for plugin: "
-msgstr "Lisäosan tiedot: "
-
 #
 #, fuzzy, python-format
 msgid "Detect box%s via network"
@@ -3388,10 +3369,6 @@ msgstr "Näytä ohjelmaoppaan listaus tälle kanavalle"
 #, fuzzy
 msgid "Display Skin"
 msgstr "Etupaneelin näyttö"
-
-#
-msgid "Display and userinterface"
-msgstr "Näyttö ja käyttöliittymä"
 
 msgid "Display message before playing next movie"
 msgstr "Näytä viesti ennen seuraavan tallenteen toistoa"
@@ -3569,6 +3546,11 @@ msgstr "Jatketaanko kohdasta, johon katselu viimeksi jäi?"
 msgid "Do you want to select a different skin?"
 msgstr ""
 
+#
+#, fuzzy
+msgid "Do you want to update the package:\n"
+msgstr "Haluatko poistaa ohjelmapaketin:\n"
+
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Haluatko päivittää vastaanottimeesi %s?"
@@ -3643,6 +3625,11 @@ msgstr "Ladataan"
 #
 msgid "Downloading Image"
 msgstr "Ladataan ohjelmistokuvaa"
+
+#
+#, fuzzy
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Ladataan tietoja lisäosista. Odota..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -4278,9 +4265,6 @@ msgstr "Laajat asetukset..."
 msgid "Extensions"
 msgstr "Laajennukset"
 
-msgid "Extensions management"
-msgstr "Laajennuksien hallinta"
-
 msgid "Extensions menu"
 msgstr "Laajennusvalikko"
 
@@ -4597,9 +4581,6 @@ msgstr ""
 #, fuzzy
 msgid "Flat by position on remote"
 msgstr "Lopullinen sijainti"
-
-msgid "Following tasks will be done after you press OK!"
-msgstr "Seuraavat tehtävät suoritetaan kun painat OK!"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr ""
@@ -5606,12 +5587,6 @@ msgstr "Asennetaan"
 msgid "Install plugin"
 msgstr "Asennetaan"
 
-msgid "Installation has completed."
-msgstr "Asennus on valmis."
-
-msgid "Installation or removal has completed."
-msgstr "Asennus tai poisto suoritettu."
-
 #
 msgid "Installing"
 msgstr "Asennetaan"
@@ -6109,6 +6084,9 @@ msgstr "Pitkät tiedostonimet"
 msgid "Long key press"
 msgstr "Pitkä painallus"
 
+msgid "Long press delay threshold"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Long press: "
@@ -6211,9 +6189,8 @@ msgstr "Mali"
 msgid "Malta"
 msgstr "Malta"
 
-#
-msgid "Manage your receiver's software"
-msgstr "Hallitse vastaanottimen ohjelmistoa"
+msgid "Manage optional software packages"
+msgstr ""
 
 #
 msgid "Manual"
@@ -6646,9 +6623,6 @@ msgstr "Kaikki satelliitit"
 msgid "Multichannel PCM"
 msgstr "PCM-monikanavaääni"
 
-msgid "Multimedia"
-msgstr "Multimedia"
-
 #
 msgid "Multiple service support"
 msgstr "Usean kanavan tuki"
@@ -6891,10 +6865,6 @@ msgid "No delay"
 msgstr "Ei viivettä"
 
 #
-msgid "No description available."
-msgstr "Kuvausta ei ole saatavilla."
-
-#
 msgid "No displayable files on this medium found!"
 msgstr "Tiedostoja ei löytynyt!"
 
@@ -6923,9 +6893,6 @@ msgstr "Kaikki virittimet ovat jo käytössä!"
 #, fuzzy
 msgid "No images found"
 msgstr "Verkkoja ei löytynyt"
-
-msgid "No network connection available."
-msgstr "Ei verkkoyhteyttä."
 
 #
 msgid "No networks found"
@@ -7237,9 +7204,6 @@ msgstr "Yksi"
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr ""
 
-msgid "Only extensions."
-msgstr "Vain laajennukset."
-
 #
 msgid "Only free scan"
 msgstr "Hae vain salaamattomat"
@@ -7422,6 +7386,9 @@ msgstr ""
 #
 msgid "Package list update"
 msgstr "Ohjelmapakettilistan päivitys"
+
+msgid "Package manager"
+msgstr ""
 
 msgid "Packages to update"
 msgstr ""
@@ -7905,14 +7872,6 @@ msgid "Plugin browser"
 msgstr "Lisäosien valinta"
 
 #
-msgid "Plugin manager activity information"
-msgstr "Lisäosien hallinnan asennustiedot"
-
-#
-msgid "Plugin manager help"
-msgstr "Lisäosien hallinan ohje"
-
-#
 msgid "Plugins"
 msgstr "Plugin-lisäosat"
 
@@ -8216,10 +8175,6 @@ msgstr "Paras katseluaika"
 msgid "Priority"
 msgstr "Prioriteetti"
 
-#
-msgid "Process"
-msgstr "Suorita"
-
 msgid "Progress"
 msgstr "Etenemispalkki"
 
@@ -8492,10 +8447,6 @@ msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Tallennuksia on käynnissä tai käynnistymässä!"
 
 #
-msgid "Recordings"
-msgstr "Tallenteet"
-
-#
 msgid "Recordings always have priority"
 msgstr "Tallennukset saavat keskeyttää suoran katselun"
 
@@ -8538,6 +8489,9 @@ msgstr "Alue"
 msgid "Relative"
 msgstr "Suhteellinen"
 
+msgid "Reload"
+msgstr ""
+
 msgid "Reload blacklists"
 msgstr "Lataa estolistat uudestaan"
 
@@ -8564,6 +8518,10 @@ msgstr "Kaukosäätimen tyyppi"
 #
 msgid "Remote control type setup"
 msgstr "Kaukosäätimen tyypin asetus"
+
+#, fuzzy
+msgid "Removal has completed."
+msgstr "Asennus tai poisto suoritettu."
 
 #
 msgid "Remove"
@@ -9014,9 +8972,6 @@ msgstr "Satelliitti"
 msgid "Satellite dish setup"
 msgstr "Satelliittilautasen asetukset"
 
-msgid "Satellite equipment"
-msgstr "Satelliittilaitteet"
-
 #
 msgid "Satellite equipment setup"
 msgstr "Satelliittilaitteiden asetukset"
@@ -9218,14 +9173,6 @@ msgstr "Etsitään"
 #
 msgid "Searching east..."
 msgstr "Etsitään itään..."
-
-#
-msgid "Searching for available updates. Please wait..."
-msgstr "Haetaan saatavilla olevia päivityksiä. Odota..."
-
-#
-msgid "Searching for new installed or removed packages. Please wait..."
-msgstr "Etsitään asennettuja tai poistettuja ohjelmapaketteja. Odota..."
 
 #
 msgid "Searching west..."
@@ -10412,10 +10359,6 @@ msgid "SkinSelector: Restart GUI"
 msgstr ""
 
 #
-msgid "Skins"
-msgstr "Teema"
-
-#
 msgid "Skip empty services"
 msgstr "Ohita tyhjät kanavat"
 
@@ -10515,13 +10458,6 @@ msgid "Softcam setup"
 msgstr "Softcamin asetus"
 
 #
-msgid "Software"
-msgstr "Ohjelmisto"
-
-msgid "Software management"
-msgstr "Ohjelmiston hallinta"
-
-#
 msgid "Software update"
 msgstr "Ohjelmiston päivitys"
 
@@ -10540,9 +10476,6 @@ msgstr "Seuraavat lisäosat eivät ole saatavilla:\n"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Pahoittelen, hakemistojen tuhoaminen voidaan tehdä vain roskakorin kautta (toistaiseksi)."
-
-msgid "Sorry, no details available!"
-msgstr "Lisätietoja ei saatavilla!"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Tämä viritin on käytössä"
@@ -11537,21 +11470,11 @@ msgstr ""
 "WLAN-lisäosaa ei ole asennettu!\n"
 "Asenna se."
 
-#, python-format
-msgid "There are at least %d updates available."
-msgstr "Vähintään %d päivitystä saatavilla."
-
-msgid "There are currently no outstanding actions."
-msgstr "Ei suorittamattomia tehtäviä."
-
 msgid "There are no saved playlists to delete!"
 msgstr "Ei poistettavia soittolistoja!"
 
 msgid "There are no saved playlists to load!"
 msgstr "Ei tallennettuja soittolistoja!"
-
-msgid "There are no updates available."
-msgstr "Päivityksiä ei ole saatavilla."
 
 msgid "There is no signal to lock on !"
 msgstr "Ei signaalia johon voisi lukittua!"
@@ -11718,22 +11641,6 @@ msgstr "Tämä asetus määrittää ääriviivakorostumien vaimennuksen."
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr "Tämä asetus määrittää kuvan terävyyden, käytetään kun kuva skaalataan suurempaan tarkkuuteen."
 
-#
-msgid "This plugin is installed."
-msgstr "Tämä lisäosa on asennettu."
-
-#
-msgid "This plugin is not installed."
-msgstr "Tätä lisäosaa ei ole asennettu."
-
-#
-msgid "This plugin will be installed."
-msgstr "Tämä lisäosa asennetaan."
-
-#
-msgid "This plugin will be removed."
-msgstr "Tämä lisäosa poistetaan."
-
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Tämä vastaanotin ei osaa purkaa %s striimejä!"
@@ -11744,6 +11651,9 @@ msgstr "Tämä kanava on suojattu lapsilukolla"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Tämä asetus sallii viritinasetusten kopioinnin jo valmiiksi säädetystä virittimestä."
+
+msgid "This setting allows you to increase or decrease the number of key repeats required to trigger a long press on the remote control or keyboard."
+msgstr ""
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
 msgstr "Tämä asetus riippuu kaapelipalveluntarjoajastasi ja sijainnistasi. Jos et tiedä oikeaa asetusta, selaa laitteesi valikoita, pyydä kaapelipalveluntarjoajalta tai Googleta."
@@ -12313,14 +12223,6 @@ msgstr "Poista välkkyvän rivin peitto tältä kanavalta"
 msgid "Undefined"
 msgstr "Määrittelemätön"
 
-#
-msgid "Undo install"
-msgstr "Kumoa asennus"
-
-#
-msgid "Undo uninstall"
-msgstr "Kumoa as.poisto"
-
 msgid "Unencrypted"
 msgstr "Salaamaton"
 
@@ -12342,10 +12244,6 @@ msgstr ""
 
 msgid "Unicable delay after last diseqc command"
 msgstr ""
-
-#
-msgid "Uninstall"
-msgstr "Poista asennus"
 
 msgid "United Arab Emirates"
 msgstr "United Arab Emirates"
@@ -12422,15 +12320,13 @@ msgstr "Päivitys asennettu. Haluatko uudelleenkäynnistää vastaanottimesi?"
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "Päivitys epäonnistui. Vastaanottimellasi ei ole toimivaa internet yhteyttä."
 
-msgid "Update feed not available."
-msgstr "Päivityslähde ei ole saatavilla."
+#, fuzzy
+msgid "Update has completed."
+msgstr "Asennus on valmis."
 
 #
 msgid "Updating"
 msgstr "Päivitetään"
-
-msgid "Updating software catalog"
-msgstr "Päivitetään ohjelmistoluetteloa"
 
 msgid "Upper case"
 msgstr "Isot kirjaimet"
@@ -12756,60 +12652,6 @@ msgstr "Viet Nam"
 msgid "View Rass interactive..."
 msgstr "Näytä Rass interactive..."
 
-msgid "View details"
-msgstr "Lisätiedot"
-
-#
-#, fuzzy, python-format
-msgid "View list of available %s extensions."
-msgstr "Näytä saatavilla olevat EPG-laajennukset"
-
-#
-msgid "View list of available CommonInterface extensions"
-msgstr "Näytä saatavilla olevat CI-laajennukset"
-
-#
-msgid "View list of available EPG extensions."
-msgstr "Näytä saatavilla olevat EPG-laajennukset"
-
-msgid "View list of available Satellite equipment extensions."
-msgstr "Näytä saatavilla olevat satelliittilaitteistojen laajennukset"
-
-#
-msgid "View list of available communication extensions."
-msgstr "Näytä saatavilla olevat tietoliikennelaajennukset"
-
-#
-msgid "View list of available default settings"
-msgstr "Näytä saatavilla olevat oletusasetukset"
-
-msgid "View list of available display and userinterface extensions."
-msgstr "Näytä saatavilla olevat näyttö- ja käyttöliittymälaajennukset."
-
-#
-msgid "View list of available multimedia extensions."
-msgstr "Näytä saatavilla olevat multimedia-laajennukset"
-
-#
-msgid "View list of available networking extensions"
-msgstr "Näytä saatavilla olevat verkkolaajennukset"
-
-#
-msgid "View list of available recording extensions"
-msgstr "Näytä saatavilla olevat tallennuslaajennukset"
-
-#
-msgid "View list of available skins"
-msgstr "Näytä saatavilla olevat teemat"
-
-#
-msgid "View list of available software extensions"
-msgstr "Näytä saatavilla olevat ohjelmistolaajennukset"
-
-#
-msgid "View list of available system extensions"
-msgstr "Näytä saatavilla olevat järjestelmälaajennukset"
-
 #
 msgid "View photos..."
 msgstr "Näytä kuvia..."
@@ -13039,13 +12881,13 @@ msgstr "Western Sahara"
 msgid "What type of service scan do you want?"
 msgstr ""
 
-msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. When we have on the OK button the channellist that it will be long exit. The infobar will shortly disappear and then shown in the other mode."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Kun päällä, suosikkilistat jotka ovat saatavilla ladataan vaikka ne eivät olisi bouquets.tv tai bouquets.radio tiedostoissa. Tämä antaa sinun pitää omat suosikkilistasi samalla kun asennettuja päivitetään."
 
-msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible. When we have on the OK button the channellist that it will be long exit."
 msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -13083,6 +12925,9 @@ msgstr "Kun käytössä, nuolinäppäimet ohjaavat äänenvoimakkuutta kanavanva
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Käy käytössä, voit määritellä etävastaanottimen OpenWebIf asetuksia"
+
+msgid "When enabled you can instantly toggle with long OK or when the channellist appears with long OK it will be long exit list via the OK button, the infobar toggle is then transfered to exit button between two different second infobars and two different standard infobars when the skin does support this feature"
+msgstr ""
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Kun päällä, voit määritellä aikaikkunan jonka aikana virransäästötilaan siirtymisen ajastin on pois päältä"
@@ -13460,30 +13305,14 @@ msgstr ""
 "haluatko poistaa\n"
 "\"%s\"?"
 
-#
-msgid "You can cancel the installation."
-msgstr "Voi keskeyttää asennuksen."
-
-#
-msgid "You can cancel the removal."
-msgstr "Voit keskeyttää poiston."
-
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Voit jatkaa TV:n katselua sillä aikaa kun tätä suoritetaan"
 
 msgid "You can enable if will be displayed extended EPG description for item."
 msgstr "Jos päällä, näytetään laajennettu ohjelmakuvaus"
 
-#
-msgid "You can install this plugin."
-msgstr "Voit asentaa tämän lisäosan."
-
 msgid "You can only burn receiver recordings!"
 msgstr "Sinä voit polttaa ainoastaan vastaanottimesi nauhoituksia!"
-
-#
-msgid "You can remove this plugin."
-msgstr "Voit poistaa tämän lisäosan."
 
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Asettaa määritetyn hakemiston tallenteiden päähakemistoksi."
@@ -14516,9 +14345,6 @@ msgstr ""
 msgid "priority"
 msgstr "Prioriteetti"
 
-msgid "receiver software because updates are available."
-msgstr "vastaanottimen ohjelmisto, koska päivityksiä on saatavilla."
-
 #
 msgid "record"
 msgstr "Tallennus"
@@ -14540,6 +14366,11 @@ msgstr "merkittäviä ihmisiä"
 #
 msgid "remove after this position"
 msgstr "Poista tämän kohdan jälkeen"
+
+#
+#, fuzzy
+msgid "remove all cuts and marks"
+msgstr "Poista tämä merkki"
 
 #
 msgid "remove before this position"
