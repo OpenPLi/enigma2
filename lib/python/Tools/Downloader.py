@@ -52,7 +52,7 @@ class downloadWithProgress:
 		if scheme == b'https':
 			from twisted.internet import ssl
 			if contextFactory is None:
-				contextFactory = ssl.ClientContextFactory()
+				contextFactory = ssl.optionsForClientTLS(hostname=host.decode("utf-8") if isinstance(host, bytes) else host)
 			self.connection = reactor.connectSSL(host, port, self.factory, contextFactory)
 		else:
 			self.connection = reactor.connectTCP(host, port, self.factory)
