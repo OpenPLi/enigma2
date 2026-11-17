@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:27+0200\n"
+"POT-Creation-Date: 2026-11-17 21:53+0100\n"
 "PO-Revision-Date: 2022-10-13 18:28+0200\n"
 "Last-Translator: Jose Juan <jzapater@gmail.com>\n"
 "Language-Team: ANGELODOS  angelo2807@hotmail.com\n"
@@ -251,13 +251,6 @@ msgstr "%d minutos"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
-
-#
-#, python-format
-msgid "%d package selected."
-msgid_plural "%d packages selected."
-msgstr[0] "%d paquete seleccionado."
-msgstr[1] "%d paquete seleccionado."
 
 #, python-format
 msgid "%d pixel wide"
@@ -687,10 +680,6 @@ msgid "A sleep timer is about to shut down your receiver. Would you like to proc
 msgstr "Un temporizador de apagado quiere apagar tu receptor. ¿Apagar ahora?"
 
 #
-msgid "A small overview of the available icon states and actions."
-msgstr "Una pequeña vista de los iconos de estados y acciones."
-
-#
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
@@ -1013,6 +1002,9 @@ msgstr "Permitir 10bit"
 msgid "Allow 12bit"
 msgstr " Permitir 12bit"
 
+msgid "Allow instantly toggle alternative infobars"
+msgstr ""
+
 msgid "Allow quitting movie player with exit"
 msgstr "Permitir salir del movieplayer con exit"
 
@@ -1116,6 +1108,10 @@ msgstr "Cualquier actividad"
 #
 msgid "Arabic"
 msgstr "Arábigo"
+
+#, fuzzy
+msgid "Are you sure to delete all cuts and marks?"
+msgstr "¿Estás seguro que quieres eliminar los canales de cable"
 
 msgid "Are you sure to delete image:"
 msgstr "¿Seguro que quieres eliminar esta entrada:"
@@ -1281,10 +1277,6 @@ msgstr "Australia"
 
 msgid "Austria"
 msgstr "Austria"
-
-#
-msgid "Author: "
-msgstr "Autor:"
 
 #
 msgid "Authoring mode"
@@ -2195,10 +2187,6 @@ msgstr "Interface común"
 msgid "Common Interface assignment"
 msgstr "Asignación de Interface Común"
 
-#
-msgid "Communication"
-msgstr "Comunicación"
-
 msgid "Comoros"
 msgstr "Comoros"
 
@@ -2652,10 +2640,6 @@ msgid "Context Menu"
 msgstr "Menú contextual del canal"
 
 #
-msgid "Continue"
-msgstr "Continuar"
-
-#
 msgid "Continue playback"
 msgstr "Reproducción contínua"
 
@@ -3029,10 +3013,6 @@ msgstr ""
 msgid "Default movie location"
 msgstr "Ubicación por defecto de películas"
 
-#
-msgid "Default settings"
-msgstr "Parámetros por Defecto"
-
 msgid "Default timer type"
 msgstr "Tipo de temporizador predeterminado"
 
@@ -3216,9 +3196,6 @@ msgstr "Destino del receptor remoto alternativo para DVB-C"
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Destino del receptor remoto de reserva para DVB-T"
 
-msgid "Details for plugin: "
-msgstr "Detalles del plugin:"
-
 #
 #, fuzzy, python-format
 msgid "Detect box%s via network"
@@ -3376,10 +3353,6 @@ msgstr "Mostrar la lista de EPG para el canal actual"
 #
 msgid "Display Skin"
 msgstr "Mostrar"
-
-#
-msgid "Display and userinterface"
-msgstr "Pantalla e Interfaz de usuario"
 
 msgid "Display message before playing next movie"
 msgstr "Mostrar mensaje antes de reproducir la siguiente película"
@@ -3553,6 +3526,11 @@ msgstr "¿Quiere continuar esta reproducción?"
 msgid "Do you want to select a different skin?"
 msgstr "¿Desea seleccionar una piel diferente?"
 
+#
+#, fuzzy
+msgid "Do you want to update the package:\n"
+msgstr "Quiere eliminar el paquete:\n"
+
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "¿Quiere descargar la imagen a %s?"
@@ -3623,6 +3601,11 @@ msgstr "Descargando"
 
 msgid "Downloading Image"
 msgstr "Descarga de imagen"
+
+#
+#, fuzzy
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Descargando información del plugin. Espere..."
 
 #
 msgid "Downloading plugin information. Please wait..."
@@ -4257,10 +4240,6 @@ msgstr "Configuración extendida..."
 msgid "Extensions"
 msgstr "Extensiones"
 
-#
-msgid "Extensions management"
-msgstr "Manejo de Extensiones"
-
 msgid "Extensions menu"
 msgstr "Menú Extensiones"
 
@@ -4574,10 +4553,6 @@ msgstr ""
 #, fuzzy
 msgid "Flat by position on remote"
 msgstr "Posición final en"
-
-#
-msgid "Following tasks will be done after you press OK!"
-msgstr "¡Las siguientes tareas serán hechas después de pulsar OK!"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr ""
@@ -5559,14 +5534,6 @@ msgid "Install plugin"
 msgstr "Instalando"
 
 #
-msgid "Installation has completed."
-msgstr "Se ha completado la instalación."
-
-#
-msgid "Installation or removal has completed."
-msgstr "Se ha completado la instalación o extracción."
-
-#
 msgid "Installing"
 msgstr "Instalando"
 
@@ -6056,6 +6023,9 @@ msgstr "Nombres de ficheros largos"
 msgid "Long key press"
 msgstr "Prensa larga"
 
+msgid "Long press delay threshold"
+msgstr ""
+
 #
 #, fuzzy
 msgid "Long press: "
@@ -6155,9 +6125,8 @@ msgstr "Mali"
 msgid "Malta"
 msgstr "Malta"
 
-#
-msgid "Manage your receiver's software"
-msgstr "Manejar el software de su receptor"
+msgid "Manage optional software packages"
+msgstr ""
 
 msgid "Manual"
 msgstr "Manual"
@@ -6572,10 +6541,6 @@ msgid "Multichannel PCM"
 msgstr "PCM multicanal"
 
 #
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#
 msgid "Multiple service support"
 msgstr "Soporte de canales múltiples"
 
@@ -6812,10 +6777,6 @@ msgid "No delay"
 msgstr "Sin demora"
 
 #
-msgid "No description available."
-msgstr "No hay descripción."
-
-#
 msgid "No displayable files on this medium found!"
 msgstr "¡No hay ficheros visualizables en su medio!"
 
@@ -6840,10 +6801,6 @@ msgstr "¡No hay sintonizador libre!"
 #
 msgid "No images found"
 msgstr "No he encontrado imágenes"
-
-#
-msgid "No network connection available."
-msgstr "No hay conexión de red disponible."
 
 #
 msgid "No networks found"
@@ -7147,10 +7104,6 @@ msgid "Only change this setting if you are using a SCR device that has been repr
 msgstr "Solo cambie esta configuración si está utilizando un dispositivo SCR que ha sido reprogramado con un programador personalizado. Para más información, consulte con la persona que reprogramó el dispositivo."
 
 #
-msgid "Only extensions."
-msgstr "Sólo extensiones."
-
-#
 msgid "Only free scan"
 msgstr "Sólo escaneo gratuito"
 
@@ -7332,6 +7285,10 @@ msgstr "OVR"
 #
 msgid "Package list update"
 msgstr "Actualización de lista de paquetes"
+
+#, fuzzy
+msgid "Package manager"
+msgstr "Paquetes para actualizar"
 
 msgid "Packages to update"
 msgstr "Paquetes para actualizar"
@@ -7813,14 +7770,6 @@ msgid "Plugin browser"
 msgstr "Navegador de plugins"
 
 #
-msgid "Plugin manager activity information"
-msgstr "Información de actividad del manejador de Plugin"
-
-#
-msgid "Plugin manager help"
-msgstr "Ayuda del manejador de Plugin"
-
-#
 msgid "Plugins"
 msgstr "Plugins"
 
@@ -8114,10 +8063,6 @@ msgstr "hora estelar"
 msgid "Priority"
 msgstr "Prioridad"
 
-#
-msgid "Process"
-msgstr "Procesar"
-
 msgid "Progress"
 msgstr "Progreso"
 
@@ -8385,10 +8330,6 @@ msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "¡Grabación(es) está(n) en proceso o va(n) a comenzar en pocos segundos!"
 
 #
-msgid "Recordings"
-msgstr "Grabaciones"
-
-#
 msgid "Recordings always have priority"
 msgstr "Las grabaciones siempre tienen prioridad"
 
@@ -8430,6 +8371,9 @@ msgstr "Region"
 msgid "Relative"
 msgstr "Relativo"
 
+msgid "Reload"
+msgstr ""
+
 msgid "Reload blacklists"
 msgstr "Actualizar listas negras"
 
@@ -8456,6 +8400,11 @@ msgstr "Tipo de control de adultos"
 
 msgid "Remote control type setup"
 msgstr "Configuración del tipo de control remoto"
+
+#
+#, fuzzy
+msgid "Removal has completed."
+msgstr "Se ha completado la instalación o extracción."
 
 #
 msgid "Remove"
@@ -8897,9 +8846,6 @@ msgstr "Satélite"
 msgid "Satellite dish setup"
 msgstr "Configuración equipo satélite"
 
-msgid "Satellite equipment"
-msgstr "Equipo satélite"
-
 #
 msgid "Satellite equipment setup"
 msgstr "Configuración del equipo satelital"
@@ -9101,14 +9047,6 @@ msgstr "Buscando"
 
 msgid "Searching east..."
 msgstr "Buscando en el este..."
-
-#
-msgid "Searching for available updates. Please wait..."
-msgstr "Buscando actualizaciones disponibles. Por favor, espere..."
-
-#
-msgid "Searching for new installed or removed packages. Please wait..."
-msgstr "Buscando para nuevos paquetes instalados o borrados. Espere..."
 
 msgid "Searching west..."
 msgstr "Buscando en el oeste..."
@@ -10253,10 +10191,6 @@ msgid "SkinSelector: Restart GUI"
 msgstr "SkinSelector: Reinicie la GUI"
 
 #
-msgid "Skins"
-msgstr "Pieles"
-
-#
 msgid "Skip empty services"
 msgstr "Omitir servicios vacíos"
 
@@ -10351,14 +10285,6 @@ msgid "Softcam setup"
 msgstr "Configuración de Softcam"
 
 #
-msgid "Software"
-msgstr "Software"
-
-#
-msgid "Software management"
-msgstr "Manejar software"
-
-#
 msgid "Software update"
 msgstr "Actualizar software"
 
@@ -10377,10 +10303,6 @@ msgstr "Algunos complementos no están disponibles:\n"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Lo sentimos, la eliminación de directorios puede (por ahora) hacerse sólo a través de la papelera."
-
-#
-msgid "Sorry, no details available!"
-msgstr "Lo sentimos, no hay detalles disponibles!"
 
 msgid "Sorry, this tuner is in use."
 msgstr "Lo sentimos, este sintonizador está en uso."
@@ -11353,25 +11275,12 @@ msgstr ""
 "Por favor, instálelo."
 
 #
-#, python-format
-msgid "There are at least %d updates available."
-msgstr "Hay por lo menos %d actualizaciones disponibles."
-
-#
-msgid "There are currently no outstanding actions."
-msgstr "No hay actualmente ninguna acción en ejecución."
-
-#
 msgid "There are no saved playlists to delete!"
 msgstr "No hay listas de reproducción guardadas para eliminar!"
 
 #
 msgid "There are no saved playlists to load!"
 msgstr "No hay listas de reproducción guardadas para cargar!"
-
-#
-msgid "There are no updates available."
-msgstr "No hay actualizaciones disponibles."
 
 msgid "There is no signal to lock on !"
 msgstr "No hay señal para bloquear!"
@@ -11536,22 +11445,6 @@ msgstr "Esta opción configura la supresión de bordes digitales falsos, resulta
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr "Esta opción configura la nitidez de la imagen cuando se está ampliando."
 
-#
-msgid "This plugin is installed."
-msgstr "Este plugin está instalado."
-
-#
-msgid "This plugin is not installed."
-msgstr "Este plugin no está instalado."
-
-#
-msgid "This plugin will be installed."
-msgstr "Este plugin será instalado."
-
-#
-msgid "This plugin will be removed."
-msgstr "Este plugin será desinstalado."
-
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "¡Este receptor no puede decodificar %s streams!"
@@ -11562,6 +11455,9 @@ msgstr "Este canal está protegido por el PIN de control de adultos"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Esta configuración permite que la configuración del sintonizador sea una duplicación de cómo otro sintonizador ya está configurado"
+
+msgid "This setting allows you to increase or decrease the number of key repeats required to trigger a long press on the remote control or keyboard."
+msgstr ""
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
 msgstr "Esta configuración depende de su proveedor de cable y su ubicación. Si no conoce la configuración correcta, consulte el menú en el receptor de cable oficial, o recíbelo de su proveedor de cable o busque ayuda en el foro de Internet."
@@ -12127,14 +12023,6 @@ msgstr "Descubrir la línea de parpadeo discontinuo para este servicio"
 msgid "Undefined"
 msgstr "Indefinido"
 
-#
-msgid "Undo install"
-msgstr "Deshacer instalación"
-
-#
-msgid "Undo uninstall"
-msgstr "Deshacer desinstalación"
-
 msgid "Unencrypted"
 msgstr "Sin cifrar"
 
@@ -12156,10 +12044,6 @@ msgstr "Retardo unicable después de habilitar el voltaje antes del comando de c
 
 msgid "Unicable delay after last diseqc command"
 msgstr "Unicable retardo después del último comando DiSEqC"
-
-#
-msgid "Uninstall"
-msgstr "Desinstalar"
 
 msgid "United Arab Emirates"
 msgstr "Emiratos Árabes Unidos"
@@ -12236,16 +12120,14 @@ msgstr "Actualización completada. ¿Desea reiniciar su receptor?"
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "Error en la actualización. Su receptor no tiene una conexión a Internet de trabajo."
 
-msgid "Update feed not available."
-msgstr "Update feed no disponible."
+#
+#, fuzzy
+msgid "Update has completed."
+msgstr "Se ha completado la instalación."
 
 #
 msgid "Updating"
 msgstr "Actualizando"
-
-#
-msgid "Updating software catalog"
-msgstr "Actualizando el catálogo de software"
 
 msgid "Upper case"
 msgstr "Mayúsculas"
@@ -12567,62 +12449,6 @@ msgid "View Rass interactive..."
 msgstr "Ver Rass interactivo..."
 
 #
-msgid "View details"
-msgstr "Ver detalles"
-
-#
-#, python-format
-msgid "View list of available %s extensions."
-msgstr "Ver la lista de extensiones %s disponibles."
-
-#
-msgid "View list of available CommonInterface extensions"
-msgstr "Ver lista de extensiones disponibles del InterfazComún"
-
-#
-msgid "View list of available EPG extensions."
-msgstr "Ver lista de extensiones de EPG disponibles."
-
-msgid "View list of available Satellite equipment extensions."
-msgstr "Ver lista de extensiones disponibles de equipamiento de Satélite."
-
-#
-msgid "View list of available communication extensions."
-msgstr "Ver lista de extensiones de comunicación disponibles."
-
-#
-msgid "View list of available default settings"
-msgstr "Ver lista de configuración por defecto disponibles."
-
-#
-msgid "View list of available display and userinterface extensions."
-msgstr "Ver la lista de extensiones de pantalla y de interfaz de usuario disponibles."
-
-#
-msgid "View list of available multimedia extensions."
-msgstr "Ver lista de extensiones multimedia disponibles."
-
-#
-msgid "View list of available networking extensions"
-msgstr "Ver lista de extensiones disponibles de red"
-
-#
-msgid "View list of available recording extensions"
-msgstr "Ver lista de extensiones de grabación disponibles"
-
-#
-msgid "View list of available skins"
-msgstr "Ver lista de pieles disponibles"
-
-#
-msgid "View list of available software extensions"
-msgstr "Ver lista de extensiones de software disponibles"
-
-#
-msgid "View list of available system extensions"
-msgstr "Ver lista de extensiones de sistema disponibles"
-
-#
 msgid "View photos..."
 msgstr "Ver fotos..."
 
@@ -12851,13 +12677,13 @@ msgstr "Sahara Occidental"
 msgid "What type of service scan do you want?"
 msgstr "¿Qué tipo de escaneo de servicio quieres?"
 
-msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. When we have on the OK button the channellist that it will be long exit. The infobar will shortly disappear and then shown in the other mode."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Cuando está habilitado, enigma2 cargará los usuarios desvinculados. Esto significa que los userbouquets que están disponibles, pero que no están incluidos en los archivos bouquets.tv o bouquets.radio, seguirán cargándose. Esto le permite, por ejemplo, mantener su propio ramo de usuario mientras se instalan los ajustes instalados"
 
-msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible. When we have on the OK button the channellist that it will be long exit."
 msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -12893,6 +12719,9 @@ msgstr "Cuando está activado, puede controlar el volumen con los botones de fle
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Cuando está habilitado, puede personalizar la configuración de OpenWebIf para el sintonizador alternativo"
+
+msgid "When enabled you can instantly toggle with long OK or when the channellist appears with long OK it will be long exit list via the OK button, the infobar toggle is then transfered to exit button between two different second infobars and two different standard infobars when the skin does support this feature"
+msgstr ""
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Cuando está activado, puede especificar un intervalo de tiempo para ignorar el temporizador de apagado cuando el receptor está en modo de espera"
@@ -13263,30 +13092,14 @@ msgstr ""
 "Te gustaría quitar\n"
 "“%s”?"
 
-#
-msgid "You can cancel the installation."
-msgstr "Usted puede cancelar la instalación."
-
-#
-msgid "You can cancel the removal."
-msgstr "Ha cancelado la desinstalación."
-
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Puede continuar viendo la televisión, etc. mientras esto se está ejecutando."
 
 msgid "You can enable if will be displayed extended EPG description for item."
 msgstr "Puede habilitar si se mostrará la descripción extendida de EPG para el artículo."
 
-#
-msgid "You can install this plugin."
-msgstr "Usted puede instalar el plugin."
-
 msgid "You can only burn receiver recordings!"
 msgstr "Sólo puede grabar grabaciones de receptor!"
-
-#
-msgid "You can remove this plugin."
-msgstr "Usted puede desinstalar el plugin."
 
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Puede establecer el directorio seleccionado como directorio ‘raíz’ para reproductor de películas."
@@ -14309,9 +14122,6 @@ msgstr "conservar marcadores en cortes"
 msgid "priority"
 msgstr "prioridad"
 
-msgid "receiver software because updates are available."
-msgstr "Receptor porque las actualizaciones están disponibles."
-
 #
 msgid "record"
 msgstr "grabar"
@@ -14333,6 +14143,11 @@ msgstr "Gente notable"
 #
 msgid "remove after this position"
 msgstr "borrar después de esta posición"
+
+#
+#, fuzzy
+msgid "remove all cuts and marks"
+msgstr "borrar esta marca"
 
 #
 msgid "remove before this position"

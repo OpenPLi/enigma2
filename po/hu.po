@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:27+0200\n"
+"POT-Creation-Date: 2026-11-17 21:53+0100\n"
 "PO-Revision-Date: 2021-11-03 15:10+0100\n"
 "Last-Translator: mcfly82\n"
 "Language-Team: mcfly82 & wysless\n"
@@ -236,12 +236,6 @@ msgstr "%d perc"
 #, python-format
 msgid "%d ms"
 msgstr "%d ms"
-
-#, python-format
-msgid "%d package selected."
-msgid_plural "%d packages selected."
-msgstr[0] "%d  szoftvercsomag kiválasztva."
-msgstr[1] "%d  szoftvercsomag kiválasztva."
 
 #, python-format
 msgid "%d pixel wide"
@@ -625,9 +619,6 @@ msgstr "Az elalvásidőzítő le akarja kapcsolni a készüléket készenléti m
 msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Az elalvásidőzítő ki akarja kapcsolni a készüléket. Engedélyezi?"
 
-msgid "A small overview of the available icon states and actions."
-msgstr "Egy gyors áttekintés az elérhető ikonokról és állapotokról."
-
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
@@ -910,6 +901,9 @@ msgstr "10bit engedélyezése"
 msgid "Allow 12bit"
 msgstr "12bit engedélyezése"
 
+msgid "Allow instantly toggle alternative infobars"
+msgstr ""
+
 msgid "Allow quitting movie player with exit"
 msgstr "Médialejátszó bezárása kilépés gombbal"
 
@@ -1005,6 +999,10 @@ msgstr "Bármilyen aktivitás"
 
 msgid "Arabic"
 msgstr "Arab"
+
+#, fuzzy
+msgid "Are you sure to delete all cuts and marks?"
+msgstr "Biztos benne, hogy visszaállítja az összes törölt image-t?"
 
 msgid "Are you sure to delete image:"
 msgstr "Biztos benne, hogy törli ezt az image-t?"
@@ -1158,9 +1156,6 @@ msgstr "Ausztrál"
 
 msgid "Austria"
 msgstr "Ausztria"
-
-msgid "Author: "
-msgstr "Szerző: "
 
 msgid "Authoring mode"
 msgstr "Authoring mód"
@@ -2002,9 +1997,6 @@ msgstr "CI modulfogadó"
 msgid "Common Interface assignment"
 msgstr "CI hozzárendelés"
 
-msgid "Communication"
-msgstr "Kommunikáció"
-
 msgid "Comoros"
 msgstr "Comore-szigetek"
 
@@ -2424,9 +2416,6 @@ msgstr "A tartalom nem fér fel a DVD-re!"
 msgid "Context Menu"
 msgstr "Csatornalista menü"
 
-msgid "Continue"
-msgstr "Folytatás"
-
 msgid "Continue playback"
 msgstr "Lejátszás folytatása"
 
@@ -2759,9 +2748,6 @@ msgstr ""
 msgid "Default movie location"
 msgstr "Felvételek tárhelye"
 
-msgid "Default settings"
-msgstr "Alapértelmezett beállítások"
-
 msgid "Default timer type"
 msgstr "Alapértelmezett időzítő típusa"
 
@@ -2935,9 +2921,6 @@ msgstr "Tartalék távoli vevő célja DVB-C vételhez"
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Tartalék távoli vevő célja DVB-T vételhez"
 
-msgid "Details for plugin: "
-msgstr "Bővítmény részletei: "
-
 #, fuzzy, python-format
 msgid "Detect box%s via network"
 msgstr "Vezeték nélküli hálózat kiválasztása"
@@ -3072,9 +3055,6 @@ msgstr "Az aktuális csatorna EPG-jének megjelenítése"
 
 msgid "Display Skin"
 msgstr "Kijelző kinézet"
-
-msgid "Display and userinterface"
-msgstr "Képernyő és felhasználói felület"
 
 msgid "Display message before playing next movie"
 msgstr "A következő fájl lejátszása előtt üzenet megjelenítése"
@@ -3227,6 +3207,10 @@ msgstr "Szeretné folytatni ezt a lejátszást?"
 msgid "Do you want to select a different skin?"
 msgstr "Szeretne másik kinézetet választani?"
 
+#, fuzzy
+msgid "Do you want to update the package:\n"
+msgstr "Biztos benne, hogy eltávolítja ezt a csomagot:\n"
+
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Szeretné frissíteni a készülék szoftverét %s-re?"
@@ -3292,6 +3276,10 @@ msgstr "Letöltés"
 
 msgid "Downloading Image"
 msgstr "Image letöltése"
+
+#, fuzzy
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Bővítmények betöltése folyamatban. Kérem, várjon..."
@@ -3868,9 +3856,6 @@ msgstr "Bővített beállítások..."
 msgid "Extensions"
 msgstr "Bővítmények"
 
-msgid "Extensions management"
-msgstr "Bővítmények kezelése"
-
 msgid "Extensions menu"
 msgstr "Bővítmények menü"
 
@@ -4167,9 +4152,6 @@ msgstr ""
 #, fuzzy
 msgid "Flat by position on remote"
 msgstr "Végleges pozíció"
-
-msgid "Following tasks will be done after you press OK!"
-msgstr "A műveletek az OK gomb lenyomása után lesznek végrehajtva!"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr ""
@@ -5078,12 +5060,6 @@ msgstr "Telepítés"
 msgid "Install plugin"
 msgstr "Telepítés"
 
-msgid "Installation has completed."
-msgstr "Telepítés kész."
-
-msgid "Installation or removal has completed."
-msgstr "A telepítés vagy eltávolítás befejeződött."
-
 msgid "Installing"
 msgstr "Telepítés"
 
@@ -5517,6 +5493,9 @@ msgstr "Hosszú fájlnevek"
 msgid "Long key press"
 msgstr "Hosszú gombnyomás"
 
+msgid "Long press delay threshold"
+msgstr ""
+
 #, fuzzy
 msgid "Long press: "
 msgstr "Hosszú gombnyomás"
@@ -5606,8 +5585,8 @@ msgstr "Mali"
 msgid "Malta"
 msgstr "Málta"
 
-msgid "Manage your receiver's software"
-msgstr "A készülék szoftverének kezelése"
+msgid "Manage optional software packages"
+msgstr ""
 
 msgid "Manual"
 msgstr "Kézi"
@@ -5976,9 +5955,6 @@ msgstr "Multiboot image választó"
 msgid "Multichannel PCM"
 msgstr "Többcsatornás PCM"
 
-msgid "Multimedia"
-msgstr "Multimédia"
-
 msgid "Multiple service support"
 msgstr "Több csatorna támogatása"
 
@@ -6186,9 +6162,6 @@ msgstr "Még nincs fogadott adat"
 msgid "No delay"
 msgstr "Nincs késleltetés"
 
-msgid "No description available."
-msgstr "Nincs elérhető leírás."
-
 msgid "No displayable files on this medium found!"
 msgstr "A hordozón nem található lejátszható fájl!"
 
@@ -6210,9 +6183,6 @@ msgstr "Nincs szabad tuner!"
 
 msgid "No images found"
 msgstr "Nem található image"
-
-msgid "No network connection available."
-msgstr "Nincs elérhető hálózati kapcsolat."
 
 msgid "No networks found"
 msgstr "Nem észlelhető hálózat"
@@ -6490,9 +6460,6 @@ msgstr "Egy"
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Csak akkor változtassa meg ez a beállítást, ha olyan Unicable eszközt használ, amely egy egyedi programozóval újra lett programozva. További információkért keresse fel az újraprogramozást végző személyt."
 
-msgid "Only extensions."
-msgstr "Csak bővítmények."
-
 msgid "Only free scan"
 msgstr "Csak FTA keresés"
 
@@ -6672,6 +6639,10 @@ msgstr "OVR"
 
 msgid "Package list update"
 msgstr "Csomaglista frissítés"
+
+#, fuzzy
+msgid "Package manager"
+msgstr "Frissítésre váró csomagok"
 
 msgid "Packages to update"
 msgstr "Frissítésre váró csomagok"
@@ -7088,12 +7059,6 @@ msgstr "Telepített bővítmények"
 msgid "Plugin browser"
 msgstr "Telepített bővítmények"
 
-msgid "Plugin manager activity information"
-msgstr "Bővítménykezelő - végrehajtási információk"
-
-msgid "Plugin manager help"
-msgstr "Bővítménykezelő - súgó"
-
 msgid "Plugins"
 msgstr "Bővítmények"
 
@@ -7357,9 +7322,6 @@ msgstr "Főműsoridő"
 msgid "Priority"
 msgstr "Prioritás"
 
-msgid "Process"
-msgstr "Futtatás"
-
 msgid "Progress"
 msgstr "Folyamat"
 
@@ -7599,9 +7561,6 @@ msgstr "Felvétel típusa"
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Felvétel folyamatban, vagy hamarosan indulni fog!"
 
-msgid "Recordings"
-msgstr "Felvételek"
-
 msgid "Recordings always have priority"
 msgstr "A felvételnek mindig elsőbbsége van"
 
@@ -7641,6 +7600,9 @@ msgstr "Régió"
 msgid "Relative"
 msgstr "Relatív"
 
+msgid "Reload"
+msgstr ""
+
 msgid "Reload blacklists"
 msgstr "Feketelista újratöltése"
 
@@ -7665,6 +7627,10 @@ msgstr "Távirányító típusa"
 
 msgid "Remote control type setup"
 msgstr "Távirányító típusának módosítása"
+
+#, fuzzy
+msgid "Removal has completed."
+msgstr "A telepítés vagy eltávolítás befejeződött."
 
 msgid "Remove"
 msgstr "Eltávolítás"
@@ -8060,9 +8026,6 @@ msgstr "Műhold"
 msgid "Satellite dish setup"
 msgstr "Műholdvevö antenna beállítása"
 
-msgid "Satellite equipment"
-msgstr "Műholdvevő eszköz"
-
 msgid "Satellite equipment setup"
 msgstr "Műholdvevö eszköz beállítása"
 
@@ -8241,12 +8204,6 @@ msgstr "Keresés"
 
 msgid "Searching east..."
 msgstr "Keresés keletre..."
-
-msgid "Searching for available updates. Please wait..."
-msgstr "Elérhető frissítések keresése. Kérem, várjon..."
-
-msgid "Searching for new installed or removed packages. Please wait..."
-msgstr "Újonnan telepített, vagy eltávolított szoftvercsomagok keresése. Kérem, várjon..."
 
 msgid "Searching west..."
 msgstr "Keresés nyugatra..."
@@ -9295,9 +9252,6 @@ msgstr "Kinézet választás műveletek"
 msgid "SkinSelector: Restart GUI"
 msgstr "Kinézet választó: Kezelőfelület újraindítása"
 
-msgid "Skins"
-msgstr "Kinézetek"
-
 msgid "Skip empty services"
 msgstr "Üres csatornák átugrása"
 
@@ -9383,12 +9337,6 @@ msgstr "Softcam beállítások"
 msgid "Softcam setup"
 msgstr "Softcam beállítások"
 
-msgid "Software"
-msgstr "Szoftver"
-
-msgid "Software management"
-msgstr "Szoftverkezelés"
-
 msgid "Software update"
 msgstr "Szoftverfrissítés"
 
@@ -9406,9 +9354,6 @@ msgstr "Egyes bővítmények nem elérhetőek:\n"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Mappák törlése csak a kukába helyezéssel lehetséges."
-
-msgid "Sorry, no details available!"
-msgstr "Nincs elérhető információ."
 
 msgid "Sorry, this tuner is in use."
 msgstr "Ez a tuner már használatban van."
@@ -10303,21 +10248,11 @@ msgstr ""
 "A vezeték nélküli bővítmény nincs telepítve!\n"
 "Kérem, telepítse."
 
-#, python-format
-msgid "There are at least %d updates available."
-msgstr "Legalább %d frissítés elérhető."
-
-msgid "There are currently no outstanding actions."
-msgstr "Semmilyen kiemelkedő esemény nem következik."
-
 msgid "There are no saved playlists to delete!"
 msgstr "Nincs törölhető elmentett lejátszási lista!"
 
 msgid "There are no saved playlists to load!"
 msgstr "Nincs betölthető elmentett lejátszási lista!"
-
-msgid "There are no updates available."
-msgstr "Nincs elérhető frissítés."
 
 msgid "There is no signal to lock on !"
 msgstr "Nincs jel!"
@@ -10482,18 +10417,6 @@ msgstr "Ezzel beállítja a hibás digitális körvonalak elfojtását."
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr "Ezzel beállítja a képernyő élességét. Általában felskálázásnál szükséges."
 
-msgid "This plugin is installed."
-msgstr "A bővítmény telepítve van."
-
-msgid "This plugin is not installed."
-msgstr "A bővítmény nincs telepítve."
-
-msgid "This plugin will be installed."
-msgstr "A bővítmény telepítve lesz."
-
-msgid "This plugin will be removed."
-msgstr "A bővítmény el lesz távolítva."
-
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Ez a készülék nem képes %s folyamokat dekódolni!"
@@ -10503,6 +10426,9 @@ msgstr "Ez a csatorna gyermekzárral védett"
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Ezzel átmásolhatja egy már beállított tuner beállításait."
+
+msgid "This setting allows you to increase or decrease the number of key repeats required to trigger a long press on the remote control or keyboard."
+msgstr ""
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
 msgstr "Ez a beállítás az ön földrajzi helyétől és kábelszolgáltatójától függ. Ha nem tudja a helyes beállításokat, nézze meg a szolgáltató által adott set-top-boxban, vagy kérjen segítséget szolgáltatójától."
@@ -10999,12 +10925,6 @@ msgstr "A kép tetején lévő villogó csík eltakarásának megszüntetése"
 msgid "Undefined"
 msgstr "Nem meghatározott"
 
-msgid "Undo install"
-msgstr "Telepítés visszavonása"
-
-msgid "Undo uninstall"
-msgstr "Eltávolítás visszavonása"
-
 msgid "Unencrypted"
 msgstr "Kódolatlan"
 
@@ -11026,9 +10946,6 @@ msgstr "Unicable késleltetés a feszültség bekapcsolás után a kapcsoló par
 
 msgid "Unicable delay after last diseqc command"
 msgstr "Unicable késleltetés az utolsó DiSEqC parancs után"
-
-msgid "Uninstall"
-msgstr "Eltávolítás"
 
 msgid "United Arab Emirates"
 msgstr "Egyesült Arab Emírségek"
@@ -11101,14 +11018,12 @@ msgstr "Frissítés sikeres. Újraindítja most a készüléket?"
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "A frissítés nem sikerült. A készüléknek nincs egy működőképes kapcsolata az internettel."
 
-msgid "Update feed not available."
-msgstr "Frissítő szerver nem elérhető."
+#, fuzzy
+msgid "Update has completed."
+msgstr "Telepítés kész."
 
 msgid "Updating"
 msgstr "Frissítés"
-
-msgid "Updating software catalog"
-msgstr "Szoftver-katalógus frissítése"
 
 msgid "Upper case"
 msgstr "Nagybetű"
@@ -11397,49 +11312,6 @@ msgstr "Vietnám"
 msgid "View Rass interactive..."
 msgstr "Rass interaktív szolgáltatás használata..."
 
-msgid "View details"
-msgstr "Részletek megtekintése"
-
-#, python-format
-msgid "View list of available %s extensions."
-msgstr "Az elérhető %s bővítmény listázása."
-
-msgid "View list of available CommonInterface extensions"
-msgstr "Az elérhető CI-Bővítmények listázása"
-
-msgid "View list of available EPG extensions."
-msgstr "Az elérhető EPG-bővítmények listázása."
-
-msgid "View list of available Satellite equipment extensions."
-msgstr "Az elérhető műholdvevő-berendezés bővítmények listázása."
-
-msgid "View list of available communication extensions."
-msgstr "Az elérhető kommunikációs bővítmények listázása."
-
-msgid "View list of available default settings"
-msgstr "Az elérhető csatornalisták listázása"
-
-msgid "View list of available display and userinterface extensions."
-msgstr "Az elérhető képernyő- és felhasználói felület bővítmények listázása."
-
-msgid "View list of available multimedia extensions."
-msgstr "Az elérhető multimédia bővítmények listázása."
-
-msgid "View list of available networking extensions"
-msgstr "Az elérhető hálózati bővítmények listázása"
-
-msgid "View list of available recording extensions"
-msgstr "Az elérhető felvételi bővítmények listázása"
-
-msgid "View list of available skins"
-msgstr "Az elérhető kinézetek listázása"
-
-msgid "View list of available software extensions"
-msgstr "Az elérhető szoftveres bővítmények listázása"
-
-msgid "View list of available system extensions"
-msgstr "Az elérhető rendszer-Bővítmények listázása"
-
 msgid "View photos..."
 msgstr "Képnézés..."
 
@@ -11646,13 +11518,13 @@ msgstr "Nyugat-Szahara"
 msgid "What type of service scan do you want?"
 msgstr "Milyen típusú szolgáltatást szeretne keresni?"
 
-msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. When we have on the OK button the channellist that it will be long exit. The infobar will shortly disappear and then shown in the other mode."
 msgstr ""
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Ha engedélyezi, a leválasztott listák is betöltődnek. Ez azt jelenti, hogy az olyan felhasználói listák is betöltődnek, amelyek léteznek, de nincsnek benne a bouquets.tv vagy bouquets.radio fájlban. Ez lehetőséget ad arra, hogy a saját listáit megtartsa, ha a csatornák frissülnek."
 
-msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible. When we have on the OK button the channellist that it will be long exit."
 msgstr ""
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -11688,6 +11560,9 @@ msgstr "Ha engedélyezi, a nyíl gombok a hangerőt fogják változtatni, és ne
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Ha engedélyezi, testreszabhatja az OpenWebIf beállításait a tartalék tunerhez."
+
+msgid "When enabled you can instantly toggle with long OK or when the channellist appears with long OK it will be long exit list via the OK button, the infobar toggle is then transfered to exit button between two different second infobars and two different standard infobars when the skin does support this feature"
+msgstr ""
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Ha engedélyezi, megadhat egy időszakot, amikor az időzített kikapcsolás készenléti állapotból figyelmen kívül lesz hagyva"
@@ -12044,12 +11919,6 @@ msgstr ""
 "biztos benne, hogy el szeretné távolítani\n"
 "\"%s\"-t?"
 
-msgid "You can cancel the installation."
-msgstr "A telepítés folyamata leállítható."
-
-msgid "You can cancel the removal."
-msgstr "Az eltávolítás folyamata leállítható."
-
 msgid "You can continue watching TV etc. while this is running."
 msgstr "A készülék használatát folytathatja a megszokott módon."
 
@@ -12057,14 +11926,8 @@ msgstr "A készülék használatát folytathatja a megszokott módon."
 msgid "You can enable if will be displayed extended EPG description for item."
 msgstr "Ha engedélyezi, az adott műsorhoz részletes EPG leírást fog látni."
 
-msgid "You can install this plugin."
-msgstr "A bővítmény telepíthető."
-
 msgid "You can only burn receiver recordings!"
 msgstr "Csak ezzel a készüléktípussal felvett anyagokat lehet kiírni!"
-
-msgid "You can remove this plugin."
-msgstr "A bővítmény eltávolítható."
 
 #
 msgid "You can set selected directory as 'root' directory for movie player."
@@ -12993,9 +12856,6 @@ msgstr ""
 msgid "priority"
 msgstr "Prioritás"
 
-msgid "receiver software because updates are available."
-msgstr "készülék szoftvere, mert frissítések elérhetők."
-
 msgid "record"
 msgstr "felvétel"
 
@@ -13013,6 +12873,10 @@ msgstr "nevezetes emberek"
 
 msgid "remove after this position"
 msgstr "e pont után mindent töröljön"
+
+#, fuzzy
+msgid "remove all cuts and marks"
+msgstr "e jelzö eltávolítása"
 
 msgid "remove before this position"
 msgstr "e pont elött mindent töröljön"

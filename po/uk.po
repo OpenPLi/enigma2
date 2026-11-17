@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 13:27+0200\n"
+"POT-Creation-Date: 2026-11-17 21:53+0100\n"
 "PO-Revision-Date: 2022-09-27 16:12+0200\n"
 "Last-Translator: kvinto\n"
 "Language-Team: kvinto\n"
@@ -242,13 +242,6 @@ msgstr "%d хвилин"
 #, python-format
 msgid "%d ms"
 msgstr "%d мс"
-
-#, python-format
-msgid "%d package selected."
-msgid_plural "%d packages selected."
-msgstr[0] "%d пакет вибрано."
-msgstr[1] "%d пакети вибрано."
-msgstr[2] "%d пакетів вибрано."
 
 #, python-format
 msgid "%d pixel wide"
@@ -637,9 +630,6 @@ msgstr "Таймер переведе приймач в режим очікув�
 msgid "A sleep timer is about to shut down your receiver. Would you like to proceed?"
 msgstr "Таймер сну хоче вимкнути Ваш приймач. Вимкнути зараз?"
 
-msgid "A small overview of the available icon states and actions."
-msgstr "Невеликий огляд доступного стану іконок і дій."
-
 msgid ""
 "A timer failed to record!\n"
 "Disable TV and try again?\n"
@@ -919,6 +909,9 @@ msgstr "Вихід 10біт"
 msgid "Allow 12bit"
 msgstr "Вихід 12біт"
 
+msgid "Allow instantly toggle alternative infobars"
+msgstr ""
+
 msgid "Allow quitting movie player with exit"
 msgstr "Дозволити вийти з програвача при виході"
 
@@ -1014,6 +1007,10 @@ msgstr "Будь яка активність"
 
 msgid "Arabic"
 msgstr "Арабська"
+
+#, fuzzy
+msgid "Are you sure to delete all cuts and marks?"
+msgstr "Ви впевнені, що хочете відновите всі видалені іміджі"
 
 msgid "Are you sure to delete image:"
 msgstr "Ви впевнені, що хочете видалити цей запис:"
@@ -1167,9 +1164,6 @@ msgstr "Австралійська"
 
 msgid "Austria"
 msgstr "Австрія"
-
-msgid "Author: "
-msgstr "Автор: "
 
 msgid "Authoring mode"
 msgstr "Режим авторизації"
@@ -1988,9 +1982,6 @@ msgstr "Модуль доступу"
 msgid "Common Interface assignment"
 msgstr "Призначення Модуля доступу"
 
-msgid "Communication"
-msgstr "З'єднання"
-
 msgid "Comoros"
 msgstr "Коморські острови"
 
@@ -2404,9 +2395,6 @@ msgstr "Інформація не поміститься на DVD!!"
 msgid "Context Menu"
 msgstr "Контекстне меню каналу"
 
-msgid "Continue"
-msgstr "Продовжити"
-
 msgid "Continue playback"
 msgstr "Продовжити відтворення"
 
@@ -2734,9 +2722,6 @@ msgstr "Тривалість за замовчанням: %d хв"
 msgid "Default movie location"
 msgstr "Розташування фільмів типово"
 
-msgid "Default settings"
-msgstr "Стандарні Налаштування"
-
 msgid "Default timer type"
 msgstr "Тип таймера за замовчуванням"
 
@@ -2906,9 +2891,6 @@ msgstr "Призначення віддаленого резервного пр�
 msgid "Destination of fallback remote receiver for DVB-T"
 msgstr "Призначення віддаленого резервного приймача для DVB-T"
 
-msgid "Details for plugin: "
-msgstr "Деталі про плагін: "
-
 #, python-format
 msgid "Detect box%s via network"
 msgstr "Визначити приймач%s через мережу"
@@ -3038,9 +3020,6 @@ msgstr "Відображення списку EPG для поточного ка
 
 msgid "Display Skin"
 msgstr "Скін дисплея"
-
-msgid "Display and userinterface"
-msgstr "Екран і інтерфейс"
 
 msgid "Display message before playing next movie"
 msgstr "Показувати повідомлення перед відтворенням наступного запису"
@@ -3192,6 +3171,10 @@ msgstr "Ви хочете продовжити відтворення?"
 msgid "Do you want to select a different skin?"
 msgstr "Бажаєте вибрати інший скін?"
 
+#, fuzzy
+msgid "Do you want to update the package:\n"
+msgstr "Ви хочете видалити пакет:\n"
+
 #, python-format
 msgid "Do you want to update your receiver to %s?"
 msgstr "Бажаєте оновити приймач від %s?"
@@ -3258,6 +3241,10 @@ msgstr "Завантажується"
 
 msgid "Downloading Image"
 msgstr "Завантаження Іміджа"
+
+#, fuzzy
+msgid "Downloading a new packet list. Please wait..."
+msgstr "Завантаження інформації про додатки. Зачекайте..."
 
 msgid "Downloading plugin information. Please wait..."
 msgstr "Завантаження інформації про додатки. Зачекайте..."
@@ -3827,9 +3814,6 @@ msgstr "Розширенні налаштування..."
 msgid "Extensions"
 msgstr "Розширення"
 
-msgid "Extensions management"
-msgstr "Керування розширеннями"
-
 msgid "Extensions menu"
 msgstr "Розширене меню"
 
@@ -4121,9 +4105,6 @@ msgstr "Сортувати за ключовою групою на пульті"
 
 msgid "Flat by position on remote"
 msgstr "Сортувати за позицією на пульті"
-
-msgid "Following tasks will be done after you press OK!"
-msgstr "Дані завдання будуть виконані після натиснення ОК!"
 
 msgid "For this box, the network connection can also be used for detection."
 msgstr "Для цього блоку мережеве з’єднання також можна використовувати для виявлення."
@@ -5002,12 +4983,6 @@ msgstr "Встановлення Плагіну"
 msgid "Install plugin"
 msgstr "Встановлення Плагіну"
 
-msgid "Installation has completed."
-msgstr "Встановлення завершено."
-
-msgid "Installation or removal has completed."
-msgstr "Встановлення, або видалення завершено."
-
 msgid "Installing"
 msgstr "Встановлення"
 
@@ -5442,6 +5417,9 @@ msgstr "Довгі імена файлів"
 msgid "Long key press"
 msgstr "Довге натиснення"
 
+msgid "Long press delay threshold"
+msgstr ""
+
 msgid "Long press: "
 msgstr "Довге натиснення: "
 
@@ -5529,8 +5507,8 @@ msgstr "Малі"
 msgid "Malta"
 msgstr "Мальта"
 
-msgid "Manage your receiver's software"
-msgstr "Менеджер ПЗ приймача"
+msgid "Manage optional software packages"
+msgstr ""
 
 msgid "Manual"
 msgstr "Вручну"
@@ -5897,9 +5875,6 @@ msgstr "Селектор Іміджів MultiBoot"
 msgid "Multichannel PCM"
 msgstr "Багатоканальне PCM"
 
-msgid "Multimedia"
-msgstr "Мультимедіа"
-
 msgid "Multiple service support"
 msgstr "Підтримка багатоканальності"
 
@@ -6104,9 +6079,6 @@ msgstr "Дані ще не отримано"
 msgid "No delay"
 msgstr "Без затримки"
 
-msgid "No description available."
-msgstr "Опис відсутній."
-
 msgid "No displayable files on this medium found!"
 msgstr "Потрібних файлів на цьому носії не знайдено!"
 
@@ -6127,9 +6099,6 @@ msgstr "Немає вільного тюнера!"
 
 msgid "No images found"
 msgstr "Іміджі не знайдено"
-
-msgid "No network connection available."
-msgstr "Немає доступного мережевого підключення."
 
 msgid "No networks found"
 msgstr "Мереж не знайдено"
@@ -6404,9 +6373,6 @@ msgstr "Один"
 msgid "Only change this setting if you are using a SCR device that has been reprogrammed with a custom programmer. For further information check with the person that reprogrammed the device."
 msgstr "Змінюйте це налаштування лише у тому випадку, якщо ви використовуєте пристрій SCR, який було перепрограмовано за допомогою спеціального програміста. Для отримання додаткової інформації зверніться до особи, яка перепрограмувала пристрій."
 
-msgid "Only extensions."
-msgstr "Тільки розширення."
-
 msgid "Only free scan"
 msgstr "Сканувати тільки відкриті"
 
@@ -6580,6 +6546,10 @@ msgstr ""
 
 msgid "Package list update"
 msgstr "Оновлення списку пакетів"
+
+#, fuzzy
+msgid "Package manager"
+msgstr "Пакети для оновлення"
 
 msgid "Packages to update"
 msgstr "Пакети для оновлення"
@@ -6994,12 +6964,6 @@ msgstr "Провідник плагінів"
 msgid "Plugin browser"
 msgstr "Провідник плагінів"
 
-msgid "Plugin manager activity information"
-msgstr "Інформація активності плагінів"
-
-msgid "Plugin manager help"
-msgstr "Допомога в керуванні плагіном"
-
 msgid "Plugins"
 msgstr "Плагіни"
 
@@ -7266,9 +7230,6 @@ msgstr "Прайм-тайм"
 msgid "Priority"
 msgstr "Пріоритет"
 
-msgid "Process"
-msgstr "Процес"
-
 msgid "Progress"
 msgstr "Прогрес"
 
@@ -7509,9 +7470,6 @@ msgstr "Тип запису"
 msgid "Recording(s) are in progress or coming up in few seconds!"
 msgstr "Запис(и) йде, або розпочнеться за декілька секунд!"
 
-msgid "Recordings"
-msgstr "Записи"
-
 msgid "Recordings always have priority"
 msgstr "Записи завжди мають перевагу"
 
@@ -7551,6 +7509,9 @@ msgstr "Регіон"
 msgid "Relative"
 msgstr "Відносний"
 
+msgid "Reload"
+msgstr ""
+
 msgid "Reload blacklists"
 msgstr "Перезавантажити чорні списки"
 
@@ -7574,6 +7535,10 @@ msgstr "Тип пульта управління"
 
 msgid "Remote control type setup"
 msgstr "Вибір пульта управління"
+
+#, fuzzy
+msgid "Removal has completed."
+msgstr "Встановлення, або видалення завершено."
 
 msgid "Remove"
 msgstr "Видалити"
@@ -7965,9 +7930,6 @@ msgstr "Супутник"
 msgid "Satellite dish setup"
 msgstr "Налаштування супутникової антени"
 
-msgid "Satellite equipment"
-msgstr "Супутникове обладнання"
-
 msgid "Satellite equipment setup"
 msgstr "Налаштування супутникового обладнання"
 
@@ -8149,12 +8111,6 @@ msgstr "Пошук"
 
 msgid "Searching east..."
 msgstr "Пошук на схід..."
-
-msgid "Searching for available updates. Please wait..."
-msgstr "Пошук доступних оновлень. Зачекайте..."
-
-msgid "Searching for new installed or removed packages. Please wait..."
-msgstr "Пошук нових встановлених або видалених пакетів. Зачекайте..."
 
 msgid "Searching west..."
 msgstr "Пошук на захід..."
@@ -9177,9 +9133,6 @@ msgstr "Дії при виборі скіну"
 msgid "SkinSelector: Restart GUI"
 msgstr "Вибір скіну: Перезавантаження GUI"
 
-msgid "Skins"
-msgstr "Скіни"
-
 msgid "Skip empty services"
 msgstr "Пропускати канали без предач"
 
@@ -9265,12 +9218,6 @@ msgstr "Налаштування Емулятора"
 msgid "Softcam setup"
 msgstr "Налаштування емулятора"
 
-msgid "Software"
-msgstr "Програмне забезпечення"
-
-msgid "Software management"
-msgstr "Менеджер управіння ПЗ"
-
 msgid "Software update"
 msgstr "Оновлення ПЗ"
 
@@ -9288,9 +9235,6 @@ msgstr "Деякі додатки не доступні:\n"
 
 msgid "Sorry, deleting directories can (for now) only be done through the trash can."
 msgstr "Вибачте, видалення директорій може (зараз) бути зроблено тільки через кошик."
-
-msgid "Sorry, no details available!"
-msgstr "Вибачте, немає детального опису!"
 
 msgid "Sorry, this tuner is in use."
 msgstr "На жаль цей тюнер використовується."
@@ -10168,21 +10112,11 @@ msgstr ""
 "Додаток Wі-Fі мережі не встановлений!\n"
 "Будь ласка, встановіть його."
 
-#, python-format
-msgid "There are at least %d updates available."
-msgstr "Доступно щонайменше %d оновлень."
-
-msgid "There are currently no outstanding actions."
-msgstr "В даний час немає невиконаних дій."
-
 msgid "There are no saved playlists to delete!"
 msgstr "Немає збережених списків відтворення для видалення!"
 
 msgid "There are no saved playlists to load!"
 msgstr "Немає збережених списків відтворення для завантаження!"
-
-msgid "There are no updates available."
-msgstr "Немає доступних оновлень."
 
 msgid "There is no signal to lock on !"
 msgstr "Немає сигналу для захоплення!"
@@ -10345,18 +10279,6 @@ msgstr "Ця опція встановлює придушення фіктивн
 msgid "This option sets up the picture sharpness, used when the picture is being upscaled."
 msgstr "Ця опція налаштовує різкість зображення, має значення, якщо зображення має бути збільшено."
 
-msgid "This plugin is installed."
-msgstr "Плагін встановлений."
-
-msgid "This plugin is not installed."
-msgstr "Цей плагін не встановлений."
-
-msgid "This plugin will be installed."
-msgstr "Цей плагін буде встановлений."
-
-msgid "This plugin will be removed."
-msgstr "Плагін буде видалений."
-
 #, python-format
 msgid "This receiver cannot decode %s streams!"
 msgstr "Цей приймач не може декодувати %s потоки!"
@@ -10366,6 +10288,9 @@ msgstr "Цей канал захищений батьківським контр
 
 msgid "This setting allows the tuner configuration to be a duplication of how another tuner is already configured."
 msgstr "Ці налаштування дозволяють дублювати конфігурацію одного тюнера на інший."
+
+msgid "This setting allows you to increase or decrease the number of key repeats required to trigger a long press on the remote control or keyboard."
+msgstr ""
 
 msgid "This setting depends on your cable provider and location. If you don't know the correct setting refer to the menu in the official cable receiver, or get it from your cable provider, or seek help via internet forum."
 msgstr "Це налаштування залежить від постачальника кабельного телебачення та місцезнаходження. Якщо ви не знаєте правильні установки отримайте їх у свого постачальника кабельного телебачення, або зверніться за допомогою через інтернет-форум."
@@ -10857,12 +10782,6 @@ msgstr "Показати миготливу лінію для даного ка�
 msgid "Undefined"
 msgstr "Не визначено"
 
-msgid "Undo install"
-msgstr "Скасувати встановлення"
-
-msgid "Undo uninstall"
-msgstr "Скасувати видалення"
-
 msgid "Unencrypted"
 msgstr "Декодований"
 
@@ -10883,9 +10802,6 @@ msgstr "Затримка після вимкнення напруги перед
 
 msgid "Unicable delay after last diseqc command"
 msgstr "Затримка після останньої команди diseqc"
-
-msgid "Uninstall"
-msgstr "Видалити"
 
 msgid "United Arab Emirates"
 msgstr "Об'єднані Арабські Емірати"
@@ -10957,14 +10873,12 @@ msgstr "Оновлення завершено. Хочете перезавант
 msgid "Update failed. Your receiver does not have a working internet connection."
 msgstr "Оновлення не вдалося. У Вашому приймачі немає підключення до Інтернету."
 
-msgid "Update feed not available."
-msgstr "Канал Оновленя не доступний."
+#, fuzzy
+msgid "Update has completed."
+msgstr "Встановлення завершено."
 
 msgid "Updating"
 msgstr "Оновлення"
-
-msgid "Updating software catalog"
-msgstr "Каталог оновлення ПЗ"
 
 msgid "Upper case"
 msgstr "Верхній регістр"
@@ -11249,49 +11163,6 @@ msgstr "В'єтнам"
 msgid "View Rass interactive..."
 msgstr "Показати інтерактивний Rass..."
 
-msgid "View details"
-msgstr "Перегляд деталей"
-
-#, python-format
-msgid "View list of available %s extensions."
-msgstr "Переглянути список доступних розширень %s."
-
-msgid "View list of available CommonInterface extensions"
-msgstr "Перегляд списку доступних розширень CommonInterface"
-
-msgid "View list of available EPG extensions."
-msgstr "Перегляд списку доступних розширень EPG."
-
-msgid "View list of available Satellite equipment extensions."
-msgstr "Перегляд списку доступних розширень супутникового обладнання."
-
-msgid "View list of available communication extensions."
-msgstr "Перегляд списку доступних розширень комунікації."
-
-msgid "View list of available default settings"
-msgstr "Перегляд списку налаштувань за замовчуванням"
-
-msgid "View list of available display and userinterface extensions."
-msgstr "Перегляд списку доступних розширень інтерфейсу користувача."
-
-msgid "View list of available multimedia extensions."
-msgstr "Перегляд списку доступних розширень мультимедіа."
-
-msgid "View list of available networking extensions"
-msgstr "Перегляд списку доступних розширень мережі"
-
-msgid "View list of available recording extensions"
-msgstr "Перегляд списку доступних розширень запису"
-
-msgid "View list of available skins"
-msgstr "Переглянути список доступних скінів"
-
-msgid "View list of available software extensions"
-msgstr "Перегляд списку доступних розширень ПЗ"
-
-msgid "View list of available system extensions"
-msgstr "Перегляд списку доступних розширень системи"
-
 msgid "View photos..."
 msgstr "Перегляд фото..."
 
@@ -11499,13 +11370,15 @@ msgstr "Західна Сахара"
 msgid "What type of service scan do you want?"
 msgstr "Який тип каналів Ви хочете сканувати?"
 
-msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. The infobar will shortly disappear and then shown in the other mode."
+#, fuzzy
+msgid "When enabled a simplified version from the second infobar is shown. This can also be toggled instantly by holding the OK button when the second infobar is visible. When we have on the OK button the channellist that it will be long exit. The infobar will shortly disappear and then shown in the other mode."
 msgstr "Якщо ввімкнено, відображається спрощена версія з другої інформаційної панелі. Це також можна миттєво перемкнути, утримуючи кнопку OK, коли відображається друга інформаційна панель. Інформаційна панель незабаром зникне, а потім відобразиться в іншому режимі."
 
 msgid "When enabled enigma2 will load unlinked userbouquets. This means that userbouquets that are available, but not included in the bouquets.tv or bouquets.radio files, will still be loaded. This allows you for example to keep your own user bouquet while installed settings are updated"
 msgstr "Якщо ввімкнено, enigma2 завантажуватиме не зв’язані списки користувача. Це означає, що користувацькі списки доступні, але не включені до файлів bouquets.tv або bouquets.radio, все одно будуть завантажені. Це дозволяє, наприклад, зберігати власний список користувачів під час оновлення встановлених налаштувань"
 
-msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible."
+#, fuzzy
+msgid "When enabled extra information is shown on the infobar. This can also be toggled instantly by holding the OK button when the inforbar is not visible. When we have on the OK button the channellist that it will be long exit."
 msgstr "Якщо ввімкнено, на інфопанелі відображається додаткова інформація. Це також можна миттєво перемкнути, утримуючи кнопку OK, коли інфопанель не відображається."
 
 msgid "When enabled the Picture in Picture window can be closed with 'exit' button."
@@ -11541,6 +11414,9 @@ msgstr "Якщо ввімкнено, Ви можете регулювати гу
 
 msgid "When enabled you can customize the OpenWebIf settings for the fallback receiver"
 msgstr "Якщо увімкнено, Ви можете налаштувати параметри OpenWebIf для резервного тюнера"
+
+msgid "When enabled you can instantly toggle with long OK or when the channellist appears with long OK it will be long exit list via the OK button, the infobar toggle is then transfered to exit button between two different second infobars and two different standard infobars when the skin does support this feature"
+msgstr ""
 
 msgid "When enabled you can specify a timeframe to ignore the shutdown timer when the receiver is in standby mode"
 msgstr "Якщо увімкнено, Ви можете вказати часові рамки, щоб ігнорувати таймер вимкнення, коли приймач знаходиться в режимі очікування"
@@ -11893,26 +11769,14 @@ msgstr ""
 "Ви хочете видалити\n"
 "\"%s\"?"
 
-msgid "You can cancel the installation."
-msgstr "Ви можете відмінити встановлення."
-
-msgid "You can cancel the removal."
-msgstr "Ви можете відмінити видалення."
-
 msgid "You can continue watching TV etc. while this is running."
 msgstr "Ви можете продовжувати дивитися телевізор тощо, поки це працює."
 
 msgid "You can enable if will be displayed extended EPG description for item."
 msgstr "Ви можете включити, якщо буде відображатися розширений опис ЕПГ для елемента."
 
-msgid "You can install this plugin."
-msgstr "Ви можете встановити цей додаток."
-
 msgid "You can only burn receiver recordings!"
 msgstr "Ви можете записати лише з приймача!"
-
-msgid "You can remove this plugin."
-msgstr "Ви можете видалити цей додаток."
 
 msgid "You can set selected directory as 'root' directory for movie player."
 msgstr "Ви можете встановити вибраний каталог, як кореневий каталог для медіаплеєра."
@@ -12826,9 +12690,6 @@ msgstr "зберегти закладки в розрізах"
 msgid "priority"
 msgstr "пріоритет"
 
-msgid "receiver software because updates are available."
-msgstr "доступні оновлення ПЗ для приймача."
-
 msgid "record"
 msgstr "запис"
 
@@ -12846,6 +12707,10 @@ msgstr "відомі люди"
 
 msgid "remove after this position"
 msgstr "видалити після цієї позиції"
+
+#, fuzzy
+msgid "remove all cuts and marks"
+msgstr "видалити цю закладку"
 
 msgid "remove before this position"
 msgstr "видалити до цієї позиції"
