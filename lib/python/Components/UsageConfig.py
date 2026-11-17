@@ -93,7 +93,24 @@ def InitUsageConfig():
 	config.usage.oldstyle_channel_select_controls = ConfigYesNo(default=False)
 	config.usage.zap_with_ch_buttons = ConfigYesNo(default=False)
 	config.usage.ok_is_channelselection = ConfigYesNo(default=False)
-	config.usage.long_ok_to_toggle_alternative_screens = ConfigYesNo(default=True)
+
+	def getAlternativeInfoBarChoices():
+		from skin import findSkinScreen
+		simple = findSkinScreen("SecondInfoBarSimple")
+		adds = findSkinScreen("InfoBarAdds")
+		choices = [("no", _("No"))]
+		if adds and simple:
+			choices.append(("infobaradds", _("Additional information on infobar")))
+			choices.append(("secondinfobarsimple", _("Simple second infobar")))
+			choices.append(("both", _("Both panels")))
+		elif adds:
+			choices.append(("infobaradds", _("Yes")))
+		elif simple:
+			choices.append(("secondinfobarsimple", _("Yes")))
+		default = "both" if adds and simple else "infobaradds" if adds else "secondinfobarsimple" if simple else "no"
+		return {"default": default, "choices": choices}
+	config.usage.long_ok_to_toggle_alternative_screens = ConfigSelection(**getAlternativeInfoBarChoices())
+
 	config.usage.changebouquet_set_history = ConfigYesNo(default=False)
 	config.usage.volume_instead_of_channelselection = ConfigYesNo(default=False)
 	config.usage.channelselection_preview = ConfigYesNo(default=False)

@@ -447,11 +447,12 @@ class InfoBarShowHide(InfoBarScreenSaver):
 			self.toggleViews()
 
 	def toggleViews(self):
-		if config.usage.long_ok_to_toggle_alternative_screens.value:
-			if self.shown:
+		value = config.usage.long_ok_to_toggle_alternative_screens.value
+		if self.shown:
+			if value in ("infobaradds", "both"):
 				self.toggleInfoBarAddon()
-			else:
-				self.toggleSecondInfoBar()
+		elif value in ("secondinfobarsimple", "both"):
+			self.toggleSecondInfoBar()
 
 	def toggleSecondInfoBar(self):
 		if self.actualSecondInfoBarScreen and not self.actualSecondInfoBarScreen.shown and self.secondInfoBarScreenSimple.skinAttributes and self.secondInfoBarScreen.skinAttributes:
