@@ -245,6 +245,62 @@ def resolveFilename(scope, base="", path_prefix=None):
 		path = "%s:%s" % (path, suffix)
 	return path
 
+def fileReadLines(filename, default=None, *args, **kwargs):
+	if not os.path.isfile(filename):
+		return default
+	try:
+		with open(filename, "r", encoding="utf-8", errors="replace") as fd:
+			return fd.read().splitlines()
+	except OSError:
+		return default
+
+
+def fileWriteLines(filename, lines, *args, **kwargs):
+	try:
+		parent = os.path.dirname(filename)
+		if parent and not os.path.exists(parent):
+			os.makedirs(parent, exist_ok=True)
+		with open(filename, "w", encoding="utf-8") as fd:
+			if isinstance(lines, (list, tuple)):
+				for line in lines:
+					fd.write(f"{line}\n")
+			else:
+				fd.write(str(lines))
+		return True
+	except OSError:
+		return False
+
+
+def fileReadLine(filename, default=None, *args, **kwargs):
+	lines = fileReadLines(filename, default=None, *args, **kwargs)
+	if not lines:
+		return default
+	return lines[0]
+
+
+def fileWriteLine(filename, line, *args, **kwargs):
+	return fileWriteLines(filename, [line], *args, **kwargs)
+
+
+def getPrimarySkinResolution():
+	try:
+		from enigma import getDesktop
+		size = getDesktop(0).size()
+		if size and size.width() > 0 and size.height() > 0:
+			return (size.width(), size.height())
+	except Exception:
+		pass
+	try:
+		from Components.config import config
+		skin_path = getattr(getattr(config, "skin", None), "primary_skin", None)
+		val = skin_path.value if skin_path and hasattr(skin_path, "value") else ""
+		if "2160" in val or "4k" in val.lower() or "uhd" in val.lower():
+			return (3840, 2160)
+		if "1080" in val or "fhd" in val.lower():
+			return (1920, 1080)
+	except Exception:
+		pass
+	return (1280, 720)
 
 def comparePaths(leftPath, rightPath):
 	if leftPath.endswith(os.sep):
