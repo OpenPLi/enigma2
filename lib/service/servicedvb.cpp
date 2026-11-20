@@ -3405,6 +3405,12 @@ void eDVBServicePlay::updateDecoder(bool sendSeekableStateChanged)
 			}
 			m_teletext_parser->start(program.textPid);
 		}
+		else if (m_teletext_parser && m_decoder_index == 0 && tpid > 0 && tpid < 0x1fff && m_teletext_parser->getPid() != tpid)
+		{
+			/* The decoder may be started before the PMT is known (e.g. streams, only cached PIDs are available), so the teletext
+			 * parser was started without a pid. Start the scan for subtitle pages as soon as the teletext pid is known. */
+			m_teletext_parser->start(tpid);
+		}
 
 		/* don't worry about non-existing services, nor pvr services */
 		if (m_dvb_service)
@@ -3670,6 +3676,8 @@ RESULT eDVBServicePlay::getCachedSubtitle(struct SubtitleTrack &track)
 					int pid = (data&0xFFFF0000)>>16;
 					if (program.textPid == pid) // teletext
 						track.type = 1; // type teletext
+					else if (m_is_stream && !h.isPMTReady())
+						return -1; // the teletext pid is only known after the PMT has been parsed, decide later
 					else
 						track.type = 0; // type dvb
 					track.pid = pid; // pid
