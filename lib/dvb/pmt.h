@@ -133,6 +133,7 @@ public:
 	int getPMT(ePtr<eTable<ProgramMapSection> > &ptr) { return m_PMT.getCurrent(ptr); }
 	int getChannel(eUsePtr<iDVBChannel> &channel);
 	int getDemuxID() const { return m_decode_demux_num; }
+	bool isPMTReady() const { return m_pmt_ready; }
 	void resetCachedProgram() { m_have_cached_program = false; }
 	void sendEventNoPatEntry();
 	void getHBBTVUrl(std::string &ret) const { ret = m_HBBTVUrl; }

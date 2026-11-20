@@ -456,6 +456,7 @@ int eDVBTeletextParser::start(int pid)
 	eDebug("[eDVBTeletextParser] starting PES reader on pid=%04x", pid);
 	if (m_pes_reader && pid >= 0 && pid < 0x1fff)
 	{
+		m_pes_reader->stop(); /* restart on the new pid; harmless if the reader is not active */
 		m_pid = pid;
 		return m_pes_reader->start(pid);
 	}
