@@ -18,6 +18,25 @@ eSubtitleWidget::eSubtitleWidget(eWidget *parent)
 }
 
 #define startX 50
+
+/* The subtitle settings (font size, border width) are defined for a screen width of 1280 pixels and scaled to the desktop. */
+static int scaledSubtitleSetting(int value)
+{
+	return value * getDesktop(0)->size().width() / 1280;
+}
+
+/* The region that is invalidated for a text subtitle (and that it is clipped to when painted) has to cover everything that is
+ * drawn for it: the border around the glyphs, and the last line, which can reach below the bottom of the area because the text
+ * is aligned to the bottom without taking the top of the text block into account (see renderText in gDC::exec). Otherwise
+ * the border is cut off at the edge of the area, and when the border is painted in a larger repaint it stays on the screen
+ * after the subtitle has gone. */
+static eRect subtitleTextRegion(const eRect &area)
+{
+	int borderwidth = scaledSubtitleSetting(eConfigManager::getConfigIntValue("config.subtitles.subtitle_borderwidth", 2));
+	int fontsize = scaledSubtitleSetting(eConfigManager::getConfigIntValue("config.subtitles.subtitle_fontsize", 34));
+	int margin = borderwidth + 1;
+	return eRect(ePoint(area.left() - margin, area.top() - margin), eSize(area.width() + 2 * margin, area.height() + 2 * margin + fontsize / 2));
+}
 void eSubtitleWidget::setPage(const eDVBTeletextSubtitlePage &p)
 {
 	eDVBTeletextSubtitlePage newpage = p;
@@ -78,7 +97,7 @@ void eSubtitleWidget::setPage(const eDVBTeletextSubtitlePage &p)
 			area.setTop(size().height() - height - lowerborder);
 			area.setWidth(width);
 			area.setHeight(height);
-			m_visible_region |= area;
+			m_visible_region |= subtitleTextRegion(area);
 		}
 		else
 		{
@@ -109,7 +128,7 @@ void eSubtitleWidget::setPage(const eDVBTeletextSubtitlePage &p)
 				area.setTop(size_per_element * m_page.m_elements[i].m_source_line);
 				area.setWidth(width);
 				area.setHeight(size_per_element * 2); //teletext subtitles are double height only even lines are used
-				m_visible_region |= area;
+				m_visible_region |= subtitleTextRegion(area);
 			}
 		}
 	}
@@ -246,7 +265,7 @@ void eSubtitleWidget::setPage(const ePangoSubtitlePage &p)
 		area.setTop(size_per_element * element + startY - lowerborder);
 		area.setWidth(width);
 		area.setHeight(size_per_element);
-		m_visible_region |= area;
+		m_visible_region |= subtitleTextRegion(area);
 	}
 
 	m_hide_subtitles_timer->start(m_pango_page.m_timeout, true);
@@ -300,8 +319,13 @@ int eSubtitleWidget::event(int event, void *data, void *data2)
 		else
 			rt_halignment_flag = gPainter::RT_HALIGN_CENTER;
 
-		int borderwidth = eConfigManager::getConfigIntValue("config.subtitles.subtitle_borderwidth", 2) * getDesktop(0)->size().width()/1280;
-		int fontsize = eConfigManager::getConfigIntValue("config.subtitles.subtitle_fontsize", 34) * getDesktop(0)->size().width()/1280;
+		int borderwidth = scaledSubtitleSetting(eConfigManager::getConfigIntValue("config.subtitles.subtitle_borderwidth", 2));
+		int fontsize = scaledSubtitleSetting(eConfigManager::getConfigIntValue("config.subtitles.subtitle_fontsize", 34));
+
+		/* Never draw the text outside the region that is invalidated again when the page goes away, see subtitleTextRegion(). */
+		const bool clip_to_visible_region = !m_pixmap && (m_page_ok || m_pango_page_ok);
+		if (clip_to_visible_region)
+			painter.clip(m_visible_region);
 
 		if (m_pixmap)
 		{
@@ -454,6 +478,8 @@ int eSubtitleWidget::event(int event, void *data, void *data2)
 				painter.blitScale(it->m_pixmap, r);
 			}
 		}
+		if (clip_to_visible_region)
+			painter.clippop();
 		return 0;
 	}
 	default:
