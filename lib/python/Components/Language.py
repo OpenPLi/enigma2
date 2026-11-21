@@ -5,6 +5,11 @@ import os
 
 from Tools.Directories import SCOPE_LANGUAGE, resolveFilename
 
+def alphabeticSortKey(name):
+	name = (name or "").lower()
+	if locale.setlocale(locale.LC_COLLATE) == "C":
+		return (False, name)
+	return (not name[:1].isdigit(), locale.strxfrm(name))
 
 class Language:
 	def __init__(self):
@@ -90,8 +95,9 @@ class Language:
 		for category in [locale.LC_CTYPE, locale.LC_COLLATE, locale.LC_TIME, locale.LC_MONETARY, locale.LC_MESSAGES, locale.LC_NUMERIC]:
 			try:
 				locale.setlocale(category, (self.getLanguage(), 'UTF-8'))
-			except:
-				pass
+			except locale.Error:
+				if category == locale.LC_COLLATE:
+					locale.setlocale(category, "C")
 		# HACK: sometimes python 2.7 reverts to the LC_TIME environment value, so make sure it has the correct value
 		os.environ["LC_TIME"] = self.getLanguage() + '.UTF-8'
 		os.environ["GST_SUBTITLE_ENCODING"] = self.getGStreamerSubtitleEncoding()
