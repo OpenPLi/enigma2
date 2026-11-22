@@ -1,4 +1,5 @@
 from Components.GUIComponent import GUIComponent
+from Components.Language import alphabeticSortKey
 from Tools.FuzzyDate import FuzzyTime
 from ServiceReference import ServiceReference
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaBlend, MultiContentEntryProgress
@@ -795,9 +796,10 @@ class MovieList(GUIComponent):
 		# x = ref,info,begin,...
 		ref = x[0]
 		name = x[1] and x[1].getName(ref)
+		name = alphabeticSortKey(name)
 		if ref.flags & eServiceReference.mustDescent:
-			return (0, name and name.lower() or "", -x[2])
-		return (1, name and name.lower() or "", -x[2])
+			return (0, name, -x[2])
+		return (1, name, -x[2])
 
 	def buildAlphaNumericFlatSortKey(self, x):
 		# x = ref,info,begin,...
@@ -812,13 +814,13 @@ class MovieList(GUIComponent):
 			name = p[1]
 		# print "Sorting for -%s-" % name
 
-		return (1, name and name.lower() or "", -x[2])
+		return (1, alphabeticSortKey(name), -x[2])
 
 	def buildBeginTimeSortKey(self, x):
 		ref = x[0]
 		if ref.flags & eServiceReference.mustDescent:
-			return (0, "", -x[2])
-		return (1, "", -x[2])
+			return (0, (False, ""), -x[2])
+		return (1, (False, ""), -x[2])
 
 	def buildGroupwiseSortkey(self, x):
 		# Sort recordings by date, sort MP3 and stuff by name

@@ -1,4 +1,5 @@
 from Components.GUIComponent import GUIComponent
+from Components.Language import alphabeticSortKey
 
 from enigma import eEPGCache, eListbox, eListboxPythonMultiContent, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, eServiceReference
 
@@ -13,6 +14,7 @@ from skin import applySkinFactor, parseFont, parseScale
 
 from re import search
 from datetime import timedelta
+
 
 EPG_TYPE_SINGLE = 0
 EPG_TYPE_MULTI = 1
@@ -419,7 +421,7 @@ class EPGList(GUIComponent):
 		if list:
 			event_id = self.getSelectedEventId()
 			if type == 1:
-				list.sort(key=lambda x: (x[4] and x[4].lower(), x[2]))
+				list.sort(key=lambda x: (alphabeticSortKey(x[4]), x[2]))
 			elif type == 2:
 				list.sort(key=lambda x: (self.getEventRating(x), x[2]))
 			else:
