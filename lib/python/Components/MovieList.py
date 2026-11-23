@@ -795,7 +795,14 @@ class MovieList(GUIComponent):
 	def buildAlphaNumericSortKey(self, x):
 		# x = ref,info,begin,...
 		ref = x[0]
+		if x[1] is None and ref.flags & eServiceReference.mustDescent:
+			return (-1, "", 0)
 		name = x[1] and x[1].getName(ref)
+		if name and ref.flags & eServiceReference.mustDescent:
+			p = os.path.split(name)
+			if not p[1]:
+				p = os.path.split(p[0])
+			name = p[1]
 		name = alphabeticSortKey(name)
 		if ref.flags & eServiceReference.mustDescent:
 			return (0, name, -x[2])
