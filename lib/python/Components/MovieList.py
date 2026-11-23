@@ -792,42 +792,33 @@ class MovieList(GUIComponent):
 		for tag in realtags:
 			self.tags[tag] = set([tag])
 
+	def buildSortKey(self, x, flat=False, byTime=False):
+		ref, info, begin, _ = x
+		isDir = ref.flags & eServiceReference.mustDescent
+
+		if isDir:
+			if info is None:
+				return (-2, "", 0)
+			name = os.path.basename(ref.getPath().rstrip("/"))
+			if name == ".Trash":
+				return (-1, "", 0)
+
+		group = 0 if isDir and not flat else 1
+		if byTime:
+			return (group, (False, ""), -begin)
+
+		if not isDir:
+			name = info and info.getName(ref)
+		return (group, alphabeticSortKey(name), -begin)
+
 	def buildAlphaNumericSortKey(self, x):
-		# x = ref,info,begin,...
-		ref = x[0]
-		if x[1] is None and ref.flags & eServiceReference.mustDescent:
-			return (-1, "", 0)
-		name = x[1] and x[1].getName(ref)
-		if name and ref.flags & eServiceReference.mustDescent:
-			p = os.path.split(name)
-			if not p[1]:
-				p = os.path.split(p[0])
-			name = p[1]
-		name = alphabeticSortKey(name)
-		if ref.flags & eServiceReference.mustDescent:
-			return (0, name, -x[2])
-		return (1, name, -x[2])
+		return self.buildSortKey(x)
 
 	def buildAlphaNumericFlatSortKey(self, x):
-		# x = ref,info,begin,...
-		ref = x[0]
-		name = x[1] and x[1].getName(ref)
-		if name and ref.flags & eServiceReference.mustDescent:
-			# only use directory basename for sorting
-			p = os.path.split(name)
-			if not p[1]:
-				# if path ends in '/', p is blank.
-				p = os.path.split(p[0])
-			name = p[1]
-		# print "Sorting for -%s-" % name
-
-		return (1, alphabeticSortKey(name), -x[2])
+		return self.buildSortKey(x, flat=True)
 
 	def buildBeginTimeSortKey(self, x):
-		ref = x[0]
-		if ref.flags & eServiceReference.mustDescent:
-			return (0, (False, ""), -x[2])
-		return (1, (False, ""), -x[2])
+		return self.buildSortKey(x, byTime=True)
 
 	def buildGroupwiseSortkey(self, x):
 		# Sort recordings by date, sort MP3 and stuff by name
