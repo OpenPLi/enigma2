@@ -428,9 +428,6 @@ def InitAVSwitch():
 		else:
 			choices = [("auto", "auto"), ("rgb", "RGB"), ("420", "4:2:0"), ("422", "4:2:2"), ("444", "4:4:4")]
 			default = "auto"
-		f = "/proc/stb/video/hdmi_colorspace_choices"
-		if os.path.exists(f):
-			(choices, default) = readChoices(f, choices, default)
 		config.av.hdmicolorspace = ConfigSelection(choices=choices, default=default)
 		config.av.hdmicolorspace.addNotifier(setHaveColorspace)
 
