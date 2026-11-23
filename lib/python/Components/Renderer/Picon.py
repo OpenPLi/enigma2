@@ -97,6 +97,8 @@ class PiconLocator:
 
 piconLocator = None
 
+def invalidateListPicons():
+	pass
 
 def initPiconPaths():
 	global piconLocator
@@ -186,3 +188,4 @@ class Picon(Renderer):
 					self.pngname = pngname
 			elif self.visible:
 				self.instance.hide()
+
