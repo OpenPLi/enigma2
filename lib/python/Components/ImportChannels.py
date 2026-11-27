@@ -19,6 +19,13 @@ supportfiles = ('lamedb', 'blacklist', 'whitelist', 'alternatives.')
 e2path = "/etc/enigma2"
 
 
+def _extract_owif_files(raw):
+	data = loads(raw)
+	if isinstance(data, list) and data:
+		data = data[0]
+	return data.get("files", []) if isinstance(data, dict) else []
+
+
 class ImportChannels:
 
 	def __init__(self):
@@ -121,7 +128,7 @@ class ImportChannels:
 				for line in content:
 #					print ("[Import Channels] %s" % line)
 					# check if it contains another bouquet reference, first tv type then radio type
-					r = re.match('#SERVICE 1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line) or re.match('#SERVICE 1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "(.*)" ORDER BY bouquet', line)
+					r = re.match(r'#SERVICE\s+1:[0-9a-fA-F]+:[12]:[0-9a-fA-F:]+:FROM BOUQUET "([^"]+)"', line)
 					if r:
 						# recurse
 						result.extend(self.ImportGetFilelist(remote, r.group(1)))
@@ -138,7 +145,7 @@ class ImportChannels:
 			if self.ImportGetFilelist(True, 'bouquets.tv', 'bouquets.radio'): # we should ensure we have at some files available
 				try:
 					print("[Import Channels] Enumerate and Fetch remote support files")
-					for file in [file.replace(e2path, '') for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, e2path)))["files"] if os.path.basename(file).startswith(supportfiles)]:
+					for file in [file.replace(e2path, '') for file in _extract_owif_files(self.getUrl("%s/file?dir=%s" % (self.url, e2path))) if os.path.basename(file).startswith(supportfiles)]:
 #						print("[Import Channels] Downloading %s..." % file)
 						open(os.path.join(self.tmp_dir, os.path.basename(file)), "wb").write(self.getUrl("%s/file?file=%s/%s" % (self.url, e2path, quote(file))))
 				except Exception as e:
@@ -166,7 +173,7 @@ class ImportChannels:
 			print("[Import Channels] Writing epg.dat file on server box")
 			try:
 				result = loads(self.getUrl("%s/api/saveepg" % self.url, timeout=30).decode('utf-8'))
-				if 'result' not in result and result['result'] == False:
+				if not result.get('result'):
 					self.ImportChannelsDone(False, _("Error when writing epg.dat on the fallback receiver"))
 			except Exception as e:
 				print("[Import Channels] Exception: %s" % str(e))
@@ -176,9 +183,9 @@ class ImportChannels:
 			try:
 				epgdatfile = self.getFallbackSettingsValue(self.url, "config.misc.epgcache_filename") or "/media/hdd/epg.dat"
 				try:
-					files = [file for file in loads(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile))))["files"] if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
+					files = [file for file in _extract_owif_files(self.getUrl("%s/file?dir=%s" % (self.url, os.path.dirname(epgdatfile)))) if os.path.basename(file).startswith(os.path.basename(epgdatfile))]
 				except:
-					files = [file for file in loads(self.getUrl("%s/file?dir=/" % self.url))["files"] if os.path.basename(file).startswith("epg.dat")]
+					files = [file for file in _extract_owif_files(self.getUrl("%s/file?dir=/" % self.url)) if os.path.basename(file).startswith("epg.dat")]
 				epg_location = files[0] if files else None
 			except Exception as e:
 				print("[Import Channels] Exception: %s" % str(e))
