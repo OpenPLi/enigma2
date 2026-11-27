@@ -339,14 +339,18 @@ void eHdmiCEC::hdmiEvent(int what)
 	if (what & eSocketNotifier::Read)
 	{
 		bool hasdata = false;
-		struct cec_rx_message rxmessage;
+		struct cec_rx_message rxmessage = {};
 		if (linuxCEC)
 		{
-			struct cec_msg msg;
-			if (::ioctl(hdmiFd, CEC_RECEIVE, &msg) >= 0)
+			struct cec_msg msg = {};
+			if (::ioctl(hdmiFd, CEC_RECEIVE, &msg) >= 0 && msg.len >= 1)
 			{
-				rxmessage.length = msg.len - 1;
-				memcpy(&rxmessage.data, &msg.msg[1], rxmessage.length);
+				rxmessage.address = (msg.msg[0] >> 4) & 0x0f;
+				rxmessage.length = (msg.len > 1) ? (msg.len - 1) : 0;
+				if (rxmessage.length > sizeof(rxmessage.data))
+					rxmessage.length = sizeof(rxmessage.data);
+				if (rxmessage.length > 0)
+					memcpy(&rxmessage.data, &msg.msg[1], rxmessage.length);
 				hasdata = true;
 			}
 		}
