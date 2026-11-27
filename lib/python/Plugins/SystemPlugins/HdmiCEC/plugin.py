@@ -124,12 +124,12 @@ def main(session, **kwargs):
 
 def startSetup(menuid):
 	# only show in the menu when set to intermediate or higher
-	if menuid == "video" and config.av.videoport.value == "DVI" and config.usage.setup_level.index >= 1:
+	if menuid == "video" and (path.exists("/dev/cec0") or config.av.videoport.value == "DVI") and config.usage.setup_level.index >= 1:
 		return [(_("HDMI-CEC setup"), main, "hdmi_cec_setup", 0)]
 	return []
 
 
 def Plugins(**kwargs):
-	if path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
+	if path.exists("/dev/cec0") or path.exists("/dev/hdmi_cec") or path.exists("/dev/misc/hdmi_cec0"):
 		return [PluginDescriptor(where=PluginDescriptor.WHERE_MENU, fnc=startSetup)]
 	return []
