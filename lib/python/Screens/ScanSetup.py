@@ -816,7 +816,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.list.append((_("Hierarchy info"), self.scan_ter.hierarchy))
 				if self.scan_ter.system.value == eDVBFrontendParametersTerrestrial.System_DVB_T2:
 					self.list.append((_('PLP ID'), self.scan_ter.plp_id))
-			elif self.scan_typeterrestrial.value == "predefined_transponder":
+			elif self.scan_typeterrestrial.value in ("predefined_transponder", "multi_transponder"):
 				if nim.canBeCompatible("DVB-T2"):
 					self.systemEntry = (_('System'), self.scan_ter.system)
 					self.list.append(self.systemEntry)
@@ -825,8 +825,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				self.TerrestrialRegion = nim.config.terrestrial
 				self.TerrestrialRegionEntry = (_('Region'), self.TerrestrialRegion)
 				self.list.append(self.TerrestrialRegionEntry)
-				self.predefinedTerrTranspondersList()
-				self.list.append((_('Transponder'), self.TerrestrialTransponders, _("Select which transponder to scan.")))
+				if self.scan_typeterrestrial.value == "predefined_transponder":
+					self.predefinedTerrTranspondersList()
+					self.list.append((_('Transponder'), self.TerrestrialTransponders, _("Select which transponder to scan.")))
+				else:
+					self.multiTerrTranspondersList()
 			elif self.scan_typeterrestrial.value == "complete":
 				self.TerrestrialRegion = nim.config.terrestrial
 				if nimmanager.getNimName(nim.slot).startswith("Sundtek"):
@@ -869,6 +872,8 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 	def newConfig(self):
 		cur = self["config"].getCurrent()
 		print("cur is", cur)
+		if cur == self.typeOfScanEntry and self.DVB_type.value == "DVB-T" and self.scan_typeterrestrial.value == "multi_transponder":
+			self.scan_ter.system.value = eDVBFrontendParametersTerrestrial.System_DVB_T_T2  # multiple transponders starts on Auto
 		if cur == self.typeOfScanEntry or \
 			cur == self.DVB_TypeEntry or \
 			cur == self.typeOfInputEntry or \
@@ -1259,7 +1264,7 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 		self.scan_typecable = ConfigSelection(default=defaultCabSearchType, choices=[("single_transponder", _("User defined transponder")), ("predefined_transponder", _("Predefined transponder")), ("complete", _("Complete"))])
 		self.last_scan_typecable = "single_transponder"
 		self.cable_toggle = {"single_transponder": "complete", "complete": "single_transponder"}
-		self.scan_typeterrestrial = ConfigSelection(default=defaultTerrSearchType, choices=[("single_transponder", _("User defined transponder")), ("predefined_transponder", _("Predefined transponder")), ("complete", _("Complete"))])
+		self.scan_typeterrestrial = ConfigSelection(default=defaultTerrSearchType, choices=[("single_transponder", _("User defined transponder")), ("predefined_transponder", _("Predefined transponder")), ("multi_transponder", _("Multiple transponders")), ("complete", _("Complete"))])
 		self.scan_type_atsc = ConfigSelection(default=defaultATSCSearchType, choices=[("single_transponder", _("User defined transponder")), ("predefined_transponder", _("Predefined transponder")), ("complete", _("Complete"))])
 		self.scan_input_as = ConfigSelection(default="channel", choices=[("frequency", _("Frequency")), ("channel", _("Channel"))])
 		self.scan_ter_complete_type = ConfigSelection(default="all", choices=[("all", _("All frequency")), ("extended", _("Extended"))])
@@ -1451,6 +1456,11 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 						tp = tps[self.TerrestrialTransponders.index]
 						tlist.append(buildTerTransponder(tp[1], tp[9], tp[2], tp[4], tp[5], tp[3], tp[7], tp[6], tp[8], self.scan_ter.system.value, tp[11]))
 				removeAll = False
+			elif self.scan_typeterrestrial.value == "multi_transponder":
+				for tp, sel in self.multiscanlist:
+					if sel.value:
+						tlist.append(buildTerTransponder(tp[1], tp[9], tp[2], tp[4], tp[5], tp[3], tp[7], tp[6], tp[8], self.scan_ter.system.value, tp[11]))
+				removeAll = False
 			elif self.scan_typeterrestrial.value == "complete":
 				if nimmanager.getNimName(nim.slot).startswith("Sundtek") and self.scan_ter_complete_type.value == "all":
 					action = SEARCH_TERRESTRIAL2_TRANSPONDERS
@@ -1603,6 +1613,20 @@ class ScanSetup(ConfigListScreen, Screen, CableTransponderSearchSupport, Terrest
 				print("channel", channel)
 		self.TerrestrialTransponders = ConfigSelection(choices=list, default=default)
 		return default
+
+	def multiTerrTranspondersList(self):
+		index_to_scan = int(self.scan_nims.value)
+		channels = supportedChannels(index_to_scan)
+		terrestrialRegion = nimmanager.nim_slots[index_to_scan].config.terrestrial
+		region = terrestrialRegion.description[terrestrialRegion.value]
+		for tp in nimmanager.getTranspondersTerrestrial(region):
+			if tp[0] == 2:  # TERRESTRIAL
+				channel = ''
+				if channels:
+					channel = _(' (Channel %s)') % (getChannelNumber(tp[1], index_to_scan))
+				sel = ConfigEnableDisable(default=False)
+				self.list.append(('%s MHz %s' % (str(tp[1] // 1000000), channel), sel))
+				self.multiscanlist.append((tp, sel))
 
 	def compareTerrTransponders(self, tp, compare):
 		frequencyTolerance = 1000000 #1 MHz
