@@ -1,7 +1,7 @@
+#include <cctype>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <wordexp.h>
 #include <lib/base/eenv.h>
 #include <lib/base/eerror.h>
 
@@ -42,53 +42,60 @@ void eEnv::initialize()
 	}
 }
 
+/*
+ * Expand $name and ${name} from the environment, recursively.
+ * This used wordexp(WRDE_NOCMD | WRDE_UNDEF), but musl rejects '{' and '}'
+ * outside quotes with WRDE_BADCHAR, so every "${libdir}/..." came out empty
+ * and enigma2 quit before running StartEnigma.py.
+ */
 int eEnv::resolveVar(std::string &dest, const char *src)
 {
-	size_t i = 0;
-	int ret;
-	wordexp_t p;
+	std::string out;
+	const char *s = src;
 
-	ret = wordexp(src, &p, WRDE_NOCMD | WRDE_UNDEF);
-	if (ret != 0) {
-		switch (ret) {
-		case WRDE_BADCHAR:
-			eDebug("[eEnv] %s: bad character", __func__);
-			break;
-		case WRDE_BADVAL:
-			eDebug("[eEnv] %s: bad value", __func__);
-			break;
-		case WRDE_CMDSUB:
-			eDebug("[eEnv] %s: invalid command substitution", __func__);
-			break;
-		case WRDE_NOSPACE:
-			eDebug("[eEnv] %s: out of memory", __func__);
-			break;
-		case WRDE_SYNTAX:
-			eDebug("[eEnv] %s: syntax error", __func__);
-			break;
-		default:
-			eDebug("[eEnv] %s: unknown error", __func__);
-			break;
+	while (*s) {
+		if (*s != '$') {
+			out += *s++;
+			continue;
 		}
-
-		return -1;
-	}
-
-	while (i < p.we_wordc) {
-		if (strchr(p.we_wordv[i], '$')) {
-			ret = eEnv::resolveVar(dest, p.we_wordv[i]);
-			if (ret < 0)
-				break;
+		const char *start = s + 1;
+		std::string name;
+		if (*start == '{') {
+			const char *end = strchr(start + 1, '}');
+			if (!end) {
+				eDebug("[eEnv] %s: syntax error in '%s'", __func__, src);
+				return -1;
+			}
+			name.assign(start + 1, end - start - 1);
+			s = end + 1;
 		} else {
-			dest.append(p.we_wordv[i]);
+			const char *p = start;
+			while (*p && (isalnum((unsigned char)*p) || *p == '_'))
+				p++;
+			if (p == start) {
+				out += *s++;
+				continue;
+			}
+			name.assign(start, p - start);
+			s = p;
 		}
-
-		if (++i < p.we_wordc)
-			dest.append(" ");
+		const char *val = getenv(name.c_str());
+		if (!val) {
+			eDebug("[eEnv] %s: undefined variable '%s'", __func__, name.c_str());
+			return -1;
+		}
+		if (strchr(val, '$')) {
+			std::string sub;
+			if (eEnv::resolveVar(sub, val) < 0)
+				return -1;
+			out += sub;
+		} else {
+			out += val;
+		}
 	}
 
-	wordfree(&p);
-	return ret;
+	dest.append(out);
+	return 0;
 }
 
 int eEnv::resolveVar(std::string &dest, const std::string &src)
