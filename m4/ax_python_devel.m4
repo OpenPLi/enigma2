@@ -383,8 +383,8 @@ print(sitedir)"`
 			PYTHON_SITE_PKG2=`$PYTHON -c "$IMPORT_SYSCONFIG; \
 				print (sysconfig.get_python_lib(0,0));"`
 		fi
+		PYTHON_SITE_PKG="$ac_python_libdir_XCompile$PYTHON_SITE_PKG2"
 	   fi
-	   PYTHON_SITE_PKG="$ac_python_libdir_XCompile$PYTHON_SITE_PKG2"
 	   AC_MSG_RESULT([$PYTHON_SITE_PKG])
 	   AC_SUBST([PYTHON_SITE_PKG])
 
@@ -413,8 +413,8 @@ print(sitedir)"`
 			PYTHON_PLATFORM_SITE_PKG2=`$PYTHON -c "$IMPORT_SYSCONFIG; \
 				print (sysconfig.get_python_lib(1,0));"`
 		fi
+		PYTHON_PLATFORM_SITE_PKG="$ac_python_libdir_XCompile$PYTHON_PLATFORM_SITE_PKG2"
 	   fi
-	   PYTHON_PLATFORM_SITE_PKG="$ac_python_libdir_XCompile$PYTHON_PLATFORM_SITE_PKG2"
 	   AC_MSG_RESULT([$PYTHON_PLATFORM_SITE_PKG])
 	   AC_SUBST([PYTHON_PLATFORM_SITE_PKG])
 
