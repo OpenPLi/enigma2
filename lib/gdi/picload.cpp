@@ -25,8 +25,8 @@ DEFINE_REF(ePicLoad);
 
 static std::string getSize(const char* file)
 {
-	struct stat64 s = {};
-	if (stat64(file, &s) < 0)
+	struct stat s = {};
+	if (stat(file, &s) < 0)
 		return "";
 	return std::to_string((long)(s.st_size / 1024)) + " kB";
 }

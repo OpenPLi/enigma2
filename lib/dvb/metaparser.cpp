@@ -30,10 +30,10 @@ static long long fileSize(const std::string &basename)
 	long long filesize = 0;
 	char buf[16] = {};
 	std::string splitname;
-	struct stat64 s = {};
+	struct stat s = {};
 
 	/* get filesize */
-	if (!stat64(basename.c_str(), &s))
+	if (!stat(basename.c_str(), &s))
 		filesize = (long long) s.st_size;
 	/* handling for old splitted recordings (enigma 1) */
 	int slice=1;
@@ -41,7 +41,7 @@ static long long fileSize(const std::string &basename)
 	{
 		snprintf(buf, sizeof(buf), ".%03d", slice++);
 		splitname = basename + buf;
-		if (stat64(splitname.c_str(), &s) < 0)
+		if (stat(splitname.c_str(), &s) < 0)
 			break;
 		filesize += (long long) s.st_size;
 	}

@@ -29,8 +29,13 @@
 
 eDVBCIInterfaces *eDVBCIInterfaces::instance = 0;
 
+#ifdef __GLIBC__
 pthread_mutex_t eDVBCIInterfaces::m_pmt_handler_lock = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
 pthread_mutex_t eDVBCIInterfaces::m_slot_lock = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+#else
+pthread_mutex_t eDVBCIInterfaces::m_pmt_handler_lock = {{PTHREAD_MUTEX_RECURSIVE}};
+pthread_mutex_t eDVBCIInterfaces::m_slot_lock = {{PTHREAD_MUTEX_RECURSIVE}};
+#endif
 
 eDVBCIInterfaces::eDVBCIInterfaces()
  : m_messagepump_thread(this,1), m_messagepump_main(eApp,1), m_runTimer(eTimer::create(this))
