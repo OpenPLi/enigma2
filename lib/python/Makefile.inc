@@ -29,6 +29,7 @@ EXTRA_DIST += \
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/python/enigma_python.Pcpp@am__quote@
 
 .i.cpp:
+	$(AM_V_at)mkdir -p $(DEPDIR)/python
 	$(AM_V_GEN)$(SWIG) $(AX_SWIG_PYTHON_OPT) -MT $@ -MD -MF $(DEPDIR)/$*.Tpo -I$(top_srcdir) -O -nortti -nothreads -o $@ $<
 	$(AM_V_at)mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Pcpp
 	$(AM_V_at)sed -i 's/_ENUMS\([(),]\)/\1/g' python/enigma.py
