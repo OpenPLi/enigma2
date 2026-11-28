@@ -258,6 +258,9 @@ def setBoxInfoItems():
 	BoxInfo.setItem("FCCactive", False)
 	BoxInfo.setItem("Autoresolution_proc_videomode", model in ("gbue4k", "gbquad4k", "gbquad4kpro", "vuduo4klite") and "/proc/stb/video/videomode_50hz" or "/proc/stb/video/videomode")
 	BoxInfo.setItem("ForceSet10bitMode2160p", model in ("gbquad4kpro", "vuduo4klite"))
+	# PiP from servicemp3 needs the second video device to accept memory writes from dvbvideosink (decoder=1).
+	# VU+ dvb-bcm7444 only feeds video1 from the demux (brcm_video2_write is a stub), so use the DVB path there.
+	BoxInfo.setItem("PiPServiceMP3", BoxInfo.getItem("PIPAvailable") and not BoxInfo.getItem("Blindscan_t2_available"))
 
 
 setBoxInfoItems()
