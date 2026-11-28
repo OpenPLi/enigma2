@@ -212,7 +212,18 @@ class PictureInPicture(Screen):
 					AddPopup(text="PiP...\n" + _("Connected transcoding, limit - no PiP!"), type=MessageBox.TYPE_ERROR, timeout=5, id="ZapPipError")
 				return 0
 			if ref.toString().startswith("4097"):
-				#Change to service type 1 and try to play a stream as type 1
+				# Try servicemp3 first (needs a dvbvideosink with the "decoder" property and a driver
+				# that accepts memory writes on the PiP video device).
+				# If it refuses the PiP target, change to service type 1 and try to play as type 1.
+				mp3pip = BoxInfo.getItem("PiPServiceMP3") and eServiceCenter.getInstance().play(ref)
+				if mp3pip and not mp3pip.setTarget(1, True):
+					self.session.nav.pnav.setPiPService(ref)
+					self.pipservice = mp3pip
+					self.pipservice.start()
+					self.currentService = service
+					self.currentServiceReference = orig_ref
+					return 1
+				mp3pip = None
 				ref = eServiceReference("1" + ref.toString()[4:])
 			self.session.nav.pnav.setPiPService(ref)
 			if not self.isPlayableForPipService(orig_ref):
